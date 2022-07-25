@@ -34,7 +34,7 @@ export default function Home({ posts }) {
       </Head>
       <h1>Sylvan</h1>
 
-      {posts.map((post, idx) => (
+      {posts.reverse().map((post, idx) => (
         <PostCard key={idx} {...post} />
       ))}
   </div>
