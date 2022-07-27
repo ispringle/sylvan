@@ -3,13 +3,13 @@ import Link from 'next/link'
 
 import { format, parseISO } from 'date-fns'
 
-import { allBlogPosts } from 'contentlayer/generated'
+import { allBookReviews } from 'contentlayer/generated'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
 import Header from '../header'
 
 export async function getStaticPaths() {
-  const paths = allBlogPosts.map((post) => post.url)
+  const paths = allBookReviews.map((post) => post.url)
   return {
     paths,
     fallback: false,
@@ -17,7 +17,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const content = allBlogPosts.find((content) => content.slug === params.slug)
+  const content = allBookReviews.find((content) => content.slug === params.slug)
   return {
     props: {
       content,
@@ -25,7 +25,7 @@ export async function getStaticProps({ params }) {
   }
 }
 
-const BlogPostLayout: React.FC<{ content }> = ({ content }) => {
+const BookReviewLayout: React.FC<{ content }> = ({ content }) => {
   const MDXContent = useMDXComponent(content.body.code)
 
   return (
@@ -42,6 +42,9 @@ const BlogPostLayout: React.FC<{ content }> = ({ content }) => {
               {format(parseISO(content.date), 'LLLL d, yyyy')}
             </time>
           </div>
+          <div>
+            <img src={content.cover} width={256} height={"auto"} />
+          </div>
           <MDXContent />
         </article>
       </main>
@@ -49,4 +52,4 @@ const BlogPostLayout: React.FC<{ content }> = ({ content }) => {
   )
 }
 
-export default BlogPostLayout
+export default BookReviewLayout

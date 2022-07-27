@@ -3,7 +3,8 @@ import { computedFields } from './GlobalComputedFields'
 
 export const BlogPost = defineDocumentType(() => ({
   name: 'BlogPost',
-  filePathPattern: `blog/**/*.md`,
+  filePathPattern: `blog/**/*.mdx`,
+  contentType: 'mdx',
   fields: {
     title: {
       type: 'string',
