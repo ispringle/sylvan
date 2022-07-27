@@ -1,5 +1,5 @@
 import { makeSource } from 'contentlayer/source-files';
-import { BlogPost } from './content_type';
+import { BlogPost } from './contentlayer_type';
 
 const contentLayerConfig = makeSource({
   contentDirPath: 'content',
