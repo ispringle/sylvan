@@ -1,5 +1,5 @@
 import { defineDocumentType } from 'contentlayer/source-files'
-import { computedFields } from './GlobalComputedFields.ts'
+import { computedFields } from './GlobalComputedFields'
 
 export const BlogPost = defineDocumentType(() => ({
   name: 'BlogPost',

@@ -1,5 +1,5 @@
 import { defineDocumentType } from 'contentlayer/source-files'
-import { computedFields } from './GlobalComputedFields.ts'
+import { computedFields } from './GlobalComputedFields'
 
 export const BookReview = defineDocumentType(() => ({
   name: 'BookReview',
@@ -18,12 +18,17 @@ export const BookReview = defineDocumentType(() => ({
     author: {
       type: 'string',
       description: "The name of the book's author",
-      required: true,
+      required: false,
     },
     cover: {
       type: 'string',
       description: "The path to the book's cover image",
-      required: true,
+      required: false,
+    },
+    isbn: {
+      type: 'string',
+      description: "The book's ISBN reference number",
+      required: false,
     },
   },
   computedFields
