@@ -1,3 +1,4 @@
 import { BlogPost } from './BlogPost';
+import { BookReview } from './BookReview';
 
-export { BlogPost };
+export { BookReview, BlogPost };

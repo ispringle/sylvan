@@ -1,9 +1,9 @@
 import { makeSource } from 'contentlayer/source-files';
-import { BlogPost } from './contentlayer_type';
+import { BookReview, BlogPost } from './contentlayer_type';
 
 const contentLayerConfig = makeSource({
   contentDirPath: 'content',
-  documentTypes: [BlogPost],
+  documentTypes: [BookReview, BlogPost],
 });
 
 export default contentLayerConfig;
