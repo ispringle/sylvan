@@ -1,10 +1,10 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import { compareDesc, format, parseISO } from 'date-fns'
-import { allPosts } from 'contentlayer/generated'
+import { allBlogPosts } from 'contentlayer/generated'
 
 export async function getStaticProps() {
-  const posts = allPosts.sort((a, b) => {
+  const posts = allBlogPosts.sort((a, b) => {
     return compareDesc(new Date(a.date), new Date(b.date))
   })
   return { props: { posts } }
