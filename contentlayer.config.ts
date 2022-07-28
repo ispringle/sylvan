@@ -3,6 +3,7 @@ import { BookReview, BlogPost } from './contentlayer_type';
 
 import remarkGfm from 'remark-gfm'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
+import rehypeCodeTitles from 'rehype-code-titles'
 import rehypePrism from 'rehype-prism-plus'
 import rehypeSlug from 'rehype-slug'
 
@@ -12,17 +13,18 @@ const contentLayerConfig = makeSource({
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
-      rehypeSlug,
-      rehypePrism,
       [
-      rehypeAutolinkHeadings,
-      {
+        rehypeAutolinkHeadings,
+        {
           behavior: 'append',
           properties: {
             className: ['anchor']
           },
         },
       ],
+      rehypeCodeTitles,
+      rehypeSlug,
+      rehypePrism,
     ],
   },
 });
