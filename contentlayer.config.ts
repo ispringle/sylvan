@@ -13,6 +13,7 @@ const contentLayerConfig = makeSource({
   mdx: {
     remarkPlugins: [remarkGfm],
     rehypePlugins: [
+      rehypeSlug,
       [
         rehypeAutolinkHeadings,
         {
@@ -23,7 +24,6 @@ const contentLayerConfig = makeSource({
         },
       ],
       rehypeCodeTitles,
-      rehypeSlug,
       rehypePrism,
     ],
   },
