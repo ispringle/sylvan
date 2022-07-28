@@ -6,8 +6,6 @@ import { format, parseISO } from 'date-fns'
 import { allBookReviews } from 'contentlayer/generated'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
-import Header from '../header'
-
 export async function getStaticPaths() {
   const paths = allBookReviews.map((post) => post.url)
   return {
@@ -30,12 +28,8 @@ const BookReviewLayout: React.FC<{ content }> = ({ content }) => {
 
   return (
     <>
-      <Head>
-        <title>{content.title}</title>
-      </Head>
-      <Header />
       <main>
-        <article>
+        <article className="actual">
           <div>
             <h1>{content.title}</h1>
             <time dateTime={content.date}>
