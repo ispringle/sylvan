@@ -7,16 +7,13 @@ const Header = () => {
       <nav>
         <ul>
           <li>
-            <Link href="/"><a>Home</a></Link>
-          </li>
-          <li>
             <Link href="/about"><a>About</a></Link>
           </li>
           <li>
             <Link href="/blog"><a>Blog</a></Link>
           </li>
           <li>
-            <Link href="/grok"><a>KB</a></Link>
+            <Link href="/book"><a>Books</a></Link>
           </li>
           <li>
             <Link href="/projects"><a>Projects</a></Link>

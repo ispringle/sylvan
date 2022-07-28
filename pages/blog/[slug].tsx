@@ -28,6 +28,9 @@ const BlogPostLayout: React.FC<{ content }> = ({ content }) => {
 
   return (
     <>
+      <Head>
+        <title>{content.title}</title>
+      </Head>
       <main>
         <article className="actual">
           <div>

@@ -1,11 +1,13 @@
-import { allDocuments } from 'contentlayer/generated'
+import Head from 'next/head'
 
 import { compareDesc } from 'date-fns'
 
-import IndexStub from '../components/index_stub'
+import { allBookReviews } from 'contentlayer/generated'
+
+import IndexStub from '../../components/index_stub'
 
 export async function getStaticProps() {
-  const posts = allDocuments.sort((a, b) => {
+  const posts = allBookReviews.sort((a, b) => {
     return compareDesc(new Date(a.date), new Date(b.date))
   })
   return { props: { posts } }
@@ -14,6 +16,7 @@ export async function getStaticProps() {
 export default function Index({ posts }) {
   return (
     <>
+      <Head><title>Book Reviews</title></Head>
       <IndexStub posts={posts} />
     </>
   )

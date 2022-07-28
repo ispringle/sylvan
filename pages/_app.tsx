@@ -9,7 +9,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Sylvan</title>
+        <title>Ian S. Pringle</title>
       </Head>
       <Header />
 
