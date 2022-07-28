@@ -1,6 +1,9 @@
+
 import Head from 'next/head'
 import Link from 'next/link'
+
 import { compareDesc, format, parseISO } from 'date-fns'
+
 import { allDocuments } from 'contentlayer/generated'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
@@ -12,9 +15,9 @@ export async function getStaticProps() {
 }
 
 function ContentCard(post) {
-  let Content: React.Component
+  let Content: any
   if (post.type === 'BookReview') {
-    Content = () => <img src={post.cover} width={128} height={"auto"} />
+    Content = () => <img src={post.cover} width={128} height={'auto'} />
   } else {
     Content = useMDXComponent(post.body.code)
   }
