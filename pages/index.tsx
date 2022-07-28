@@ -11,11 +11,6 @@ export async function getStaticProps() {
   return { props: { posts } }
 }
 
-const createImg = ({src, width, height}) => {
-  return (
-    <img src={src} width={width} height={height} />
-  )
-}
 function ContentCard(post) {
   let Content: React.Component
   if (post.type === 'BookReview') {
