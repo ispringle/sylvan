@@ -5,7 +5,7 @@ import { compareDesc } from 'date-fns'
 import IndexStub from '../components/index_stub'
 
 export async function getStaticProps() {
-  const posts = allDocuments.sort((a, b) => {
+  const posts = allDocuments.filter((x) => x.url != '/about').sort((a, b) => {
     return compareDesc(new Date(a.date), new Date(b.date))
   })
   return { props: { posts } }

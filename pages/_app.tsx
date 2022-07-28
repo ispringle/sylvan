@@ -4,6 +4,7 @@ import Head from 'next/head'
 import '../style/style.sass'
 
 import Header from '../components/header'
+import Footer from '../components/footer'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -14,6 +15,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       <Header />
 
       <Component {...pageProps} />
+      <Footer />
     </>
   )
 }
