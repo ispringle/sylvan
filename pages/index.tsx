@@ -19,9 +19,7 @@ const createImg = ({src, width, height}) => {
 function ContentCard(post) {
   let Content: React.Component
   if (post.type === 'BookReview') {
-    // Content = (<img src={post.cover} width={128} height={"auto"} />)
-    // Content = createImg(post.cover, 128, "auto")
-    Content = useMDXComponent(post.body.code)
+    Content = () => <img src={post.cover} width={128} height={"auto"} />
   } else {
     Content = useMDXComponent(post.body.code)
   }
@@ -36,7 +34,9 @@ function ContentCard(post) {
       <time dateTime={post.date}>
         {format(parseISO(post.date), 'LLLL d, yyyy')}
       </time>
-      <Content />
+      <article>
+        <Content />
+      </article>
     </div>
   )
 }
