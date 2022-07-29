@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import Image from 'next/Image'
+import Image from 'next/image'
 
 import { images } from '../public'
 import pic from '../public/book/the-red-knight-cover.jpg'
