@@ -6,7 +6,7 @@ import { allAbouts } from 'contentlayer/generated'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
 export async function getStaticProps() {
-  const post = allAbouts[0]
+  const post = allAbouts.filter((x) => x.slug == 'about-short')[0]
   return { props: { post } }
 }
 

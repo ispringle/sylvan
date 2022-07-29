@@ -6,6 +6,8 @@ import { format, parseISO } from 'date-fns'
 import { allBookReviews } from 'contentlayer/generated'
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
+import { getImage } from '../../components/image_content'
+
 export async function getStaticPaths() {
   const paths = allBookReviews.map((post) => post.url)
   return {
@@ -25,6 +27,7 @@ export async function getStaticProps({ params }) {
 
 const BookReviewLayout: React.FC<{ content }> = ({ content }) => {
   const MDXContent = useMDXComponent(content.body.code)
+  const ImageContent = getImage(content.cover)
 
   return (
     <>
@@ -35,9 +38,6 @@ const BookReviewLayout: React.FC<{ content }> = ({ content }) => {
             <time dateTime={content.date}>
               {format(parseISO(content.date), 'LLLL d, yyyy')}
             </time>
-          </div>
-          <div>
-            <img src={content.cover} width={256} height={"auto"} />
           </div>
           <MDXContent />
         </article>

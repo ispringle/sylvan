@@ -1,15 +1,16 @@
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { compareDesc, format, parseISO } from 'date-fns'
 
 import { useMDXComponent } from 'next-contentlayer/hooks'
 
+import { getImage } from './image_content'
+
 function ContentCard(post) {
-  let Content: any
+  let Content = useMDXComponent(post.body.code)
   if (post.type === 'BookReview') {
-    Content = () => <img src={post.cover} />
-  } else {
-    Content = useMDXComponent(post.body.code)
+    Content = getImage(post.cover)
   }
 
   return (
