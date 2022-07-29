@@ -3,3 +3,4 @@ node_modules
 .contentlayer
 .next
 yarn-error.log
+out/

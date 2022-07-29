@@ -15,6 +15,7 @@
     "contentlayer": "^0.2.6",
     "date-fns": "^2.29.1",
     "next": "^12.2.3",
+    "next-build-id": "^3.0.0",
     "next-contentlayer": "^0.2.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
