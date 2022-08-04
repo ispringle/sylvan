@@ -3,7 +3,7 @@ const nextBuildId = require('next-build-id')
 
 module.exports = withContentlayer({
   compiler: {
-    removeConsole: true,
+    // removeConsole: true,
   },
   experimental: {
     images: {

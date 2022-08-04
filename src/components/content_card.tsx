@@ -13,6 +13,9 @@ function ContentCard(post) {
     Content = getImage(post.cover)
   }
 
+  const postDate = format(parseISO(post.date), 'LLLL d, yyyy')
+  console.log(postDate, post.date)
+
   return (
     <div>
       <h2>

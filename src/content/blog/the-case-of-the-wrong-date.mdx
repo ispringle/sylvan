@@ -1,0 +1,94 @@
+---
+title: The Case of the Wrong Date
+date: 2022-07-29
+---
+
+I noticed a funny thing happening, the dates for my posts were wrong. The
+source of the post would contain the correct value in the frontmatter, for
+example the date of my [first post](/blog/hello-world) was `2022-07-25` but
+when that was rendered by NextJS and spit out on the website it was coming in a
+whole day _earlier_, ie `2022-07-24`. At first I thought the culprit was the
+date library, `date-fns`, so I dropped into a node shell to see if that was the
+case...
+
+```shell
+> date.format(date.parseISO('2022-07-29'), 'LLLL d, yyyy')
+'July 29, 2022'
+```
+
+So `date-fns` is not the culprit. Next step, `console.log`!
+
+```Javascript
+  const postDate = format(parseISO(post.date), 'LLLL d, yyyy')
+  console.log(postDate, post.date) // July 24, 2022 2022-07-25T00:00:00.000Z
+```
+
+Weird right? The input is the 25th but the output is the 24th. Let's see what
+the date-fns documentation has to
+[say](https://date-fns.org/v2.29.1/docs/Time-Zones#overview) :
+
+> Libraries like Moment and Luxon, which provide their own date time classes,
+> manage these timestamp and time zone values internally. Since date-fns always
+> returns a plain JS Date, which implicitly has the current system's time zone,
+> helper functions are needed for handling common time zone related use cases.
+
+Okay, not so weird maybe! But I'm not sure the answer is going to be easy. The
+documentation goes on to explain how to update a datetime stamp to either
+reflect the time in a given locale based on the UTC time _or_ update a locale
+based timestamp to reflect UTC time. What we need is to update the _timezone_,
+the datetime is right, the timezone is wrong in this particular case.
+
+Sadly the JavaScript `date` doesn't really have this concept and so it sounded
+like it might be easier to correct the problem at the source... and I figured
+that source was Contentlayer, since it was parsing my frontmatter.
+
+I did some more dgging and it looks like someone who works on Contentlayer
+actually attempted addressing this issue
+[already](https://github.com/contentlayerdev/contentlayer/issues/9#issuecomment-980280572)
+and the tl;dr is that it's actually not something they can fix because it's
+being determined by something in front of Contentlayer, and the dev suggested
+it might be an issue with gray-matter, the frontmatter parser they're using.
+
+I went to the [repo](https://github.com/jonschlinkert/gray-matter/) for
+gray-matter and poked around, but after looking at [how this library
+works](https://github.com/jonschlinkert/gray-matter/blob/master/lib/engines.js#L16),
+this is not the culprit either.
+
+Next step was to check in on `js-yaml`, which is what gray-matter is using to
+parse the frontmatter -- at least in my case since I'm using yaml frontmatter.
+
+The story there is likely that I need to change how I present the date, as it
+wants either the date format I'm using (ie `2022-07-29`) or it wants a full
+blown timestamp. If you use the full blown timestamp than it can set the
+timzezone, but otherwise you're stuck with UTC it looks like. And this isn't
+just that `js-yaml` library, but in fact this is a part of the [YAML
+standard](https://yaml.org/type/timestamp.html):
+
+> If the time zone is omitted, the timestamp is assumed to be specified in UTC.
+> The time part may be omitted altogether, resulting in a date format. In such
+> a case, the time part is assumed to be 00:00:00Z (start of day, UTC).
+
+Which means I have few options. I can use the far more cumbersome timestamp (ie
+2022-07-29T01:02:03-6.0), I could deal with the date being wrong, I could
+update the timestamp everytime I use it, or perhaps provide a PR to
+Contentlayer.
+
+I dislike the middle idea, so I ended up creating a PR to contentlayer. Essentially, this PR will update the date if a timezone is specified in the config file and if the date that was already fetched does not match the offset set specified in that timezone field of the config.
+
+Here's the diff of my PR:
+
+```diff
+let dateValue = new Date(rawFieldData)
+if (options.date?.timezone) {
+- dateValue = dateFnsTz.zonedTimeToUtc(dateValue, options.date.timezone)
++  // NOTE offset of specified timezone in milliseconds
++  const desiredOffset = dateFnsTz.getTimezoneOffset(options.date.timezone)
++
++  // NOTE offset of raw date value is in minutes, we must multiple 60 then 1000 to get milliseconds
++  const currentOffset = dateValue.getTimezoneOffset() * 60 * 1000
++
++  if (desredOffset != currentOffset) {
++    dateValue = new Date(dateValue.getTime() + dateFnsTz.getTimezoneOffset(options.date.timezone) * -1)
++  }
+}
+```
