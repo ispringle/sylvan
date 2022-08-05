@@ -1,0 +1,64 @@
+a::before
+    content: "["
+
+a::after
+    content: "]"
+
+a
+    color: black
+    text-decoration: none
+    font-weight: bold
+
+b::before, b::after
+    content: "*"
+    font-family: monospace
+
+code.inline-code::before, code.inline-code::after
+    content: "~"
+    font-family: monospace
+
+del::before, del::after
+    content: "+"
+    font-family: monospace
+
+i::before, i::after
+    content: "/"
+    font-family: monospace
+
+
+pre
+    border: 1px dashed black
+
+.DONE, .TODO
+    color: white
+    padding: 0.1em 0.3em
+    border-radius: 3px
+    background-clip: padding-box
+    font-family: monospace
+    font-size: 80%
+    line-height: 1
+
+.DONE
+    background-color: green
+
+.TODO
+    background-color: red
+
+.underline::before, .underline::after
+    content: "_"
+    font-family: monospace
+
+ul
+    list-style: none
+    padding-left: 25px
+
+ul li::before
+    content: "-"
+    color: black
+    font-family: monospace
+    font-size: 1.25em
+    font-weight: bold
+    padding-right: 10px
+
+li p
+  display: inline

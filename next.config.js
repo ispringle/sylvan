@@ -1,9 +1,8 @@
-const { withContentlayer } = require("next-contentlayer");
 const nextBuildId = require('next-build-id')
 
-module.exports = withContentlayer({
+module.exports = {
   compiler: {
-    // removeConsole: true,
+    removeConsole: true,
   },
   experimental: {
     images: {
@@ -14,4 +13,4 @@ module.exports = withContentlayer({
   poweredByHeader: false,
   reactStrictMode: true,
   swcMinify: true,
-});
+};
