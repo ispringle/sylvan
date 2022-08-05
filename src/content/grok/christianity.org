@@ -1,0 +1,14 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2022-08-04 Thu>
+:MODIFIED: <2022-08-04 Thu>
+:TYPE: slip
+:ID:       a68cfdb0-5e16-449d-b517-af5c28d5eb59
+:END:
+#+title: Christianity
+
+#+BEGIN_QUOTE 1 Corinthians 1:1-4
+Now I make known to you, brethren, the gospel which I preached to you, which also you received, in which also you stand, by which also you are saved, if you hold fast the word which I preached to you, unless you believed in vain.
+
+For I delivered to you as of first importance what I also received, that Christ died for our sins according to the Scriptures, and that He was buried, and that He was raised on the third day according to the Scriptures,
+#+END_QUOTE

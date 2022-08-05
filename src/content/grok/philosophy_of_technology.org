@@ -1,0 +1,8 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2022-08-04 Thu>
+:MODIFIED: <2022-08-04 Thu>
+:TYPE: slip
+:ID:       cb6d4d07-cfda-4078-a362-87e8ad56fee2
+:END:
+#+title: Philosophy of Technology

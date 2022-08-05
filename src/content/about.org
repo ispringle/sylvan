@@ -1,0 +1,48 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2022-08-04 Thu>
+:MODIFIED: <2022-08-04 Thu>
+:TYPE: about
+:END:
+#+title: About Me
+
+# Howdy, I'm Ian.
+
+#+CAPTION: Picture of me after spending a day cutting welds
+#+NAME: Me!
+[[./me.jpg]]
+
+I'm a sinner saved by grace. I am a husband and father.
+
+By weekday I am a site reliability engineer and systems engineer at Hydrobuilder
+Holdings. As part of my job I get to touch a number of different stacks and
+systems. In addition to running operations and building systems software, I
+also do a bit of work with system architecting and am helping to lead an effort
+to redesign our systems and refactor out e-commcerce platform.
+
+My past jobs include working as a consultant, a full-stack developer
+(Openshift, Java, Kotlin, StencilJS), a systems administrator, a helpdesk
+agent, and a data-entry monkey. I am a self-taught programmer and systems
+operator. I believe this is an immense asset, I am capable to self-directed
+learning, often times on the job. I love learning this way and generally try to
+take new jobs that will push me into technology I do not already know.
+Language-wise I am in love with Rust, V, and Lua. I am also confident in a
+professional setting with Python, Java, Javascript, Kotlin, Go, Bash, Python,
+PowerShell, and a few Lisps.
+
+After work hours and on the weekend I am a neo-Luddite. I work hard to find an
+appropriate balance between modern technologies and my God-given desire to work
+with my hands.
+
+As you will learn from my projects and blog posts, my interestes are many and
+varied. I have a degree in New Testament studies, with a minor in Koine Greek
+-- I love studying and discussing theology. I also like animals, a lot. I have
+rabbits (too many to count), dogs (seven; two hounds, a great dane, and four
+Great Pyrenees/Anatolian Shepherds), five horses, three turtles (an Eastern
+Paint, a yellow belly slider, and a African sideneck; all are rescues), loads
+of chickens, seven cats, a beared dragon, a boa constrictor, four cows, a bull,
+two goats, and a crow.
+
+I live on a farm in very rural Missouri with my wife and children. We sell raw
+cow milk, raw goat milk, and eggs. If you live between Poplar Bluff and West
+Plains and are interested in our produce, feel free to reach out!

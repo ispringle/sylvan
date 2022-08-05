@@ -1,0 +1,19 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2022-07-29 Fri>
+:MODIFIED: <2022-08-04 Thu>
+:TYPE: blog
+:END:
+#+title: A WIP
+
+As you can see this site is a serious WIP. But it's coming along, nonetheless -- and dare I say it, is actually useable. Few tasks I'd like to get done next include:
+
+* TODO RSS feed(s)
+* DONE Start rudimentary display of `/grok` -- aka the knowledge base
+* TODO Programmigcally display projects under `/project` based on GitHub and GitLab starred projects
+* TODO Add a section for my JS and love.js games so they can all be played/explored from this site
+* TODO Better logo/branding/header thing and a favicon that isn't the NextJS default
+* TODO Book review index as a gallery of book covers
+* TODO Typography improvements including a better font, better colors, and automatically swap quotes and dashes for the appropriate curly quote or emdash, etc.
+
+I'd also really love to figure out a way to incorporate Git commits into each post/review/etc. Basically figure out when the document was added in Git and that would stand in as my `date` and then figure out last modified date/time and add that as well. And speaking of time... the time values are wrong, I will need to investigate what is up with the `date-fns` library I'm using.
