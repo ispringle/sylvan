@@ -14,7 +14,7 @@ import resolveLinks from './resolveLinks';
 // (images, linked files) to the public directory, so that next.js
 // serves them.
 // const pagesDirectory = path.join(process.cwd(), 'public');
-const pagesDirectory = path.join(process.cwd(), 'src/content/org');
+const pagesDirectory = path.join(process.cwd(), 'src/content');
 const blackListedPaths = ["todo.org", "inbox.org",]
 
 const processor = trough()

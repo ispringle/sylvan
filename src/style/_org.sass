@@ -1,5 +1,7 @@
+@import _psuedodrawer
+
 a::before
-    content: "["
+  content: "["
 
 a::after
     content: "]"
@@ -28,6 +30,16 @@ i::before, i::after
 
 pre
     border: 1px dashed black
+
+.orgtime::before
+  content: "<"
+  color: black
+  font-weight: bold
+
+.orgtime::after
+  content: ">"
+  color: black
+  font-weight: bold
 
 .DONE, .TODO
     color: white

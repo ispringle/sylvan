@@ -4,6 +4,7 @@ import Note from '../components/Note';
 import Slip from '../components/Slip';
 import Root from '../components/Root';
 import { BacklinkProps } from '../components/Backlink';
+import { PropertiesDrawerProps } from '../components/PropertiesDrawer';
 
 export interface PageProps {
   pageType: string;
@@ -19,6 +20,7 @@ export interface PageProps {
   description: string | null;
   icon: string;
   allPages?: any[];
+  propteries?: PropertiesDrawerProps;
 }
 
 const Page = ({ ...props }: PageProps) => {

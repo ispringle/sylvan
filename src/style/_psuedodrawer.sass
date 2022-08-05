@@ -1,0 +1,62 @@
+table.psuedoDrawer
+  bottom: 1em
+  position: fixed
+
+table.psuedoDrawer::before
+  color: gray
+  /* content: ":" attr(title) ": \a..."
+  content: ":" attr(title) ":"
+  display: block
+  text-transform: uppercase
+  white-space: pre
+
+table.psuedoDrawer:focus::before, table.psuedoDrawer:hover::before
+  content: ":" attr(title) ":"
+
+table.psuedoDrawer::after
+  visibility: hidden
+  content: ":END:"
+
+table.psuedoDrawer:focus::after, table.psuedoDrawer:hover::after
+  visibility: visible
+
+table.psuedoDrawer tbody
+  color: gray
+  visibility: hidden
+
+table.psuedoDrawer:focus
+  outline: unset
+
+table.psuedoDrawer:focus > tbody, table.psuedoDrawer:hover > tbody
+  visibility: visible
+
+table.psuedoDrawer th::before, th::after
+  content: ":"
+
+table.psuedoDrawer th::before
+  padding-right: 0.1em
+
+table.psuedoDrawer th::after
+  padding-left: 0.1em
+
+table.psuedoDrawer td
+  word-break: break-all
+
+table.psuedoDrawer th
+  margin: unset
+  padding: unset
+  font-weight: normal
+  text-transform: uppercase
+  text-align: left
+
+
+table.psuedoDrawer *, *::before, *::after
+  color: gray !important
+
+.linkList span:not(:first-child)::before
+  content: ", "
+  white-space: pre
+
+.linkList span:last-child::before
+  content: ", & "
+  white-space: pre

@@ -3,6 +3,7 @@ import { parse } from 'date-fns';
 
 import { getAllPaths, getAllPosts, getPostBySlug } from '../lib/api';
 import Page, { PageProps } from '../components/Page';
+import Footer from '../components/Footer';
 
 const specialPaths = ['/', '/blog', '/book', '/grok']
 
@@ -34,7 +35,6 @@ export const getStaticProps = async ({ params }: PageParams) => {
   let backlinks: any[] = [];
   let allPosts: any[] = [];
   if (specialPaths.includes(path)) {
-    console.log(path)
     allPosts = await getAllPosts().then(
       pages => pages.filter(page => page.path.includes(path)).map(page => ({
         path: page.path,
@@ -47,7 +47,7 @@ export const getStaticProps = async ({ params }: PageParams) => {
     data = page?.data;
     backlinks = data ? await Promise.all([...data.backlinks].map(getPostBySlug)) : [];
   }
-  console.log(page)
+  // console.log(page)
   let creation_date = new Date();
   let modified_date = new Date();
   if (data?.properties?.created) {
@@ -56,6 +56,10 @@ export const getStaticProps = async ({ params }: PageParams) => {
   if (data?.properties?.modified) {
     modified_date = parseOrgTime(data.properties.created)
   }
+
+
+  const properties = data?.properties || {};
+
   return {
     props: {
       title: data?.title || page?.basename || path,
@@ -69,6 +73,7 @@ export const getStaticProps = async ({ params }: PageParams) => {
       slug: path,
       date: creation_date.toJSON(),
       lastModified: modified_date.toJSON(),
+      properties: properties,
       // isodate: data
       // lastModifiedIso?: string;
       // description: string | null;
@@ -78,7 +83,12 @@ export const getStaticProps = async ({ params }: PageParams) => {
 };
 
 const PageContent = ({ ...props }: PageProps) => {
-  return <Page {...props} />
+  return (
+    <>
+      <Page {...props} />
+      <Footer {...props} />
+    </>
+  )
 }
 
 export default PageContent;

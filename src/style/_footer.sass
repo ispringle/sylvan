@@ -1,11 +1,8 @@
 footer
-  @include elastic
   font-size: 1.5em
   display: flex
-  flex-flow: row nowrap
-  justify-content: space-between
-  align-items: flex-end
-  padding-top: 6em
+  max-height: 10em
+  min: 10em
 
   #postamble
     font-size: 90%
@@ -15,3 +12,23 @@ footer
     font-size: 0.7em
     p
       margin: 0
+
+  .footerSection
+    flex: 1
+    display: flex
+
+  #footerLeft
+    justify-content: left
+    margin-right: auto
+
+  #footerMid
+    font-size: 3em
+    justify-content: center
+    max-width: min(80vw, 669px)
+    min-width: min(80vw, 669px)
+    padding: 0 1em
+
+  #footerRight
+    align-items: flex-end
+    justify-content: right
+    margin-left:auto
