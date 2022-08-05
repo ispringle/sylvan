@@ -1,0 +1,139 @@
+i::before, i::after {
+    content: "/";
+    font-family: monospace;
+}
+
+a::before {
+    content: "[";
+}
+
+a::after {
+    content: "]";
+}
+
+a {
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+b::before, b::after {
+    content: "*";
+    font-family: monospace;
+}
+
+code::before, code::after {
+    content: "~";
+    font-family: monospace;
+}
+
+.underline::before, .underline::after {
+    content: "_";
+    font-family: monospace;
+}
+
+del::before, del::after {
+    content: "+";
+    font-family: monospace;
+}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 10px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+blockquote p {
+  display: inline;
+}
+
+ul {
+    list-style: none;
+    padding-left: 25px;
+}
+
+ul li::before {
+    content: "-";
+    color: black;
+    font-family: monospace;
+    font-size: 1.25em;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+body {
+    display: grid;
+    grid-template:
+        "header header header" auto
+        ". content toc" 75%
+        "footer . ." auto
+        / 25% auto 25%;
+    height: calc(100vh - 16px);
+    margin: 8px;
+}
+
+#content {
+    grid-area: content;
+    margin: unset;
+    max-width: 669px;
+    place-self: start center;
+}
+
+#preamble {
+    display: flex;
+    width: 100%;
+    grid-area: header;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+pre {
+    border: 1px dashed black;
+}
+
+pre#logo {
+    margin: unset;
+    padding: unset;
+    background-color: white;
+    border: unset;
+    width: unset;
+}
+
+#postamble {
+    grid-area: footer;
+}
+
+.done, .todo {
+    color: white;
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    background-clip: padding-box;
+    font-family: monospace;
+    font-size: 80%;
+    line-height: 1;
+}
+
+.done {
+    background-color: green;
+}
+.todo {
+    background-color: red;
+}
+
+.title::before {
+    content: ". /";
+}
+
+.title::after {
+    content: ".html";
+}
