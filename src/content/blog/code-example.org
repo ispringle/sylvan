@@ -8,7 +8,7 @@
 
 This is just an example of some code blocks for testing rehype prism.
 
-This is the time parser I use for Planwarrior. As you can see on lines 1-3 I have a time_str function which takes a string representation of time (`4:03`) and then determines how many minutes that is since midnight:
+This is the time parser I use for Planwarrior. As you can see on lines 1-3 I have a ~time_str~ function which takes a string representation of time (~4:03~) and then determines how many minutes that is since midnight:
 #+BEGIN_SRC python
 def time_str(s):
     h, m = [int(x) for x in s.split(':')]
