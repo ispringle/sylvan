@@ -1,0 +1,30 @@
+#+title: README
+
+* Sylvan
+
+** Synopsis
+
+Sylvan is my site generator. It takes ~.org~ files and converts them into HTML
+using NextJS. This is /not/ a static site generator and I have no intentions of
+writing Sylvan in such a way that NextJS would be able to generate it
+statically. I have used SSGs and I have static websites as well, but this is
+different because I wanted to play with NextJS and create a beautiful website to
+display my thoughts and notes. It is my goal to design and build Sylvan in such
+a way that it meets /my/ needs. At the same time, I am fairly confident that
+Syval /could/ work for you as a jumping off point for your own website. I would
+suggest not just copying it and using it as-is, but mostly because I think it's
+weird when people just copy someone else's personal site, becausae personal
+websites are /personal/ and in some ways are an extension and reflection of the
+person who created it.
+
+** To Do's
+*** TODO footnotes/annotations
+*** TODO bibtex support
+*** TODO better, more easily extended pipeline
+*** DONE custom flueron-like element for footer
+CLOSED: [2022-08-06 Sat 15:07]
+*** TODO start porting over some JS games and such
+*** TODO start using the API features of NextJS
+*** TODO Build a better build system that is able to pull in my org files automatically
+*** TODO Move org content dir to /public so that I don't have to also copy over images and other static content
+*** TODO write more blog posts

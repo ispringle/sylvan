@@ -1,6 +1,8 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
 import PropertiesDrawer from './PropertiesDrawer'
+import triquerta from '../../public/triquerta.svg'
 
 const Footer = ({ ...props }) => {
     return (
@@ -8,7 +10,10 @@ const Footer = ({ ...props }) => {
             <div id="footerLeft" className='footerSection'>
                 <PropertiesDrawer {...props} />
             </div>
-            <div id="footerMid" className='footerSection'>❦</div>
+            <div id="footerMid" className='footerSection'>
+                {/* <Image className='flueron' src={triquerta} width={"50em"} height={"50em"} /> */}
+                <img className='flueron' src={"/triquerta.svg"} width={"50em"} height={"50em"} />
+            </div>
             <div id="footerRight" className='footerSection'>
                 <div className="license">
                     <p>Creative Commons</p>
