@@ -1,48 +1,56 @@
-table.psuedoDrawer
+.psuedoDrawer
+  --wdth: calc(((100vw - 8px - 2em - min(80vw, 669px)) / 2) - 1em)
   bottom: 1em
+  display: grid
+  grid-template-columns: auto
   position: fixed
+  width: var(--wdth)
+  @media screen and (max-width: 1200px)
+    display: none
 
-table.psuedoDrawer::before
+.psuedoDrawer > .drawerRow
+  width: inherit
+
+.psuedoDrawer::before
   color: gray
-  /* content: ":" attr(title) ": \a..."
   content: ":" attr(title) ":"
   display: block
   text-transform: uppercase
   white-space: pre
 
-table.psuedoDrawer:focus::before, table.psuedoDrawer:hover::before
+.psuedoDrawer:focus::before, .psuedoDrawer:hover::before
   content: ":" attr(title) ":"
 
-table.psuedoDrawer::after
-  visibility: hidden
-  content: ":END:"
-
-table.psuedoDrawer:focus::after, table.psuedoDrawer:hover::after
-  visibility: visible
-
-table.psuedoDrawer tbody
+.psuedoDrawer::after
   color: gray
-  visibility: hidden
+  content: "..."
+  letter-spacing: 0.2em
+
+.psuedoDrawer:focus::after, .psuedoDrawer:hover::after
+  content: ":END:"
+  letter-spacing: normal
+
+.psuedoDrawer > .drawerRow
+  color: gray
+  display: none
 
 table.psuedoDrawer:focus
   outline: unset
 
-table.psuedoDrawer:focus > tbody, table.psuedoDrawer:hover > tbody
-  visibility: visible
+table.psuedoDrawer:focus > .drawerRow, .psuedoDrawer:hover > .drawerRow
+  display: flex
+  gap: 0.5em
 
-table.psuedoDrawer th::before, th::after
+.drawerRow > .key::before, .drawerRow > .key::after
   content: ":"
 
-table.psuedoDrawer th::before
+.psuedoDrawer .key::before
   padding-right: 0.1em
 
-table.psuedoDrawer th::after
+.psuedoDrawer .key::after
   padding-left: 0.1em
 
-table.psuedoDrawer td
-  word-break: break-all
-
-table.psuedoDrawer th
+.psuedoDrawer .key
   margin: unset
   padding: unset
   font-weight: normal
@@ -50,13 +58,5 @@ table.psuedoDrawer th
   text-align: left
 
 
-table.psuedoDrawer *, *::before, *::after
-  color: gray !important
-
-.linkList span:not(:first-child)::before
-  content: ", "
-  white-space: pre
-
-.linkList span:last-child::before
-  content: ", & "
-  white-space: pre
+.psuedoDrawer *, .psuedoDrawer *::before, .psuedoDrawer  *::after
+  color: gray

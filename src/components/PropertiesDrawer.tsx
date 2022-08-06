@@ -13,44 +13,36 @@ const PropertiesDrawer = ({ ...props }) => {
     const properties = props.properties
     delete properties["author"]
     return (
-        <table title="properties" className="psuedoDrawer">
-            <tbody>
-                <tr>
-                    <th>author</th>
-                    <td>Ian Shepard Pringle</td>
-                </tr>
-                {
-                    Object.keys(properties).map(k => {
-                        return (
-                            <tr key={k}>
-                                <th>{k}</th>
-                                <td>{properties[k]}</td>
-                            </tr>
-                        )
-                    })
-                }
-                <tr>
-                    <th>compiled</th>
-                    <td><span className="orgtime">{compDateText}</span></td>
-                </tr>
-                <tr>
-                    <th>made_with</th>
-                    <td>
-                        <div className="linkList">
-                            <span>
-                                <a rel="noreferrer" target="_blank" title="Emacs 28.1" href="https://www.gnu.org/software/emacs/">Emacs</a>
-                            </span>
-                            <span>
-                                <a rel=" noreferrer" target="_blank" title="Orgmode 9.5.2" href="https://orgmode.org">Orgmode</a>
-                            </span>
-                            <span>
-                                <a rel="noreferrer" target="_blank" title={"NextJS " + process.env.NEXT_PUBLIC_NEXT_JS_VERSION} href="https://nextjs.org">NextJS</a>
-                            </span>
+        <div title="properties" className="psuedoDrawer">
+            <div className="drawerRow">
+                <span className="key">author</span>
+                <span>Ian Shepard Pringle</span>
+            </div>
+            {
+                Object.keys(properties).map(k => {
+                    return (
+                        <div key={k} className="drawerRow">
+                            <span className="key">{k}</span>
+                            <span>{properties[k]}</span>
                         </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table >
+                    )
+                })
+            }
+            <div className="drawerRow">
+                <span className="key">compiled</span>
+                <span><span className="orgtime">{compDateText}</span></span>
+            </div>
+            <div className="drawerRow">
+                <span className="key">made_with</span>
+                <span>
+                    <div className="linkList">
+                        <a rel="noreferrer" target="_blank" title="Emacs 28.1" href="https://www.gnu.org/software/emacs/">Emacs</a>
+                        <a rel=" noreferrer" target="_blank" title="Orgmode 9.5.2" href="https://orgmode.org">Orgmode</a>
+                        <a rel="noreferrer" target="_blank" title={"NextJS " + process.env.NEXT_PUBLIC_NEXT_JS_VERSION} href="https://nextjs.org">NextJS</a>
+                    </div>
+                </span>
+            </div>
+        </div>
 
     )
 }
