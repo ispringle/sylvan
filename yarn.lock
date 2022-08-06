@@ -410,6 +410,11 @@ base64-js@^1.3.1:
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.5.1.tgz#1b1b440160a5bf7ad40b650f095963481903930a"
   integrity sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==
 
+bibtex-parse@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/bibtex-parse/-/bibtex-parse-2.1.0.tgz#576d2c61a95b1612928d5e52c7dee64df13618e0"
+  integrity sha512-Ej1vvnhfEfegd2WAeQ1dWJ/NkS3Cb84zRPeMMCFDcOSvAJFAmhm/sAr2oLpK/KQITlnHk0g6+zBokGvLe9+NaQ==
+
 binary-extensions@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-2.2.0.tgz#75f502eeaf9ffde42fc98829645be4ea76bd9e2d"
@@ -1607,6 +1612,11 @@ next-build-id@^3.0.0:
   resolved "https://registry.yarnpkg.com/next-build-id/-/next-build-id-3.0.0.tgz#bfb7a1e2df03882688758f0a4a67e6e837043f42"
   integrity sha512-B3JCsL/9Z/wkmo3EySukQHCgx89Aw0i4LPi2MEhCboQBJ6wpkYTIu1z6hOYKuw/S1Wy8ZRqCEq0dVY/ST6jGqg==
 
+next-seo@^5.5.0:
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/next-seo/-/next-seo-5.5.0.tgz#12bdfce60a6ae098f49617357a166c2d44dbc29e"
+  integrity sha512-5ouBHFtx8YrSDW44lj0qIEQ+oMcz6stgoITB+SqHUZbhgizoJsyLmq73gJ0lxtEKpcN8vG2QgRIJfdb8OAPChw==
+
 next@^12.2.3:
   version "12.2.3"
   resolved "https://registry.yarnpkg.com/next/-/next-12.2.3.tgz#c29d235ce480e589894dfab3120dade25d015a22"
@@ -2336,7 +2346,7 @@ to-vfile@^7.0.0, to-vfile@^7.2.3:
     is-buffer "^2.0.0"
     vfile "^5.1.0"
 
-trough@^2.0.0:
+trough@^2.0.0, trough@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/trough/-/trough-2.1.0.tgz#0f7b511a4fde65a46f18477ab38849b22c554876"
   integrity sha512-AqTiAOLcj85xS7vQ8QkAV41hPDIJ71XJB4RCUrzo/1GM2CQwhkJGaf9Hgr7BOugMRpgGUrqRg/DrBDl4H40+8g==
@@ -2585,6 +2595,13 @@ vfile-message@^3.0.0:
   dependencies:
     "@types/unist" "^2.0.0"
     unist-util-stringify-position "^3.0.0"
+
+vfile-rename@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/vfile-rename/-/vfile-rename-2.0.1.tgz#40ab5fea092bba5e03145a260dff870882d50b0c"
+  integrity sha512-Nhl/ZpcxWWyTHcAGgGJsCmKbSewugqNovfR7C1AjUTcY+u8Jqgnvrvh7sPZ8YZ+Nq0+ob6drWjBE5HcNDbAlew==
+  dependencies:
+    vfile "^5.0.0"
 
 vfile-reporter@^7.0.4:
   version "7.0.4"

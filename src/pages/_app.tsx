@@ -1,8 +1,9 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
+import { DefaultSeo } from 'next-seo';
 
 import '../style/style.sass'
-
+import SEO from '../../next-seo.config';
 import Header from '../components/Header'
 
 export default function MyApp({ Component, pageProps }: AppProps) {
@@ -11,6 +12,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             <Head>
                 <title>ian.ist</title>
             </Head>
+            <DefaultSeo {...SEO} />
             <Header />
 
             <Component {...pageProps} />

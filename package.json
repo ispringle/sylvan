@@ -12,9 +12,11 @@
   "dependencies": {
     "@stitches/core": "^1.2.8",
     "@stitches/react": "^1.2.8",
+    "bibtex-parse": "^2.1.0",
     "date-fns": "^2.29.1",
     "next": "^12.2.3",
     "next-build-id": "^3.0.0",
+    "next-seo": "^5.5.0",
     "orgast-util-visit-ids": "^0.5.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -26,6 +28,7 @@
     "rehype-url-inspector": "^2.0.2",
     "sharp": "^0.30.7",
     "to-vfile": "^7.2.3",
+    "trough": "^2.1.0",
     "unified": "^10.1.2",
     "uniorg": "^0.5.2",
     "uniorg-extract-keywords": "^0.5.2",
@@ -33,6 +36,7 @@
     "uniorg-rehype": "^0.5.2",
     "uniorg-slug": "^0.5.2",
     "vfile-find-down": "^6.0.0",
+    "vfile-rename": "^2.0.1",
     "vfile-reporter": "^7.0.4"
   },
   "devDependencies": {
