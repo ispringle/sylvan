@@ -25,6 +25,8 @@ person who created it.
 CLOSED: [2022-08-06 Sat 15:07]
 *** TODO start porting over some JS games and such
 *** TODO start using the API features of NextJS
-*** TODO Build a better build system that is able to pull in my org files automatically
-*** TODO Move org content dir to /public so that I don't have to also copy over images and other static content
+*** DONE Build a better build system that is able to pull in my org files automatically
+CLOSED: [2022-08-07 Sun 12:51]
+*** DONE Move org content dir to /public so that I don't have to also copy over images and other static content
+CLOSED: [2022-08-07 Sun 12:51]
 *** TODO write more blog posts
