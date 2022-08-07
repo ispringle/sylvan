@@ -1,8 +1,0 @@
-:PROPERTIES:
-:AUTHOR: Ian S. Pringle
-:CREATED: <2022-08-04 Thu>
-:MODIFIED: <2022-08-04 Thu>
-:TYPE: slip
-:ID:       a54dc079-2bd8-43c3-9cc5-bd7f0d0a1130
-:END:
-#+title: farming

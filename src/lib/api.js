@@ -10,7 +10,7 @@ import { processor } from './pipeline';
 // (images, linked files) to the public directory, so that next.js
 // serves them.
 // const pagesDirectory = path.join(process.cwd(), 'public');
-const pagesDirectory = path.join(process.cwd(), 'src/content');
+const pagesDirectory = path.join(process.cwd(), 'public');
 const blackListedPaths = ["todo.org", "inbox.org",]
 
 const loadPosts = async () => {

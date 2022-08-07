@@ -1,8 +1,0 @@
-:PROPERTIES:
-:AUTHOR: Ian S. Pringle
-:CREATED: <2022-08-04 Thu>
-:MODIFIED: <2022-08-04 Thu>
-:TYPE: slip
-:ID:       a9480200-bc9d-4900-a011-d5e56c4107b3
-:END:
-#+title: DIY

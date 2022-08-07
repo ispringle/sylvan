@@ -1,8 +1,0 @@
-:PROPERTIES:
-:AUTHOR: Ian S. Pringle
-:CREATED: <2022-08-04 Thu>
-:MODIFIED: <2022-08-04 Thu>
-:TYPE: slip
-:ID:       f82d8360-39fa-48fa-b85f-9cb0db183b79
-:END:
-#+title: technological mininalism
