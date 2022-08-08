@@ -1,6 +1,5 @@
 // @ts-nocheck
 // TODO Fix the typing here re: uniorg-slug
-
 import { unified } from 'unified';
 
 import { NodeProperty } from 'uniorg';

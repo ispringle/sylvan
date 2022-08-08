@@ -1,15 +1,11 @@
-import { format, parseISO } from 'date-fns'
-
-const timestampToOrgFormat = (timestamp: string) => {
-    return format(parseISO(timestamp), "yyyy-MM-dd EEE HH:mm")
-}
+import OrgTime from './OrgTime'
 
 export interface PropertiesDrawerProps {
     properties: { [key: string]: string };
 }
 
 const PropertiesDrawer = ({ ...props }) => {
-    const compDateText = timestampToOrgFormat(process.env.NEXT_PUBLIC_BUILD_TIME)
+
     const properties = props.properties
     delete properties["author"]
     return (
@@ -30,7 +26,9 @@ const PropertiesDrawer = ({ ...props }) => {
             }
             <div className="drawerRow">
                 <span className="key">compiled</span>
-                <span><span className="orgtime">{compDateText}</span></span>
+                <span>
+                    <OrgTime dateStr={process.env.NEXT_PUBLIC_BUILD_TIME} />
+                </span>
             </div>
             <div className="drawerRow">
                 <span className="key">made_with</span>
