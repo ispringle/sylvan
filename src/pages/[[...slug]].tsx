@@ -8,87 +8,98 @@ import Footer from '../components/Footer';
 const specialPaths = ['/', '/blog', '/book', '/grok']
 
 export const getStaticPaths = async () => {
-  const paths = await getAllPaths();
-  // add '/' which is synonymous to '/index'
-  specialPaths.forEach(p => paths.push(p));
+    const paths = await getAllPaths();
+    // add '/' which is synonymous to '/index'
+    specialPaths.forEach(p => paths.push(p));
 
-  return {
-    paths,
-    fallback: false,
-  };
+    return {
+        paths,
+        fallback: false,
+    };
 };
 
 interface PageParams {
-  params: {
-    slug?: string[];
-  };
+    params: {
+        slug?: string[];
+    };
 }
 
 const parseOrgTime = (timestamp) => {
-  return parse(timestamp, '<yyyy-MM-dd EEE>', new Date())
+    return parse(timestamp, '<yyyy-MM-dd EEE>', new Date())
 }
 
 export const getStaticProps = async ({ params }: PageParams) => {
-  const path = '/' + join(...(params.slug || ['index']));
-  let page: any;
-  let data: any;
-  let backlinks: any[] = [];
-  let allPosts: any[] = [];
-  if (specialPaths.includes(path)) {
-    allPosts = await getAllPosts().then(
-      pages => pages.filter(page => page.path.includes(path)).map(page => ({
-        path: page.path,
-        title: page.data.title || page.basename,
-        date: parseOrgTime(page.data?.properties?.created).toJSON() || new Date().toJSON(),
-      }))
-    );
-  } else {
-    page = await getPostBySlug(path);
-    data = page?.data;
-    backlinks = data ? await Promise.all([...data.backlinks].map(getPostBySlug)) : [];
-  }
-  // console.log(page)
-  let creation_date = new Date();
-  let modified_date = new Date();
-  if (data?.properties?.created) {
-    creation_date = parseOrgTime(data.properties.created)
-  }
-  if (data?.properties?.modified) {
-    modified_date = parseOrgTime(data.properties.created)
-  }
+    const path = '/' + join(...(params.slug || ['index']));
+    let page: any;
+    let data: any;
+    let backlinks: any[] = [];
+    let allPosts: any[] = [];
+    if (specialPaths.includes(path)) {
+        allPosts = await getAllPosts().then(
+            pages => pages.filter(page => page.path.includes(path)).map(page => ({
+                path: page.path,
+                title: page.data.title || page.basename,
+                date: parseOrgTime(page.data?.properties?.created).toJSON() || new Date().toJSON(),
+            }))
+        );
+    } else if (path === '/index') {
+        allPosts = await getAllPosts().then(
+            pages => pages.map(page => ({
+                path: page.path,
+                title: page.data.title || page.basename,
+                date: parseOrgTime(page.data?.properties?.created).toJSON() || new Date().toJSON(),
+            }))
+        );
+        page = await getPostBySlug(path);
+        data = page?.data;
+        backlinks = data ? await Promise.all([...data.backlinks].map(getPostBySlug)) : [];
+    } else {
+        page = await getPostBySlug(path);
+        data = page?.data;
+        backlinks = data ? await Promise.all([...data.backlinks].map(getPostBySlug)) : [];
+    }
+    // console.log(page)
+    let creation_date = new Date();
+    let modified_date = new Date();
+    if (data?.properties?.created) {
+        creation_date = parseOrgTime(data.properties.created)
+    }
+    if (data?.properties?.modified) {
+        modified_date = parseOrgTime(data.properties.created)
+    }
 
 
-  const properties = data?.properties || {};
+    const properties = data?.properties || {};
 
-  return {
-    props: {
-      title: data?.title || page?.basename || path,
-      pageType: data?.properties?.type || 'index',
-      hast: page?.result || "",
-      allPages: allPosts,
-      backlinks: backlinks.map((b) => ({
-        path: b.path,
-        title: b.data.title || b.basename,
-      })),
-      slug: path,
-      date: creation_date.toJSON(),
-      lastModified: modified_date.toJSON(),
-      properties: properties,
-      // isodate: data
-      // lastModifiedIso?: string;
-      // description: string | null;
-      // icon: string;
-    },
-  };
+    return {
+        props: {
+            title: data?.title || page?.basename || path,
+            pageType: data?.properties?.type || 'index',
+            hast: page?.result || "",
+            allPages: allPosts,
+            backlinks: backlinks.map((b) => ({
+                path: b.path,
+                title: b.data.title || b.basename,
+            })),
+            slug: path,
+            date: creation_date.toJSON(),
+            lastModified: modified_date.toJSON(),
+            properties: properties,
+            // isodate: data
+            // lastModifiedIso?: string;
+            // description: string | null;
+            // icon: string;
+        },
+    };
 };
 
 const PageContent = ({ ...props }: PageProps) => {
-  return (
-    <>
-      <Page {...props} />
-      <Footer {...props} />
-    </>
-  )
+    return (
+        <>
+            <Page {...props} />
+            <Footer {...props} />
+        </>
+    )
 }
 
 export default PageContent;
