@@ -25,7 +25,24 @@ interface PageParams {
 }
 
 const parseOrgTime = (timestamp) => {
-    return parse(timestamp, '<yyyy-MM-dd EEE>', new Date())
+    const tsNoTimeRegex = /<\d{4}-\d{2}-\d{2} [A-Z][a-z]{2}>/;
+    const tsWithTimeToMinutesRegex = /<\d{4}-\d{2}-\d{2} [A-Z][a-z]{2} \d{2}:\d{2}>/;
+    const tsWithTimeToSecondsRegex = /<\d{4}-\d{2}-\d{2} [A-Z][a-z]{2} \d{2}:\d{2}:\d{2}>/;
+
+    let ts = new Date();
+
+    switch (true) {
+        case tsNoTimeRegex.test(timestamp):
+            ts = parse(timestamp, '<yyyy-MM-dd EEE>', new Date());
+            break;
+        case tsWithTimeToMinutesRegex.test(timestamp):
+            ts = parse(timestamp, '<yyyy-MM-dd EEE HH:mm>', new Date());
+            break;
+        case tsWithTimeToSecondsRegex.test(timestamp):
+            ts = parse(timestamp, '<yyyy-MM-dd EEE HH:mm:ss>', new Date());
+            break;
+    }
+    return ts
 }
 
 export const getStaticProps = async ({ params }: PageParams) => {
