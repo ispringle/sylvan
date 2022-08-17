@@ -12,7 +12,7 @@ const timestampToOrgFormat = (timestamp: string) => {
 const OrgTime = ({ dateStr }) => {
     const compDateText = timestampToOrgFormat(dateStr)
     return (
-        <span><span className="orgtime">{compDateText}</span></span>
+        <span className="orgtime">{compDateText}</span>
     )
 }
 
