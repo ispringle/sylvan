@@ -12,7 +12,7 @@ const Footer = ({ ...props }) => {
             </div>
             <div id="footerMid" className='footerSection'>
                 {/* <Image className='flueron' src={triquerta} width={"50em"} height={"50em"} /> */}
-                <img className='flueron' src={"/8bit-fleuron.svg"} />
+                <img className='flueron' src={"fleuron.svg"} />
             </div>
             <div id="footerRight" className='footerSection'>
                 <div className="license">
