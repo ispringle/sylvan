@@ -4,7 +4,7 @@ const nextBuildId = require('next-build-id')
 
 module.exports = {
   compiler: {
-    // removeConsole: true,
+    removeConsole: true,
   },
   env: {
     NEXT_PUBLIC_NEXT_JS_VERSION: packageJson.dependencies.next.replace('^', ''),
