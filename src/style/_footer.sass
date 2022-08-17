@@ -21,7 +21,6 @@ footer
     margin-right: auto
 
   #footerMid
-    font-size: 3em
     justify-content: center
     max-width: min(80vw, 669px)
     min-width: min(80vw, 669px)
@@ -29,6 +28,10 @@ footer
     @media screen and (max-width: 1200px)
       max-width: unset
       min-width: unset
+    img
+      font-size: calc(16px + 6 * ((100vw - 320px) / 680))
+      height: 1em
+      width: 1em
 
 
   #footerRight

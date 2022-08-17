@@ -5,7 +5,9 @@ node_modules
 yarn-error.log
 out/
 .log/
+public/build
 public/**/*.org
+public/**/*.org_archive
 public/me.jpg
 public/logo.svg
 public/logo.txt
