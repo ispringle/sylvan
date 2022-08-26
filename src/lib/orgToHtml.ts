@@ -9,12 +9,14 @@ import extractKeywords from 'uniorg-extract-keywords';
 import { uniorgSlug } from 'uniorg-slug';
 import { visit } from 'unist-util-visit';
 import { visitIds } from 'orgast-util-visit-ids';
+import { uniorgAttach } from 'uniorg-attach';
 
 const processor = unified()
   .use(orgParse)
   .use(extractKeywords)
   .use(extractProperties)
   .use(uniorgSlug)
+  .use(uniorgAttach, { idDir: '.attach' })
   .use(extractIds)
   .use(org2rehype)
   .use(toJson);
