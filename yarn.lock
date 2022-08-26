@@ -2425,6 +2425,13 @@ unified@^10.0.0, unified@^10.1.2:
     trough "^2.0.0"
     vfile "^5.0.0"
 
+uniorg-attach@^0.5.3:
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/uniorg-attach/-/uniorg-attach-0.5.3.tgz#f91790a47dd372a8b6577b887edbec62392201b7"
+  integrity sha512-UJqLU4l+KZjkEZGW+W6mMWv2FZaER+WM4v9I/8073cf9oPFIoJYZwBARIYcpZTcVFYDBBOkCwZW1CpNNQDiRFg==
+  dependencies:
+    unist-util-visit-parents "5.1.0"
+
 uniorg-extract-keywords@^0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/uniorg-extract-keywords/-/uniorg-extract-keywords-0.5.2.tgz#a4764ce1caadb0ba9c7d35740d78fde4fc84d2ca"

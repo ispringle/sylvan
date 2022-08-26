@@ -16,7 +16,7 @@ const processor = unified()
   .use(extractKeywords)
   .use(extractProperties)
   .use(uniorgSlug)
-  .use(uniorgAttach, { idDir: '.attach' })
+  .use(uniorgAttach, { idDir: '/.attach' })
   .use(extractIds)
   .use(org2rehype)
   .use(toJson);
