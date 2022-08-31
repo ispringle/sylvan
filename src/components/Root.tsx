@@ -29,7 +29,7 @@ const Root = ({ title, hast, backlinks, ...props }: PageProps) => {
                 <ul style={{ margin: 'unset', padding: 'unset' }}>
                     {
                         props.allPages
-                            .filter(p => p.path.includes("/grok"))
+                            .filter(p => p.path.includes("/loci"))
                             .sort(
                                 (a, b) => new Date(b.date).valueOf() - new Date(a.date).valueOf())
                             .slice(0, 3)

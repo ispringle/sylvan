@@ -5,11 +5,11 @@ import { getAllPaths, getAllPosts, getPostBySlug } from '../lib/api';
 import Page, { PageProps } from '../components/Page';
 import Footer from '../components/Footer';
 
+// '/' is synonymous to '/index'
 const specialPaths = ['/', '/blog', '/book', '/grok']
 
 export const getStaticPaths = async () => {
     const paths = await getAllPaths();
-    // add '/' which is synonymous to '/index'
     specialPaths.forEach(p => paths.push(p));
 
     return {
