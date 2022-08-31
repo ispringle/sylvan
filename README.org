@@ -29,4 +29,5 @@ CLOSED: [2022-08-06 Sat 15:07]
 CLOSED: [2022-08-07 Sun 12:51]
 *** DONE Move org content dir to /public so that I don't have to also copy over images and other static content
 CLOSED: [2022-08-07 Sun 12:51]
+*** TODO Make the "special" paths and the filtering for those indices generic and configurable via an org file
 *** TODO write more blog posts
