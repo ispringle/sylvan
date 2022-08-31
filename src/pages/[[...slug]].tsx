@@ -6,7 +6,7 @@ import Page, { PageProps } from '../components/Page';
 import Footer from '../components/Footer';
 
 // '/' is synonymous to '/index'
-const specialPaths = ['/', '/blog', '/book', '/grok']
+const specialPaths = ['/', '/blog', '/book', '/loci']
 
 export const getStaticPaths = async () => {
     const paths = await getAllPaths();
