@@ -1,10 +1,11 @@
-import BlogPost from '../components/Blog';
-import Index from '../components/Index';
-import Note from '../components/Note';
-import Slip from '../components/Slip';
-import Root from '../components/Root';
-import { BacklinkProps } from '../components/Backlink';
-import { PropertiesDrawerProps } from '../components/PropertiesDrawer';
+import BlogPost from "../components/Blog";
+import Index from "../components/Index";
+import Note from "../components/Note";
+import Literate from "../components/Literate";
+import Slip from "../components/Slip";
+import Root from "../components/Root";
+import { BacklinkProps } from "../components/Backlink";
+import { PropertiesDrawerProps } from "../components/PropertiesDrawer";
 
 export interface PageProps {
   pageType: string;
@@ -24,19 +25,20 @@ export interface PageProps {
 }
 
 const Page = ({ ...props }: PageProps) => {
-  if (props.pageType === 'blog') {
-    return <BlogPost {...props} />
-  } else if (props.pageType === 'slip') {
-    return <Slip {...props} />
-  } else if (props.pageType === 'root') {
-    return <Root {...props} />
-  } else if (props.pageType === 'index') {
-    return <Index {...props} />
+  if (props.pageType === "blog") {
+    return <BlogPost {...props} />;
+  } else if (props.pageType === "slip") {
+    return <Slip {...props} />;
+  } else if (props.pageType === "root") {
+    return <Root {...props} />;
+  } else if (props.pageType === "index") {
+    return <Index {...props} />;
+  } else if (props.pageType === "literate") {
+    return <Literate {...props} />;
   } else {
-    return <Note {...props} />
+    return <Note {...props} />;
   }
-
 };
 
 export default Page;
-export { BlogPost, Index, Note, Slip, Root }
+export { BlogPost, Index, Note, Slip, Root };
