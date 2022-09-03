@@ -6,11 +6,18 @@ import Page, { PageProps } from "../components/Page";
 import Footer from "../components/Footer";
 
 // '/' is synonymous to '/index'
-const specialPaths = ["/", "/blog", "/book", "/loci", "/literate"];
+const specialPaths = {
+  "/": {},
+  "/blog": { pageType: "blog" },
+  "/book": { pageType: "book" },
+  "/loci": { pageType: "slip" },
+  "/literate": { pageType: "literate" },
+  "/note": { pageType: "note" },
+};
 
 export const getStaticPaths = async () => {
   const paths = await getAllPaths();
-  specialPaths.forEach((p) => paths.push(p));
+  Object.keys(specialPaths).forEach((p) => paths.push(p));
 
   return {
     paths,
@@ -53,10 +60,11 @@ export const getStaticProps = async ({ params }: PageParams) => {
   let data: any;
   let backlinks: any[] = [];
   let allPosts: any[] = [];
-  if (specialPaths.includes(path)) {
+  if (Object.prototype.hasOwnProperty.call(specialPaths, path)) {
+    const pageType = specialPaths[path].pageType;
     allPosts = await getAllPosts().then((pages) =>
       pages
-        .filter((page) => page.path.includes(path))
+        .filter((page) => page.data?.properties?.type == pageType)
         .map((page) => ({
           path: page.path,
           title: page.data.title || page.basename,
