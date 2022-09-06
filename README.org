@@ -18,6 +18,8 @@ websites are /personal/ and in some ways are an extension and reflection of the
 person who created it.
 
 ** To Do's
+*** TODO Look into using a components library for a minor refactor
+*** TODO update headings so that there is only one h1 (title of article) and then all headings ought to be larger than the p text
 *** TODO footnotes/annotations
 *** TODO bibtex support
 *** TODO better, more easily extended pipeline
@@ -30,4 +32,5 @@ CLOSED: [2022-08-07 Sun 12:51]
 *** DONE Move org content dir to /public so that I don't have to also copy over images and other static content
 CLOSED: [2022-08-07 Sun 12:51]
 *** TODO Make the "special" paths and the filtering for those indices generic and configurable via an org file
-*** TODO write more blog posts
+*** DONE write more blog posts :ARCHIVE:
+CLOSED: [2022-09-04 Sun 05:51]
