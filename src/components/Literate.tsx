@@ -1,9 +1,10 @@
-import Head from 'next/head';
+import Head from "next/head";
 
-import Backlink from './Backlink';
-import Link from './Link';
-import Rehype from './Rehype';
-import { PageProps } from './Page';
+import Backlink from "./Backlink";
+import Link from "./Link";
+import Rehype from "./Rehype";
+import { PageProps } from "./Page";
+import Title from "./Title";
 
 const Note = ({ title, hast, backlinks, ...props }: PageProps) => {
   return (
@@ -11,12 +12,12 @@ const Note = ({ title, hast, backlinks, ...props }: PageProps) => {
       <Head>
         <title>{title}</title>
       </Head>
-      <article id={props.slug.replace('/', '')} className={props.pageType}>
-        <h1>{title}</h1>
+      <article id={props.slug.replace("/", "")} className={props.pageType}>
+        <Title>{title}</Title>
         <Rehype hast={hast} />
         {!!backlinks.length && (
           <section>
-            <h2>{'Backlinks'}</h2>
+            <h2>{"Backlinks"}</h2>
             <ul>
               {backlinks.map((b) => (
                 <li key={b.path}>
@@ -31,4 +32,4 @@ const Note = ({ title, hast, backlinks, ...props }: PageProps) => {
   );
 };
 
-export default Note
+export default Note;

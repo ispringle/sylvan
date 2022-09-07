@@ -1,3 +1,13 @@
 main
   @include centered
   font-size: 2em
+
+main aside
+  --wdth: calc(((100vw - 8px - 2em - min(80vw, 669px)) / 2) - 1em)
+  justify-content: right
+  position: fixed
+  right: calc(4px + (2em + 8px) / 2)
+  max-width: var(--wdth)
+
+  nav
+    font-size: 1em

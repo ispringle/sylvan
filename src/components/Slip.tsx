@@ -1,9 +1,10 @@
-import Head from 'next/head';
+import Head from "next/head";
 
-import Backlink from './Backlink';
-import Link from './Link';
-import Rehype from './Rehype';
-import { PageProps } from './Page';
+import Backlink from "./Backlink";
+import Link from "./Link";
+import Rehype from "./Rehype";
+import { PageProps } from "./Page";
+import Title from "./Title";
 
 const Slip = ({ title, hast, backlinks, ...props }: PageProps) => {
   return (
@@ -11,12 +12,12 @@ const Slip = ({ title, hast, backlinks, ...props }: PageProps) => {
       <Head>
         <title>{title}</title>
       </Head>
-      <h1>{title}</h1>
-      <article id={props.slug.replace('/', '')} className={props.pageType}>
+      <Title>{title}</Title>
+      <article id={props.slug.replace("/", "")} className={props.pageType}>
         <Rehype hast={hast} />
         {!!backlinks.length && (
           <section>
-            <h2>{'Backlinks'}</h2>
+            <h2>{"Backlinks"}</h2>
             <ul>
               {backlinks.map((b) => (
                 <li key={b.path}>
@@ -31,4 +32,4 @@ const Slip = ({ title, hast, backlinks, ...props }: PageProps) => {
   );
 };
 
-export default Slip
+export default Slip;
