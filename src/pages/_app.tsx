@@ -8,13 +8,24 @@ import { clockCursor } from "cursor-effects";
 import "../style/style.sass";
 import SEO from "../../next-seo.config";
 import Header from "../components/Header";
-import { cursorTo } from "readline";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
-  useEffect(() => {
-    const targetEl = document.getElementsByTagName("main")[0];
-    clockCursor();
-  });
+  /* useEffect(() => {
+   *   let cursorOn = false;
+   *   window.addEventListener("mousemove", function (event) {
+   *     const targetEl = this.document.getElementsByTagName("main")[0];
+   *     const elUnderCursor = Array.from(document.querySelectorAll(":hover"));
+   *     if (!elUnderCursor.includes(targetEl)) {
+   *       cursorOn = true;
+   *     } else {
+   *       cursorOn = false;
+   *     }
+   *     console.log(cursorOn);
+   *   });
+   *   if (cursorOn) {
+   *     clockCursor();
+   *   }
+   * }); */
   return (
     <>
       <Head>
