@@ -1,0 +1,27 @@
+span.image
+  display: block
+  position: relative
+  max-width: 500px
+  filter: saturate(0) contrast(250)
+
+  img
+    max-width: 500px
+    z-index: 1
+
+  .overlay
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAOklEQVR4nC3KQQFAQAAAwd0EIohANA0uiiiugQgiiLA+5j0AVBewVa/VUGd1qBNgrR5gqW6r8x+7Oj8/xCBur9LU/wAAAABJRU5ErkJggg==')
+    background-repeat: repeat
+    display: block
+    height: 100%
+    width: 100%
+    opacity: 45%
+    position: absolute
+    top: 0px
+    left: 0px
+    z-index: 2
+
+span.image:hover
+  filter: unset
+  .overlay
+    display: none
+
