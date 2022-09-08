@@ -16,6 +16,10 @@ module.exports = {
     },
   },
   generateBuildId: () => nextBuildId({ dir: __dirname }),
+  i18n: {
+    locales: ["en"],
+    defaultLocale: "en",
+  },
   poweredByHeader: false,
   reactStrictMode: true,
   swcMinify: true,
