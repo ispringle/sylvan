@@ -570,6 +570,11 @@ csstype@^3.0.2:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.0.tgz#4ddcac3718d787cf9df0d1b7d15033925c8f29f2"
   integrity sha512-uX1KG+x9h5hIJsaKR9xHUeUraxf8IODOwq9JLNPq6BwB04a/xgpq3rcx47l5BZu5zBPlgD342tdke3Hom/nJRA==
 
+cursor-effects@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/cursor-effects/-/cursor-effects-1.0.4.tgz#16cceac6cd40198dd96ca3ca5444107af887e8b5"
+  integrity sha512-LWcQHyHyeRfS0u4njd+cipaLUKoE1N9Jg4Rjon5h75TIB4Z4VxF+nX5c/QjXX795EMZoEz6jz8K+U+V4w5wy0A==
+
 damerau-levenshtein@^1.0.8:
   version "1.0.8"
   resolved "https://registry.yarnpkg.com/damerau-levenshtein/-/damerau-levenshtein-1.0.8.tgz#b43d286ccbd36bc5b2f7ed41caf2d0aba1f8a6e7"
