@@ -1,24 +1,22 @@
-.branding
-  @include centered
-  box-shadow: var(--default-logo-shadow)
-
-.branding:hover
-    animation-timing-function: ease-out
-    transform-origin: bottom center 50px
-    animation-name: intensifies
-    animation-duration: 5s
-
 pre.logo
   font-size: 1.25em
   margin: unset
   padding: unset
-  background-color: var(--default-logo-bg)
+  background-color: #{$alpha-only}
   color: var(--default-logo-fg)
-  box-shadow: var(--default-logo-pre-inner-shadow)
   border: unset
   width: unset
-a.branding::before, a.branding::after
-  content: unset
+
+.branding
+  @include centered
+
+  &:hover
+    animation-timing-function: ease-out
+    transform-origin: bottom center 50px
+    animation-name: intensifies
+    animation-duration: 5s
+  &.branding::before, &.branding::after
+    content: unset
 
 @keyframes intensifies
     0%

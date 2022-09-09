@@ -8,9 +8,7 @@ const Footer = ({ ...props }) => {
       <div id="footerLeft" className="footerSection">
         <PropertiesDrawer {...props} />
       </div>
-      <div id="footerMid" className="footerSection">
-        <img className="flueron" src={"fleuron.svg"} alt="" />
-      </div>
+      <div id="footerMid" className="footerSection"></div>
       <div id="footerRight" className="footerSection">
         <div className="license">
           <p>Creative Commons</p>

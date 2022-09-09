@@ -1,10 +1,16 @@
 $threshhold: 40em
 $gap: 1rem
 $svgWidth: 5em
+$padding: 1em
 
 header
   @include centered
+  @include framed
+  background-color: var(--default-color-bg)
   font-family: $accent-font
+  padding: $padding
+  margin: unset
+  margin-bottom: 3em
   nav
     margin-top: 0
     font-size: 3em

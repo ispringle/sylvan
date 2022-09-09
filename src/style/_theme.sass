@@ -29,11 +29,10 @@
   /* --dark-image-filter: saturate(0) sepia(1) contrast(2.5) grayscale(1) sepia(1)
   --dark-image-filter: saturate(0) contrast(250)
   --dark-logo-fg: #{$dark-FG}
-  --dark-logo-bg: #{$alpha-only}
-  /* --dark-logo-fg: #{$dark-BG}
-  /* --dark-logo-bg: #{$dark-FG}
-  /* --dark-logo-shadow: 0 0 60px 30px #fbf88d, 0 0 100px 60px #f7eb5c, 0 0 140px 90px #e8b6bc
-  /* --dark-logo-pre-inner-shadow: inset 0 0 60px 30px #fbf88d
+  --dark-logo-fg: #{$dark-BG}
+  --dark-logo-bg: #{$dark-FG}
+  --dark-logo-shadow: 0 0 60px 30px #fbf88d, 0 0 100px 60px #f7eb5c, 0 0 140px 90px #e8b6bc
+  --dark-logo-pre-inner-shadow: inset 0 0 60px 30px #fbf88d
   --dark-fleuron-filter: invert(100%)
 
 @mixin default-dark
@@ -54,6 +53,4 @@
 
 @media (prefers-color-scheme: dark)
   :root
-    @include light-vars
-    @include dark-vars
     @include default-dark

@@ -3,6 +3,7 @@ import { parse } from "date-fns";
 
 import { getAllPaths, getAllPosts, getPostBySlug } from "../lib/api";
 import Page, { PageProps } from "../components/Page";
+import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 // '/' is synonymous to '/index'
@@ -132,7 +133,10 @@ export const getStaticProps = async ({ params }: PageParams) => {
 const PageContent = ({ ...props }: PageProps) => {
   return (
     <>
-      <Page {...props} />
+      <div id="primary-column">
+        <Header />
+        <Page {...props} />
+      </div>
       <Footer {...props} />
     </>
   );

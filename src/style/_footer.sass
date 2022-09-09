@@ -2,12 +2,10 @@ footer
   font-size: 1.5em
   display: flex
   margin-top: 3em
-
-  #postamble
-    font-size: 90%
-    p
-      margin: unset
   .license
+    background-color: var(--default-color-bg)
+    padding: 0.5em
+    @include framed
     font-size: 0.7em
     p
       margin: 0
@@ -28,20 +26,8 @@ footer
     @media screen and (max-width: 1200px)
       max-width: unset
       min-width: unset
-    .fleuron
-      font-size: calc(16px + 6 * ((100vw - 320px) / 680))
-      filter: var(--default-fleuron-filter)
-      height: 1em
-      width: 1em
-
 
   #footerRight
     align-items: flex-end
     justify-content: right
     margin-left:auto
-
-  .flueron
-    transition: transform .7s ease-in-out
-
-  .flueron:hover
-    transform: rotate(360deg)
