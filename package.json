@@ -10,11 +10,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "@fontsource/didact-gothic": "^4.5.9",
+    "@fontsource/vt323": "^4.5.10",
     "@stitches/core": "^1.2.8",
     "@stitches/react": "^1.2.8",
     "bibtex-parse": "^2.1.0",
     "cursor-effects": "^1.0.4",
     "date-fns": "^2.29.1",
+    "image-size": "^1.0.2",
     "next": "^12.2.3",
     "next-build-id": "^3.0.0",
     "next-seo": "^5.5.0",

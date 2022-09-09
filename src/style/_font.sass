@@ -3,19 +3,23 @@ $accent-font: 'VT323', 'monospace'
 
 $font-size-base: 2em
 
+@use '@fontsource/didact-gothic/scss/mixins' as didact
+@include didact.fontFace($weight: 400, $display: swap, $fontName: 'Didact Gothic', $fontDir: '~@fontsource/didact-gothic/files')
+/* @font-face
+/*   font-display: swap
+/*   font-family: 'Didact Gothic'
+/*   font-style: normal
+/*   font-weight: 400
+/*   src: local('Didact Gothic Regular'), local('DidactGothic-Regular'), url('/fonts/DidactGothic-Regular.ttf')
 
-@font-face
-  font-display: swap
-  font-family: 'Didact Gothic'
-  font-style: normal
-  font-weight: 400
-  src: local('Didact Gothic Regular'), local('DidactGothic-Regular'), url('/fonts/DidactGothic-Regular.ttf')
 
+/* Use these after https://github.com/fontsource/fontsource/issues/567 has been resolved
+/* @use '@fontsource/vt323/scss/mixins' as vt323
+/* @include vt323.fontFace($weight: 400, $display: swap, $fontName: 'VT323', $fontDir: "~@fontsource/vt323/files")
 @font-face
   font-display: swap
   font-family: 'VT323'
   font-style: normal
   font-weight: 400
   font-variant-ligature: none
-  font-
   src: local('VT323 Regular'), local('VT323-Regular'), url('/fonts/VT323-Regular.ttf')
