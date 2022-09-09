@@ -20,6 +20,7 @@ module.exports = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  output: "standalone",
   poweredByHeader: false,
   reactStrictMode: true,
   serverRuntimeConfig: {

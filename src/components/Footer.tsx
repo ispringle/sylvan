@@ -6,7 +6,7 @@ const Footer = ({ ...props }) => {
   return (
     <footer>
       <div id="footerLeft" className="footerSection">
-        <PropertiesDrawer {...props} />
+        {props.nodrawer ? "" : <PropertiesDrawer {...props} />}
       </div>
       <div id="footerMid" className="footerSection"></div>
       <div id="footerRight" className="footerSection">

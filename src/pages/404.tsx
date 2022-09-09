@@ -1,5 +1,8 @@
 import { useEffect } from "react";
 
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+
 export default function Custom404({ ...props }) {
   useEffect(() => {
     let reqPath = window.location.href.split("ian.ist");
@@ -17,22 +20,29 @@ export default function Custom404({ ...props }) {
     );
   });
   return (
-    <div id="e404">
-      <div className="monitor">
-        <div className="bezel">
-          <div className="crt">
-            <div className="terminal">
-              <p>
-                user@ian.ist:/var/www/$ cat .<span className="path"></span>
-              </p>
-              <p>
-                cat: .<span className="path"></span>: no such file or directory
-              </p>
-              <p>user@ian.ist:/var/www/$ </p>
+    <>
+      <div id="primary-column">
+        <Header />
+        <div id="e404">
+          <div className="monitor">
+            <div className="bezel">
+              <div className="crt">
+                <div className="terminal">
+                  <p>
+                    user@ian.ist:/var/www/$ cat .<span className="path"></span>
+                  </p>
+                  <p>
+                    cat: .<span className="path"></span>: no such file or
+                    directory
+                  </p>
+                  <p>user@ian.ist:/var/www/$ </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <Footer {...props} nodrawer />
+    </>
   );
 }
