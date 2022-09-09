@@ -7,7 +7,7 @@ import Title from "./Title";
 const Root = ({ title, hast, backlinks, ...props }: PageProps) => {
   return (
     <article id={"root"} className={props.pageType}>
-      <Title id="howder">Howdy</Title>
+      <Title id="howdy">Howdy</Title>
       <section className="content">
         <Rehype hast={hast} />
       </section>
