@@ -1,16 +1,17 @@
-import { format } from "date-fns";
-
 import Link from "./Link";
 import OrgTime from "./OrgTime";
 import { PageProps } from "./Page";
 import Rehype from "./Rehype";
+import Title from "./Title";
 
 const Root = ({ title, hast, backlinks, ...props }: PageProps) => {
   return (
-    <main>
-      <article id={"root"} className={props.pageType}>
+    <article id={"root"} className={props.pageType}>
+      <Title id="howder">Howdy</Title>
+      <section className="content">
         <Rehype hast={hast} />
-
+      </section>
+      <section>
         <h4>Latest Blog Posts</h4>
         <ul style={{ margin: "unset", padding: "unset" }}>
           {props.allPages
@@ -26,6 +27,8 @@ const Root = ({ title, hast, backlinks, ...props }: PageProps) => {
               </li>
             ))}
         </ul>
+      </section>
+      <section>
         <h4>Latest Grok Updates</h4>
         <ul style={{ margin: "unset", padding: "unset" }}>
           {props.allPages
@@ -41,8 +44,8 @@ const Root = ({ title, hast, backlinks, ...props }: PageProps) => {
               </li>
             ))}
         </ul>
-      </article>
-    </main>
+      </section>
+    </article>
   );
 };
 

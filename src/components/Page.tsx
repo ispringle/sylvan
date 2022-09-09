@@ -1,9 +1,14 @@
+import Head from "next/head";
+
+import ThemeToggle from "./ThemeToggle";
+
 import BlogPost from "../components/Blog";
 import Index from "../components/Index";
 import Note from "../components/Note";
 import Literate from "../components/Literate";
 import Slip from "../components/Slip";
 import Root from "../components/Root";
+
 import { BacklinkProps } from "../components/Backlink";
 import { PropertiesDrawerProps } from "../components/PropertiesDrawer";
 
@@ -24,7 +29,7 @@ export interface PageProps {
   propteries?: PropertiesDrawerProps;
 }
 
-const Page = ({ ...props }: PageProps) => {
+const getContent = (pageType, props) => {
   if (props.pageType === "blog") {
     return <BlogPost {...props} />;
   } else if (props.pageType === "slip") {
@@ -38,6 +43,20 @@ const Page = ({ ...props }: PageProps) => {
   } else {
     return <Note {...props} />;
   }
+};
+
+const Page = ({ ...props }: PageProps) => {
+  const content = getContent(props.pageType, props);
+
+  return (
+    <main>
+      <Head>
+        <title>{props.title}</title>
+      </Head>
+      <ThemeToggle />
+      {content}
+    </main>
+  );
 };
 
 export default Page;

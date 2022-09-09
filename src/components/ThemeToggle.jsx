@@ -11,6 +11,7 @@ const setTheme = (theme) => {
     "logo-bg",
     "logo-shadow",
     "logo-pre-inner-shadow",
+    "flueron-filter",
   ].forEach((v) => {
     r.style.setProperty("--default-" + v, "var(--" + theme + "-" + v + ")");
   });

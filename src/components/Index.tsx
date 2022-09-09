@@ -1,21 +1,15 @@
-import Head from "next/head";
-
-import { format } from "date-fns";
-
 import Link from "./Link";
 import OrgTime from "./OrgTime";
 import { PageProps } from "./Page";
+import Title from "./Title";
 
 const capitalize = (s) => (s && s[0].toUpperCase() + s.slice(1)) || "";
 
 const Index = ({ title, allPages, ...props }: PageProps) => {
   const pageTitle = capitalize(title.replace("/", "")) + " Index";
   return (
-    <main>
-      <Head>
-        <title>{pageTitle}</title>
-      </Head>
-      <h1>{pageTitle}</h1>
+    <article id={props.slug.replace("/", "")} className={props.pageType}>
+      <Title>{pageTitle}</Title>
       <section id={props.slug.replace("/", "")} className={props.pageType}>
         <ul style={{ margin: "unset", padding: "unset" }}>
           {allPages
@@ -30,7 +24,7 @@ const Index = ({ title, allPages, ...props }: PageProps) => {
             ))}
         </ul>
       </section>
-    </main>
+    </article>
   );
 };
 

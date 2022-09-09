@@ -1,11 +1,8 @@
 import Link from "next/link";
 
-import ThemeToggle from "./ThemeToggle";
-
 const Header = () => {
   return (
     <header>
-      <ThemeToggle />
       <Link href="/">
         <a className="branding">
           {/* prettier-ignore */}

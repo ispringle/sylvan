@@ -6,14 +6,13 @@ const setParentDimensions = (e) => {
   const height = e.target.height;
   e.target.parentNode.style.width = width + "px";
   e.target.parentNode.style.height = height + "px";
-  console.log(width, height, parentEl);
 };
 
 const Img = ({ src, alt, ...props }) => {
   const imageEl = <img src={src} alt={alt} onLoad={setParentDimensions} />;
 
   return (
-    <span className="image" onLoad={() => console.log("loaded")}>
+    <span className="image">
       {imageEl}
       <svg className="overlay" id="filterMatrix">
         <feColorMatrix

@@ -3,6 +3,7 @@ $padding: 1em
 main
   @include centered
   @include framed
+  position: relative
   background-color: var(--default-color-bg)
   font-size: 2em
   padding: $padding
@@ -11,6 +12,7 @@ main
     border: unset
     box-shadow: unset
     padding: unset
+    position: unset
 
 main aside
   --wdth: calc(((100vw - 8px - 2em - min(80vw, 669px)) / 2) - 1em)
