@@ -22,5 +22,8 @@ module.exports = {
   },
   poweredByHeader: false,
   reactStrictMode: true,
+  serverRuntimeConfig: {
+    PROJECT_ROOT: __dirname,
+  },
   swcMinify: true,
 };
