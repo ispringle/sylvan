@@ -1,8 +1,7 @@
 span.image
-  display: block
+  @include framed
   position: relative
-  max-width: 500px
-  filter: saturate(0) contrast(250)
+  filter: var(--default-image-filter)
 
   img
     max-width: 500px
@@ -14,7 +13,7 @@ span.image
     display: block
     height: 100%
     width: 100%
-    opacity: 45%
+    opacity: 60%
     position: absolute
     top: 0px
     left: 0px

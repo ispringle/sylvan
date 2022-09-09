@@ -2,9 +2,9 @@ $padding: 1em
 
 main
   @include centered
+  @include framed
+  background-color: var(--default-color-bg)
   font-size: 2em
-  border: black 5px double
-  box-shadow: 5px 5px
   padding: $padding
   width: calc(min(80vw, 669px) + $padding)
   @media screen and (max-width: 900px)

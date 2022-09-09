@@ -14,9 +14,11 @@ const BlogPost = ({ title, hast, backlinks, ...props }: PageProps) => {
       </Head>
       <Title>{title}</Title>
       <article id={props.slug.replace("/", "")} className={props.pageType}>
-        <Rehype hast={hast} />
+        <section className="content">
+          <Rehype hast={hast} />
+        </section>
         {!!backlinks.length && (
-          <section>
+          <section className="backlinks">
             <h2>{"Backlinks"}</h2>
             <ul>
               {backlinks.map((b) => (

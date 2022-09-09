@@ -1,0 +1,21 @@
+@use 'theme'
+#color-toggle
+  position: absolute
+  top: 0
+  right: 0
+
+.toggle
+  input[type=checkbox]
+    height: 0
+    width: 0
+    visibility: hidden
+  label
+    cursor: pointer
+    width: 41px
+    height: 47px
+    background-image: url(http://cs.gettysburg.edu/~duncjo01/archive/icons/sun/large/toggle3.png)
+    display: block
+    border-radius: 5px
+  input:checked + label
+    filter: invert(1)
+    background-image: url(http://cs.gettysburg.edu/~duncjo01/archive/icons/sun/large/toggle1.png)

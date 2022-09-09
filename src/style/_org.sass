@@ -2,12 +2,14 @@
 
 a::before
   content: "["
+  color: var(--default-color-fg)
 
 a::after
     content: "]"
+    color: var(--default-color-fg)
 
 a
-    color: black
+    color: var(--default-color-accent)
     text-decoration: none
     font-weight: bold
 
@@ -29,16 +31,16 @@ i::before, i::after
 
 .orgtime::before
   content: "<"
-  color: black
+  color: var(--default-color-fg)
   font-weight: bold
 
 .orgtime::after
   content: ">"
-  color: black
+  color: var(--default-color-fg)
   font-weight: bold
 
 .DONE, .TODO
-    color: white
+    color: var(--default-color-bg)
     padding: 0.1em 0.3em
     border-radius: 3px
     background-clip: padding-box
@@ -62,7 +64,7 @@ ul
 
 ul li::before
     content: "-"
-    color: black
+    color: var(--default-color-fg)
     font-family: monospace
     font-size: 1.25em
     font-weight: bold

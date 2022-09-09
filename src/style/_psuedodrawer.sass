@@ -12,7 +12,7 @@
   width: inherit
 
 .psuedoDrawer::before
-  color: gray
+  color: var(--default-color-accent)
   content: ":" attr(title) ":"
   display: block
   text-transform: uppercase
@@ -22,7 +22,7 @@
   content: ":" attr(title) ":"
 
 .psuedoDrawer::after
-  color: gray
+  color: var(--default-color-accent)
   content: "..."
   letter-spacing: 0.2em
 
@@ -31,7 +31,7 @@
   letter-spacing: normal
 
 .psuedoDrawer > .drawerRow
-  color: gray
+  color: var(--default-color-accent)
   display: none
 
 table.psuedoDrawer:focus
@@ -59,4 +59,4 @@ table.psuedoDrawer:focus > .drawerRow, .psuedoDrawer:hover > .drawerRow
 
 
 .psuedoDrawer *, .psuedoDrawer *::before, .psuedoDrawer  *::after
-  color: gray
+  color: var(--default-color-accent)

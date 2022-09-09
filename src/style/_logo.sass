@@ -1,5 +1,6 @@
 .branding
   @include centered
+  box-shadow: var(--default-logo-shadow)
 
 .branding:hover
     animation-timing-function: ease-out
@@ -11,7 +12,9 @@ pre.logo
   font-size: 1.25em
   margin: unset
   padding: unset
-  background-color: white
+  background-color: var(--default-logo-bg)
+  color: var(--default-logo-fg)
+  box-shadow: var(--default-logo-pre-inner-shadow)
   border: unset
   width: unset
 a.branding::before, a.branding::after
