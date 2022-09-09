@@ -1,17 +1,38 @@
-export default function Custom404() {
+import { useEffect } from "react";
+
+export default function Custom404({ ...props }) {
+  useEffect(() => {
+    let reqPath = window.location.href.split("ian.ist");
+    if (reqPath.length < 2) {
+      reqPath = window.location.href.split("3000");
+    }
+    let path = reqPath[1];
+    if (path == "/") {
+      path = "/index.html";
+    } else {
+      path = path + ".html";
+    }
+    Array.from(document.getElementsByClassName("path")).forEach(
+      (el) => (el.innerHTML = path)
+    );
+  });
   return (
     <main>
-    <pre id="e404">
-      <div>             404             </div>
-      <div> </div>
-      <div> </div>
-      <div>      you are not where      </div>
-      <div>you ought to be. you are lost</div>
-      <div>      as best I can see      </div>
-      <div> </div>
-      <div> </div>
-      <div>               by Ian Pringle</div>
-    </pre>
+      <div id="e404">
+        <div className="monitor">
+          <div className="crt">
+            <div className="terminal">
+              <p>
+                user@ian.ist:/var/www/$ cat .<span className="path"></span>
+              </p>
+              <p>
+                cat: .<span className="path"></span>: no such file or directory
+              </p>
+              <p>user@ian.ist:/var/www/$ </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
-  )
+  );
 }
