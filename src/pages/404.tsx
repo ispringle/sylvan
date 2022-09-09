@@ -17,22 +17,20 @@ export default function Custom404({ ...props }) {
     );
   });
   return (
-    <main>
-      <div id="e404">
-        <div className="monitor">
-          <div className="crt">
-            <div className="terminal">
-              <p>
-                user@ian.ist:/var/www/$ cat .<span className="path"></span>
-              </p>
-              <p>
-                cat: .<span className="path"></span>: no such file or directory
-              </p>
-              <p>user@ian.ist:/var/www/$ </p>
-            </div>
+    <div id="e404">
+      <div className="monitor">
+        <div className="crt">
+          <div className="terminal">
+            <p>
+              user@ian.ist:/var/www/$ cat .<span className="path"></span>
+            </p>
+            <p>
+              cat: .<span className="path"></span>: no such file or directory
+            </p>
+            <p>user@ian.ist:/var/www/$ </p>
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
