@@ -3,6 +3,7 @@
   position: absolute
   top: 1em
   right: 1em
+  filter: var(--default-inversion-filter)
 
 .toggle
   input[type=checkbox]
@@ -18,5 +19,4 @@
     display: block
     border-radius: 5px
   input:checked + label
-    filter: invert(1)
     background-image: url(/assets/toggle-on.png)

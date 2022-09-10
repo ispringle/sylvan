@@ -7,20 +7,27 @@ const setTheme = (theme) => {
     "color-fg",
     "color-accent",
     "image-filter",
-    "logo-fg",
-    "logo-bg",
-    "logo-shadow",
-    "logo-pre-inner-shadow",
-    "flueron-filter",
+    "inversion-filter",
   ].forEach((v) => {
     r.style.setProperty("--default-" + v, "var(--" + theme + "-" + v + ")");
   });
+  // const toggle = document.getElementById("color-checkbox");
+  // if (theme == "light") {
+  //   toggle.checked ? (toggle.checked = false) : null;
+  // }
+  // if (theme == "dark") {
+  //   toggle.checked ? null : (toggle.checked = false);
+  // }
   localStorage.setItem("theme", theme);
 };
 
 const ThemeToggle = () => {
   useEffect(() => {
-    const defaultTheme = "light";
+    const preference = window?.matchMedia("(prefers-color-scheme: dark)")
+      .matches
+      ? "dark"
+      : "light";
+    const defaultTheme = preference || "light";
     setTheme(
       localStorage.getItem("theme")
         ? localStorage.getItem("theme")
