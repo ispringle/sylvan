@@ -55,7 +55,7 @@ const Page = ({ ...props }: PageProps) => {
       </Head>
       <ThemeToggle />
       {content}
-      <img className="fleuron" src={"fleuron.svg"} alt="" />
+      <img className="fleuron" src={"/fleuron.svg"} alt="" />
     </main>
   );
 };

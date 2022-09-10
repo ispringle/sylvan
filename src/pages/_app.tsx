@@ -29,7 +29,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>ian.ist</title>
-        <link rel="icon" href="fleuron.svg" />
+        <link rel="icon" href="/fleuron.svg" />
       </Head>
       <DefaultSeo {...SEO} />
       <Component {...pageProps} />
