@@ -3,7 +3,7 @@ import Head from "next/head";
 import { DefaultSeo } from "next-seo";
 import { useEffect } from "react";
 
-import { clockCursor } from "cursor-effects";
+import Background from "../components/Background";
 
 import "../style/style.sass";
 import SEO from "../../next-seo.config";
@@ -32,7 +32,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/fleuron.svg" />
       </Head>
       <DefaultSeo {...SEO} />
-      <Component {...pageProps} />
+      <Background>
+        <Component {...pageProps} />
+      </Background>
     </>
   );
 }
