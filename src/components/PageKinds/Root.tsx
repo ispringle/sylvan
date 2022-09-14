@@ -1,15 +1,13 @@
-import Link from "./Link";
-import OrgTime from "./OrgTime";
-import { PageProps } from "./Page";
-import Rehype from "./Rehype";
-import Title from "./Title";
+import { Link, OrgTime, Title } from "../Atoms";
+import { PageLayoutProps } from "../PageLayout";
+import RenderContent from "../RenderContent";
 
-const Root = ({ title, hast, backlinks, ...props }: PageProps) => {
+const Root = ({ title, hast, backlinks, ...props }: PageLayoutProps) => {
   return (
     <article id={"root"} className={props.pageType}>
       <Title id="howdy">Howdy</Title>
       <section className="content">
-        <Rehype hast={hast} />
+        <RenderContent hast={hast} />
       </section>
       <section>
         <h4>Latest Blog Posts</h4>

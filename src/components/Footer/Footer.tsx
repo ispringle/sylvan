@@ -1,12 +1,11 @@
-import Link from "next/link";
-
-import PropertiesDrawer from "./PropertiesDrawer";
+import { Link } from "../Atoms";
+import OrgDrawer from "../OrgDrawer";
 
 const Footer = ({ ...props }) => {
   return (
     <footer>
       <div id="footerLeft" className="footerSection">
-        {props.nodrawer ? "" : <PropertiesDrawer {...props} />}
+        {props.nodrawer ? "" : <OrgDrawer {...props} />}
       </div>
       <div id="footerMid" className="footerSection"></div>
       <div id="footerRight" className="footerSection">
@@ -16,7 +15,7 @@ const Footer = ({ ...props }) => {
             rel="license"
             href="http://creativecommons.org/licenses/by-nc-sa/4.0/"
           >
-            <a>BY-NC-SA</a>
+            BY-NC-SA
           </Link>
         </div>
       </div>

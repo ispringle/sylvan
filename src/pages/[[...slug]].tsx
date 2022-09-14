@@ -2,7 +2,7 @@ import { join } from "path";
 import { parse } from "date-fns";
 
 import { getAllPaths, getAllPosts, getPostBySlug } from "../lib/api";
-import Page, { PageProps } from "../components/Page";
+import PageLayout, { PageLayoutProps } from "../components/PageLayout";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -130,12 +130,12 @@ export const getStaticProps = async ({ params }: PageParams) => {
   };
 };
 
-const PageContent = ({ ...props }: PageProps) => {
+const PageContent = ({ ...props }: PageLayoutProps) => {
   return (
     <>
       <div id="primary-column">
         <Header />
-        <Page {...props} />
+        <PageLayout {...props} />
       </div>
       <Footer {...props} />
     </>

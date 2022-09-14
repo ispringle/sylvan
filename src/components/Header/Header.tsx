@@ -1,12 +1,11 @@
-import Link from "next/link";
+import { Link } from "../Atoms";
 
 const Header = () => {
   return (
     <header>
-      <Link href="/">
-        <a className="branding">
-          {/* prettier-ignore */}
-          <div id="logo">
+      <Link href="/" className="branding">
+        {/* prettier-ignore */}
+        <div id="logo">
             <pre className="logo"> _               _     _</pre>
             <pre className="logo">(_)             (_)   | |</pre>
             <pre className="logo"> _  __ _ _ __    _ ___| |_</pre>
@@ -14,34 +13,23 @@ const Header = () => {
             <pre className="logo">| | (_| | | | |_| \__ \ |_</pre>
             <pre className="logo">|_|\__,_|_| |_(_)_|___/\__|</pre>
           </div>
-        </a>
       </Link>
       <nav>
         <ul>
           <li>
-            <Link href="/about">
-              <a>About</a>
-            </Link>
+            <Link href="/about">About</Link>
           </li>
           <li>
-            <Link href="/blog">
-              <a>Blog</a>
-            </Link>
+            <Link href="/blog">Blog</Link>
           </li>
           <li>
-            <Link href="/book">
-              <a>Books</a>
-            </Link>
+            <Link href="/book">Books</Link>
           </li>
           <li>
-            <Link href="/loci">
-              <a>Loci</a>
-            </Link>
+            <Link href="/loci">Loci</Link>
           </li>
           <li>
-            <Link href="/literate">
-              <a>Literate</a>
-            </Link>
+            <Link href="/literate">Literate</Link>
           </li>
         </ul>
       </nav>

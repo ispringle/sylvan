@@ -1,11 +1,9 @@
-import Link from "./Link";
-import OrgTime from "./OrgTime";
-import { PageProps } from "./Page";
-import Title from "./Title";
+import { Link, OrgTime, Title } from "../Atoms";
+import { PageLayoutProps } from "../PageLayout";
 
 const capitalize = (s) => (s && s[0].toUpperCase() + s.slice(1)) || "";
 
-const Index = ({ title, allPages, ...props }: PageProps) => {
+const Sitemap = ({ title, allPages, ...props }: PageLayoutProps) => {
   const pageTitle = capitalize(title.replace("/", "")) + " Index";
   return (
     <article id={props.slug.replace("/", "")} className={props.pageType}>
@@ -28,4 +26,4 @@ const Index = ({ title, allPages, ...props }: PageProps) => {
   );
 };
 
-export default Index;
+export default Sitemap;

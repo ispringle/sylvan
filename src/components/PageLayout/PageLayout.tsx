@@ -1,18 +1,13 @@
 import Head from "next/head";
 
-import ThemeToggle from "./ThemeToggle";
+import ThemeToggle from "../ThemeToggle";
 
-import BlogPost from "../components/Blog";
-import Index from "../components/Index";
-import Note from "../components/Note";
-import Literate from "../components/Literate";
-import Slip from "../components/Slip";
-import Root from "../components/Root";
+import { Blog, Note, Literate, Root, Sitemap, Slip } from "../PageKinds";
 
-import { BacklinkProps } from "../components/Backlink";
-import { PropertiesDrawerProps } from "../components/PropertiesDrawer";
+import { BacklinkProps } from "../Atoms";
+import { OrgDrawerProps } from "../OrgDrawer";
 
-export interface PageProps {
+export interface PageLayoutProps {
   pageType: string;
   slug: string;
   title: string;
@@ -26,18 +21,18 @@ export interface PageProps {
   description: string | null;
   icon: string;
   allPages?: any[];
-  propteries?: PropertiesDrawerProps;
+  propteries?: OrgDrawerProps;
 }
 
 const getContent = (pageType, props) => {
   if (props.pageType === "blog") {
-    return <BlogPost {...props} />;
+    return <Blog {...props} />;
   } else if (props.pageType === "slip") {
     return <Slip {...props} />;
   } else if (props.pageType === "root") {
     return <Root {...props} />;
   } else if (props.pageType === "index") {
-    return <Index {...props} />;
+    return <Sitemap {...props} />;
   } else if (props.pageType === "literate") {
     return <Literate {...props} />;
   } else {
@@ -45,7 +40,7 @@ const getContent = (pageType, props) => {
   }
 };
 
-const Page = ({ ...props }: PageProps) => {
+const PageLayout = ({ ...props }: PageLayoutProps) => {
   const content = getContent(props.pageType, props);
 
   return (
@@ -60,5 +55,4 @@ const Page = ({ ...props }: PageProps) => {
   );
 };
 
-export default Page;
-export { BlogPost, Index, Note, Slip, Root };
+export default PageLayout;

@@ -1,10 +1,10 @@
-import OrgTime from "./OrgTime";
+import { OrgTime } from "../Atoms";
 
-export interface PropertiesDrawerProps {
+export interface OrgDrawerProps {
   properties: { [key: string]: string };
 }
 
-const PropertiesDrawer = ({ ...props }) => {
+const OrgDrawer = ({ ...props }) => {
   const properties = props.properties;
   delete properties["author"];
   return (
@@ -60,4 +60,4 @@ const PropertiesDrawer = ({ ...props }) => {
   );
 };
 
-export default PropertiesDrawer;
+export default OrgDrawer;

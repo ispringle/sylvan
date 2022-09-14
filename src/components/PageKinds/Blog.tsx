@@ -1,17 +1,16 @@
-import Link from "./Link";
-import Rehype from "./Rehype";
-import { PageProps } from "./Page";
-import Title from "./Title";
+import { Link, Title } from "../Atoms";
+import { PageLayoutProps } from "../PageLayout";
+import RenderContent from "../RenderContent";
 
-const Slip = ({ title, hast, backlinks, ...props }: PageProps) => {
+const Blog = ({ title, hast, backlinks, ...props }: PageLayoutProps) => {
   return (
     <article id={props.slug.replace("/", "")} className={props.pageType}>
       <Title>{title}</Title>
       <section className="content">
-        <Rehype hast={hast} />
+        <RenderContent hast={hast} />
       </section>
       {!!backlinks.length && (
-        <section>
+        <section className="backlinks">
           <h2>{"Backlinks"}</h2>
           <ul>
             {backlinks.map((b) => (
@@ -26,4 +25,4 @@ const Slip = ({ title, hast, backlinks, ...props }: PageProps) => {
   );
 };
 
-export default Slip;
+export default Blog;

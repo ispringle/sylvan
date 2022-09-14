@@ -1,13 +1,12 @@
-import Link from "./Link";
-import Rehype from "./Rehype";
-import { PageProps } from "./Page";
-import Title from "./Title";
+import { Link, Title } from "../Atoms";
+import { PageLayoutProps } from "../PageLayout";
+import RenderContent from "../RenderContent";
 
-const Note = ({ title, hast, backlinks, ...props }: PageProps) => {
+const Note = ({ title, hast, backlinks, ...props }: PageLayoutProps) => {
   return (
     <article id={props.slug.replace("/", "")} className={props.pageType}>
       <Title>{title}</Title>
-      <Rehype hast={hast} />
+      <RenderContent hast={hast} />
       {!!backlinks.length && (
         <section>
           <h2>{"Backlinks"}</h2>
