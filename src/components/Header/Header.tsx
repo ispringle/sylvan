@@ -1,18 +1,10 @@
-import { Link } from "../Atoms";
+import { Link, Logo } from "../Atoms";
 
 const Header = () => {
   return (
     <header>
       <Link href="/" className="branding">
-        {/* prettier-ignore */}
-        <div id="logo">
-            <pre className="logo"> _               _     _</pre>
-            <pre className="logo">(_)             (_)   | |</pre>
-            <pre className="logo"> _  __ _ _ __    _ ___| |_</pre>
-            <pre className="logo">| |/ _` | '_ \  | / __| __|</pre>
-            <pre className="logo">| | (_| | | | |_| \__ \ |_</pre>
-            <pre className="logo">|_|\__,_|_| |_(_)_|___/\__|</pre>
-          </div>
+        <Logo className="centered" />
       </Link>
       <nav>
         <ul>
