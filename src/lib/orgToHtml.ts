@@ -10,7 +10,6 @@ import { uniorgSlug } from "uniorg-slug";
 import { visit } from "unist-util-visit";
 import { visitIds } from "orgast-util-visit-ids";
 import { uniorgAttach } from "uniorg-attach";
-import raw from "rehype-raw";
 
 const processor = unified()
   .use(orgParse)
@@ -20,7 +19,6 @@ const processor = unified()
   .use(uniorgAttach, { idDir: "/.attach" })
   .use(extractIds)
   .use(org2rehype)
-  .use(raw)
   .use(toJson);
 
 export default async function orgToHtml(file) {

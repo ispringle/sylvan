@@ -5,7 +5,7 @@
   "author": "Ian Pringle <ian@dapringles.com>",
   "license": "GPL-3.0-only",
   "scripts": {
-    "dev": "next dev",
+    "dev": "node --trace-warnings node_modules/.bin/next dev",
     "build": "next build",
     "start": "next start"
   },

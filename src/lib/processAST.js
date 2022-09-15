@@ -1,46 +1,39 @@
-// TODO build out the AST processing here, for things like prism and other rehype plugins
-import { unified } from 'unified';
-import { toVFile } from 'to-vfile';
+// Build out the AST processing here, for things like prism and other rehype plugins
+import prism from "rehype-prism-plus";
+import raw from "rehype-raw";
 
-import prism from 'rehype-prism-plus';
+import process from "./process";
 
-const processor = unified()
-  .use(prism)
-  .use(toJson);
+// const processor = process().use(raw).use(prism, { ignoreMissing: true });
+const processor = process().use(raw);
 
 async function processAST(file) {
-  try {
-    return await processor.process(file);
-  } catch (e) {
-    console.error('failed to process file', file.path, e);
-    throw e;
-  }
+  return await processor.process(file);
 }
 
-function toJson() {
-  this.Compiler = (node) => {
-    return node;
-  };
-}
+async function processASTs(ctx) {
+  const ids = {};
+  Object.values(ctx.pages).forEach((p) => {
+    Object.entries(p.data.ids).forEach(([id, anchor]) => {
+      ids[id] = { path: p.path, anchor };
+    });
+  });
 
-async function processASTs(files) {
-  return Promise.all(files.map(getAst));
+  await Promise.all(Object.values(ctx.pages).map(processPage));
 
-  async function getAst(file) {
-    try {
-      await toVFile.read(file, 'utf8');
-    } catch (e) {
-      console.error('Error reading file', file, e);
-      throw e;
-    }
-    file.path = file.data.slug;
-    if (file.filepath.endsWith('.org')) {
-      await orgToHtml(file);
-    } else {
-      throw new Error(`Unknown page type: $file.filepath`)
-    }
+  async function processPage(file) {
+    const data = file.data;
+
+    file.bibliography = ctx.bibliography;
+    file.pageExists = pageExists;
+    file.ids = ids;
+
+    await processAST(file);
 
     return file;
+  }
+  function pageExists(slug) {
+    return ctx.options.specialPages.has(slug) || slug in ctx.pages;
   }
 }
 
