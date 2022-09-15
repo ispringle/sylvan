@@ -1,6 +1,6 @@
 import * as path from "path";
 
-import { build } from "./build-pipeline";
+import { build } from "./pipeline";
 import { Page } from "./build";
 
 export type { Page };

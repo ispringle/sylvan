@@ -1,7 +1,6 @@
 // @ts-nocheck
 // TODO Fix the typing here re: uniorg-slug
-import { unified } from "unified";
-
+import process from "./process";
 import { NodeProperty } from "uniorg";
 import orgParse from "uniorg-parse";
 import org2rehype from "uniorg-rehype";
@@ -10,16 +9,17 @@ import { uniorgSlug } from "uniorg-slug";
 import { visit } from "unist-util-visit";
 import { visitIds } from "orgast-util-visit-ids";
 import { uniorgAttach } from "uniorg-attach";
+import orgSmartypants from "./orgSmartypants";
 
-const processor = unified()
+const processor = process()
   .use(orgParse)
   .use(extractKeywords)
   .use(extractProperties)
   .use(uniorgSlug)
   .use(uniorgAttach, { idDir: "/.attach" })
   .use(extractIds)
-  .use(org2rehype)
-  .use(toJson);
+  .use(orgSmartypants as Plugin<any>, { dashes: "oldschool" })
+  .use(org2rehype);
 
 export default async function orgToHtml(file) {
   try {
@@ -75,11 +75,4 @@ function extractIds() {
       }
     });
   }
-}
-
-/** A primitive compiler to return node as is without stringifying. */
-function toJson() {
-  this.Compiler = (node) => {
-    return node;
-  };
 }

@@ -22,7 +22,7 @@ const process = trough()
 export const build = async (
   options: LociOptions
 ): Promise<Record<string, Page>> => {
-  console.time("process");
+  console.time("pipeline:build");
   const result = await new Promise<Record<string, Page>>((resolve, reject) => {
     process.run({ options, backlinks: {} }, (err: any, ctx: BuildCtx) => {
       if (err) {
@@ -32,7 +32,7 @@ export const build = async (
       }
     });
   });
-  console.timeEnd("process");
+  console.timeEnd("pipeline:build");
   return result;
 };
 

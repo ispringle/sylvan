@@ -32,6 +32,8 @@
     "rehype-react": "^7.1.1",
     "rehype-slug": "^5.0.1",
     "rehype-url-inspector": "^2.0.2",
+    "retext": "^8.1.0",
+    "retext-smartypants": "^5.2.0",
     "sharp": "^0.30.7",
     "to-vfile": "^7.2.3",
     "trough": "^2.1.0",
