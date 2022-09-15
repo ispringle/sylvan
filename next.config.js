@@ -24,8 +24,7 @@ module.exports = {
   poweredByHeader: false,
   reactStrictMode: true,
   sassOptions: {
-    includePaths: [path.join(__dirname, "styles")],
-    prependData: `@import "style/globals"`,
+    includePaths: [path.join(__dirname, "src/style")],
   },
   serverRuntimeConfig: {
     PROJECT_ROOT: __dirname,

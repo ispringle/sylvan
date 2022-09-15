@@ -1,9 +1,10 @@
 import { Link, Logo, Nav } from "../Atoms";
+import styles from "./index.module.sass";
 
 const Header = () => {
   return (
-    <header>
-      <Link href="/" className="centered branding nobracket">
+    <header className={styles.header}>
+      <Link href="/" className={styles.branding}>
         <Logo />
       </Link>
       <Nav

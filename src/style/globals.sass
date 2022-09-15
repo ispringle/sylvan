@@ -1,10 +1,21 @@
-// Variables
-@import variables
-@import colors
+// mixins
+@use "sass:math"
+@use "sass:map"
 
-// Mixins
-@import centered
-@import crt
-@import elastic
-@import framed
-@import stacked
+//Font variables
+$primary-font: 'Didact Gothic', 'sans serif'
+$accent-font: 'VT323', 'monospace'
+$font-size-initial: 10px
+$font-size-base: 2em
+$font-size-ratio: 1.01
+
+$font-sizes: (300: math.div($font-size-base, $font-size-ratio), 400: $font-size-base)
+
+@for $i from 5 through 10
+  $key: $i * 100
+  $prev: $i - 1
+  $prev-key: $prev * 100
+  $font-sizes: map.set($font-sizes, $key, map.get($font-sizes, $prev-key) * $font-size-ratio)
+
+// main layout variables
+$main-padding: 1em

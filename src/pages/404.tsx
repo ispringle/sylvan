@@ -1,5 +1,7 @@
 import { useEffect } from "react";
 
+import styles from "./404.module.sass";
+
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -23,11 +25,11 @@ export default function Custom404({ ...props }) {
     <>
       <div id="primary-column">
         <Header />
-        <div id="e404">
-          <div className="monitor">
-            <div className="bezel">
-              <div className="crt">
-                <div className="terminal">
+        <div className={styles.e404}>
+          <div className={styles.monitor}>
+            <div className={styles.bezel}>
+              <div className={styles.crt}>
+                <div className={styles.terminal}>
                   <p>
                     user@ian.ist:/var/www/$ cat .<span className="path"></span>
                   </p>

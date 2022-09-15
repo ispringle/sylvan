@@ -1,30 +1,30 @@
 // Reset
-@import '../../node_modules/normalize.css/normalize'
+@use '../../node_modules/normalize.css/normalize'
+
+@use "globals"
 
 // Standard Styling
-@import 404
-@import about
-@import article
-@import blockquote
-@import background
-@import body
-@import code
-@import color-toggle
-@import fleuron
-@import font
-@import footer
-@import header
-@import headings
-@import howdy
-@import img
-@import links
-@import main
-@import org
-@import Title
+@use "about"
+@use "article"
+@use "blockquote"
+@use "background"
+@use "body"
+@use "code"
+@use "color-toggle"
+@use "fleuron"
+@use "font"
+@use "footer"
+@use "headings"
+@use "howdy"
+@use "img"
+@use "links"
+@use "main"
+@use "org"
+@use "Title"
 
 html
-  font-size: 10px
-  font-family: $primary-font
+  font-size: globals.$font-size-initial
+  font-family: globals.$primary-font
   margin: 0
   padding: 0
   height: 100%

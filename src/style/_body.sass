@@ -1,3 +1,7 @@
+// mixins
+@use "layouts"
+
+// variables
 $padding: 2em
 
 body
@@ -10,8 +14,8 @@ body
 
 #__next
   @media screen and (min-width: 900px)
-    @include stacked
+    @include layouts.stacked
   #primary-column
-    @include stacked
+    @include layouts.stacked
     width: fit-content
     margin: auto

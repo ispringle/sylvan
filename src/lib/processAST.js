@@ -1,11 +1,14 @@
 // Build out the AST processing here, for things like prism and other rehype plugins
-import prism from "rehype-prism-plus";
+// import prism from "rehype-prism-plus";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import raw from "rehype-raw";
 
 import process from "./process";
 
 // const processor = process().use(raw).use(prism, { ignoreMissing: true });
-const processor = process().use(raw);
+const processor = process()
+  .use(raw)
+  .use(rehypeAutolinkHeadings, { behavior: "append" });
 
 async function processAST(file) {
   return await processor.process(file);

@@ -1,6 +1,9 @@
+// mixins
+@use "layouts"
+
 .psuedoDrawer
   --wdth: calc(((100vw - 8px - 2em - min(80vw, 669px)) / 2) - 6em)
-  @include framed
+  @include layouts.framed
   background-color: var(--default-color-bg)
   padding: 0.5em
   bottom: 1em
