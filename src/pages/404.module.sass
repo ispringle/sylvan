@@ -3,13 +3,13 @@
 @use "@styles/effects"
 
 .monitor
-    border: 2em ridge white
+    border: 4rem ridge white
     background-color: darkgray
 
 .bezel
   position: relative
-  height: 20em
-  border: 30px solid transparent
+  height: 40rem
+  border: 3rem solid transparent
   border-image-source: url(/assets/bezel-gray.png)
   border-image-slice: 30 fill
   border-image-outset: 0
@@ -20,17 +20,11 @@
   color: white
   p
     margin: unset
-    font-size: 1.2em
+    font-size: 2.5rem
     &:last-child::after
       animation: cursor 2s infinite
       margin-left: 1px
       content: "_"
-  #heading
-    font-size: 2em
-    background-color: white
-    align-self: center
-    color: black
-    width: fit-content
 
 .crt
   @include effects.crt
@@ -46,5 +40,4 @@
 
 .e404
   @include layouts.centered
-  font-size: 2em
-  width: calc(min(80vw, 669px) + globals.$main-padding)
+  width: calc(globals.$content-column-width + globals.$main-padding)

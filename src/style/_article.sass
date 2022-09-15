@@ -1,9 +1,13 @@
-article.blog, article.book
-  .image
-    margin: auto
-    max-width: 80%
-article.index
-  .image
-    display: block
-    margin: 0 auto
-    max-width: 80%
+article
+  font-size: 2rem
+  &.blog, &.book
+    .image
+      margin: auto
+      max-width: 80%
+  &.index
+    .image
+      display: block
+      margin: 0 auto
+      max-width: 80%
+  p
+    text-indent: 4rem

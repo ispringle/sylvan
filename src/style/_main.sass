@@ -6,7 +6,6 @@ main
   @include layouts.framed
   background-color: var(--default-color-bg)
   position: relative
-  font-size: 2em
   padding: globals.$main-padding
   width: calc(min(80vw, 669px) + globals.$main-padding)
   z-index: 1
@@ -14,11 +13,8 @@ main
     padding: unset
 
 main aside
-  --wdth: calc(((100vw - 8px - 2em - min(80vw, 669px)) / 2) - 1em)
+  --wdth: calc(((100vw - 8px - 2rem - min(80vw, 669px)) / 2) - 1rem)
   justify-content: right
   position: fixed
-  right: calc(4px + (2em + 8px) / 2)
+  right: calc(4px + (2rem + 8px) / 2)
   max-width: var(--wdth)
-
-  nav
-    font-size: 1em

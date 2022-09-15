@@ -1,7 +1,11 @@
+@use "@styles/globals"
+@use "@styles/layouts"
+@use "sass:map"
+
 .nav
-  margin-top: 0
-  margin: auto
-  font-size: 2em
+  @include layouts.centered
+  margin-top: 0 !important
+  font-size: map.get(globals.$font-sizes, 600)
   a
     color: var(--default-color-accent)
   ul
