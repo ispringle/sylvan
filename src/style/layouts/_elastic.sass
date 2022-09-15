@@ -1,0 +1,18 @@
+@mixin elastic
+  $threshhold: 40em
+  $gap: 1rem
+
+  --mul: calc(#{$threshhold} - 100%)
+  display: flex
+  flex-wrap: wrap
+  align-items: center
+  margin: calc(#{$gap} / 2 * -1) 0
+  &:before
+    content: ""
+    flex-grow: 777
+    margin: 0
+    flex-basis: Max(0px, --mul)
+  > *
+    margin: calc(#{$gap} / 2) auto
+    &:first-child
+      order: -1

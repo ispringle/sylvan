@@ -1,12 +1,15 @@
+// mixins
+@use "layouts"
+
 footer
-  font-size: 1.5em
+  font-size: 1.5rem
   display: flex
   margin-top: 3em
   z-index: 1
   .license
     background-color: var(--default-color-bg)
     padding: 0.5em
-    @include framed
+    @include layouts.framed
     font-size: 0.7em
     p
       margin: 0

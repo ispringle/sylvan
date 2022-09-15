@@ -1,46 +1,18 @@
-@use "sass:math"
+@use "globals"
+@use "sass:string"
+@use "sass:map"
 
-$font-size-ratio: 1.01
-$font-size-400: $font-size-base
-$font-size-300: math.div($font-size-base, $font-size-ratio)
-$font-size-500: $font-size-base * $font-size-ratio
-$font-size-600: $font-size-500 * $font-size-ratio
-$font-size-700: $font-size-600 * $font-size-ratio
-$font-size-800: $font-size-700 * $font-size-ratio
-$font-size-900: $font-size-800 * $font-size-ratio
-$font-size-1000: $font-size-900 * $font-size-ratio
+$heading-char: "*"
 
-h1, h2, h3, h4, h5, h6
-  font-family: $accent-font
-  margin-top: 0.3em
-  margin-bottom: 0.2em
-
-h1::before
-  content: "* "
-h1
-  font-size: $font-size-1000
-
-h2::before
-  content: "** "
-h2
-  font-size: $font-size-900
-
-h3::before
-  content: "*** "
-h3
-  font-size: $font-size-800
-
-h4::before
-  content: "**** "
-h4
-  font-size: $font-size-700
-
-h5::before
-  content: "***** "
-h5
-  font-size: $font-size-600
-
-h6::before
-  content: "****** "
-h6
-  font-size: $font-size-500
+@for $i from 1 through 6
+  $heading-before: " "
+  @for $n from 1 through $i
+    $heading-before: string.insert($heading-before, $heading-char, 0)
+  h#{$i}
+    $key: 1100 - $i * 100
+    font-family: globals.$accent-font
+    font-size: map.get(globals.$font-sizes, $key)
+    margin-top: 0.3rem
+    margin-bottom: 0.2rem
+    &::before
+      content: $heading-before

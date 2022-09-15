@@ -1,13 +1,18 @@
+@use "@styles/globals"
+@use "@styles/layouts"
+
 .psuedoDrawer
-  --wdth: calc(((100vw - 8px - 2em - min(80vw, 669px)) / 2) - 6em)
-  @include framed
+  $buffer: 12rem
+  // Calculates the size of the space to the right of the "content-column"
+  --wdth: calc(((100vw - globals.$body-padding - globals.$content-column-width) / 2) - $buffer)
+  @include layouts.framed
   background-color: var(--default-color-bg)
   padding: 0.5em
   bottom: 1em
   display: grid
   grid-template-columns: auto
   position: fixed
-  width: var(--wdth)
+  max-width: var(--wdth)
   @media screen and (max-width: 1200px)
     display: none
 

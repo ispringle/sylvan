@@ -1,12 +1,16 @@
-$speed: 2s
+// mixins
+@use "globals"
+
 #howdy
+  $speed: 2s
+
   --color-primary: #81bd7f
   --color-secondary: #67af64
   --color-tertiary: #448042
   --color-quaternary: #366534
   --color-quinary: #284a26
   text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary), 9px 9px var(--color-quaternary), 12px 12px 0 var(--color-quinary)
-  font-family: $accent-font
+  font-family: globals.$accent-font
   text-transform: uppercase
   font-size: calc(2rem + 5vw)
   text-align: center

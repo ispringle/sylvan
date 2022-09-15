@@ -1,0 +1,23 @@
+// mixins
+@use "sass:math"
+@use "sass:map"
+
+//Font variables
+$primary-font: 'Didact Gothic', 'sans serif'
+$accent-font: 'VT323', 'monospace'
+$font-size-initial: 10px
+$font-size-base: 2rem
+$font-size-ratio: 1.15
+
+$font-sizes: (300: math.div($font-size-base, $font-size-ratio), 400: $font-size-base)
+
+@for $i from 5 through 11
+  $key: $i * 100
+  $prev: $i - 1
+  $prev-key: $prev * 100
+  $font-sizes: map.set($font-sizes, $key, map.get($font-sizes, $prev-key) * $font-size-ratio)
+
+// Size variables
+$body-padding: 2rem
+$content-column-width: min(80vw, 669px)
+$main-padding: 2rem

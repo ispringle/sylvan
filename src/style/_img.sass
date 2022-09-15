@@ -1,5 +1,8 @@
+// mixins
+@use "layouts"
+
 span.image
-  @include framed
+  @include layouts.framed
   position: relative
   filter: var(--default-image-filter)
 

@@ -1,10 +1,10 @@
-@import _psuedodrawer
+@use "_psuedodrawer"
 
-a::before
+a:not(.nobracket)::before
   content: "["
   color: var(--default-color-fg)
 
-a::after
+a:not(.nobracket)::after
     content: "]"
     color: var(--default-color-fg)
 

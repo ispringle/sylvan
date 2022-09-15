@@ -1,10 +1,10 @@
 const packageJson = require("./package.json");
-
+const path = require("path");
 const nextBuildId = require("next-build-id");
 
 module.exports = {
   compiler: {
-    removeConsole: true,
+    // removeConsole: true,
   },
   env: {
     NEXT_PUBLIC_NEXT_JS_VERSION: packageJson.dependencies.next.replace("^", ""),
@@ -23,6 +23,9 @@ module.exports = {
   output: "standalone",
   poweredByHeader: false,
   reactStrictMode: true,
+  sassOptions: {
+    includePaths: [path.join(__dirname, "src/style")],
+  },
   serverRuntimeConfig: {
     PROJECT_ROOT: __dirname,
   },

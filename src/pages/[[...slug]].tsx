@@ -1,10 +1,15 @@
 import { join } from "path";
 import { parse } from "date-fns";
 
-import { getAllPaths, getAllPosts, getPostBySlug } from "../lib/api";
-import Page, { PageProps } from "../components/Page";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import {
+  getAllPaths,
+  getAllPosts,
+  getPostBySlug,
+  getPostsByType,
+} from "@lib/api";
+import PageLayout, { PageLayoutProps } from "@components/PageLayout";
+import Header from "@components/Header";
+import Footer from "@components/Footer";
 
 // '/' is synonymous to '/index'
 const specialPaths = {
@@ -63,7 +68,7 @@ export const getStaticProps = async ({ params }: PageParams) => {
   let allPosts: any[] = [];
   if (Object.prototype.hasOwnProperty.call(specialPaths, path)) {
     const pageType = specialPaths[path].pageType;
-    allPosts = await getAllPosts().then((pages) =>
+    allPosts = await getPostsByType(pageType).then((pages) =>
       pages
         .filter((page) => page.data?.properties?.type == pageType)
         .map((page) => ({
@@ -130,12 +135,12 @@ export const getStaticProps = async ({ params }: PageParams) => {
   };
 };
 
-const PageContent = ({ ...props }: PageProps) => {
+const PageContent = ({ ...props }: PageLayoutProps) => {
   return (
     <>
       <div id="primary-column">
         <Header />
-        <Page {...props} />
+        <PageLayout {...props} />
       </div>
       <Footer {...props} />
     </>
