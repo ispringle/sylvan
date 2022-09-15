@@ -25,7 +25,7 @@ module.exports = {
   reactStrictMode: true,
   sassOptions: {
     includePaths: ["./src"],
-    prependData: `@import "style/globals"`,
+    // prependData: `@import "style/globals"`,
   },
   serverRuntimeConfig: {
     PROJECT_ROOT: __dirname,

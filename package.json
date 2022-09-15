@@ -5,7 +5,7 @@
   "author": "Ian Pringle <ian@dapringles.com>",
   "license": "GPL-3.0-only",
   "scripts": {
-    "dev": "next dev",
+    "dev": "node --trace-warnings node_modules/.bin/next dev",
     "build": "next build",
     "start": "next start"
   },
@@ -28,6 +28,7 @@
     "rehype-autolink-headings": "^6.1.1",
     "rehype-code-titles": "^1.1.0",
     "rehype-prism-plus": "^1.4.2",
+    "rehype-raw": "^6.1.1",
     "rehype-react": "^7.1.1",
     "rehype-slug": "^5.0.1",
     "rehype-url-inspector": "^2.0.2",

@@ -1,7 +1,12 @@
 import { join } from "path";
 import { parse } from "date-fns";
 
-import { getAllPaths, getAllPosts, getPostBySlug } from "@lib/api";
+import {
+  getAllPaths,
+  getAllPosts,
+  getPostBySlug,
+  getPostsByType,
+} from "@lib/api";
 import PageLayout, { PageLayoutProps } from "@components/PageLayout";
 import Header from "@components/Header";
 import Footer from "@components/Footer";
@@ -63,7 +68,7 @@ export const getStaticProps = async ({ params }: PageParams) => {
   let allPosts: any[] = [];
   if (Object.prototype.hasOwnProperty.call(specialPaths, path)) {
     const pageType = specialPaths[path].pageType;
-    allPosts = await getAllPosts().then((pages) =>
+    allPosts = await getPostsByType(pageType).then((pages) =>
       pages
         .filter((page) => page.data?.properties?.type == pageType)
         .map((page) => ({
