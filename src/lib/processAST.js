@@ -1,12 +1,13 @@
-// Build out the AST processing here, for things like prism and other rehype plugins
-// import prism from "rehype-prism-plus";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import prism from "rehype-prism-plus";
 import raw from "rehype-raw";
+// import rehypeCodeTitles from "rehype-code-titles";
 
 import process from "./process";
 
-// const processor = process().use(raw).use(prism, { ignoreMissing: true });
 const processor = process()
+  // .use(rehypeCodeTitles)
+  .use(prism, { ignoreMissing: true })
   .use(raw)
   .use(rehypeAutolinkHeadings, { behavior: "append" });
 
