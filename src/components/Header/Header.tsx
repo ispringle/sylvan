@@ -3,8 +3,8 @@ import { Link, Logo } from "../Atoms";
 const Header = () => {
   return (
     <header>
-      <Link href="/" className="branding">
-        <Logo className="centered" />
+      <Link href="/" className="centered branding nobracket">
+        <Logo />
       </Link>
       <nav>
         <ul>
