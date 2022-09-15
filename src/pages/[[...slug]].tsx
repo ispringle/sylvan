@@ -1,10 +1,10 @@
 import { join } from "path";
 import { parse } from "date-fns";
 
-import { getAllPaths, getAllPosts, getPostBySlug } from "../lib/api";
-import PageLayout, { PageLayoutProps } from "../components/PageLayout";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import { getAllPaths, getAllPosts, getPostBySlug } from "@lib/api";
+import PageLayout, { PageLayoutProps } from "@components/PageLayout";
+import Header from "@components/Header";
+import Footer from "@components/Footer";
 
 // '/' is synonymous to '/index'
 const specialPaths = {

@@ -23,6 +23,10 @@ module.exports = {
   output: "standalone",
   poweredByHeader: false,
   reactStrictMode: true,
+  sassOptions: {
+    includePaths: ["./src"],
+    prependData: `@import "style/globals"`,
+  },
   serverRuntimeConfig: {
     PROJECT_ROOT: __dirname,
   },

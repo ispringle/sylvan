@@ -1,8 +1,9 @@
+import styles from "./index.module.sass";
 import { Link } from "../index";
 
 const Nav = ({ links, ...props }) => {
   return (
-    <nav>
+    <nav className={styles.nav}>
       <ul>
         {links.map((l) => (
           <li key={l.text}>
