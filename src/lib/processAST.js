@@ -7,7 +7,7 @@ import process from "./process";
 
 const processor = process()
   // .use(rehypeCodeTitles)
-  .use(prism, { ignoreMissing: true })
+  .use(prism, { ignoreMissing: true, showLineNumbers: true })
   .use(raw)
   .use(rehypeAutolinkHeadings, { behavior: "append" });
 
