@@ -1,13 +1,9 @@
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import prism from "rehype-prism-plus";
 import raw from "rehype-raw";
-// import rehypeCodeTitles from "rehype-code-titles";
 
 import process from "./process";
 
 const processor = process()
-  // .use(rehypeCodeTitles)
-  .use(prism, { ignoreMissing: true, showLineNumbers: true })
   .use(raw)
   .use(rehypeAutolinkHeadings, { behavior: "append" });
 
