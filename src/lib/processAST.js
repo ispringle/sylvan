@@ -1,28 +1,20 @@
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import raw from "rehype-raw";
-import rehypeRewrite from "rehype-rewrite";
 import rehypePresetMinify from "rehype-preset-minify";
+import sectionParent from "@agentofuser/rehype-section";
+import demoteHeadings from "./demoteHeadings";
+import unwrapImg from "./unwrapImg";
 
 import process from "./process";
 
+const section = sectionParent.default;
+
 const processor = process()
-  .use(rehypeRewrite, {
-    rewrite: (node, index, parent) => {
-      if (
-        node.tagName == "p" &&
-        node.children?.length == 1 &&
-        node.children[0].tagName == "img"
-      ) {
-        const child = node.children[0];
-        node.type = child.type;
-        node.tagName = child.tagName;
-        node.properties = child.properties;
-        node.children = child.children;
-      }
-    },
-  })
+  .use(unwrapImg)
   .use(raw)
   .use(rehypeAutolinkHeadings, { behavior: "append" })
+  .use(demoteHeadings)
+  .use(section)
   .use(rehypePresetMinify);
 
 async function processAST(file) {
