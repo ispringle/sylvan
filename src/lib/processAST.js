@@ -13,14 +13,11 @@ const processor = process()
         node.children?.length == 1 &&
         node.children[0].tagName == "img"
       ) {
-        console.log(node);
         const child = node.children[0];
         node.type = child.type;
         node.tagName = child.tagName;
         node.properties = child.properties;
         node.children = child.children;
-        console.log(node);
-        // node.tagName = child.tagName;
       }
     },
   })
