@@ -16,3 +16,13 @@ $heading-char: "*"
     margin-bottom: 0.2rem
     &::before
       content: $heading-before
+    &:hover > a > .icon-link::before
+      content: "🔗"
+      font-size: 0.5em
+      padding-left: 0.5em
+      text-align: center
+      filter: var(--default-inversion-filter)
+    a::before
+      content: unset !important
+    a::after
+      content: unset !important
