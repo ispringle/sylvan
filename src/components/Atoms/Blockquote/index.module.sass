@@ -1,19 +1,23 @@
+@use "@styles/layouts"
+@use "@styles/globals"
+@use "sass:map"
+
 .blockquote
-  background: #f9f9f9
-  border-left: 1rem solid #ccc
-  margin: 2rem 1rem
-  padding: 1rem 1rem
-  quotes: "\201C""\201D""\2018""\2019"
+  @include layouts.framed
+  background: var(--default-color-bg)
+  padding: 1rem
+  position: relative
 
-  &:before
-    color: #ccc
-    content: open-quote
-    font-size: 7rem
-    line-height: 0.2rem
-    margin-right: 0.5rem
-    vertical-align: -0.4em
-
-  &:n-child(2)
-    display: inline
-  & > ol, & > ul
-    margin: unset
+  &::before
+    content: open-quote close-quote
+    position: absolute
+    top: 0
+    left: 50%
+    transform: translate(-50%, -100%)
+    background: var(--default-color-bg)
+    height: 2rem
+    width: 6rem
+    font-size: map.get(globals.$font-sizes, 1100)
+    font-family: globals.$accent-font
+    color: var(--default-color-fg)
+    text-align: center
