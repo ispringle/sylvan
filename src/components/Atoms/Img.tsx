@@ -13,15 +13,17 @@ const Img = ({ src, alt, ...props }) => {
 
   return (
     <span className="image">
-      {imageEl}
-      <svg className="overlay" id="filterMatrix">
-        <feColorMatrix
-          result="original"
-          id="svgcolormatrix"
-          type="matrix"
-          values="-1 -1 -1 -1 -1 1 1 1 0 0 -1 -1 -1 -1 -1 2 2 2 0.8 0"
-        ></feColorMatrix>
-      </svg>
+      <picture>
+        {imageEl}
+        <svg className="overlay" id="filterMatrix">
+          <feColorMatrix
+            result="original"
+            id="svgcolormatrix"
+            type="matrix"
+            values="-1 -1 -1 -1 -1 1 1 1 0 0 -1 -1 -1 -1 -1 2 2 2 0.8 0"
+          ></feColorMatrix>
+        </svg>
+      </picture>
     </span>
   );
 };

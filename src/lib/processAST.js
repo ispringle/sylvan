@@ -1,11 +1,32 @@
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import raw from "rehype-raw";
+import rehypeRewrite from "rehype-rewrite";
+import rehypePresetMinify from "rehype-preset-minify";
 
 import process from "./process";
 
 const processor = process()
+  .use(rehypeRewrite, {
+    rewrite: (node, index, parent) => {
+      if (
+        node.tagName == "p" &&
+        node.children?.length == 1 &&
+        node.children[0].tagName == "img"
+      ) {
+        console.log(node);
+        const child = node.children[0];
+        node.type = child.type;
+        node.tagName = child.tagName;
+        node.properties = child.properties;
+        node.children = child.children;
+        console.log(node);
+        // node.tagName = child.tagName;
+      }
+    },
+  })
   .use(raw)
-  .use(rehypeAutolinkHeadings, { behavior: "append" });
+  .use(rehypeAutolinkHeadings, { behavior: "append" })
+  .use(rehypePresetMinify);
 
 async function processAST(file) {
   return await processor.process(file);

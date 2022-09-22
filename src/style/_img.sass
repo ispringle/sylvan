@@ -1,13 +1,14 @@
 // mixins
 @use "layouts"
+@use "@styles/globals"
 
-span.image
+.image
   @include layouts.framed
   position: relative
   filter: var(--default-image-filter)
-
+  float: right
   img
-    max-width: 500px
+    max-width: globals.$content-column-width
     z-index: 1
 
   .overlay
@@ -22,7 +23,7 @@ span.image
     left: 0px
     z-index: 2
 
-span.image:hover
+.image:hover
   filter: unset
   .overlay
     display: none
