@@ -1,0 +1,19 @@
+.blockquote
+  background: #f9f9f9
+  border-left: 1rem solid #ccc
+  margin: 2rem 1rem
+  padding: 1rem 1rem
+  quotes: "\201C""\201D""\2018""\2019"
+
+  &:before
+    color: #ccc
+    content: open-quote
+    font-size: 7rem
+    line-height: 0.2rem
+    margin-right: 0.5rem
+    vertical-align: -0.4em
+
+  &:n-child(2)
+    display: inline
+  & > ol, & > ul
+    margin: unset
