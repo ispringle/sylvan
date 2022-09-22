@@ -1,4 +1,5 @@
 import { OrgTime } from "../Atoms";
+import styles from "./index.module.sass";
 
 export interface OrgDrawerProps {
   properties: { [key: string]: string };
@@ -8,26 +9,26 @@ const OrgDrawer = ({ ...props }) => {
   const properties = props.properties;
   delete properties["author"];
   return (
-    <div title="properties" className="psuedoDrawer">
-      <div className="drawerRow">
+    <div title="properties" className={styles.psuedoDrawer}>
+      <div className={styles.drawerRow}>
         <span className="key">author</span>
         <span>Ian Shepard Pringle</span>
       </div>
       {Object.keys(properties).map((k) => {
         return (
-          <div key={k} className="drawerRow">
+          <div key={k} className={styles.drawerRow}>
             <span className="key">{k}</span>
             <span>{properties[k]}</span>
           </div>
         );
       })}
-      <div className="drawerRow">
+      <div className={styles.drawerRow}>
         <span className="key">compiled</span>
         <span>
           <OrgTime dateStr={process.env.NEXT_PUBLIC_BUILD_TIME} />
         </span>
       </div>
-      <div className="drawerRow">
+      <div className={styles.drawerRow}>
         <span className="key">made_with</span>
         <div className="linkList">
           <a
