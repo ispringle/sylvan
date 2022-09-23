@@ -1,6 +1,5 @@
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import raw from "rehype-raw";
-import rehypePresetMinify from "rehype-preset-minify";
 import sectionParent from "@agentofuser/rehype-section";
 import demoteHeadings from "./demoteHeadings";
 import unwrapImg from "./unwrapImg";
@@ -14,8 +13,7 @@ const processor = process()
   .use(raw)
   .use(rehypeAutolinkHeadings, { behavior: "append" })
   .use(demoteHeadings)
-  .use(section)
-  .use(rehypePresetMinify);
+  .use(section);
 
 async function processAST(file) {
   return await processor.process(file);
