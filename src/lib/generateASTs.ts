@@ -26,7 +26,9 @@ async function generateASTs(ctx: BuildCtx): Promise<void> {
         delete ctx.pages[file.data.slug];
       }
     }
-
+    // Delete the raw file, we don't need it once we have the AST
+    file.value = null;
+    // if (file.data.title == "Org Mode Examples") console.log(file.result);
     return file;
   }
 }

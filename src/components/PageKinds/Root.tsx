@@ -6,9 +6,7 @@ const Root = ({ title, hast, backlinks, ...props }: PageLayoutProps) => {
   return (
     <article id={"root"} className={props.pageType}>
       <Title id="howdy">Howdy</Title>
-      <section className="content">
-        <RenderContent hast={hast} />
-      </section>
+      <RenderContent hast={hast} />
       <section>
         <h4>Latest Blog Posts</h4>
         <ul style={{ margin: "unset", padding: "unset" }}>

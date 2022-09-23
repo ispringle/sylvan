@@ -1,5 +1,7 @@
+@use "globals"
+$font-size: 2rem
 article
-  font-size: 2rem
+  font-size: $font-size
   &.blog, &.book
     .image
       margin: auto
@@ -10,4 +12,4 @@ article
       margin: 0 auto
       max-width: 80%
   p
-    text-indent: 4rem
+    line-height: calc($font-size * globals.$font-line-height-ratio)

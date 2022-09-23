@@ -1,19 +1,20 @@
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import raw from "rehype-raw";
-import sectionParent from "@agentofuser/rehype-section";
+
+// import inlineFootnotes from "./inlineFootnotes";
+import intoArticle from "./intoArticle";
 import demoteHeadings from "./demoteHeadings";
 import unwrapImg from "./unwrapImg";
 
 import process from "./process";
 
-const section = sectionParent.default;
-
 const processor = process()
   .use(unwrapImg)
+  // .use(inlineFootnotes)
   .use(raw)
   .use(rehypeAutolinkHeadings, { behavior: "append" })
   .use(demoteHeadings)
-  .use(section);
+  .use(intoArticle);
 
 async function processAST(file) {
   return await processor.process(file);
