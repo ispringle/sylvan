@@ -23,7 +23,7 @@ const processor = process()
 
 export default async function orgToHtml(file) {
   try {
-    return await processor.process(file);
+    return processor.process(file);
   } catch (e) {
     console.error("failed to process file", file.path, e);
     throw e;
