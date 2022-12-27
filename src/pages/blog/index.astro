@@ -1,18 +1,26 @@
 ---
-import Base from "../layouts/Base.astro";
+import Base from "@layouts/Base.astro";
 import { getURL, slugify } from "@utils";
 import { getCollection, getEntry } from "astro:content";
 
-const postsMax = 5;
-const allPosts = await getCollection("blog");
-const posts = allPosts
-  .splice(0, postsMax)
-  .sort((a, b) => b.data.created.valueOf() - a.data.created.valueOf())
-  .filter((a) => a.data.title != "index");
-const pageTitle = "Howdy";
+const devMode = import.meta.env.DEV;
 
-const index = await getEntry("site", "root.md").catch((content) => undefined);
+const allPosts = await getCollection("blog");
+const publishablePosts = allPosts
+  .filter((a) => (a.data.draft = !true))
+  .filter((a) => (a.data.public = !false));
+
+const posts = devMode
+  ? allPosts
+      .sort((a, b) => b.data.created.valueOf() - a.data.created.valueOf())
+      .filter((a) => a.data.title != "index")
+  : publishablePosts
+      .sort((a, b) => b.data.created.valueOf() - a.data.created.valueOf())
+      .filter((a) => a.data.title != "index");
+
+const index = await getEntry("blog", "index.md").catch((content) => undefined);
 const { Content } = index ? await index.render() : { Content: undefined };
+const pageTitle = index ? index.data.title : "Post Index";
 ---
 
 <Base pageTitle={pageTitle}>
@@ -28,7 +36,6 @@ const { Content } = index ? await index.render() : { Content: undefined };
     }
     <article>
       <h2>Posts</h2>
-      Here are some of my recent posts:
       <ul>
         {
           posts.map((post) => (

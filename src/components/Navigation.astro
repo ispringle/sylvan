@@ -1,7 +1,9 @@
 ---
+import { getURL} from "@utils";
+const href = Astro.url.origin;
 ---
 <nav>
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/blog">Blog</a>
+    <a href={href}>Home</a>
+    <a href={getURL(href, "about")}>About</a>
+    <a href={getURL(href, "blog")}>Blog</a>
 </nav>

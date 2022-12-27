@@ -1,0 +1,16 @@
+---
+import Base from "@layouts/Base.astro";
+import { getURL, slugify } from "@utils";
+import { getEntry } from "astro:content";
+
+const about = await getEntry("site", "about.md");
+const { Content } = await about.render()
+---
+
+<Base pageTitle={about.data.title}>
+  <article>
+    {
+        Content ? <Content /> : ""
+    }
+  </article>
+</Base>
