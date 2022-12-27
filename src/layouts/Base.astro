@@ -3,7 +3,26 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 const { pageTitle, ...props } = Astro.props;
 ---
+<style lang="sass" is:global>
+:root
+  --bg: #f0f6f0
+  --fg: #222323
+a
+  color: var(--fg)
+  text-decoration: none
+a::before
+  content: "["
+a::after
+  content: "]"
+body
+  background-color: var(--bg)
+  color: var(--fg)
 
+@media(prefers-color-scheme: dark)
+  :root
+    --bg: #222323
+    --fg: #f0f6f0
+</style>
 <html lang="en">
   <head>
     <meta charset="utf-8" />

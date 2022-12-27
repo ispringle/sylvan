@@ -11,6 +11,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^1.7.2"
+    "astro": "^1.7.2",
+    "sass": "^1.57.1"
   }
 }
