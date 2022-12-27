@@ -17,3 +17,8 @@ pnpm-debug.log*
 
 # macOS-specific files
 .DS_Store
+
+# Specific files/dirs
+src/content/blog
+src/content/site/about.md
+src/content/site/root.md
