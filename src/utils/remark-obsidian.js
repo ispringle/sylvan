@@ -16,11 +16,18 @@ const BRACKET_LINK_REGEX =
   /\[\[([a-zA-ZÀ-ÿ0-9-'?%.():&,+/€! ]+)#?([a-zA-ZÀ-ÿ0-9-'?%.():&,+/€! ]+)?\|?([a-zA-ZÀ-ÿ0-9-'?%.():&,+/€! ]+)?\]\]/g;
 const EMBED_LINK_REGEX = /!\[\[([a-zA-ZÀ-ÿ0-9-'?%.():&,+/€! ]+)\]\]/g;
 const CALLOUT_REGEX = /\[!(?<kind>[\w]+)\]\n(?<value>.*)\<\/p\>/g;
+const EXTERNAL_LINK_REGEX = /\:\/\//g;
+
 const imageExtensions = ["svg", "png", "jpg", "jpeg", "gif", "webp", "avif"];
 const imgExtRegex = new RegExp(`\\.(${imageExtensions.join("|")})$`);
 const isImage = (path) => imgExtRegex.test(path);
 
-const defaultTitleToURL = (title) => `/${slugify(title, { lower: true })}`;
+const defaultTitleToURL = (uri) => {
+  if (uri.match(EXTERNAL_LINK_REGEX)) {
+    return uri;
+  }
+  return `/${slugify(uri, { lower: true })}`;
+};
 
 const makeImageNode = (url, position, alt = "", title = null) => {
   return {
@@ -78,29 +85,29 @@ const remarkObsidian =
     } = options;
 
     visit(tree, "paragraph", (node, index, parent) => {
-        // console.log(node)
+      // console.log(node)
       const markdown = toMarkdown(node, {
         extensions: [gfmFootnoteToMarkdown(), gfmStrikethroughToMarkdown],
       });
       const paragraph = String(
         unified().use(remarkParse).use(remarkHtml).processSync(markdown)
       );
-     if (paragraph.match(CALLOUT_REGEX)) {
-        const [,kind, value] = CALLOUT_REGEX.exec(paragraph);
+      if (paragraph.match(CALLOUT_REGEX)) {
+        const [, kind, value] = CALLOUT_REGEX.exec(paragraph);
         node.type = "div";
         node.children = [
-            {
-                type: "text",
-                attributes: {
-                    name: "class",
-                    value: kind,
-                },
-                value,
-                position: node.children[0].position
-            }
-        ]
-        return node
-     }
+          {
+            type: "text",
+            attributes: {
+              name: "class",
+              value: kind,
+            },
+            value,
+            position: node.children[0].position,
+          },
+        ];
+        return node;
+      }
       if (paragraph.match(EMBED_LINK_REGEX)) {
         const [, fileName] = EMBED_LINK_REGEX.exec(paragraph);
 
@@ -130,19 +137,21 @@ const remarkObsidian =
       }
 
       if (paragraph.match(BRACKET_LINK_REGEX)) {
-        const [, link,, text] = BRACKET_LINK_REGEX.exec(paragraph);
+        const [, link, , text] = BRACKET_LINK_REGEX.exec(paragraph);
         if (isImage(link)) {
           node.children[0] = makeImageNode(
             "/" + link,
             node.position,
-            text, text
+            text,
+            text
           );
-          return node
+          return node;
         }
         const html = paragraph.replace(
           BRACKET_LINK_REGEX,
           (bracketLink, link, heading, text) => {
             const href = titleToUrl(link, markdownFolder);
+            console.log(link, href);
             if (
               node.children.some(
                 ({ value, type }) =>
