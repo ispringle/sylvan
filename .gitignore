@@ -22,3 +22,4 @@ pnpm-debug.log*
 src/content/blog
 src/content/site/about.md
 src/content/site/root.md
+src/content/types.generated.d.ts
