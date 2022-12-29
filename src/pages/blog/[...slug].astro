@@ -8,12 +8,18 @@ export async function getStaticPaths() {
 
   const posts = devMode
     ? allPosts
-        .sort((a, b) => b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf())
+        .sort(
+          (a, b) =>
+            b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf()
+        )
         .filter((a) => a.frontmatter.title != "index")
     : allPosts
-        .sort((a, b) => b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf())
-        .filter((a) => (a.frontmatter.draft = !true))
-        .filter((a) => (a.frontmatter.public = !false))
+        .sort(
+          (a, b) =>
+            b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf()
+        )
+        .filter((a) => a.frontmatter.draft == false)
+        .filter((a) => a.frontmatter.public == true)
         .filter((a) => a.frontmatter.title != "index");
   return posts.map((post) => {
     return {

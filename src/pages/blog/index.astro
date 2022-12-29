@@ -7,15 +7,21 @@ const devMode = import.meta.env.DEV;
 
 const allPosts = await Astro.glob("/content/blog/*.md");
 
-  const posts = devMode
-    ? allPosts
-        .sort((a, b) => b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf())
-        .filter((a) => a.frontmatter.title != "index")
-    : allPosts
-        .sort((a, b) => b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf())
-        .filter((a) => (a.frontmatter.draft = !true))
-        .filter((a) => (a.frontmatter.public = !false))
-        .filter((a) => a.frontmatter.title != "index");
+const posts = devMode
+  ? allPosts
+      .sort(
+        (a, b) =>
+          b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf()
+      )
+      .filter((a) => a.frontmatter.title != "index")
+  : allPosts
+      .sort(
+        (a, b) =>
+          b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf()
+      )
+      .filter((a) => a.frontmatter.draft == false)
+      .filter((a) => a.frontmatter.public == true)
+      .filter((a) => a.frontmatter.title != "index");
 
 const index = allPosts.find((a) => a.frontmatter.title == "index");
 const { Content } = index ? index : { Content: undefined };
@@ -39,7 +45,13 @@ const pageTitle = index ? index.frontmatter.title : "Post Index";
         {
           posts.map((post) => (
             <li>
-              <a href={getURL(Astro.url.origin, "blog", slugify(post.frontmatter.title))}>
+              <a
+                href={getURL(
+                  Astro.url.origin,
+                  "blog",
+                  slugify(post.frontmatter.title)
+                )}
+              >
                 {post.frontmatter.title}
               </a>{" "}
               - {post.frontmatter.created}

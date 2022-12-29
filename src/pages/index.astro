@@ -21,8 +21,8 @@ const posts = devMode
         (a, b) =>
           b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf()
       )
-      .filter((a) => (a.frontmatter.draft = !true))
-      .filter((a) => (a.frontmatter.public = !false))
+      .filter((a) => a.frontmatter.draft == false)
+      .filter((a) => a.frontmatter.public == true)
       .filter((a) => a.frontmatter.title != "index")
       .splice(0, postsCap);
 
