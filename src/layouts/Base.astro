@@ -19,14 +19,18 @@ const { pageTitle, ...props } = Astro.props;
     --default-light-green: #4d7c71
     --default-dark-green: #0e8743
     --default-light-blue: #a0c5c6
+    --default-light-blue-alt: #43c6f8
     --default-dark-blue: #0a5c9f
     --default-light-purple: #a453f5
     --default-dark-purple: #392874
     --default-light-fuscia: #c33479
     --default-dark-fuscia: #86215f
+    --body-bg: #1f2f49
     --bg: var(--default-white)
     --fg: var(--default-black)
-    --content-column-width: 669px
+    --main-width: 669px
+    --main-offset: 10vw
+    --footer-height: 512px
   a
     text-decoration: none
     color: var(--default-light-fuscia)
@@ -43,21 +47,26 @@ const { pageTitle, ...props } = Astro.props;
       color: var(--fg)
       content: "]"
   body
-    background-color: var(--bg)
+    background-color: var(--body-bg)
     color: var(--fg)
-  #content-column
-    height: 90vh
+    font-size: 10px
+  main
+    background-color: var(--bg)
+    height: fit-content
     display: flex
     flex-direction: column
-    max-width: var(--content-column-width)
-    margin-left: 10vw
+    font-size: 1rem
+    max-width: var(--main-width)
+    margin-left: var(--main-offset)
+    padding: 5px
+    padding-bottom: calc(var(--footer-height) )
   img
-    max-width: var(--content-column-width)
-
-  @media(prefers-color-scheme: dark)
-    :root
-      --bg: var(--default-black)
-      --fg: var(--default-white)
+    background-color: var(--bg)
+    border: var(--default-black) 5px double
+    box-shadow: 5px 5px var(--fg)
+    max-width: var(--main-width)
+    margin-left: 50px
+    padding: 5px
 </style>
 <html lang="en">
   <head>
@@ -68,12 +77,10 @@ const { pageTitle, ...props } = Astro.props;
     <title>{pageTitle}</title>
   </head>
   <body>
-    <div id="content-column">
-      <Header />
+    <Header />
       <main>
         <slot />
       </main>
-      <Footer />
-    </div>
+    <Footer />
   </body>
 </html>

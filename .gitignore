@@ -20,4 +20,4 @@ pnpm-debug.log*
 
 # Specific files/dirs
 /content/
-public/media/leeroy-puppy.png
+public/media/
