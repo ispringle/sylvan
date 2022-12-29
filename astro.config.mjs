@@ -10,7 +10,4 @@ export default defineConfig({
         remarkObsidian,
     ],
   },
-  experimental: {
-    contentCollections: true,
-  },
 });
