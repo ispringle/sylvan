@@ -1,5 +1,5 @@
 ---
-import Base from "@layouts/Base.astro";
+import Page from "@layouts/Page.astro";
 import { filterContent, slugify } from "@utils";
 
 export async function getStaticPaths() {
@@ -18,6 +18,6 @@ const { post } = Astro.props;
 const { Content } = post;
 ---
 
-<Base pageTitle={post.frontmatter.title}>
+<Page>
   <Content />
-</Base>
+</Page>

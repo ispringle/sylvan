@@ -3,25 +3,61 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 const { pageTitle, ...props } = Astro.props;
 ---
-<style lang="sass" is:global>
-:root
-  --bg: #f0f6f0
-  --fg: #222323
-a
-  color: var(--fg)
-  text-decoration: none
-a::before
-  content: "["
-a::after
-  content: "]"
-body
-  background-color: var(--bg)
-  color: var(--fg)
 
-@media(prefers-color-scheme: dark)
+<style lang="sass" is:global>
   :root
-    --bg: #222323
-    --fg: #f0f6f0
+    --default-white: #fef6dd
+    --default-black: #212425
+    --default-light-yellow: #f3e46d
+    --default-dark-yellow: #edd600
+    --default-light-pink: #bf98ac
+    --default-dark-pink: #b1739a
+    --default-light-red: #ed7275
+    --default-dark-red: #e1202d
+    --default-light-orange: #e67216
+    --default-dark-orange: #eb5b2b
+    --default-light-green: #4d7c71
+    --default-dark-green: #0e8743
+    --default-light-blue: #a0c5c6
+    --default-dark-blue: #0a5c9f
+    --default-light-purple: #a453f5
+    --default-dark-purple: #392874
+    --default-light-fuscia: #c33479
+    --default-dark-fuscia: #86215f
+    --bg: var(--default-white)
+    --fg: var(--default-black)
+    --content-column-width: 669px
+  a
+    text-decoration: none
+    color: var(--default-light-fuscia)
+    &:visited
+      color: var(--default-dark-fuscia)
+    &:hover
+      color: var(--default-light-purple)
+    &:active
+      color: var(--default-dark-purple)
+    &::before
+      color: var(--fg)
+      content: "["
+    &::after
+      color: var(--fg)
+      content: "]"
+  body
+    background-color: var(--bg)
+    color: var(--fg)
+  #content-column
+    height: 90vh
+    display: flex
+    flex-direction: column
+    max-width: var(--content-column-width)
+    margin-left: 10vw
+  img
+    max-width: var(--content-column-width)
+
+  @media(prefers-color-scheme: dark)
+    :root
+      --bg: var(--default-black)
+      --fg: var(--default-white)
 </style>
 <html lang="en">
   <head>
@@ -32,10 +68,12 @@ body
     <title>{pageTitle}</title>
   </head>
   <body>
-    <Header />
-    <main>
-      <slot />
-    </main>
-    <Footer />
+    <div id="content-column">
+      <Header />
+      <main>
+        <slot />
+      </main>
+      <Footer />
+    </div>
   </body>
 </html>
