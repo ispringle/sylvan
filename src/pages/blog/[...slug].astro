@@ -1,26 +1,11 @@
 ---
 import Base from "@layouts/Base.astro";
-import slugify from "@utils/slugify";
+import { filterContent, slugify } from "@utils";
 
 export async function getStaticPaths() {
   const devMode = import.meta.env.DEV;
-  const allPosts = await Astro.glob("/content/blog/*.md");
+  const posts = filterContent(await Astro.glob("/content/blog/*.md"));
 
-  const posts = devMode
-    ? allPosts
-        .sort(
-          (a, b) =>
-            b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf()
-        )
-        .filter((a) => a.frontmatter.title != "index")
-    : allPosts
-        .sort(
-          (a, b) =>
-            b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf()
-        )
-        .filter((a) => a.frontmatter.draft == false)
-        .filter((a) => a.frontmatter.public == true)
-        .filter((a) => a.frontmatter.title != "index");
   return posts.map((post) => {
     return {
       params: { slug: slugify(post.frontmatter.title) },

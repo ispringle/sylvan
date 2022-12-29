@@ -1,30 +1,12 @@
 ---
 import Base from "../layouts/Base.astro";
-import { getURL, slugify } from "@utils";
+import { filterContent, getURL, slugify } from "@utils";
 
 const devMode = import.meta.env.DEV;
 const postsCap = 5;
 
 const allPages = await Astro.glob("/content/*.md");
-const allPosts = await Astro.glob("/content/blog/*.md");
-
-const posts = devMode
-  ? allPosts
-      .sort(
-        (a, b) =>
-          b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf()
-      )
-      .filter((a) => a.frontmatter.title != "index")
-      .splice(0, postsCap)
-  : allPosts
-      .sort(
-        (a, b) =>
-          b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf()
-      )
-      .filter((a) => a.frontmatter.draft == false)
-      .filter((a) => a.frontmatter.public == true)
-      .filter((a) => a.frontmatter.title != "index")
-      .splice(0, postsCap);
+const posts = filterContent(await Astro.glob("/content/blog/*.md")).splice(0, postsCap);
 
 const index = allPages.find((a) => a.frontmatter.title == "index");
 const { Content } = index ? index : { Content: undefined };
