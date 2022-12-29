@@ -19,8 +19,5 @@ pnpm-debug.log*
 .DS_Store
 
 # Specific files/dirs
-src/content/blog
-src/content/site/about.md
-src/content/site/root.md
-src/content/types.generated.d.ts
+/content/
 public/media/leeroy-puppy.png

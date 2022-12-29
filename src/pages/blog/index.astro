@@ -5,22 +5,21 @@ import { getCollection, getEntry } from "astro:content";
 
 const devMode = import.meta.env.DEV;
 
-const allPosts = await getCollection("blog");
-const publishablePosts = allPosts
-  .filter((a) => (a.data.draft = !true))
-  .filter((a) => (a.data.public = !false));
+const allPosts = await Astro.glob("/content/blog/*.md");
 
-const posts = devMode
-  ? allPosts
-      .sort((a, b) => b.data.created.valueOf() - a.data.created.valueOf())
-      .filter((a) => a.data.title != "index")
-  : publishablePosts
-      .sort((a, b) => b.data.created.valueOf() - a.data.created.valueOf())
-      .filter((a) => a.data.title != "index");
+  const posts = devMode
+    ? allPosts
+        .sort((a, b) => b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf())
+        .filter((a) => a.frontmatter.title != "index")
+    : allPosts
+        .sort((a, b) => b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf())
+        .filter((a) => (a.frontmatter.draft = !true))
+        .filter((a) => (a.frontmatter.public = !false))
+        .filter((a) => a.frontmatter.title != "index");
 
-const index = await getEntry("blog", "index.md").catch((content) => undefined);
-const { Content } = index ? await index.render() : { Content: undefined };
-const pageTitle = index ? index.data.title : "Post Index";
+const index = allPosts.find((a) => a.frontmatter.title == "index");
+const { Content } = index ? index : { Content: undefined };
+const pageTitle = index ? index.frontmatter.title : "Post Index";
 ---
 
 <Base pageTitle={pageTitle}>
@@ -40,10 +39,10 @@ const pageTitle = index ? index.data.title : "Post Index";
         {
           posts.map((post) => (
             <li>
-              <a href={getURL(Astro.url.origin, post.collection, post.slug)}>
-                {post.data.title}
+              <a href={getURL(Astro.url.origin, "blog", slugify(post.frontmatter.title))}>
+                {post.frontmatter.title}
               </a>{" "}
-              - {post.data.created}
+              - {post.frontmatter.created}
             </li>
           ))
         }

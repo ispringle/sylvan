@@ -4,29 +4,29 @@ import slugify from "@utils/slugify";
 
 export async function getStaticPaths() {
   const devMode = import.meta.env.DEV;
-  const allPosts = await Astro.glob("/content/blog/*.md");
+  const allPages = await Astro.glob("/content/*.md");
 
-  const posts = devMode
-    ? allPosts
+  const pages = devMode
+    ? allPages
         .sort((a, b) => b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf())
         .filter((a) => a.frontmatter.title != "index")
-    : allPosts
+    : allPages
         .sort((a, b) => b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf())
         .filter((a) => (a.frontmatter.draft = !true))
         .filter((a) => (a.frontmatter.public = !false))
         .filter((a) => a.frontmatter.title != "index");
-  return posts.map((post) => {
+  return pages.map((page) => {
     return {
-      params: { slug: slugify(post.frontmatter.title) },
-      props: { post: post },
+      params: { slug: slugify(page.frontmatter.title) },
+      props: { page: page },
     };
   });
 }
 
-const { post } = Astro.props;
-const { Content } = post;
+const { page } = Astro.props;
+const { Content } = page;
 ---
 
-<Base pageTitle={post.frontmatter.title}>
+<Base pageTitle={page.frontmatter.title}>
   <Content />
 </Base>

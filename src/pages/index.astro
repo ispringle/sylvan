@@ -1,18 +1,34 @@
 ---
 import Base from "../layouts/Base.astro";
 import { getURL, slugify } from "@utils";
-import { getCollection, getEntry } from "astro:content";
 
-const postsMax = 5;
-const allPosts = await getCollection("blog");
-const posts = allPosts
-  .splice(0, postsMax)
-  .sort((a, b) => b.data.created.valueOf() - a.data.created.valueOf())
-  .filter((a) => a.data.title != "index");
-const pageTitle = "Howdy";
+const devMode = import.meta.env.DEV;
+const postsCap = 5;
 
-const index = await getEntry("site", "root.md").catch((content) => undefined);
-const { Content } = index ? await index.render() : { Content: undefined };
+const allPages = await Astro.glob("/content/*.md");
+const allPosts = await Astro.glob("/content/blog/*.md");
+
+const posts = devMode
+  ? allPosts
+      .sort(
+        (a, b) =>
+          b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf()
+      )
+      .filter((a) => a.frontmatter.title != "index")
+      .splice(0, postsCap)
+  : allPosts
+      .sort(
+        (a, b) =>
+          b.frontmatter.created.valueOf() - a.frontmatter.created.valueOf()
+      )
+      .filter((a) => (a.frontmatter.draft = !true))
+      .filter((a) => (a.frontmatter.public = !false))
+      .filter((a) => a.frontmatter.title != "index")
+      .splice(0, postsCap);
+
+const index = allPages.find((a) => a.frontmatter.title == "index");
+const { Content } = index ? index : { Content: undefined };
+const pageTitle = index ? index.frontmatter.title : "Post Index";
 ---
 
 <Base pageTitle={pageTitle}>
@@ -33,10 +49,16 @@ const { Content } = index ? await index.render() : { Content: undefined };
         {
           posts.map((post) => (
             <li>
-              <a href={getURL(Astro.url.origin, post.collection, post.slug)}>
-                {post.data.title}
+              <a
+                href={getURL(
+                  Astro.url.origin,
+                  "blog",
+                  slugify(post.frontmatter.title)
+                )}
+              >
+                {post.frontmatter.title}
               </a>{" "}
-              - {post.data.created}
+              - {post.frontmatter.created}
             </li>
           ))
         }

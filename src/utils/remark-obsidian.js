@@ -85,7 +85,6 @@ const remarkObsidian =
     } = options;
 
     visit(tree, "paragraph", (node, index, parent) => {
-      // console.log(node)
       const markdown = toMarkdown(node, {
         extensions: [gfmFootnoteToMarkdown(), gfmStrikethroughToMarkdown],
       });
@@ -151,7 +150,6 @@ const remarkObsidian =
           BRACKET_LINK_REGEX,
           (bracketLink, link, heading, text) => {
             const href = titleToUrl(link, markdownFolder);
-            console.log(link, href);
             if (
               node.children.some(
                 ({ value, type }) =>
