@@ -76,9 +76,8 @@ export const parseBracketLink = (
   return { href, title: link };
 };
 
-const remarkObsidian =
-  (options = {}) =>
-  (tree) => {
+function remarkObsidian(options = {}) {
+  return function(tree) {
     const {
       markdownFolder = `${process.cwd()}/content`,
       titleToUrl = defaultTitleToURL,
@@ -218,5 +217,6 @@ const remarkObsidian =
       return node;
     });
   };
+}
 
 export default remarkObsidian;

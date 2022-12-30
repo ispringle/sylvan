@@ -1,0 +1,36 @@
+@use "sass:string"
+@use "sass:map"
+
+@use "globals"
+@use "effects"
+
+$heading-char: "*"
+
+@for $i from 1 through 6
+  $heading-before: " "
+  @for $n from 1 through $i
+    $heading-before: string.insert($heading-before, $heading-char, 0)
+  h#{$i}
+    $key: 1100 - $i * 100
+    font-family: globals.$accent-font
+    font-size: map.get(globals.$font-sizes, $key)
+    margin-top: 0.3rem
+    margin-bottom: 0.2rem
+    &:hover > a > .icon-link::before
+      content: "🔗"
+      font-size: 0.5em
+      padding-left: 0.5em
+      text-align: center
+      filter: var(--default-inversion-filter)
+    a::before
+      content: unset !important
+    a::after
+      content: unset !important
+h1
+  @include effects.framed
+  background-color: var(--bg)
+  position: relative
+  padding: 2rem 2rem
+  text-align: end
+  &::after
+    content: "."

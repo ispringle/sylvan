@@ -16,6 +16,16 @@ aside
   & p
     margin: unset
     padding: unset
+.content-stack
+  display: flex
+  flex-wrap: wrap
+  gap: 1rem
+.content-stack > :first-child
+  flex-grow: 1
+.content-stack > :last-child
+  flex-basis: 0
+  flex-grow: 999
+  min-inline-size: 50%
 </style>
 <article>
   {
@@ -39,5 +49,5 @@ aside
       </aside>
     : ""
   }
-  <slot />
+    <slot />
 </article>

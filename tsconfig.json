@@ -6,6 +6,7 @@
       "@content/*": ["src/content/*"],
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"],
+      "@styles/*": ["src/styles/*"],
       "@utils": ["src/utils/index.ts"],
       "@utils/*": ["src/utils/*"]
     },

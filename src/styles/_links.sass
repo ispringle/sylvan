@@ -1,0 +1,16 @@
+a
+  font-weight: bold
+  text-decoration: none
+  color: var(--default-light-fuscia)
+  &:visited
+    color: var(--default-dark-fuscia)
+  &:hover
+    color: var(--default-light-purple)
+  &:active
+    color: var(--default-dark-purple)
+  &:not(.nobracket)::before
+    color: var(--fg)
+    content: "["
+  &:not(.nobracket)::after
+    color: var(--fg)
+    content: "]"

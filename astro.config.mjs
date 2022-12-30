@@ -1,5 +1,10 @@
 import { defineConfig } from "astro/config";
-import { remarkObsidian } from "./src/utils";
+import wikiLinkPlugin from "remark-wiki-link-plus";
+import remarkEmbed from "remark-embed-plus";
+import remarkGfm from "remark-gfm";
+import remarkSmartypants from "remark-smartypants";
+import remarkObsidian from "./src/utils/remark-obsidian-md";
+import sectionize from "remark-sectionize";
 
 // https://astro.build/config
 export default defineConfig({
@@ -7,7 +12,12 @@ export default defineConfig({
   trailingSlash: "always",
   markdown: {
     remarkPlugins: [
-        remarkObsidian,
+      remarkObsidian,
+      remarkEmbed,
+      wikiLinkPlugin,
+      remarkGfm,
+      remarkSmartypants,
+      sectionize,
     ],
   },
 });

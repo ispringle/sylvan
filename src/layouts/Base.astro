@@ -2,38 +2,20 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
-import '../styles/colors.sass';
+import '../styles/style.sass';
 
 const { pageTitle, ...props } = Astro.props;
 ---
 
 <style lang="sass" is:global>
-  a
-    text-decoration: none
-    color: var(--default-light-fuscia)
-    &:visited
-      color: var(--default-dark-fuscia)
-    &:hover
-      color: var(--default-light-purple)
-    &:active
-      color: var(--default-dark-purple)
-    &::before
-      color: var(--fg)
-      content: "["
-    &::after
-      color: var(--fg)
-      content: "]"
   body
     background-color: var(--body-bg)
     color: var(--fg)
   main
-    background-color: var(--bg)
     height: fit-content
     display: flex
     flex-direction: column
     max-width: var(--main-width)
-    margin-left: var(--main-offset)
-    padding: 5px
     padding-bottom: 50px
   img
     background-color: var(--bg)
@@ -48,6 +30,24 @@ const { pageTitle, ...props } = Astro.props;
     border: var(--default-black) 5px double
     box-shadow: 5px 5px var(--fg)
     padding: 5px
+  .content-stack
+    display: flex
+    flex-wrap: wrap
+    gap: 1rem
+  .content-stack > :first-child
+    flex-grow: 1
+  .content-stack > :last-child
+    flex-basis: 0
+    flex-grow: 999
+    min-inline-size: 50%
+  section
+    max-width: var(--main-width)
+    margin: 2rem 0
+    & section, &.footnotes
+      background-color: var(--bg)
+      border: var(--default-black) 5px double
+      box-shadow: 5px 5px var(--fg)
+      padding: 2rem
 </style>
 <html lang="en">
   <head>
@@ -58,10 +58,16 @@ const { pageTitle, ...props } = Astro.props;
     <title>{pageTitle}</title>
   </head>
   <body>
-    <Header />
-    <main class="bordered">
-      <slot />
-    </main>
+    <div class="content-stack">
+      <div class="sidebar">
+        <Header />
+      </div>
+      <div class="content">
+        <main>
+          <slot />
+        </main>
+      </div>
+    </div>
     <Footer />
   </body>
 </html>
