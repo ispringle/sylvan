@@ -6,9 +6,10 @@ export async function getStaticPaths() {
   const devMode = import.meta.env.DEV;
   const pages = filterContent(await Astro.glob("/content/*.md"));
   return pages.map((page) => {
+    page.frontmatter.author = page.frontmatter?.author || "Ian S. Pringle"
     return {
       params: { slug: slugify(page.frontmatter.title) },
-      props: { page: page },
+      props: { page: page},
     };
   });
 }

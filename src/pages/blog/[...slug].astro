@@ -7,9 +7,10 @@ export async function getStaticPaths() {
   const posts = filterContent(await Astro.glob("/content/blog/*.md"));
 
   return posts.map((post) => {
+    post.frontmatter.author = post.frontmatter?.author || "Ian S. Pringle"
     return {
       params: { slug: slugify(post.frontmatter.title) },
-      props: { post: post },
+      props: { post: post},
     };
   });
 }
@@ -18,6 +19,6 @@ const { post } = Astro.props;
 const { Content } = post;
 ---
 
-<Page>
+<Page frontmatter={post.frontmatter}>
   <Content />
 </Page>

@@ -6,7 +6,7 @@ const devMode = import.meta.env.DEV;
 const postsCap = 5;
 
 const allPages = await Astro.glob("/content/*.md");
-const posts = filterContent(await Astro.glob("/content/blog/*.md")).splice(0, postsCap);
+const posts = filterContent(await Astro.glob("/content/blog/*.md"));
 
 const index = allPages.find((a) => a.frontmatter.title == "index");
 const { Content } = index ? index : { Content: undefined };

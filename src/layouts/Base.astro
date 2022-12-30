@@ -1,36 +1,13 @@
 ---
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+
+import '../styles/colors.sass';
+
 const { pageTitle, ...props } = Astro.props;
 ---
 
 <style lang="sass" is:global>
-  :root
-    --default-white: #fef6dd
-    --default-black: #212425
-    --default-light-yellow: #f3e46d
-    --default-dark-yellow: #edd600
-    --default-light-pink: #bf98ac
-    --default-dark-pink: #b1739a
-    --default-light-red: #ed7275
-    --default-dark-red: #e1202d
-    --default-light-orange: #e67216
-    --default-dark-orange: #eb5b2b
-    --default-light-green: #4d7c71
-    --default-dark-green: #0e8743
-    --default-light-blue: #a0c5c6
-    --default-light-blue-alt: #43c6f8
-    --default-dark-blue: #0a5c9f
-    --default-light-purple: #a453f5
-    --default-dark-purple: #392874
-    --default-light-fuscia: #c33479
-    --default-dark-fuscia: #86215f
-    --body-bg: #1f2f49
-    --bg: var(--default-white)
-    --fg: var(--default-black)
-    --main-width: 669px
-    --main-offset: 10vw
-    --footer-height: 512px
   a
     text-decoration: none
     color: var(--default-light-fuscia)
@@ -49,23 +26,27 @@ const { pageTitle, ...props } = Astro.props;
   body
     background-color: var(--body-bg)
     color: var(--fg)
-    font-size: 10px
   main
     background-color: var(--bg)
     height: fit-content
     display: flex
     flex-direction: column
-    font-size: 1rem
     max-width: var(--main-width)
     margin-left: var(--main-offset)
     padding: 5px
-    padding-bottom: calc(var(--footer-height) )
+    padding-bottom: 50px
   img
     background-color: var(--bg)
-    border: var(--default-black) 5px double
-    box-shadow: 5px 5px var(--fg)
     max-width: var(--main-width)
     margin-left: 50px
+    padding: 5px
+    border: var(--default-black) 5px double
+    box-shadow: 5px 5px var(--fg)
+  p
+    margin: 5px
+  .bordered
+    border: var(--default-black) 5px double
+    box-shadow: 5px 5px var(--fg)
     padding: 5px
 </style>
 <html lang="en">
@@ -78,9 +59,9 @@ const { pageTitle, ...props } = Astro.props;
   </head>
   <body>
     <Header />
-      <main>
-        <slot />
-      </main>
+    <main class="bordered">
+      <slot />
+    </main>
     <Footer />
   </body>
 </html>

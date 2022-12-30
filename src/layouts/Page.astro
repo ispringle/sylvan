@@ -3,14 +3,9 @@ import Article from "@components/Article.astro";
 import Base from "@layouts/Base.astro";
 
 const { frontmatter, ...props } = Astro.props;
-console.log(frontmatter)
 ---
-
-<Base >
-    {frontmatter?.subtitle ? <h2>{frontmatter.subtitle}</h2> : ""}
-    {frontmatter?.created ? <p>{frontmatter.created}</p> : ""}
-    {frontmatter?.author ? <p>Written by {frontmatter.author}</p> : ""}
-    <Article>
-  <slot />
-    </Article>
+<Base pageTitle={frontmatter?.title || ""}>
+  <Article author={frontmatter?.author || ""} created={frontmatter?.created || ""} updated={frontmatter?.updated || ""}>
+    <slot />
+  </Article>
 </Base>

@@ -1,7 +1,43 @@
 ---
+import { formatDate } from "@utils"
+const { author, created, updated, ...props } = Astro.props;
 ---
-<style>
+<style lang="sass">
+article
+  position: relative
+aside
+  background-color: var(--bg)
+  display: inline
+  position: relative
+  float: right
+  clear: right
+  width: 50%
+  margin-right: -60%
+  & p
+    margin: unset
+    padding: unset
 </style>
 <article>
-    <slot></slot>
+  {
+    author || created || updated
+    ? <aside class="bordered">
+      {
+        author
+          ? <p id="author">Written by {author}</p>
+          : ""
+      }
+      {
+        created
+          ? <p id="created">Created on {formatDate(created)}</p>
+          : ""
+      }
+      {
+        updated
+          ? <p id="updated">Last updated on {formatDate(updated)}</p>
+          : ""
+      }
+      </aside>
+    : ""
+  }
+  <slot />
 </article>

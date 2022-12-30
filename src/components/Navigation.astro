@@ -2,8 +2,11 @@
 import { getURL} from "@utils";
 const href = Astro.url.origin;
 ---
+<style lang="sass">
+nav
+  display: flex
+  flex-direction: column
+</style>
 <nav>
     <a href={href}>Home</a>
-    <a href={getURL(href, "about")}>About</a>
-    <a href={getURL(href, "blog")}>Blog</a>
 </nav>
