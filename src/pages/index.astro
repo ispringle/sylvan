@@ -1,6 +1,6 @@
 ---
-import Base from "../layouts/Base.astro";
-import { filterContent, getURL, slugify } from "@utils";
+import Index from "../layouts/Index.astro";
+import { filterContent } from "@utils";
 
 const devMode = import.meta.env.DEV;
 const postsCap = 5;
@@ -8,43 +8,12 @@ const postsCap = 5;
 const allPages = await Astro.glob("/content/*.md");
 const posts = filterContent(await Astro.glob("/content/blog/*.md"));
 
-const index = allPages.find((a) => a.frontmatter.title == "index");
+const sitePages = await Astro.glob("/content/*.md");
+const index = sitePages.find((a) => a.frontmatter.title == "index");
 const { Content } = index ? index : { Content: undefined };
 const pageTitle = index ? index.frontmatter.title : "Post Index";
 ---
 
-<Base pageTitle={pageTitle}>
-  <article>
-    {
-      Content ? (
-        <article>
-          <Content />
-        </article>
-      ) : (
-        ""
-      )
-    }
-    <article>
-      <h2>Posts</h2>
-      Here are some of my recent posts:
-      <ul>
-        {
-          posts.map((post) => (
-            <li>
-              <a
-                href={getURL(
-                  Astro.url.origin,
-                  "blog",
-                  slugify(post.frontmatter.title)
-                )}
-              >
-                {post.frontmatter.title}
-              </a>{" "}
-              - {post.frontmatter.created}
-            </li>
-          ))
-        }
-      </ul>
-    </article>
-  </article>
-</Base>
+<Index pageTitle={pageTitle} posts={posts}>
+  { Content ? <Content /> : "" }
+</Index>

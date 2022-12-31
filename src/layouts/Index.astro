@@ -1,0 +1,32 @@
+---
+import Base from "@layouts/Base.astro";
+import { getURL, slugify } from "@utils";
+
+const { pageTitle, posts, ...props } = Astro.props;
+---
+<Base pageTitle={pageTitle}>
+  <article>
+    <slot />
+    <section>
+      <h2>Posts</h2>
+      <ul>
+        {
+          posts.map((post) => (
+            <li>
+              <a
+                href={getURL(
+                  Astro.url.origin,
+                  "blog",
+                  slugify(post.frontmatter.title)
+                )}
+              >
+                {post.frontmatter.title}
+              </a>{" "}
+              - {post.frontmatter.created}
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </article>
+</Base>
