@@ -12,13 +12,5 @@ const { Content } = index ? index : { Content: undefined };
 const pageTitle = index ? index.frontmatter.title : "Post Index";
 ---
 <Index pageTitle={pageTitle} posts={posts}>
-  {
-    Content ? (
-      <article>
-        <Content />
-      </article>
-    ) : (
-      ""
-    )
-  }
+  { Content ? <Content /> : "" }
 </Index>
