@@ -8,22 +8,24 @@ const { pageTitle, ...props } = Astro.props;
 ---
 
 <style lang="sass" is:global>
+  @use  "../styles/effects"
   body
     background-color: var(--body-bg)
     color: var(--fg)
   main
+    @include effects.framed
+    background-color: var(--bg)
     height: fit-content
     display: flex
     flex-direction: column
     max-width: var(--main-width)
     padding-bottom: 50px
   img
+    /* @include effects.framed */
     background-color: var(--bg)
-    max-width: var(--main-width)
-    margin-left: 50px
+    max-width: 100%
+    /* margin-left: 50px */
     padding: 5px
-    border: var(--default-black) 5px double
-    box-shadow: 5px 5px var(--fg)
   p
     margin: 5px
   .bordered
@@ -39,15 +41,15 @@ const { pageTitle, ...props } = Astro.props;
   .content-stack > :last-child
     flex-basis: 0
     flex-grow: 999
-    min-inline-size: 50%
-  section
-    max-width: var(--main-width)
-    margin: 2rem 0
-    & section, &.footnotes
-      background-color: var(--bg)
-      border: var(--default-black) 5px double
-      box-shadow: 5px 5px var(--fg)
-      padding: 2rem
+    min-inline-size: 91.5%
+  /* section */
+  /*   max-width: var(--main-width) */
+  /*   margin: 2rem 0 */
+  /*   & section, &.footnotes */
+  /*     background-color: var(--bg) */
+  /*     border: var(--default-black) 5px double */
+  /*     box-shadow: 5px 5px var(--fg) */
+  /*     padding: 2rem */
 </style>
 <html lang="en">
   <head>
