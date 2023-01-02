@@ -1,34 +1,39 @@
 ---
-import Base from "@layouts/Base.astro";
-import { getURL, slugify } from "@utils";
+import { filterContent, getURL, slugify } from "@utils";
 
-const { pageTitle, posts, ...props } = Astro.props;
+const { page, ...props } = Astro.props;
+const { frontmatter, file } = page;
+
+const ROLL_DIR_REGEX = new RegExp(`${frontmatter.rollDir}\/.*\.md`);
+
+const allPages = await Astro.glob("/content/**/*.md")
+const neededPages = allPages.filter(card => card.file.split("/content/")[1].match(ROLL_DIR_REGEX)).slice(0, frontmatter?.cardCap);
+const roll = filterContent(neededPages);
 ---
 <style lang="sass">
+
 </style>
-<Base pageTitle={pageTitle}>
-  <article>
-    <slot />
-    <section>
-      <h2>Posts</h2>
-      <ul>
-        {
-          posts.map((post) => (
-            <li>
-              <a
-                href={getURL(
-                  Astro.url.origin,
-                  "blog",
-                  slugify(post.frontmatter.title)
-                )}
-              >
-                {post.frontmatter.title}
-              </a>{" "}
-              - {post.frontmatter.created}
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-  </article>
-</Base>
+<article>
+  <slot /><br/>
+  <section>
+    <h2>{frontmatter?.rollHeading ? frontmatter.rollHeading : "Pages"}</h2>
+    <ul>
+      {
+        roll.map((card) => (
+          <li>
+            <a
+              href={getURL(
+                Astro.url.origin,
+                "blog",
+                slugify(card.frontmatter.title)
+              )}
+            >
+              {card.frontmatter.title}
+            </a>{" "}
+            - {card.frontmatter.created}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</article>

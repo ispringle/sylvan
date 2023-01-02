@@ -3,9 +3,10 @@ export default function slugify(str) {
     .toString()
     .trim()
     .toLowerCase()
+    .replace(/^\//g, "")
     .replace(/\s+/g, "-")
     .replace(/&/g, "and")
-    .replace(/[^\w\-]+/g, "")
+    .replace(/[^\w\/\-]+/g, "")
     .replace(/--+/g, "-")
     .replace(/^-/, "")
     .replace(/-+$/, "");

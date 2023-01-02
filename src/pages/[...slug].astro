@@ -1,23 +1,31 @@
 ---
-import Base from "@layouts/Base.astro";
+import Page from "@layouts/Page.astro";
 import {filterContent, slugify} from "@utils";
 
 export async function getStaticPaths() {
   const devMode = import.meta.env.DEV;
-  const pages = filterContent(await Astro.glob("/content/*.md"));
+  const pages = filterContent(await Astro.glob("/content/**/*.md"));
   return pages.map((page) => {
+    const { title, kind } = page.frontmatter;
     page.frontmatter.author = page.frontmatter?.author || "Ian S. Pringle"
+
+    const path = page.file.split("/content/")[1].split(".md")[0];
+
+    const indexSlug = (kind == "index" && path == "index") ? undefined : slugify(path.split("/index")[0]);
+    const slug = kind == "index" ? indexSlug : slugify(path);
+
     return {
-      params: { slug: slugify(page.frontmatter.title) },
-      props: { page: page},
+      params: { slug },
+      props: { page },
     };
   });
 }
 
 const { page } = Astro.props;
 const { Content } = page;
+
 ---
 
-<Base pageTitle={page.frontmatter.title}>
+<Page page={page}>
   <Content />
-</Base>
+</Page>

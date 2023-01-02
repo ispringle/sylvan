@@ -1,12 +1,16 @@
 ---
 import Article from "@components/Article.astro";
+import Index from "@layouts/Index.astro";
 import Base from "@layouts/Base.astro";
 
-const { frontmatter, ...props } = Astro.props;
+const { page, ...props } = Astro.props;
+
 ---
-<Base pageTitle={frontmatter?.title || ""}>
+<Base pageTitle={page.frontmatter?.title || ""}>
   { () => {
-    switch (frontmatter?.kind || "post") {
+    switch (page.frontmatter?.kind || "post") {
+      case "index":
+        return <Index page={page}><slot /></Index>
       case "entry":
       case "post":
       case "article":
@@ -16,7 +20,7 @@ const { frontmatter, ...props } = Astro.props;
       case "href":
       case "image":
       default:
-        return <Article author={frontmatter?.author || ""} created={frontmatter?.created || ""} updated={frontmatter?.updated || ""}>
+        return <Article author={page.frontmatter?.author || ""} created={page.frontmatter?.created || ""} updated={page.frontmatter?.updated || ""}>
           <slot />
         </Article>
     }
