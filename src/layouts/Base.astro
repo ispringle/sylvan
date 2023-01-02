@@ -4,7 +4,8 @@ import Footer from "../components/Footer.astro";
 
 import '../styles/style.sass';
 
-const { pageTitle, ...props } = Astro.props;
+const { pageTitle, siteTitle, ...props } = Astro.props;
+const title = siteTitle ? siteTitle : pageTitle + " - " + "ian.ist"
 ---
 
 <style lang="sass" is:global>
@@ -57,7 +58,7 @@ const { pageTitle, ...props } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
+    <title>{title}</title>
   </head>
   <body>
     <div class="content-stack">
