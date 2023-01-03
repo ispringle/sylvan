@@ -1,15 +1,17 @@
 ---
+import Head from "../components/Head.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
 import '../styles/style.sass';
 
-const { pageTitle, siteTitle, ...props } = Astro.props;
-const title = siteTitle ? siteTitle : pageTitle + " - " + "ian.ist"
+const { pageTitle, siteTitle = "ian.ist", ...props } = Astro.props;
+const title = pageTitle ? pageTitle + " - " + siteTitle : siteTitle
 ---
 
 <style lang="sass" is:global>
   @use  "../styles/effects"
+
   body
     background-color: var(--body-bg)
     color: var(--fg)
@@ -20,7 +22,8 @@ const title = siteTitle ? siteTitle : pageTitle + " - " + "ian.ist"
     display: flex
     flex-direction: column
     max-width: var(--main-width)
-    padding-bottom: 50px
+    margin-bottom: 50px
+    padding: 5px 5px 50px
   img
     /* @include effects.framed */
     background-color: var(--bg)
@@ -39,10 +42,12 @@ const title = siteTitle ? siteTitle : pageTitle + " - " + "ian.ist"
     gap: 1rem
   .content-stack > :first-child
     flex-grow: 1
+    width: 80px
+    min-height: 1px
   .content-stack > :last-child
     flex-basis: 0
     flex-grow: 999
-    min-inline-size: 91.5%
+    min-inline-size: 88%
   /* section */
   /*   max-width: var(--main-width) */
   /*   margin: 2rem 0 */
@@ -53,24 +58,19 @@ const title = siteTitle ? siteTitle : pageTitle + " - " + "ian.ist"
   /*     padding: 2rem */
 </style>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <script async type="module" src="https://cdn.skypack.dev/pin/@hotwired/turbo@v7.2.4-ZifPufG8LWXS2LFpHP7B/mode=imports,min/optimized/@hotwired/turbo.js"></script>
-    <title>{title}</title>
-  </head>
+  <Head title={title}/>
   <body>
+    <Header />
     <div class="content-stack">
       <div class="sidebar">
-        <Header />
       </div>
       <div class="content">
         <main>
           <slot />
         </main>
+      </turbo-frame>
       </div>
     </div>
+    <Footer />
   </body>
 </html>

@@ -1,4 +1,6 @@
+@use "./bordered"
+@use "./shadowed"
+
 @mixin framed
-    border: var(--default-black) 0.5rem double
-    box-shadow: 0.5rem 0.5rem var(--fg)
-    padding: 0.5rem
+    @include shadowed.shadowed
+    @include bordered.bordered
