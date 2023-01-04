@@ -1,4 +1,5 @@
 ---
+import Background from "../components/Background.astro";
 import Head from "../components/Head.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -16,6 +17,7 @@ const title = pageTitle ? pageTitle + " - " + siteTitle : siteTitle
   html
     height: 100%
   body
+    background-attachment: fixed
     color: var(--fg)
     margin: unset
     padding: unset
@@ -63,11 +65,11 @@ const title = pageTitle ? pageTitle + " - " + siteTitle : siteTitle
   /*     border: var(--default-black) 5px double */
   /*     box-shadow: 5px 5px var(--fg) */
   /*     padding: 2rem */
-</style>
+</style
 <html lang="en">
   <Head title={title}/>
   <body>
-    <div id="background"><div></div></div>
+    <Background />
     <Header />
     <div class="content-stack">
       <div class="sidebar">
