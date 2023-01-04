@@ -11,10 +11,14 @@ const title = pageTitle ? pageTitle + " - " + siteTitle : siteTitle
 
 <style lang="sass" is:global>
   @use  "../styles/effects"
+  @use  "../styles/background"
 
+  html
+    height: 100%
   body
-    background-color: var(--body-bg)
     color: var(--fg)
+    margin: unset
+    padding: unset
   main
     @include effects.framed
     background-color: var(--bg)
@@ -32,10 +36,13 @@ const title = pageTitle ? pageTitle + " - " + siteTitle : siteTitle
     padding: 5px
   p
     margin: 5px
-  .bordered
-    border: var(--default-black) 5px double
-    box-shadow: 5px 5px var(--fg)
-    padding: 5px
+  #background
+    @include background.desert
+    position: fixed
+    top: 0
+    height: 100%
+    width: 100%
+    z-index: -9999
   .content-stack
     display: flex
     flex-wrap: wrap
@@ -60,6 +67,7 @@ const title = pageTitle ? pageTitle + " - " + siteTitle : siteTitle
 <html lang="en">
   <Head title={title}/>
   <body>
+    <div id="background"><div></div></div>
     <Header />
     <div class="content-stack">
       <div class="sidebar">

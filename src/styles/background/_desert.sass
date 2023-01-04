@@ -1,0 +1,16 @@
+@mixin desert
+  filter: contrast(260%) brightness(100%)
+  background: linear-gradient(0deg, rgba(246,68,102,1), rgba(238,153,114,1))
+  &::after
+    content: ""
+    position: absolute
+    left: 0
+    top: 0
+    height: 100%
+    width: 100%
+    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAOklEQVR4nC3KQQFAQAAAwd0EIohANA0uiiiugQgiiLA+5j0AVBewVa/VUGd1qBNgrR5gqW6r8x+7Oj8/xCBur9LU/wAAAABJRU5ErkJggg==')
+    // background: url("data:image/svg+xml,%3Csvg viewBox='0 0 194 194' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4.2' numOctaves='6' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")
+    mix-blend-mode: multiply
+    image-rendering: pixelated
+    filter: saturate(0) contrast(250)
+    opacity: 40%
