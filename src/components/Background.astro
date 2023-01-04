@@ -1,7 +1,7 @@
 ---
 ---
 <canvas id="background-canvas" style="display:none;"></canvas>
-<script>
+<head><script data-turbo-track="reload">
 function hexToRGB(hexcode) {
   const [,hexR, hexG, hexB] = hexcode.match(/#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})/)
   const r = parseInt(hexR, 16)
@@ -34,30 +34,33 @@ function bayer(image, depth, colorOne, colorTwo) {
   return image
 }
 
-const canvas = document.getElementById("background-canvas");
-const ctx = canvas.getContext("2d");
-ctx.canvas.width = window.innerWidth;
-ctx.canvas.height = window.innerHeight;
+function updateCanvas() {
+  const canvas = document.getElementById("background-canvas");
+  const ctx = canvas.getContext("2d");
+  ctx.canvas.width = window.innerWidth;
+  ctx.canvas.height = window.innerHeight;
 
-// Setup intermediate canvas with gradient
-const intermediateCanvas = document.createElement('canvas');
-const intermediateContext = intermediateCanvas.getContext('2d');
+  // Setup intermediate canvas with gradient
+  const intermediateCanvas = document.createElement('canvas');
+  const intermediateContext = intermediateCanvas.getContext('2d');
 
-intermediateContext.canvas.width = window.innerWidth;
-intermediateContext.canvas.height = window.innerHeight;
+  intermediateContext.canvas.width = window.innerWidth;
+  intermediateContext.canvas.height = window.innerHeight;
 
-let gradient = intermediateContext.createLinearGradient(0, canvas.width, 0, 0)
-gradient.addColorStop(0, "black")
-gradient.addColorStop(1, "white")
+  let gradient = intermediateContext.createLinearGradient(0, canvas.width, 0, 0)
+  gradient.addColorStop(0, "black")
+  gradient.addColorStop(1, "white")
 
-intermediateContext.fillStyle = gradient;
-intermediateContext.fillRect(0, 0, canvas.width, canvas.height);
+  intermediateContext.fillStyle = gradient;
+  intermediateContext.fillRect(0, 0, canvas.width, canvas.height);
 
-const intermediateImageData = intermediateContext.getImageData(0, 0, canvas.width, canvas.height)
+  const intermediateImageData = intermediateContext.getImageData(0, 0, canvas.width, canvas.height)
 
-// Blit intermediate canvas to background-canvas
-ctx.putImageData(bayer(intermediateImageData, 80, hexToRGB("#2b59c3"), hexToRGB("#e9aaa9")), 0, 0);
+  // Blit intermediate canvas to background-canvas
+  ctx.putImageData(bayer(intermediateImageData, 80, hexToRGB("#2b59c3"), hexToRGB("#e9aaa9")), 0, 0);
 
-document.body.style.background = "url(" + canvas.toDataURL() + ")";
-document.body.style.backgroundAttachment = "fixed";
-</script>
+  document.body.style.background = "url(" + canvas.toDataURL() + ")";
+  document.body.style.backgroundAttachment = "fixed";
+}
+document.body.style.background ? undefined : updateCanvas()
+</script></head>
