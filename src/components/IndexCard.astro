@@ -1,0 +1,32 @@
+---
+import { getURL, slugify } from "@utils";
+import PostExcept from "@igor.dvlpr/astro-post-excerpt"
+import Date from "./Date.astro"
+const {card} = Astro.props
+---
+<style lang="sass">
+div.card
+  display: flex
+  flex-direction: column
+  margin: 1rem
+  & :last-child
+    align-self: flex-end
+    margin-top: 0.5rem
+</style>
+<div class="card">
+    <a
+      class="nobracket nostyle"
+      href={getURL(
+        Astro.url.origin,
+        "blog",
+        slugify(card.frontmatter.title)
+      )}
+    >
+  <article class="card">
+    <PostExcept smartEllipsis post={card}/>
+  </article>
+    </a>{" "}
+  <span>
+    <Date date={card.frontmatter.created} />
+  </span>
+</div>

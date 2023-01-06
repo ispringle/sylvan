@@ -1,0 +1,15 @@
+---
+import { DateTime } from "luxon";
+import { default as converter } from "number-to-words"
+
+const {date: dateValue} = Astro.props
+const date = DateTime.fromISO(dateValue)
+const day = converter.toOrdinal(date.day)
+const month = date.toFormat("LLLL")
+const year = converter.toOrdinal(date.year)
+
+const dateString = `Written on the ${day} day of ${month} in the ${year} year of Our Lord and Savior Jesus Christ`
+---
+<div class="date">
+  <em>{dateString}</em>
+</div>

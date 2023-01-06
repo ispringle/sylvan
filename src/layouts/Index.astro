@@ -1,5 +1,6 @@
 ---
-import { filterContent, getURL, slugify } from "@utils";
+import IndexCard from "../components/IndexCard.astro"
+import { filterContent, slugify } from "@utils";
 
 const { page, ...props } = Astro.props;
 const { frontmatter, file } = page;
@@ -11,29 +12,25 @@ const neededPages = allPages.filter(card => card.file.split("/content/")[1].matc
 const roll = filterContent(neededPages);
 ---
 <style lang="sass">
-
+@use "../styles/effects"
+h2
+  @include effects.shadowed
+  background-color: var(--bg)
+  padding: 1rem
+  width: fit-content
+.cards
+  display: flex
+  flex-direction: column
+  align-items: flex-end
 </style>
-<article>
-  <slot /><br/>
+<article class="main">
+  <slot />
+</article>
   <section>
     <h2>{frontmatter?.rollHeading ? frontmatter.rollHeading : "Pages"}</h2>
-    <ul>
-      {
-        roll.map((card) => (
-          <li>
-            <a
-              href={getURL(
-                Astro.url.origin,
-                "blog",
-                slugify(card.frontmatter.title)
-              )}
-            >
-              {card.frontmatter.title}
-            </a>{" "}
-            - {card.frontmatter.created}
-          </li>
-        ))
-      }
-    </ul>
+    <div class="cards">{
+      roll.map((card) => (
+        <IndexCard card={card}> </IndexCard>
+      ))
+    }</div>
   </section>
-</article>

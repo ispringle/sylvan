@@ -1,12 +1,13 @@
 a
-  font-weight: bold
   text-decoration: none
-  color: var(--default-light-fuscia)
-  &:visited
+  &:not(.nostyle)
+    font-weight: bold
+    color: var(--default-light-fuscia)
+  &:visited:not(.nostyle)
     color: var(--default-dark-fuscia)
-  &:hover
+  &:hover:not(.nostyle)
     color: var(--default-light-purple)
-  &:active
+  &:active:not(.nostyle)
     color: var(--default-dark-purple)
   &:not(.nobracket)::before
     color: var(--fg)
@@ -14,3 +15,5 @@ a
   &:not(.nobracket)::after
     color: var(--fg)
     content: "]"
+  &.nostyle
+    color: unset

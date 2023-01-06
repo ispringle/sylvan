@@ -11,9 +11,6 @@ const title = pageTitle ? pageTitle + " - " + siteTitle : siteTitle
 ---
 
 <style lang="sass" is:global>
-  @use  "../styles/effects"
-  @use  "../styles/background"
-
   html
     height: 100%
   body
@@ -22,29 +19,18 @@ const title = pageTitle ? pageTitle + " - " + siteTitle : siteTitle
     margin: unset
     padding: unset
   main
-    @include effects.framed
-    background-color: var(--bg)
     height: fit-content
     display: flex
     flex-direction: column
     max-width: var(--main-width)
     margin-bottom: 50px
-    padding: 5px 5px 50px
   img
-    /* @include effects.framed */
     background-color: var(--bg)
     max-width: 100%
     /* margin-left: 50px */
     padding: 5px
   p
     margin: 5px
-  #background
-    @include background.desert
-    position: fixed
-    top: 0
-    height: 100%
-    width: 100%
-    z-index: -9999
   .content-stack
     display: flex
     flex-wrap: wrap
@@ -77,7 +63,6 @@ const title = pageTitle ? pageTitle + " - " + siteTitle : siteTitle
         <main>
           <slot />
         </main>
-      </turbo-frame>
       </div>
     </div>
     <Footer />
