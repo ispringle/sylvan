@@ -17,7 +17,7 @@ const title = pageTitle ? pageTitle + " - " + siteTitle : siteTitle
   html
     height: 100%
   body
-    background-attachment: fixed
+    background-color: var(--default-light-blue)
     color: var(--fg)
     margin: unset
     padding: unset
@@ -69,7 +69,6 @@ const title = pageTitle ? pageTitle + " - " + siteTitle : siteTitle
 <html lang="en">
   <Head title={title}/>
   <body>
-    <Background />
     <Header />
     <div class="content-stack">
       <div class="sidebar">
