@@ -10,6 +10,11 @@ const year = converter.toOrdinal(date.year)
 
 const dateString = `Written on the ${day} day of ${month} in the ${year} year of Our Lord and Savior Jesus Christ`
 ---
+<style lang="sass">
+em
+  font-size: 0.75rem
+  color: var(--fg)
+</style>
 <div class="date">
   <em>{dateString}</em>
 </div>

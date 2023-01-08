@@ -1,6 +1,6 @@
 ---
 import { getURL, slugify } from "@utils";
-import PostExcept from "@igor.dvlpr/astro-post-excerpt"
+import Excerpt from './Excerpt.astro'
 import Date from "./Date.astro"
 const {card} = Astro.props
 ---
@@ -23,7 +23,8 @@ div.card
       )}
     >
   <article class="card">
-    <PostExcept smartEllipsis post={card}/>
+    <div class="card-title-heading">{card.frontmatter.title}</div>
+    <Excerpt post={card}/>
   </article>
     </a>{" "}
   <span>

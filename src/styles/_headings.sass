@@ -26,7 +26,7 @@ $heading-char: "*"
       content: unset !important
     a::after
       content: unset !important
-h1
+h1, .card-title-heading
   // @include effects.framed
   background-color: var(--bg)
   position: relative
@@ -34,3 +34,7 @@ h1
   text-align: end
   &::after
     content: "."
+.card-title-heading
+  font-family: globals.$accent-font
+  font-size: map.get(globals.$font-sizes, 5)
+  font-size: 1.5rem

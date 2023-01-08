@@ -1,0 +1,26 @@
+---
+import Markdown from '@astrojs/markdown-component';
+
+const { post } = Astro.props;
+let excerpt = ""
+switch (post.frontmatter.kind) {
+  case "entry":
+    excerpt = post.rawContent()
+                  .trim()
+                  .split("\n")
+                  .filter(a => !a.startsWith("#") && a != "")
+                  .join("\n")
+    break;
+  default:
+    excerpt = post.rawContent()
+                  .trim()
+                  .split("\n")
+                  .filter(a => !a.startsWith("#") && a != "")[0]
+                  .split(" ")
+                  .slice(0, 100)
+                  .join(' ') + '…';
+}
+---
+<Markdown>
+  {excerpt}
+</Markdown>

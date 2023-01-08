@@ -3,11 +3,10 @@
 @use "effects"
 article
   background-color: var(--bg)
+  @include effects.shadowed
   &.main
-    @include effects.framed
     margin-bottom: 2rem
     padding: 5px 10px 50px
   &.card
-    @include effects.shadowed
     padding: 1rem
     width: fit-content
