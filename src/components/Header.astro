@@ -4,21 +4,9 @@ import Navigation from "./Navigation.astro";
 ---
 <style lang="sass">
 header
-  display: flex
-  flex-wrap: wrap
   height: 4rem
-  justify-content: space-between
   margin: 1rem
-  gap: 1rem
-  & > :first-child
-    flex-grow: 1
-  & > :last-child
-    flex-basis: 0
-    flex-grow: 999
-    min-inline-size: 88%
 </style>
 <header>
     <Navigation />
-    <HeaderArt />
-    <div></div>
 </header>
