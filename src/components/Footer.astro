@@ -1,16 +1,32 @@
 ---
+import { Icon } from "astro-icon";
 ---
 <style lang="sass">
-  footer
-    bottom: 0
-    left: 0
-    width: 100%
-  #footer-tag
-    position: fixed
-    bottom: 5px
-    right: 5px
+footer
+  bottom: 0
+  left: 0
+  width: 100%
+.list
+  display: flex
+  flex-direction: column
+  align-items: flex-end
+  margin: 1rem
+[astro-icon]
+  display: inlin
+  line-height: 1
+  height: 1em
+  width: 1em
+  &.astro
+    fill: var(--default-dark-orange)
+  &.heart
+    color: var(--default-dark-red)
+  &.obsidian
+    color: var(--default-dark-purple)
 </style>
 <footer>
-  <div id="beau"></div>
-  <div id="footer-tag">Made with love.</div>
+  <div class="list">
+    <div>Made with love <Icon name="mdi:cards-heart" class="heart" title="love" />&&</div>
+    <div>Made with Astro <Icon name="astro" class="astro" title="Astro.build"/> &&</div>
+    <div>Made with <Icon name="simple-icons:obsidian" class="obsidian" title="Obsidian.md" /></div>
+  </div>
 </footer>

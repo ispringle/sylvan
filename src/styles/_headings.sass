@@ -12,10 +12,14 @@ $heading-char: "*"
     $heading-before: string.insert($heading-before, $heading-char, 0)
   h#{$i}
     $key: 1100 - $i * 100
-    font-family: globals.$accent-font
+    font-family: globals.$primary-font
     font-size: map.get(globals.$font-sizes, $key)
-    margin-top: 0.3rem
-    margin-bottom: 0.2rem
+    font-style: italic
+    font-weight: 400
+    line-height: 1
+    &:not(.card-title-heading)
+      margin-top: map.get(globals.$font-sizes, $key)
+      margin-bottom: 1.4rem
     &:hover > a > .icon-link::before
       content: "🔗"
       font-size: 0.5em
@@ -26,15 +30,11 @@ $heading-char: "*"
       content: unset !important
     a::after
       content: unset !important
+h1
+  padding: 2rem 2rem
 h1, .card-title-heading
-  // @include effects.framed
   background-color: var(--bg)
   position: relative
-  padding: 2rem 2rem
   text-align: end
   &::after
     content: "."
-.card-title-heading
-  font-family: globals.$accent-font
-  font-size: map.get(globals.$font-sizes, 5)
-  font-size: 1.5rem

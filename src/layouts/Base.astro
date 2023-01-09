@@ -18,19 +18,11 @@ const title = pageTitle ? pageTitle + " - " + siteTitle : siteTitle
     color: var(--fg)
     margin: unset
     padding: unset
-  main
-    height: fit-content
-    display: flex
-    flex-direction: column
-    max-width: var(--main-width)
-    margin-bottom: 50px
   img
     background-color: var(--bg)
     max-width: 100%
     /* margin-left: 50px */
     padding: 5px
-  p
-    margin: 5px
   .content-stack
     display: flex
     flex-wrap: wrap
@@ -43,14 +35,6 @@ const title = pageTitle ? pageTitle + " - " + siteTitle : siteTitle
     flex-basis: 0
     flex-grow: 999
     min-inline-size: 88%
-  /* section */
-  /*   max-width: var(--main-width) */
-  /*   margin: 2rem 0 */
-  /*   & section, &.footnotes */
-  /*     background-color: var(--bg) */
-  /*     border: var(--default-black) 5px double */
-  /*     box-shadow: 5px 5px var(--fg) */
-  /*     padding: 2rem */
 </style
 <html lang="en">
   <Head title={title}/>
