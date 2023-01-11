@@ -10,10 +10,14 @@
     "preview": "astro preview",
     "astro": "astro"
   },
-  "dependencies": {},
+  "dependencies": {
+  },
   "devDependencies": {
     "@astrojs/markdown-component": "^1.0.2",
     "@astrojs/partytown": "^1.0.2",
+    "@astropub/md": "^0.1.4",
+    "@astrojs/mdx": "^0.14.0",
+    "astro-m2dx": "^0.7.15",
     "astro": "^1.0.0",
     "astro-critters": "^1.1.24",
     "astro-google-fonts-optimizer": "^0.2.2",
@@ -26,6 +30,7 @@
     "mdast-util-to-string": "^3.1.0",
     "number-to-words": "^1.2.4",
     "remark": "^14.0.2",
+    "remark-directive": "^2.0.1",
     "remark-embed-plus": "^1.0.4",
     "remark-frontmatter": "^4.0.1",
     "remark-gfm": "^3.0.1",

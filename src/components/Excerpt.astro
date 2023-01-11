@@ -1,26 +1,14 @@
 ---
-import Markdown from '@astrojs/markdown-component';
+import { Markdown } from "@astropub/md";
 
 const { post } = Astro.props;
-let excerpt = ""
-switch (post.frontmatter.kind) {
-  case "entry":
-    excerpt = post.rawContent()
-                  .trim()
-                  .split("\n")
-                  .filter(a => !a.startsWith("#") && a != "")
-                  .join("\n")
-    break;
-  default:
-    excerpt = post.rawContent()
-                  .trim()
-                  .split("\n")
-                  .filter(a => !a.startsWith("#") && a != "")[0]
-                  .split(" ")
-                  .slice(0, 100)
-                  .join(' ') + '…';
-}
+const { frontmatter } = post;
+let excerpt = frontmatter.rawmdx
+                      .trim()
+                      .split("\n")
+                      .filter(a => !a.startsWith("#") && a != "")[0]
+                      .split(" ")
+                      .slice(0, 100)
+                      .join(' ') + '…';
 ---
-<Markdown>
-  {excerpt}
-</Markdown>
+<Markdown of={excerpt}/>

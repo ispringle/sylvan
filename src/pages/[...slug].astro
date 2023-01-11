@@ -4,7 +4,7 @@ import {filterContent, slugify} from "@utils";
 
 export async function getStaticPaths() {
   const devMode = import.meta.env.DEV;
-  const pages = filterContent(await Astro.glob("/content/**/*.md"), false);
+  const pages = filterContent(await Astro.glob("/content/**/*.mdx"), false);
   return pages.map((page) => {
     const { title, kind } = page.frontmatter;
     page.frontmatter.author = page.frontmatter?.author || "Ian S. Pringle"

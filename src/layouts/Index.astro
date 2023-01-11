@@ -5,9 +5,9 @@ import { filterContent, slugify } from "@utils";
 const { page, ...props } = Astro.props;
 const { frontmatter, file } = page;
 
-const ROLL_DIR_REGEX = new RegExp(`${frontmatter.rollDir}\/.*\.md`);
+const ROLL_DIR_REGEX = new RegExp(`${frontmatter.rollDir}\/.*\.mdx`);
 
-const allPages = await Astro.glob("/content/**/*.md")
+const allPages = await Astro.glob("/content/**/*.mdx")
 const neededPages = allPages.filter(card => card.file.split("/content/")[1].match(ROLL_DIR_REGEX))
 const roll = filterContent(neededPages).slice(0, frontmatter?.cardCap);
 ---

@@ -2,10 +2,10 @@
 import { formatDate } from "@utils"
 const { author, created, updated, ...props } = Astro.props;
 ---
-<style lang="sass">
+<style lang="sass" is:global>
 article
   position: relative
-aside
+aside:not(.sidenote)
   background-color: var(--bg)
   /* display: inline */
   display: none
@@ -17,21 +17,11 @@ aside
   & p
     margin: unset
     padding: unset
-.content-stack
-  display: flex
-  flex-wrap: wrap
-  gap: 1rem
-.content-stack > :first-child
-  flex-grow: 1
-.content-stack > :last-child
-  flex-basis: 0
-  flex-grow: 999
-  min-inline-size: 50%
 </style>
 <article class="main">
   {
     author || created || updated
-    ? <aside class="bordered">
+    ? <aside class="frontmatter">
       {
         author
           ? <p id="author">Written by {author}</p>
