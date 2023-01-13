@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 
 // integrations
+import { astroImageTools } from "astro-imagetools";
 import critters from "astro-critters";
 import purgecss from "astro-purgecss";
 import mdx from "@astrojs/mdx";
@@ -14,7 +15,7 @@ import remarkGfm from "remark-gfm";
 import remarkSmartypants from "remark-smartypants";
 import sectionize from "remark-sectionize";
 import remarkDirective from "remark-directive"; // This is required for m2dx
-import remarkObsidian from "./src/utils/remark-obsidian-md";
+import remarkObsidian from "./src/utils/remark-obsidian-md.js";
 
 /** @type {import('astro-m2dx').Options} */
 const m2dxOptions = {
@@ -28,6 +29,7 @@ export default defineConfig({
   site: "https://ian.ist",
   trailingSlash: "always",
   integrations: [
+    astroImageTools,
     critters(),
     markdownIntegration(),
     mdx({}),
