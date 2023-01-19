@@ -3,6 +3,7 @@ import { getURL, slugify } from "@utils";
 import Excerpt from './Excerpt.astro'
 import Date from "./Date.astro"
 const { card } = Astro.props
+console.log(card.file, card.file.match(/.*\/sylvan\/content(?<path>.*)\.md[x]?/))
 const { path } = card.file.match(/.*\/sylvan\/content(?<path>.*)\.md[x]?/).groups
 ---
 <style lang="sass">
