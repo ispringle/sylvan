@@ -2,7 +2,8 @@
 import { getURL, slugify } from "@utils";
 import Excerpt from './Excerpt.astro'
 import Date from "./Date.astro"
-const {card} = Astro.props
+const { card } = Astro.props
+const { path } = card.file.match(/.*\/sylvan\/content(?<path>.*)\.md[x]?/).groups
 ---
 <style lang="sass">
 div.card
@@ -18,8 +19,7 @@ div.card
       class="nobracket nostyle"
       href={getURL(
         Astro.url.origin,
-        "blog",
-        slugify(card.frontmatter.title)
+        slugify(path)
       )}
     >
   <article class="card">
@@ -28,6 +28,10 @@ div.card
   </article>
     </a>{" "}
   <span>
-    <Date date={card.frontmatter.created} />
+    {
+      card.frontmatter?.created
+        ? <Date date={card.frontmatter.created} />
+        : ""
+    }
   </span>
 </div>
