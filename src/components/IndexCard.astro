@@ -3,7 +3,7 @@ import { getURL, slugify } from "@utils";
 import Excerpt from './Excerpt.astro'
 import Date from "./Date.astro"
 const { card } = Astro.props
-const { path } = card.file.match(/.*\/sylvan\/content(?<path>.*)\.md[x]?/).groups
+const path = "blog/" + card.frontmatter.title
 ---
 <style lang="sass">
 div.card
