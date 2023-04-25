@@ -1,0 +1,112 @@
+---
+---
+<head><script data-turbo-track="reload">
+function hexToRGB(hexcode) {
+  const [,hexR, hexG, hexB] = hexcode.match(/#?([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})/)
+  const r = parseInt(hexR, 16)
+  const g = parseInt(hexG, 16)
+  const b = parseInt(hexB, 16)
+  return [ r, g, b]
+}
+
+function findExp(x) {
+  let i = 0;
+  do {
+      i += 1
+  } while (Math.pow(2, i) != x);
+  return i;
+}
+
+function halve(buckets) {
+  const one = buckets;
+  const two = one.splice(0, Math.ceil(one.length / 2));
+  return [two, one]
+}
+
+function averagePixels(pixels) {
+  const len = pixels.length;
+  let sums = [0, 0, 0];
+  for (let i = 0; i < len; i++) {
+      sums[0] += pixels[i][0];
+      sums[1] += pixels[i][1];
+      sums[2] += pixels[i][2];
+    }
+  return sums.map(n => Math.ceil(n / len));
+  }
+
+function generatePalette(data, paletteSize = 16) {
+  const pixels = [];
+  for (let i = 0; i < data.length; i += 4) {
+    pixels.push([data[i], data[i+1], data[i+2]]);
+  }
+  let buckets = [pixels]
+
+  for (let i = 0; i < findExp(paletteSize); i++) {
+    let halfBucket = [];
+    for (let n = 0; n < buckets.length; n++) {
+      let halfPixels = halve(buckets[n]);
+      halfBucket.push(halfPixels[0]);
+      halfBucket.push(halfPixels[1]);
+    }
+    buckets = halfBucket;
+  }
+  return [...buckets.map(averagePixels), ...[[0,0,0], [255,255,255]]]
+}
+
+function bayer(image, depth, colorOne, colorTwo) {
+    const thresholdMap = [
+      [0, 8, 2, 10],
+      [12, 4, 14, 6],
+      [3, 11, 1, 9],
+      [15, 7, 13, 5],
+    ]
+  const mapSize = thresholdMap.length
+  const [ redBias, greenBias, blueBias ] = [ 0.2126, 0.7152, 0.0722 ];
+
+  const { data, height, width } = image
+  const palette = generatePalette(data);
+  for (let i = 0; i < data.length; i += 4) {
+    const x = i / 4 % width;
+    const y = Math.floor(i / 4 / width);
+
+    const lumen = (data[i] * redBias) + (data[i+1] * greenBias) + (data[i+2] * blueBias);
+    const map = Math.floor((lumen + thresholdMap[x % mapSize][y % mapSize]) / 2);
+    const value = map > depth ? colorOne : colorTwo;
+    for (let c = 0; c < value.length; c++) {
+        data[i+c] = value[c]
+      }
+  }
+
+  return image
+}
+
+function updateCanvas() {
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  ctx.canvas.width = window.innerWidth;
+  ctx.canvas.height = window.innerHeight;
+
+  // Setup intermediate canvas with gradient
+  const intermediateCanvas = document.createElement('canvas');
+  const intermediateContext = intermediateCanvas.getContext('2d');
+
+  intermediateContext.canvas.width = window.innerWidth;
+  intermediateContext.canvas.height = window.innerHeight;
+
+  let gradient = intermediateContext.createLinearGradient(0, canvas.width, 0, 0)
+  gradient.addColorStop(0.0, "#e9aaa9")
+  gradient.addColorStop(1.0, "#2b59c3")
+
+  intermediateContext.fillStyle = gradient;
+  intermediateContext.fillRect(0, 0, canvas.width, canvas.height);
+
+  const intermediateImageData = intermediateContext.getImageData(0, 0, canvas.width, canvas.height)
+
+  // Blit intermediate canvas to background-canvas
+  ctx.putImageData(bayer(intermediateImageData, 80, hexToRGB("#2b59c3"), hexToRGB("#e9aaa9")), 0, 0);
+
+  document.body.style.background = "url(" + canvas.toDataURL() + ")";
+  document.body.style.backgroundAttachment = "fixed";
+}
+document.body.style.background == "" ? updateCanvas() : undefined
+</script></head>

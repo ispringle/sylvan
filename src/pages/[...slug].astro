@@ -1,0 +1,34 @@
+---
+import { pathToFileURL, fileURLToPath } from "url";
+import { relative } from "path";
+import fs from "fs";
+
+import Page from "@layouts/Page.astro";
+import Image from '@components/Image.astro';
+import Link from '@components/Link.astro';
+
+import { allPages, getBacklinks, resources } from "@lib/pages";
+import {filterContent, slugify} from "@utils";
+
+export async function getStaticPaths() {
+  const pages = filterContent(await allPages, false);
+  return pages.map((page) => {
+    const slug = slugify(page.frontmatter.slug)
+    return {
+      params: {
+        slug: slug === "" ? undefined : slug,
+      },
+      props: { page },
+    };
+  });
+}
+
+const {page} = Astro.props;
+const { default: Content, frontmatter: data = {} } = page;
+---
+<Page page={page}>
+  <Content components={{
+    a: Link,
+    img: Image
+  }}/>
+</Page>

@@ -1,0 +1,24 @@
+---
+import { getURL} from "@utils";
+
+const href = Astro.url.origin;
+---
+<style lang="sass">
+@use  "../styles/effects"
+
+nav
+  display: flex
+  flex-direction: row
+  & a
+    @include effects.shadowed
+    background-color: var(--bg)
+    height: min-content
+    padding: 1rem
+    margin-right: 1rem
+</style>
+<nav>
+    <a class="nobracket" href={href}>ian.ist</a>
+    <a class="nobracket" href={getURL(href, "about")}>about</a>
+    <a class="nobracket" href={getURL(href, "blog")}>blog</a>
+    <a class="nobracket" href={getURL(href, "grok")}>grok</a>
+</nav>

@@ -1,0 +1,22 @@
+---
+import { getURL, slugify } from "@utils";
+import { getBacklinks } from '@lib/pages';
+import Link from '@components/Link.astro';
+const { url } = Astro.props
+const backlinks = [...(await getBacklinks(url))];
+---
+{ !!backlinks.length
+    ? (
+    <section class="backlinks">
+        <h2>Backlinks</h2>
+        <ul>
+        {backlinks.map((b) => (
+            <li>
+            {b.frontmatter.icon}
+            <Link href={b.frontmatter.slug}>{b.frontmatter.title}</Link>
+            </li>
+        ))}
+        </ul>
+    </section>)
+    : ''
+}

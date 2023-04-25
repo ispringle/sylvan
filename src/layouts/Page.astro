@@ -1,0 +1,26 @@
+---
+import Article from "@components/Article.astro";
+import Index from "@layouts/Index.astro";
+import Base from "@layouts/Base.astro";
+const { page, ...props } = Astro.props;
+---
+<Base pageTitle={page.frontmatter?.title || ""}>
+  { () => {
+    switch (page.frontmatter?.type || "post") {
+      case "index":
+        return <Index page={page}><slot /></Index>
+      case "entry":
+      case "post":
+      case "article":
+      case "slip":
+      case "essay":
+      case "prose":
+      case "href":
+      case "image":
+      default:
+        return <Article frontmatter={page.frontmatter}>
+          <slot />
+        </Article>
+    }
+  }}
+</Base>

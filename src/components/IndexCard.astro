@@ -1,0 +1,34 @@
+---
+import { getURL, slugify } from "@utils";
+import Date from "./Date.astro"
+const { card: {frontmatter} } = Astro.props
+---
+<style lang="sass">
+div.card
+  display: flex
+  flex-direction: column
+  margin: 1rem
+  & :last-child
+    align-self: flex-end
+    margin-top: 0.5rem
+</style>
+<div class="card">
+    <a
+      class="nobracket nostyle"
+      href={getURL(
+        Astro.url.origin,
+        slugify(frontmatter.slug)
+      )}
+    >
+  <article class="card">
+    <h3 class="card-title-heading">{frontmatter.title}</h3>
+  </article>
+    </a>{" "}
+  <span>
+    {
+      frontmatter?.created
+        ? <Date date={frontmatter.created} />
+        : ""
+    }
+  </span>
+</div>

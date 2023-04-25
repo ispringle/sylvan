@@ -1,4 +1,5 @@
 {
+  "extends": "astro/tsconfigs/base",
   "compilerOptions": {
     "target": "es6",
     "experimentalDecorators": true,
@@ -6,6 +7,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
+    "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "incremental": true,
@@ -17,9 +19,13 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@styles/*": ["src/style/*"],
+      "@content/*": ["src/content/*"],
       "@components/*": ["src/components/*"],
-      "@lib/*": ["src/lib/*"]
+      "@layouts/*": ["src/layouts/*"],
+      "@styles/*": ["src/styles/*"],
+      "@utils": ["src/utils/index.ts"],
+      "@utils/*": ["src/utils/*"],
+       "@lib/*": ["src/lib/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

@@ -1,0 +1,16 @@
+---
+import { DateTime } from "luxon";
+import { default as converter } from "number-to-words"
+
+const {date: dateValue} = Astro.props
+const date = DateTime.fromISO(dateValue)
+---
+<style lang="sass">
+@use "../styles/globals"
+div
+  font-size: 0.75rem
+  color: var(--fg)
+</style>
+<div class="date">
+  <em>{date}</em>
+</div>

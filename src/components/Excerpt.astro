@@ -1,0 +1,14 @@
+---
+import { Markdown } from "@astropub/md";
+
+const { post } = Astro.props;
+const { frontmatter } = post;
+let excerpt = frontmatter.rawmdx
+                      .trim()
+                      .split("\n")
+                      .filter(a => !a.startsWith("#") && a != "")[0]
+                      .split(" ")
+                      .slice(0, 100)
+                      .join(' ') + '…';
+---
+<Markdown of={excerpt}/>
