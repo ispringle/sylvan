@@ -6,8 +6,8 @@ export default function filterContent(content, filterIndices = true) {
       .sort(sortNewestToOldest)
     : content
       .filter((a) => !filterIndices || a.frontmatter.type != "index")
-      .filter((a) => a.frontmatter.draft === false)
-      .filter((a) => a.frontmatter.public === true)
+      .filter((a) => a.frontmatter.draft === false || !a.frontmatter.draft)
+      .filter((a) => a.frontmatter.private === false || !a.frontmatter.private)
       .sort(sortNewestToOldest);
 }
 

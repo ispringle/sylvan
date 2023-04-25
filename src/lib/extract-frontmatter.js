@@ -46,7 +46,7 @@ export const extractProperties = tree => {
     // console.log(props)
     // props?.children.forEach(node => data.properties[node.key] = node.value)
     visit(tree, "node-property", (prop) => {
-        properties[prop.key.toLowerCase()] = prop.value;
+        properties[prop.key.toLowerCase()] = prop.value === 't' ? true : prop.value;
     });
     return properties
 }
