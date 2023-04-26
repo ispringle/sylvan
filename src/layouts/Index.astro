@@ -8,7 +8,7 @@ const { frontmatter, file } = page;
 
 const includeRoll = frontmatter?.include_roll || typeof frontmatter?.include_roll === "undefined"
 const ROLL_DIR_REGEX = new RegExp(`${frontmatter.roll_dir}\/.*\.org`);
-const pages = filterContent(await allPages, false);
+const pages = filterContent(await allPages);
 const roll = pages.filter(card => card.file.split("/content/")[1].match(ROLL_DIR_REGEX))
 ---
 <style lang="sass">
