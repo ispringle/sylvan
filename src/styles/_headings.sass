@@ -20,6 +20,9 @@ $heading-char: "*"
     &:not(.card-title-heading)
       margin-top: map.get(globals.$font-sizes, $key)
       margin-bottom: 1.4rem
+    &.card-title-heading
+      margin: unset
+      margin-bottom: 0.2rem
     &:hover > a > .icon-link::before
       content: "🔗"
       font-size: 0.5em
@@ -32,7 +35,6 @@ $heading-char: "*"
       content: unset !important
 h1
   padding: 2rem 2rem
-h1, .card-title-heading
   background-color: var(--bg)
   position: relative
   text-align: end

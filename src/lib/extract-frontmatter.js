@@ -10,7 +10,6 @@ export const extractFrontmatter = async p => {
         .replace(/\.(org|md)$/, '')
         .replace(/(^|\/)index$/, '')
     const slug = ('/' + cleanName + '/').replaceAll(/\/+/g, '/');
-    const pageType = getPageType(relpath);
 
     let title = cleanName.split('/').pop();
     if (title) {
@@ -19,34 +18,30 @@ export const extractFrontmatter = async p => {
 
     return {
         title,
-        renderer: 'post',
         slug,
-        pageType,
-        icon: getPageIcon(pageType),
     };
 };
 
-const getPageType = (path) => {
-    if (path.startsWith('posts')) return 'post';
-    return 'note';
-};
-
-const getPageIcon = (type) => {
-    if (!type) return null;
-    if (type === 'post') return '🖋';
-    return '📝';
-};
-
 export const extractProperties = tree => {
-    const properties = {}
+    const frontmatter = {}
+    const setValue = (v) => {
+        switch (v) {
+            case "t":
+            case "true":
+                return true
+            case "nil":
+            case "false":
+                return false
+            default:
+                return v
+        }
+    }
 
-    // const props = tree.children[0]?.children?.[0];
-    // console.log(tree.filter(prop => prop.type == "property-drawer"))
-    // const props = tree.children.filter(child => child.type == 'property-drawer')?.[0]
-    // console.log(props)
-    // props?.children.forEach(node => data.properties[node.key] = node.value)
-    visit(tree, "node-property", (prop) => {
-        properties[prop.key.toLowerCase()] = prop.value === 't' ? true : prop.value;
-    });
-    return properties
+    const drawer = tree.children[0]?.type === "property-drawer"
+        ? tree.children[0]
+        : undefined
+    if (!drawer) { return }
+    const props = drawer?.children
+    props.forEach(node => frontmatter[node.key.toLowerCase()] = setValue(node.value))
+    return frontmatter
 }

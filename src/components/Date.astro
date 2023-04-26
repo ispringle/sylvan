@@ -4,6 +4,7 @@ import { default as converter } from "number-to-words"
 
 const {date: dateValue} = Astro.props
 const date = DateTime.fromISO(dateValue)
+const dateStr = date.toFormat("<yyyy-MM-dd EEE>")
 ---
 <style lang="sass">
 @use "../styles/globals"
@@ -12,5 +13,5 @@ div
   color: var(--fg)
 </style>
 <div class="date">
-  <em>{date}</em>
+  <em>{dateStr}</em>
 </div>

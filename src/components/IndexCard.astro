@@ -1,34 +1,33 @@
 ---
-import { getURL, slugify } from "@utils";
+import { getURL, slugify } from "@utils"
 import Date from "./Date.astro"
+import Tag from "./Tag.astro"
 const { card: {frontmatter} } = Astro.props
+console.log(frontmatter)
 ---
 <style lang="sass">
 div.card
-  display: flex
-  flex-direction: column
   margin: 1rem
-  & :last-child
-    align-self: flex-end
-    margin-top: 0.5rem
 </style>
 <div class="card">
     <a
-      class="nobracket nostyle"
-      href={getURL(
+        class="nobracket nostyle"
+        href={getURL(
         Astro.url.origin,
         slugify(frontmatter.slug)
-      )}
+        )}
     >
-  <article class="card">
-    <h3 class="card-title-heading">{frontmatter.title}</h3>
-  </article>
-    </a>{" "}
-  <span>
-    {
-      frontmatter?.created
+        <h4 class="card-title-heading">{frontmatter.title}</h4>
+    </a>
+    <span>{
+        frontmatter?.created
         ? <Date date={frontmatter.created} />
         : ""
+    }</span>
+    { frontmatter.tags
+        ? <div class="tags">{
+            frontmatter.tags.map(tag => <Tag tag={tag} />)
+          }</div>
+        : ""
     }
-  </span>
 </div>

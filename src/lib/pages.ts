@@ -4,13 +4,15 @@ import { join } from 'path';
 export type Page = {
     frontmatter: {
         title: string;
+        id?: string;
         type?: string;
         slug?: string;
-        summary?: string;
-        date?: string;
-        last_modified?: string;
+        created?: string;
+        modified?: string;
         links: string[];
+        tags: string[];
         draft?: boolean;
+        private?: boolean;
     }
     ids: Record<string, string>;
 }

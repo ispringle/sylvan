@@ -12,21 +12,27 @@ footer
   align-items: flex-end
   margin: 1rem
 [astro-icon]
-  display: inlin
+  display: inline
   line-height: 1
-  height: 1em
-  width: 1em
+  height: 1.5em
+  width: 1.5em
   &.astro
     fill: var(--default-dark-orange)
   &.heart
     color: var(--default-dark-red)
-  &.obsidian
+  &.emacs
     color: var(--default-dark-purple)
+  &.org
+    color: var(--default-light-fuscia)
 </style>
 <footer>
   <div class="list">
-    <div>Made with love <Icon name="mdi:cards-heart" class="heart" title="love" />&&</div>
-    <div>Made with Astro <Icon name="astro" class="astro" title="Astro.build"/> &&</div>
-    <div>Made with <Icon name="simple-icons:obsidian" class="obsidian" title="Obsidian.md" /></div>
+    <div>Made with love:</div>
+    <div>
+        <Icon name="mdi:cards-heart" class="heart" title="love" />
+        <Icon name="simple-icons:gnuemacs" class="emacs" title="emacs" />
+        <Icon name="simple-icons:org" class="org" title="org-mode" />
+        <Icon name="astro" class="astro" title="Astro.build"/>
+    </div>
   </div>
 </footer>

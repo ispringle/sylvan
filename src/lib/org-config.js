@@ -11,6 +11,7 @@ import { visitParents } from 'unist-util-visit-parents';
 
 import { rehypeResolveImg } from './rehype-resolve-image.js';
 import { extractFrontmatter, extractProperties } from './extract-frontmatter.js';
+import { formatFrontmatter } from './format-frontmatter.js';
 
 export default {
     uniorgParseOptions: {
@@ -46,11 +47,11 @@ export default {
 
 function frontmatter() {
     return async (tree, file) => {
-        file.data.astro.frontmatter = {
+        file.data.astro.frontmatter = formatFrontmatter({
             ...(await extractFrontmatter(file.path)),
             ...(extractProperties(tree)),
             ...file.data.astro.frontmatter,
-        };
+        });
 
         if (file.data.astro.frontmatter.hasOwnProperty('draft')) {
             file.data.astro.frontmatter.title += ' 🚧';

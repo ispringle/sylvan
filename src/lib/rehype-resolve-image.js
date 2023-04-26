@@ -23,6 +23,12 @@ export const rehypeResolveImg = () => {
                 }
 
                 let url = node.properties[propertyName];
+                const headingLink = /.*\.org::.*/
+                if (url.match(headingLink)) {
+                    const [fileLink, headingLink] = url.split("::")
+                    url = fileLink
+                }
+
                 let u;
                 try {
                     u = new URL(url, 'file://' + file.path);
@@ -32,7 +38,6 @@ export const rehypeResolveImg = () => {
                 if (u.protocol !== 'file:') {
                     return;
                 }
-                const headingLink = /.*\.org::.*/
                 if (u.pathname.match(headingLink)) {
                     return;
                 }
@@ -63,7 +68,6 @@ export const rehypeResolveImg = () => {
                 let name = imported.get(url);
                 if (!name) {
                     name = `__${imported.size}_${url.replace(/\W/g, '_')}__`;
-
                     imports.push({
                         type: 'mdxjsEsm',
                         value: '',
@@ -91,7 +95,7 @@ export const rehypeResolveImg = () => {
                                                         type: 'Identifier',
                                                         name: 'frontmatter',
                                                     },
-                                                    local: { type: 'Identifier', name },
+                                                    local: { type: 'Identifier', name, headingLink: headingLink || "" },
                                                 },
                                         ],
                                     },
@@ -99,7 +103,6 @@ export const rehypeResolveImg = () => {
                             },
                         },
                     });
-
                     imported.set(url, name);
                 }
 

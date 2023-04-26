@@ -1,10 +1,12 @@
 ---
 import IndexCard from "../components/IndexCard.astro"
-import { filterContent } from "@utils";
+import { filterContent, sortNewestToOldest } from "@utils";
 import { allPages } from "@lib/pages";
 
 const { page, ...props } = Astro.props;
 const { frontmatter, file } = page;
+
+const includeRoll = frontmatter?.include_roll || typeof frontmatter?.include_roll === "undefined"
 const ROLL_DIR_REGEX = new RegExp(`${frontmatter.roll_dir}\/.*\.org`);
 const pages = filterContent(await allPages, false);
 const neededPages = pages.filter(card => card.file.split("/org/")[1].match(ROLL_DIR_REGEX))
@@ -21,16 +23,18 @@ h2
 .cards
   display: flex
   flex-direction: column
-  align-items: flex-end
 </style>
 <article class="main index">
   <slot />
 </article>
-  <section>
-    <h2>{frontmatter?.rollHeading ? frontmatter.rollHeading : "Pages"}</h2>
-    <div class="cards">{
-      roll.map((card) => (
-        <IndexCard card={card}> </IndexCard>
-      ))
-    }</div>
-  </section>
+{ includeRoll
+  ? <section>
+        <h2>{frontmatter?.rollHeading ? frontmatter.rollHeading : "Pages"}</h2>
+        <article class="cards">{
+            roll.map((card) => (
+            <IndexCard card={card}> </IndexCard>
+            ))
+        }</article>
+    </section>
+  : ""
+}

@@ -12,7 +12,6 @@ const backlinks = [...(await getBacklinks(url))];
         <ul>
         {backlinks.map((b) => (
             <li>
-            {b.frontmatter.icon}
             <Link href={b.frontmatter.slug}>{b.frontmatter.title}</Link>
             </li>
         ))}
