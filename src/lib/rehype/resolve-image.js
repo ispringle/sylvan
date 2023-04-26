@@ -2,7 +2,7 @@ import { visit } from 'unist-util-visit';
 import path from 'path';
 import fs from 'fs';
 
-export const rehypeResolveImg = () => {
+export const resolveImage = () => {
     return (tree, file) => {
         const imported = new Map();
         const imports = [];

@@ -3,7 +3,6 @@ import { formatDate } from "@utils"
 import Backlinks from "@components/Backlinks.astro";
 const {frontmatter, ...props} = Astro.props;
 const { author = "", created = "", updated = "" } = frontmatter;
-console.log(frontmatter)
 ---
 <style lang="sass" is:global>
 article
