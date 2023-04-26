@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as fs from 'fs/promises';
 import { DateTime } from "luxon";
 
-const ContentDirectory = new URL('../../../org', import.meta.url);
+const ContentDirectory = new URL('../../../content', import.meta.url);
 
 export function frontmatter() {
     return async (tree, file) => {

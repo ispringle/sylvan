@@ -20,7 +20,7 @@ const on = <T, R>(value: T, f: (value: T) => R): R => f(value);
 
 const pages = import.meta.glob<true, '', Page>(
     [
-        '../../org/**/*.org',
+        '../../content/**/*.org',
     ],
     { eager: true }
 )
@@ -32,7 +32,7 @@ const cwd = process.cwd()
 export const resources = Object.fromEntries(
     Object.entries(
         import.meta.glob(
-            ['../../org/**/*.{png,jpg,jpeg,gif,webp,avif,txt,pdf,sh,mp3,svg}'],
+            ['../../content/**/*.{png,jpg,jpeg,gif,webp,avif,txt,pdf,sh,mp3,svg}'],
             { as: 'url' }
         )).map(([path, loader]) => [fs.realpathSync(join(cwd, 'src/lib', path)), loader]));
 

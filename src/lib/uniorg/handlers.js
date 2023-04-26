@@ -22,5 +22,6 @@ export default {
         );
         return h("p.verse", verses);
     },
-    "superscript": (org) => { console.log(org) },
+    // superscript parsing is broken in uniorg atm
+    // "superscript": (org) => { console.log(org) },
 }
