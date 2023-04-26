@@ -29,7 +29,7 @@ h2
 </article>
 { includeRoll
   ? <section>
-        <h2>{frontmatter?.rollHeading ? frontmatter.rollHeading : "Pages"}</h2>
+        <h2>{frontmatter?.roll_heading ? frontmatter.roll_heading : "Pages"}</h2>
         <article class="cards">{
             roll.map((card) => (
             <IndexCard card={card}> </IndexCard>
