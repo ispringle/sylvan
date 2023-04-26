@@ -5710,6 +5710,13 @@ unified@^10.0.0, unified@^10.1.2:
     trough "^2.0.0"
     vfile "^5.0.0"
 
+uniorg-attach@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/uniorg-attach/-/uniorg-attach-1.0.0.tgz#10b0c46b40d01b28a420cc08e8a5d2b5a1827a68"
+  integrity sha512-d1tO0NLutiPlpAmNFO/QL+ZPu+aSHclSjk1JynlA0M9Qu5YtEIsu1tc7247s7XZo681xL5x8C3aaU/KSJ0cmGQ==
+  dependencies:
+    unist-util-visit-parents "5.1.0"
+
 uniorg-extract-keywords@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/uniorg-extract-keywords/-/uniorg-extract-keywords-1.0.0.tgz#8651e8ed94c752897355fa683bc43644200336fb"

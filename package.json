@@ -35,6 +35,7 @@
     "sass": "^1.62.0",
     "sharp": "^0.32.0",
     "unified": "^10.1.2",
+    "uniorg-attach": "^1.0.0",
     "uniorg-parse": "^2.0.0",
     "uniorg-rehype": "^1.1.0",
     "uniorg-slug": "^1.0.0",
