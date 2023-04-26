@@ -1,5 +1,4 @@
 import rehypeRaw from 'rehype-raw';
-import prism from '@mapbox/rehype-prism';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import minify from 'rehype-preset-minify';
 
@@ -13,17 +12,6 @@ export default [
     rehypeRaw,
     replaceTags,
     intoArticle,
-    [
-        prism,
-        {
-            ignoreMissing: true,
-            alias: {
-                lisp: ['common-lisp'],
-                jsx: ['astro'],
-                txt: ['org'],
-            },
-        },
-    ],
     resolveImage,
     collectLinks,
     [rehypeAutolinkHeadings, { behavior: 'wrap' }],
