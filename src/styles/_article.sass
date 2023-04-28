@@ -9,9 +9,10 @@ article
   &.cards
     margin: 2rem 0
     padding: 2rem 1.4rem 10rem
-  &.index
+  &.index,
+  &.frontmatter
     padding: 0 1.4rem
-  &:not(.index):not(.card)::after
+  &:not(.index):not(.card):not(.frontmatter):not(.no-favicon)::after
     content: ""
     content: url(/favicon.svg)
     position: absolute
@@ -19,3 +20,8 @@ article
     left: 50%
     margin: 1rem auto
     width: fit-content
+  &.frontmatter
+    align-self: flex-end
+    & p
+      margin: unset
+      padding: unset

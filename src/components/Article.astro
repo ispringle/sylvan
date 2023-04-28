@@ -2,28 +2,20 @@
 import { formatDate } from "@utils"
 import Backlinks from "@components/Backlinks.astro";
 const {frontmatter, ...props} = Astro.props;
-const { author = "", created = "", updated = "" } = frontmatter;
+const { author = "", created = "", modified = "" } = frontmatter;
 ---
 <style lang="sass" is:global>
 article
   position: relative
-aside:not(.sidenote)
-  background-color: var(--bg)
-  /* display: inline */
-  display: none
-  position: relative
-  float: right
-  clear: right
-  width: 50%
-  margin-right: -60%
+.frontmatter
+  align-self: flex-end
   & p
     margin: unset
     padding: unset
 </style>
-<article class="main">
   {
-    author || created || updated
-    ? <aside class="frontmatter">
+    author || created || modified
+    ? <article class="frontmatter">
       {
         author
           ? <p id="author">Written by {author}</p>
@@ -35,13 +27,14 @@ aside:not(.sidenote)
           : ""
       }
       {
-        updated
-          ? <p id="updated">Last updated on {formatDate(updated)}</p>
+        modified
+          ? <p id="updated">Last updated on {formatDate(modified)}</p>
           : ""
       }
       </aside>
     : ""
   }
+<article class="main">
     <slot />
     <Backlinks url={frontmatter.slug} />
 </article>

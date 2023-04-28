@@ -1,11 +1,8 @@
 ---
 import Base from "@layouts/Base.astro";
 import IndexCard from "@components/IndexCard.astro"
-import Image from '@components/Image.astro';
-import Link from '@components/Link.astro';
 
 import { tags } from "@lib/pages";
-import {slugify} from "@utils";
 
 export async function getStaticPaths() {
   const allTags = tags;
