@@ -1,4 +1,4 @@
-export default function slugify(str) {
+export default function slugify(str, root = false) {
     const url = str
         .toString()
         .trim()
@@ -11,5 +11,5 @@ export default function slugify(str) {
         .replace(/--+/g, "-")
         .replace(/^-/, "")
         .replace(/-+$/, "");
-    return url;
+    return root ? "/" + url : url;
 }

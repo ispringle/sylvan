@@ -1,4 +1,5 @@
 ---
+import {slugify} from "@utils";
 const {tag} = Astro.props
 ---
 <style lang="sass">
@@ -8,6 +9,8 @@ const {tag} = Astro.props
     margin: 0.2em
     padding: 0em 0.3em
 </style>
-<span class="tag">
-      {tag}
-</span>
+<a href={slugify("tags/"+tag, true)}>
+    <span class="tag">
+        {tag}
+    </span>
+</a>

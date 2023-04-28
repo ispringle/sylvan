@@ -88,3 +88,16 @@ const backlinks = on(allPages, (posts) => {
 export const getBacklinks = (slug: string) => {
     return backlinks[slug] ?? new Set();
 };
+
+const getTags = () => {
+    const t = {}
+    allPages.forEach(p => {
+        p.frontmatter.tags.forEach(
+            tag => t[tag] = [
+                ...(t[tag] ? t[tag] : []),
+                ...[JSON.stringify(p.frontmatter)]])
+    })
+    return t
+}
+
+export const tags = getTags()
