@@ -28,6 +28,6 @@
        "@lib/*": ["src/lib/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js", "**/*.astro"],
   "exclude": ["node_modules"]
 }
