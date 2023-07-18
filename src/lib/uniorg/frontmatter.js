@@ -32,7 +32,6 @@ const extractFrontmatter = async p => {
 
     return {
         title,
-        slug,
     };
 };
 

@@ -28,11 +28,16 @@ const pages = Object.values(
   )
 )
 
+function setSlug (path: string): string {
+  const isRoot = path.includes('/content/index') || path.includes('/content/site/index')
+  const file = path.split("/content/")[1].split(".")[0];
+  return isRoot
+    ? undefined
+    : slugify(file)
+}
+
 function setFrontmatter (page: Page): Page {
-  page.frontmatter.slug = slugify(
-    page.frontmatter.slug
-  )
-  console.log(page.frontmatter.slug)
+  page.frontmatter.slug = setSlug(page.file);
   return page
 }
 

@@ -4,13 +4,13 @@ import Image from '@components/Image.astro';
 import Link from '@components/Link.astro';
 
 import { allPages, getBacklinks, resources } from "@lib/pages";
-import {filterContent, slugify} from "@utils";
+import {filterContent } from "@utils";
 
 export async function getStaticPaths() {
   const pages = filterContent(await allPages, false);
   return pages.map((page) => {
     const path = page.frontmatter.slug
-    console.log(path)
+    // console.log(path, page.file)
     return {
       params: {
         slug: path === "" ? undefined : path,

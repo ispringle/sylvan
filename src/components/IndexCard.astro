@@ -1,8 +1,9 @@
 ---
-import { getURL, slugify } from "@utils"
+import { getURL } from "@utils"
 import Date from "./Date.astro"
 import Tag from "./Tag.astro"
 const { card: {frontmatter} } = Astro.props
+const href = getURL(Astro.url.origin, frontmatter.slug);
 ---
 <style lang="sass">
 div.card
@@ -11,12 +12,9 @@ div.card
 <div class="card">
     <a
         class="nobracket nostyle"
-        href={getURL(
-        Astro.url.origin,
-        slugify(frontmatter.slug)
-        )}
+        href={href}
     >
-        <h4 class="card-title-heading">{frontmatter.title}</h4>
+        <h4 class="card-title-heading">{frontmatter.title || frontmatter.slug}</h4>
     </a>
     <span>{
         frontmatter?.created
