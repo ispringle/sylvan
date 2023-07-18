@@ -6,7 +6,7 @@ const { page, ...props } = Astro.props;
 ---
 <Base pageTitle={page.frontmatter?.title || ""}>
   { () => {
-    switch (page.frontmatter?.type || "post") {
+    switch (page.frontmatter?.type || page.frontmatter?.kind || "post") {
       case "index":
         return <Index page={page}><slot /></Index>
       case "entry":

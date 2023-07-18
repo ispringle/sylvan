@@ -3,6 +3,7 @@ export default function slugify(str, root = false) {
         .toString()
         .trim()
         .toLowerCase()
+        .replace(/(^|\/)index$/, '')
         .replace(/^\//g, "")
         .replace(/\/$/g, "")
         .replace(/\s+/g, "-")

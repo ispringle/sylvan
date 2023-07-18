@@ -9,10 +9,11 @@ import {filterContent, slugify} from "@utils";
 export async function getStaticPaths() {
   const pages = filterContent(await allPages, false);
   return pages.map((page) => {
-    const slug = slugify(page.frontmatter.slug)
+    const path = page.frontmatter.slug
+    console.log(path)
     return {
       params: {
-        slug: slug === "" ? undefined : slug,
+        slug: path === "" ? undefined : path,
       },
       props: { page },
     };
