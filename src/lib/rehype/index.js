@@ -15,7 +15,7 @@ export default [
     resolveImage,
     collectLinks,
     [rehypeAutolinkHeadings, { behavior: 'wrap' }],
-    minify,
+    // minify,
     saveImages,
 ]
 
