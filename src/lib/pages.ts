@@ -110,7 +110,7 @@ const backlinks = on(allPages, posts => {
     const links = p?.frontmatter.links ?? []
 
     for (let link of links) {
-      if (Object.keys(p.ids).includes(link)) {
+      if ( p?.ids && Object.keys(p.ids).includes(link)) {
         // linking to self -> does not count
         continue
       }
