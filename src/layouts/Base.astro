@@ -3,50 +3,55 @@ import Background from "../components/Background.astro";
 import Head from "../components/Head.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import '../styles/style.sass';
+
+import '../styles/style.css';
+
 const { pageTitle, siteTitle = "ian.ist", ...props } = Astro.props;
 const title = pageTitle ? pageTitle + " - " + siteTitle : siteTitle
 ---
 
-<style lang="sass" is:global>
-  html
-    height: 100%
-  body
-    background-color: var(--default-light-green)
-    color: var(--fg)
-    margin: unset
-    padding: unset
-  img
-    background-color: var(--bg)
-    max-width: 100%
-    /* margin-left: 50px */
-    padding: 5px
-  .content-stack
-    display: flex
-    flex-wrap: wrap
-    gap: 1rem
-  .content-stack > :first-child
-    flex-grow: 1
-    width: 80px
-    min-height: 1px
-  .content-stack > :last-child
-    flex-basis: 0
-    flex-grow: 999
-    min-inline-size: 88%
+<style>
+:root, html {
+  font-family: 'IM Fell English';
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+body {
+  font-size: 1.5rem;
+  background-color: var(--bg);
+  color: var(--fg);
+  background-image : url(/images/background.png);
+}
+main, .main-header {
+  width: 87.5%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 12.5%;
+  max-width: 1400px;
+}
+@media (max-width: 760px) {
+  main, .main-header {
+    width: 84%;
+    padding-left: 8%;
+    padding-right: 8%;
+    margin-top: auto;
+  }
+  .main-header {
+    width: 100%;
+  }
+}
 </style
 <html lang="en">
   <Head title={title}/>
   <body>
-    <Header />
-    <div class="content-stack">
-      <div class="sidebar">
-      </div>
-      <div class="content">
+    <Header class="main-header" />
         <main>
           <slot />
         </main>
-      </div>
-    </div>
     <Footer />
   </body>
 </html>

@@ -1,3 +1,87 @@
 ---
+import knight from '../assets/knight-horse.png';
 ---
-<div>ianist</div>
+<style>
+.header-branding {
+    pointer-events: none;
+    position: relative;
+    margin-top: 4rem;
+}
+.dropcap .actual,
+.dropcap .period {
+  font-size: 15rem;
+}
+
+.dropcap .actual {
+  color: #903;
+  font-family: drop-cap;
+}
+
+.dropcap .rest {
+  font-size: 10rem;
+}
+
+.sr-only {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+img {
+    position: absolute;
+    top: -2.5rem;
+    left: 38rem;
+    height: 15rem;
+    width: unset;
+}
+
+@media (max-width: 760px) {
+    .dropcap .actual,
+    .dropcap .period {
+        font-size: 9rem;
+    }
+
+    .dropcap .rest {
+        font-size: 6rem;
+    }
+
+    img {
+        position: absolute;
+        top: -2.5rem;
+        left: 22.7rem;
+        height: 10rem;
+        width: unset !important;
+    }
+}
+@media (max-width: 450px) {
+    .dropcap .actual,
+    .dropcap .period {
+        font-size: 6rem;
+    }
+
+    .dropcap .rest {
+        font-size: 4rem;
+    }
+
+    img {
+        top: -1.1rem;
+        left: 15.4rem;
+        height: 6rem;
+        width: unset !important;
+    }
+}
+</style>
+<div class="header-branding">
+    <span class="header-text">
+    <span class="dropcap" aria-hidden="true">
+        <span class="actual">D</span><span class="rest">rollery</span>
+        <span class="period">.</span>
+    </span>
+        <span class="sr-only">Drollery</span>
+    </span>
+    <img decoding="async" loading="lazy" alt="Medieval drollery of a knight on a horse" src={knight.src}>
+</div>

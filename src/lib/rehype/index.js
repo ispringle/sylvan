@@ -1,6 +1,6 @@
 import rehypeRaw from 'rehype-raw';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import minify from 'rehype-preset-minify';
+import prism from '@mapbox/rehype-prism';
 
 import { resolveImage } from './resolve-image.js';
 import { collectLinks } from './collect-links.js';
@@ -10,12 +10,21 @@ import { saveImages } from './save-images.js';
 
 export default [
     rehypeRaw,
-    replaceTags,
+    // replaceTags,
     intoArticle,
     resolveImage,
     collectLinks,
+    [
+        prism,
+        {
+            ignoreMissing: true,
+            alias: {
+                lisp: ['common-lisp'],
+                jsx: ['astro'],
+            }
+        }
+    ],
     [rehypeAutolinkHeadings, { behavior: 'wrap' }],
-    // minify,
     saveImages,
 ]
 

@@ -4,18 +4,34 @@ import Backlinks from "@components/Backlinks.astro";
 const {frontmatter, ...props} = Astro.props;
 const { author = "", created = "", modified = "" } = frontmatter;
 ---
-<style lang="sass" is:global>
-article
-  position: relative
-.frontmatter
-  align-self: flex-end
-  & p
-    margin: unset
-    padding: unset
+<style is:global>
+article.main > p,
+article.main > header,
+article.main > footer,
+article.main > table,
+article.main > blockquote > p,
+article.main > section > p,
+article.main > section > header,
+article.main > section > footer,
+article.main > section > div.footnote-definition,
+article.main > section > table {
+    width: 55%;
+}
+
+article.main > dl,
+article.main > ol,
+article.main > ul,
+article.main > section > dl,
+article.main > section > ol,
+article.main > section > ul {
+    width: 50%;
+    -webkit-padding-start: 5%;
+}
 </style>
+<article class="main">
   {
     author || created || modified
-    ? <article class="frontmatter">
+    ? <header class="frontmatter">
       {
         author
           ? <p id="author">Written by {author}</p>
@@ -31,10 +47,9 @@ article
           ? <p id="updated">Last updated on {formatDate(modified)}</p>
           : ""
       }
-      </aside>
+      </header>
     : ""
   }
-<article class="main">
     <slot />
     <Backlinks url={frontmatter.slug} />
 </article>

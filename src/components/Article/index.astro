@@ -1,0 +1,92 @@
+---
+import Backlinks from "@components/Backlinks.astro";
+import { formatDate } from "@utils"
+
+import './style.css';
+import './prism.css';
+
+const {frontmatter, ...props} = Astro.props;
+const { author = "", created = "", modified = "" } = frontmatter;
+---
+<style>
+</style>
+<article class="main">
+  {
+    author || created || modified
+    ? <header class="frontmatter">
+      {
+        author
+          ? <p id="author">Written by {author}</p>
+          : ""
+      }
+      {
+        created
+          ? <p id="created">Created on {formatDate(created)}</p>
+          : ""
+      }
+      {
+        modified
+          ? <p id="updated">Last updated on {formatDate(modified)}</p>
+          : ""
+      }
+      </header>
+    : ""
+  }
+    <slot />
+    <Backlinks url={frontmatter.slug} />
+</article>
+<script lang="javascript">
+function Element(ele, attrs = {}, children = [], innerHTML = "") {
+    const element = document.createElement(ele);
+    element.innerHTML = innerHTML;
+    Object.keys(attrs).forEach(key => element.setAttribute(key, attrs[key]))
+    children.forEach(child => element.appendChild(child));
+    return element;
+}
+
+
+function inlineFootnote(fn) {
+  return Element("span", {class: "sidenote"}, [
+    Element("label", { // Footnote reference and toggle for displaying footnote on mobile view
+      class: "margin-toggle",
+      for: `fn-${fn.id}`,
+    }, [
+      fn.el.cloneNode(true) // Inner footnote link
+    ]),
+    Element("input", { // Toggle for displaying footnote on mobile view
+      class: "margin-toggle",
+      id: `fn-${fn.id}`,
+      type: "checkbox"
+    }),
+    Element("div", { // Footnote Definition Wrapper
+      id: `fn.${fn.id}`,
+      role: "doc-footnote",
+    }, [
+      Element("div", {class: "fndef-number"}, [], fn.id),
+      Element("p", {}, [], fn.def), // Footnote Definition text
+      Element("a", {href: `#${fn.fnRefId}`}) // Link back to footnote reference
+    ]),
+  ]);
+}
+
+const footnotes = {};
+Array.from(document.getElementsByClassName("footref")).forEach(fnr => {
+  const id = fnr.id.split(".")[1];
+  footnotes[id] = {
+    fnRefId: fnr.id,
+    id,
+    el: fnr.parentNode,
+    bounding: fnr.getBoundingClientRect(),
+  }
+});
+let fnSection;
+Array.from(document.getElementsByClassName("footnote-definition")).forEach(fn => {
+  footnotes[fn.firstChild.firstChild.id.split(".")[1]].def = fn.lastChild.innerHTML;
+  fnSection = fn.parentNode;
+});
+fnSection.remove()
+Object.values(footnotes).forEach(fn => {
+  const newEl = inlineFootnote(fn);
+  fn.el.replaceWith(newEl);
+})
+</script>

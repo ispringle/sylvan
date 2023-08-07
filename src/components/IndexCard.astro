@@ -3,11 +3,21 @@ import { getURL } from "@utils"
 import Date from "./Date.astro"
 import Tag from "./Tag.astro"
 const { card: {frontmatter} } = Astro.props
-const href = getURL(Astro.url.origin, frontmatter.slug);
+const href = frontmatter.link
 ---
-<style lang="sass">
-div.card
-  margin: 1rem
+<style>
+h4 { margin: unset; }
+.card {
+    break-inside: avoid;
+    margin: 1rem;
+}
+a {
+    color: unset;
+    text-decoration: unset;
+}
+.tags {
+font-size: 1rem;
+}
 </style>
 <div class="card">
     <a
@@ -16,15 +26,15 @@ div.card
     >
         <h4 class="card-title-heading">{frontmatter.title || frontmatter.slug}</h4>
     </a>
-    <span>{
+    <div>{
         frontmatter?.created
         ? <Date date={frontmatter.created} />
         : ""
-    }</span>
+    }
     { frontmatter.tags
         ? <div class="tags">{
             frontmatter.tags.map(tag => <Tag tag={tag} />)
           }</div>
         : ""
-    }
+    }</div>
 </div>

@@ -9,21 +9,25 @@ export async function getStaticPaths() {
   return Object.keys(allTags).map(tag => {
     return {
         params: { tag },
-        props: { tag, pages: allTags[tag] },
+        props: { tag, pages: allTags[tag].pages, color: allTags[tag].color },
     }
   })
 }
-
-const { pages, tag } = Astro.props;
+const { color: tagColor, pages, tag } = Astro.props;
 const ps = pages.map(page => JSON.parse(page))
 ---
+<style define:vars={{tagColor}}>
+.tag-list {
+column-width: 15rem;
+}
+</style>
 <Base pageTitle={`'${tag}' Tags`}>
     <article class="cards">
         <h2>All pages tagged with "{tag}"</h2><br>
-        {
+        <div class="tag-list">{
             ps.map((p) => (
             <IndexCard card={{frontmatter: p}}> </IndexCard>
         ))
-        }
+        }</div>
     </article>
 </Base>

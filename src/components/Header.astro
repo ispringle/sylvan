@@ -1,12 +1,11 @@
 ---
 import HeaderArt from "./HeaderArt.astro";
 import Navigation from "./Navigation.astro";
+const {class: className} = Astro.props;
 ---
-<style lang="sass">
-header
-  height: 4rem
-  margin: 1rem
+<style>
 </style>
-<header>
+<header class={className}>
+    <HeaderArt/>
     <Navigation />
 </header>

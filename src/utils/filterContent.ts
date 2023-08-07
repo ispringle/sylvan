@@ -1,26 +1,16 @@
-export default function filterContent(content, filterIndices = true) {
-  const devMode = import.meta.env.DEV;
-  return devMode
-    ? content
-      .filter((a) => !filterIndices || a.frontmatter.type != "index")
-      .sort(sortNewestToOldest)
-    : content
-      .filter((a) => !filterIndices || a.frontmatter.type != "index")
-      .filter((a) => a.frontmatter.draft === false || !a.frontmatter.draft)
-      .filter((a) => a.frontmatter.private === false || !a.frontmatter.private)
-      .sort(sortNewestToOldest);
-}
+const indexTypes = [
+  "index",
+  "root",
+  "all",
+  "news",
+]
 
-export function sortNewestToOldest(a, b) {
-  return (
-    new Date(b.frontmatter.created).valueOf() -
-    new Date(a.frontmatter.created).valueOf()
-  );
-}
+export const devFilterMaybe = page => import.meta.env.DEV
+  ? true
+  : (page.frontmatter?.draft ?? true) && (page.frontmatter?.private ?? true)
+export const filterIndices = (page) => !indexTypes.includes(page.frontmatter?.type)
+export const filterByDir = dirRE => page => page.file.split("/content/")[1].match(dirRE);
 
-export function sortOldestToNewest(a, b) {
-  return (
-    new Date(a.frontmatter.created).valueOf() -
-    new Date(b.frontmatter.created).valueOf()
-  );
-}
+export const sortNewestToOldest = (a, b) => new Date(b.frontmatter.created).valueOf() - new Date(a.frontmatter.created).valueOf()
+export const sortOldestToNewest = (a, b) => new Date(a.frontmatter.created).valueOf() - new Date(b.frontmatter.created).valueOf()
+export const sortAToZ = (a, b) => a.frontmatter.title.localeCompare(b.frontmatter.title);

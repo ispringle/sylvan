@@ -1,9 +1,25 @@
 ---
 import {slugify} from "@utils";
+import { tags } from "@lib/pages";
+
 const {tag} = Astro.props
+const {color: tagColor} = tags[tag];
+// span {
+// background-color: var(--tagColor);
+// border-radius: 25px;
+// margin: 0.2rem;
+// padding: 0 0.5rem;
+// break-inside: avoid;
+// }
 ---
-<style lang="sass">
+<style define:vars={{tagColor}}>
+a {
+color: unset;
+text-decoration: unset;
+}
 </style>
+<span>
 <a href={slugify("tags/"+tag, true)}>
    {tag}
 </a>
+</span>

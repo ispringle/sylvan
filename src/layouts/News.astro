@@ -1,0 +1,30 @@
+---
+import IndexCard from "@components/IndexCard.astro"
+import { allPages } from "@lib/pages";
+import {filterIndices, sortNewestToOldest } from "@utils/filterContent";
+
+const { page, ...props } = Astro.props;
+const { frontmatter, file } = page;
+
+const roll = (await allPages).filter(filterIndices);
+---
+<style lang="sass">
+h2
+  background-color: var(--bg)
+  padding: 1rem
+  width: fit-content
+.cards
+  display: flex
+  flex-direction: column
+</style>
+<article class="main index">
+  <slot />
+</article>
+<section>
+    <h2>{frontmatter?.roll_heading ? frontmatter.roll_heading : "Pages"}</h2>
+    <article class="cards">{
+        roll.map((card) => (
+        <IndexCard card={card}> </IndexCard>
+        ))
+    }</article>
+</section>

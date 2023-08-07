@@ -1,33 +1,28 @@
 ---
 import { Icon } from "astro-icon";
 ---
-<style lang="sass">
-footer
-  bottom: 0
-  left: 0
-  width: 100%
-.list
-  display: flex
-  flex-direction: column
-  align-items: flex-end
-  margin: 1rem
-[astro-icon]
-  display: inline
-  line-height: 1
-  height: 1.5em
-  width: 1.5em
-  &.astro
-    fill: var(--default-dark-orange)
-  &.heart
-    color: var(--default-dark-red)
-  &.emacs
-    color: var(--default-dark-purple)
-  &.org
-    color: var(--default-light-fuscia)
+<style>
+footer {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+.list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 1rem;
+}
+[astro-icon] {
+  display: inline;
+  line-height: 1;
+  height: 1.5em;
+  width: 1.5em;
+  fill: var(--fg)
+}
 </style>
 <footer>
   <div class="list">
-    <div>Made with love:</div>
     <div>
         <Icon name="mdi:cards-heart" class="heart" title="love" />
         <Icon name="simple-icons:gnuemacs" class="emacs" title="emacs" />

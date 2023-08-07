@@ -1,0 +1,55 @@
+---
+import IndexCard from "@components/IndexCard.astro"
+import { allPages } from "@lib/pages";
+
+import {filterIndices, sortNewestToOldest } from "@utils/filterContent";
+
+const { page, ...props } = Astro.props;
+const { frontmatter, file } = page;
+
+const roll = (await allPages).filter(filterIndices);
+
+function shuffle(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+  return array
+}
+
+---
+<style>
+section.indices {
+  padding-right: 12.5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+section.cards {
+  display: flex;
+  flex-direction: column;
+}
+</style>
+<article class="main index">
+  <slot />
+<section class="indices">
+    <section class="cards">
+      <h2>Recent Updates</h2>
+      {
+        roll.splice(0, 10).sort((a,b)=>sortNewestToOldest(a,b,"updated")).map((card) => (
+        <IndexCard card={card}> </IndexCard>
+        ))
+    }
+    <div><a href="/news">See all updates...</a></div>
+    </section >
+    <section class="cards">
+      <h2>Random Pages</h2>
+      {
+        shuffle(roll).splice(0,10).map((card) => (
+        <IndexCard card={card}> </IndexCard>
+        ))
+    }
+    <div><a href="/all">See all pages...</a></div>
+    </section >
+</section>
+</article>
