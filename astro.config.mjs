@@ -10,7 +10,7 @@ import mdx from '@astrojs/mdx'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://ian.ist',
+  site: 'https://drollery.org',
   expirimental: {
     assets: true,
   },
