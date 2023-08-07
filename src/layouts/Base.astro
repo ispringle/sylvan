@@ -6,7 +6,7 @@ import Footer from "../components/Footer.astro";
 
 import '../styles/style.css';
 
-const { pageTitle, siteTitle, ...props } = Astro.props;
+const { pageTitle, siteTitle = "Drollery", ...props } = Astro.props;
 const title = pageTitle ? pageTitle + " - " + siteTitle : siteTitle
 ---
 
