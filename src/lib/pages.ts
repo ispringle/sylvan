@@ -105,10 +105,6 @@ export const resolveId = (id: string) => {
 const backlinks = on(allPages, (posts) => {
   const backlinks: Record<string, Set<Page>> = {};
   for (const p of posts) {
-    if (p.frontmatter.hasOwnProperty('no_links')) {
-      continue;
-    }
-
     const links = p.frontmatter.links ?? [];
 
     for (let link of links) {

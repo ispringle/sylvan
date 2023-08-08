@@ -1,17 +1,17 @@
 ---
-import { getBacklinks } from '@lib/pages';
+import { backlinks, getBacklinks } from '@lib/pages';
 import Link from '@components/Link.astro';
 const { url } = Astro.props
-const backlinks = [...(await getBacklinks(url))];
+const xref = [...(await getBacklinks(url))];
 ---
-{ !!backlinks.length
+{ !!xref.length
     ? (
-    <section class="backlinks">
-        <h2>Backlinks</h2>
+    <section class="xref">
+        <h2>Xrefs</h2>
         <ul>
-        {backlinks.map((b) => (
+        {xref.map(x => (
             <li>
-            <Link href={b.frontmatter.slug}>{b.frontmatter.title}</Link>
+            <Link href={x.frontmatter.link}>{x.frontmatter.title}</Link>
             </li>
         ))}
         </ul>

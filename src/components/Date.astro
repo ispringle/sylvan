@@ -6,11 +6,11 @@ const {date: dateValue} = Astro.props
 const date = DateTime.fromISO(dateValue)
 const dateStr = date.toFormat("<yyyy-MM-dd EEE>")
 ---
-<style lang="sass">
-@use "../styles/globals"
-div
-  font-size: 0.75rem
-  color: var(--fg)
+<style>
+div {
+  font-size: 0.9rem;
+  color: var(--fg);
+}
 </style>
 <div class="date">
   <em>{dateStr}</em>

@@ -33,7 +33,7 @@ const { author = "", created = "", modified = "" } = frontmatter;
     : ""
   }
     <slot />
-    <Backlinks url={frontmatter.slug} />
+    <Backlinks url={frontmatter.link} />
 </article>
 <script lang="javascript">
 function Element(ele, attrs = {}, children = [], innerHTML = "") {
@@ -69,7 +69,7 @@ function inlineFootnote(fn) {
   ]);
 }
 
-const footnotes = {};
+var footnotes = {};
 Array.from(document.getElementsByClassName("footref")).forEach(fnr => {
   const id = fnr.id.split(".")[1];
   footnotes[id] = {
