@@ -9,7 +9,20 @@ import '../styles/style.css';
 const { pageTitle, siteTitle = "Drollery", ...props } = Astro.props;
 const title = pageTitle ? pageTitle + " - " + siteTitle : siteTitle
 ---
-
+<!DOCTYPE html>
+<html lang="en">
+  <Head title={title}/>
+  <body>
+    <Header class="main-header" />
+        <main>
+          <slot />
+        </main>
+    <Footer />
+    <script type="module">
+      import hotwiredTurbo from 'https://cdn.skypack.dev/@hotwired/turbo';
+    </script>
+  </body>
+</html>
 <style>
 :root, html {
   font-family: 'IM Fell English';
@@ -45,16 +58,3 @@ main, .main-header {
   }
 }
 </style
-<html lang="en">
-  <Head title={title}/>
-  <body>
-    <Header class="main-header" />
-        <main>
-          <slot />
-        </main>
-    <Footer />
-    <script type="module">
-      import hotwiredTurbo from 'https://cdn.skypack.dev/@hotwired/turbo';
-    </script>
-  </body>
-</html>
