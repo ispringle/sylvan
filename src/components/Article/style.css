@@ -2,6 +2,15 @@ article {
   margin: 5rem 0;
 }
 
+article::before,
+article::after {
+  content: "";
+  display: table;
+}
+article::after {
+  clear: both;
+}
+
 article.main > header > p {
   margin: unset;
 }

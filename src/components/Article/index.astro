@@ -8,8 +8,6 @@ import './prism.css';
 const {frontmatter, ...props} = Astro.props;
 const { author = "", created = "", modified = "" } = frontmatter;
 ---
-<style>
-</style>
 <article class="main">
   {
     author || created || modified
