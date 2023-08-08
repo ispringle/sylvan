@@ -36,57 +36,38 @@ const { author = "", created = "", modified = "" } = frontmatter;
     <Backlinks url={frontmatter.link} />
 </article>
 <script lang="javascript">
-function Element(ele, attrs = {}, children = [], innerHTML = "") {
-    const element = document.createElement(ele);
-    element.innerHTML = innerHTML;
-    Object.keys(attrs).forEach(key => element.setAttribute(key, attrs[key]))
-    children.forEach(child => element.appendChild(child));
-    return element;
+function html(tmpl) {
+  const el = document.createElement('template');
+  el.innerHTML = tmpl.trim();
+  return el.content.children;
 }
-
 
 function inlineFootnote(fn) {
-  return Element("span", {class: "sidenote"}, [
-    Element("label", { // Footnote reference and toggle for displaying footnote on mobile view
-      class: "margin-toggle",
-      for: `fn-${fn.id}`,
-    }, [
-      fn.el.cloneNode(true) // Inner footnote link
-    ]),
-    Element("input", { // Toggle for displaying footnote on mobile view
-      class: "margin-toggle",
-      id: `fn-${fn.id}`,
-      type: "checkbox"
-    }),
-    Element("div", { // Footnote Definition Wrapper
-      id: `fn.${fn.id}`,
-      role: "doc-footnote",
-    }, [
-      Element("div", {class: "fndef-number"}, [], fn.id),
-      Element("p", {}, [], fn.def), // Footnote Definition text
-      Element("a", {href: `#${fn.fnRefId}`}) // Link back to footnote reference
-    ]),
-  ]);
+  return html(`
+    <span class="sidenote">
+      <label class="margin-toggle" for="fn-${fn.id}">${fn.el.outerHTML}</label>
+      <input class="margin-toggle" id="fn-${fn.id}" type="checkbox">
+      <div id="fn.${fn.id}" role="doc-footnote">
+        <div class="fndef-number">${fn.id}</div>
+        <p>${fn.def}</p>
+        <a href="#${fn.fnRefId}"></a>
+      </div>
+    </span
+  `)[0]
 }
 
-var footnotes = {};
-Array.from(document.getElementsByClassName("footref")).forEach(fnr => {
-  const id = fnr.id.split(".")[1];
-  footnotes[id] = {
-    fnRefId: fnr.id,
-    id,
-    el: fnr.parentNode,
-    bounding: fnr.getBoundingClientRect(),
-  }
-});
-let fnSection;
-Array.from(document.getElementsByClassName("footnote-definition")).forEach(fn => {
-  footnotes[fn.firstChild.firstChild.id.split(".")[1]].def = fn.lastChild.innerHTML;
-  fnSection = fn.parentNode;
-});
-fnSection.remove()
-Object.values(footnotes).forEach(fn => {
-  const newEl = inlineFootnote(fn);
-  fn.el.replaceWith(newEl);
-})
+function liftFootnotes() {
+  var [fns, sect] = [{}];
+  Array.from(document.getElementsByClassName("footref")).forEach(({id: fnRefId, parentNode: el}) => {
+    fns[id = fnRefId.split(".")[1]] = {fnRefId, id, el}
+  });
+  Array.from(document.getElementsByClassName("footnote-definition")).forEach(({firstChild: f, lastChild: l, parentNode: p}) => {
+    fns[f.firstChild.id.split(".")[1]].def = l.innerHTML;
+    sect = p;
+  });
+  sect.remove()
+  Object.values(fns).forEach(fn => fn.el.replaceWith(inlineFootnote(fn)))
+}
+
+liftFootnotes()
 </script>
