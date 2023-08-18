@@ -6,7 +6,8 @@ import {filterIndices, sortNewestToOldest } from "@utils/filterContent";
 const { page, ...props } = Astro.props;
 const { frontmatter, file } = page;
 
-const roll = (await allPages).filter(filterIndices);
+const roll = (await allPages).filter(filterIndices).sort(sortNewestToOldest);
+console.log(roll)
 ---
 <style lang="sass">
 h2

@@ -7,8 +7,9 @@ import {filterIndices, sortNewestToOldest } from "@utils/filterContent";
 const { page, ...props } = Astro.props;
 const { frontmatter, file } = page;
 
+const rollLen = 10
 const roll = (await allPages).filter(filterIndices);
-
+const recent = roll.filter(filterIndices).sort(sortNewestToOldest).splice(0,rollLen);
 function shuffle(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -17,6 +18,7 @@ function shuffle(array) {
   return array
 }
 
+const random = shuffle(roll).splice(0,rollLen)
 ---
 <style>
 section.indices {
@@ -36,7 +38,7 @@ section.cards {
     <section class="cards">
       <h2>Recent Updates</h2>
       {
-        roll.splice(0, 10).sort((a,b)=>sortNewestToOldest(a,b,"updated")).map((card) => (
+        recent.map((card) => (
         <IndexCard card={card}> </IndexCard>
         ))
     }
@@ -45,7 +47,7 @@ section.cards {
     <section class="cards">
       <h2>Random Pages</h2>
       {
-        shuffle(roll).splice(0,10).map((card) => (
+        random.map((card) => (
         <IndexCard card={card}> </IndexCard>
         ))
     }

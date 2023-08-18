@@ -10,10 +10,11 @@ export type Page = {
     id?: string
     type?: string
     slug: string | undefined
-    link: string
+    Link: string
     canonicalUrl: string
     created?: string
     modified?: string
+    link: string
     links: string[]
     tags: string[]
     draft?: boolean
@@ -115,7 +116,7 @@ const backlinks = on(allPages, (posts) => {
 
       try {
         link = resolveId(link);
-      } catch {}
+      } catch { }
 
       backlinks[link] = backlinks[link] ?? new Set();
       backlinks[link].add(p);
