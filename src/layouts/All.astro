@@ -1,5 +1,5 @@
 ---
-import IndexCard from "@components/IndexCard.astro"
+import Rolladex from "@components/Rolladex.astro"
 import { allPages } from "@lib/pages";
 import {filterIndices, sortAToZ } from "@utils/filterContent";
 
@@ -8,23 +8,14 @@ const { frontmatter, file } = page;
 
 const roll = (await allPages).filter(filterIndices).sort(sortAToZ);
 ---
-<style lang="sass">
-h2
-  background-color: var(--bg)
-  padding: 1rem
-  width: fit-content
-.cards
-  display: flex
-  flex-direction: column
+<style>
+.cards {
+  display: flex;
+  flex-direction: column;
+ }
 </style>
 <article class="main index">
   <slot />
 </article>
-<section>
-    <h2>{frontmatter?.roll_heading ? frontmatter.roll_heading : "Pages"}</h2>
-    <article class="cards">{
-        roll.map((card) => (
-        <IndexCard card={card}> </IndexCard>
-        ))
-    }</article>
-</section>
+<Rolladex heading={frontmatter?.roll_heading ? frontmatter.roll_heading : "Pages"}
+          roll={roll} />

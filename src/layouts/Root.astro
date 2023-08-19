@@ -1,5 +1,6 @@
 ---
 import IndexCard from "@components/IndexCard.astro"
+import Rolladex from "@components/Rolladex.astro"
 import { allPages } from "@lib/pages";
 
 import {filterIndices, sortNewestToOldest } from "@utils/filterContent";
@@ -19,6 +20,8 @@ function shuffle(array) {
 }
 
 const random = shuffle(roll).splice(0,rollLen)
+
+
 ---
 <style>
 section.indices {
@@ -35,23 +38,11 @@ section.cards {
 <article class="main index">
   <slot />
 <section class="indices">
-    <section class="cards">
-      <h2>Recent Updates</h2>
-      {
-        recent.map((card) => (
-        <IndexCard card={card}> </IndexCard>
-        ))
-    }
+  <Rolladex heading="Recent Updates" roll={recent}>
     <div><a href="/news">See all updates...</a></div>
-    </section >
-    <section class="cards">
-      <h2>Random Pages</h2>
-      {
-        random.map((card) => (
-        <IndexCard card={card}> </IndexCard>
-        ))
-    }
+  </Rolladex>
+  <Rolladex heading="Random Pages" roll={random}>
     <div><a href="/all">See all pages...</a></div>
-    </section >
+  </Rolladex>
 </section>
 </article>

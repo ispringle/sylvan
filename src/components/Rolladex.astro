@@ -1,0 +1,19 @@
+---
+import IndexCard from "@components/IndexCard.astro"
+const {heading, roll} = Astro.props;
+---
+<style>
+.cards {
+  column-width: 15rem;
+  margin-bottom: 1rem;
+  }
+</style>
+<section>
+    <h2>{heading}</h2>
+    <div class="cards">{
+        roll.map((card) => (
+        <IndexCard card={card}> </IndexCard>
+        ))
+    }</div>
+    <slot/>
+</section>
