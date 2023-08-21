@@ -5,9 +5,13 @@ const indexTypes = [
   "news",
 ]
 
-export const devFilterMaybe = page => import.meta.env.DEV
-  ? true
-  : (page.frontmatter?.draft ?? true) && (page.frontmatter?.private ?? true)
+export const devFilterMaybe = page => {
+  const devMode = import.meta.env.DEV
+  if (devMode) return true;
+  if (page.frontmatter.private) return false;
+  if (page.frontmatter.draft) return false;
+  return true
+}
 export const filterIndices = (page) => !indexTypes.includes(page.frontmatter?.type)
 export const filterByDir = dirRE => page => page.file.split("/content/")[1].match(dirRE);
 

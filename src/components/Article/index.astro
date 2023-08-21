@@ -6,17 +6,12 @@ import './style.css';
 import './prism.css';
 
 const {frontmatter, ...props} = Astro.props;
-const { author = "", created = "", modified = "" } = frontmatter;
+const { created = "", modified = "" } = frontmatter;
 ---
 <article class="main">
   {
-    author || created || modified
+    created || modified
     ? <header class="frontmatter">
-      {
-        author
-          ? <p id="author">Written by {author}</p>
-          : ""
-      }
       {
         created
           ? <p id="created">Created on {formatDate(created)}</p>
