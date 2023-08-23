@@ -6,6 +6,15 @@ const { card: {frontmatter} } = Astro.props
 const href = frontmatter.link
 ---
 <style>
+*, *:hover {
+  cursor: var(--cursor-default-left),
+  var(--cursor-default-right),
+  var(--cursor-alt-left-up),
+  var(--cursor-alt-right-up),
+  var(--cursor-alt-left-down),
+  var(--cursor-alt-right-down),
+  auto !important;
+}
 .card {
     display: flex;
     flex-direction: row;

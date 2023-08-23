@@ -9,21 +9,24 @@ import {SITE_TITLE} from '../consts';
 const { pageTitle = "", ...props } = Astro.props;
 const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
 ---
-<style>
+<style is:global>
 @font-face {
   font-family: drop-cap;
   src: url(/fonts/drop-caps/floral.ttf);
   font-display: swap;
 }
 
-* {
-  cursor: url("/images/manicules/manicule-default-right.png") 113 46,
-    url("/images/manicules/manicule-default-left.png") 0 46,
-    url("/images/manicules/manicule-alt-left-up.png") 0 0,
-    url("/images/manicules/manicule-alt-right-up.png") 81 0,
-    url("/images/manicules/manicule-alt-left-down.png") 0 126,
-    url("/images/manicules/manicule-alt-right-down.png") 81 126, auto;
+*, *:hover {
+  cursor: var(--cursor-default-right),
+  var(--cursor-default-left),
+  var(--cursor-alt-left-up),
+  var(--cursor-alt-right-up),
+  var(--cursor-alt-left-down),
+  var(--cursor-alt-right-down),
+  auto;
 }
+</style>
+<style>
 :root {
   font-family: 'IM Fell English';
   margin: 0;
@@ -38,14 +41,23 @@ const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
   --accent: #903;
   --bg: var(--default-white);
   --fg: var(--default-black);
+  --cursor-default-right: url("/images/manicules/manicule-default-right.png") 113 46;
+  --cursor-default-left: url("/images/manicules/manicule-default-left.png") 0 46;
+  --cursor-alt-left-up: url("/images/manicules/manicule-alt-left-up.png") 0 0;
+  --cursor-alt-right-up: url("/images/manicules/manicule-alt-right-up.png") 81 0;
+  --cursor-alt-left-down: url("/images/manicules/manicule-alt-left-down.png") 0 126;
+  --cursor-alt-right-down: url("/images/manicules/manicule-alt-right-down.png") 81 126;
 }
+
 html {
   font-size: 15px;
 }
+
 html, body {
   height: 100%;
   width: 100%;
 }
+
 body {
   display: flex;
   flex-direction: column;
@@ -54,10 +66,15 @@ body {
   color: var(--fg);
   background-image : url(/images/background.png);
 }
+
 main, .main-header {
-  width: min(669px, 60vw);
   margin: auto;
 }
+
+main {
+  width: min(669px, 60vw);
+}
+
 main {
   flex: 1 0 auto;
 }
