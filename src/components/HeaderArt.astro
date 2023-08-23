@@ -1,5 +1,6 @@
 ---
 import knight from '../assets/knight-horse.png';
+import {Image} from "astro:assets";
 ---
 <style>
 .header-branding {
@@ -83,5 +84,5 @@ img {
     </span>
         <span class="sr-only">Drollery</span>
     </span>
-    <img decoding="async" loading="lazy" alt="Medieval drollery of a knight on a horse" src={knight.src}>
+    <Image alt="Medieval drollery of a knight on a horse" src={knight}/>
 </div>

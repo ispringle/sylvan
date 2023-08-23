@@ -1,6 +1,6 @@
 ---
-import { Picture } from '@astrojs/image/components';
-const { src, width, height } = Astro.props;
+import { Image } from 'astro:assets';
+const { src, width, height, alt } = Astro.props;
 const notSupported =
   typeof src === 'string' && (src.endsWith('.svg') || src.endsWith('.gif'));
 const isSupported = !notSupported;
@@ -15,14 +15,13 @@ img {
 </style>
 {
   typeof src !== 'string' ? (
-    <Picture
+    <Image
       widths={[320, 480, /* full-width */ 700, /* @2x */ 1400]}
+      alt={alt ?? ""}
       fit="contain"
       {...Astro.props}
     />
   ) : (
-    <picture>
       <img {...Astro.props} />
-    </picture>
   )
 }
