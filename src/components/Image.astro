@@ -7,7 +7,12 @@ const isSupported = !notSupported;
 const hasAspectRatio = width !== undefined && height !== undefined;
 // aspectRatio={`${width}:${height}`}
 ---
-
+<style>
+img {
+  aspect-ratio: 1/1;
+  width: 75%;
+}
+</style>
 {
   typeof src !== 'string' ? (
     <Picture

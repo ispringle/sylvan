@@ -27,6 +27,7 @@
     "hast-util-select": "^5.0.5",
     "hast-util-to-string": "^2.0.0",
     "katex": "^0.16.6",
+    "lightningcss": "^1.21.7",
     "luxon": "^3.3.0",
     "orgast-util-visit-ids": "^1.0.0",
     "refactor": "^0.0.3",
