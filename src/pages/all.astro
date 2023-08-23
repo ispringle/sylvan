@@ -1,0 +1,11 @@
+---
+import Base from "@layouts/Base.astro"
+import Rolladex from "@components/Rolladex.astro"
+import { allPages } from "@lib/pages";
+import {filterIndices, sortAToZ } from "@utils/filterContent";
+
+const roll = (await allPages).filter(filterIndices).sort(sortAToZ);
+---
+<Base pageTitle="All">
+  <Rolladex heading="All Pages" roll={roll} />
+</Base>

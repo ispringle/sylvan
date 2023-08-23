@@ -28,5 +28,10 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'auto',
     assets: 'assets'
-  }
+  },
+  vite: {
+    css: {
+      devSourcemap: true,
+    },
+  },
 })

@@ -3,17 +3,29 @@ import IndexCard from "@components/IndexCard.astro"
 const {heading, roll} = Astro.props;
 ---
 <style>
-.cards {
-  column-width: 15rem;
-  margin-bottom: 1rem;
-  }
+ ul {
+   padding-inline: unset;
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+ }
+ li {
+   list-style: none;
+   display: block;
+ }
+ li:hover::before {
+   aspect-ratio: 1/1;
+   content: url(/images/point-right-sm.png);
+   position: absolute;
+   margin-left: -100px;
+ }
 </style>
 <section>
     <h2>{heading}</h2>
-    <div class="cards">{
+    <ul class="cards">{
         roll.map((card) => (
-        <IndexCard card={card}> </IndexCard>
+      <li><IndexCard card={card}/></li>
         ))
-    }</div>
+    }</ul>
     <slot/>
 </section>

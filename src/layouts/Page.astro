@@ -1,24 +1,20 @@
 ---
-import Base from "@layouts/Base.astro";
-
-import All from "@layouts/All.astro";
-import Article from "@components/Article/index.astro";
+import Base from "@layouts/Base.astro"
+import Article from "@components/Article.astro";
 import Index from "@layouts/Index.astro";
-import News from "@layouts/News.astro";
 import Root from "@layouts/Root.astro";
 
 const { page, ...props } = Astro.props;
+
+const { title } = page.frontmatter?.title ?? "";
+
 const kind = page.frontmatter?.type || page.frontmatter?.kind || "";
 ---
-<Base pageTitle={page.frontmatter?.title || ""}>
+<Base pageTitle={title}>
   { () => {
     switch (page.frontmatter?.type || page.frontmatter?.kind || "post") {
       case "root":
         return <Root page={page}><slot /></Root >
-      case "all":
-        return <All page={page}><slot /></All>
-      case "news":
-        return <News page={page}><slot /></News >
       case "index":
         return <Index page={page}><slot /></Index>
       case "post":

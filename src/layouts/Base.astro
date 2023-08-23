@@ -4,27 +4,27 @@ import Head from "../components/Head.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
-import '../styles/style.css';
+import {SITE_TITLE} from '../consts';
 
-const { pageTitle, siteTitle = "Drollery", ...props } = Astro.props;
-const title = pageTitle ? pageTitle + " - " + siteTitle : siteTitle
+const { pageTitle = "", ...props } = Astro.props;
+const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
 ---
-<!DOCTYPE html>
-<html lang="en">
-  <Head title={title}/>
-  <body>
-    <Header class="main-header" />
-        <main>
-          <slot />
-        </main>
-    <Footer />
-    <script type="module">
-      import hotwiredTurbo from 'https://cdn.skypack.dev/@hotwired/turbo';
-    </script>
-  </body>
-</html>
 <style>
-:root, html {
+@font-face {
+  font-family: drop-cap;
+  src: url(/fonts/drop-caps/floral.ttf);
+  font-display: swap;
+}
+
+* {
+  cursor: url("/images/manicules/manicule-default-right.png") 113 46,
+    url("/images/manicules/manicule-default-left.png") 0 46,
+    url("/images/manicules/manicule-alt-left-up.png") 0 0,
+    url("/images/manicules/manicule-alt-right-up.png") 81 0,
+    url("/images/manicules/manicule-alt-left-down.png") 0 126,
+    url("/images/manicules/manicule-alt-right-down.png") 81 126, auto;
+}
+:root {
   font-family: 'IM Fell English';
   margin: 0;
   padding: 0;
@@ -32,29 +32,48 @@ const title = pageTitle ? pageTitle + " - " + siteTitle : siteTitle
   text-rendering: geometricPrecision;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --default-white: #fffff8;
+  --default-black: #111;
+  --default-blue: #b4d5fe;
+  --accent: #903;
+  --bg: var(--default-white);
+  --fg: var(--default-black);
+}
+html {
+  font-size: 15px;
+}
+html, body {
+  height: 100%;
+  width: 100%;
 }
 body {
+  display: flex;
+  flex-direction: column;
   font-size: 1.5rem;
   background-color: var(--bg);
   color: var(--fg);
   background-image : url(/images/background.png);
 }
 main, .main-header {
-  width: 87.5%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 12.5%;
-  max-width: 1400px;
+  width: min(669px, 60vw);
+  margin: auto;
 }
-@media (max-width: 760px) {
-  main, .main-header {
-    width: 84%;
-    padding-left: 8%;
-    padding-right: 8%;
-    margin-top: auto;
-  }
-  .main-header {
-    width: 100%;
-  }
+main {
+  flex: 1 0 auto;
 }
 </style>
+
+<!DOCTYPE html>
+<html lang="en">
+  <Head title={title}/>
+  <body>
+    <Header class="main-header" />
+        <main>
+          <slot/>
+        </main>
+    <Footer class="main-footer"/>
+    <script type="module">
+      import hotwiredTurbo from 'https://cdn.skypack.dev/@hotwired/turbo';
+    </script>
+  </body>
+</html>

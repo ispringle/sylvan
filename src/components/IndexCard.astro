@@ -6,35 +6,31 @@ const { card: {frontmatter} } = Astro.props
 const href = frontmatter.link
 ---
 <style>
-h4 { margin: unset; }
 .card {
-    break-inside: avoid;
-    margin: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
 }
-a {
-    color: unset;
-    text-decoration: unset;
+span {
+    flex: 1;
 }
 .tags {
 font-size: 1rem;
 }
 </style>
 <div class="card">
-    <a
-        class="nobracket nostyle"
-        href={href}
-    >
-        <h4 class="card-title-heading">{frontmatter.title || frontmatter.slug}</h4>
+    <Date date={frontmatter.created} />
+    <span>
+
+    <a href={href} >
+        {frontmatter.title || frontmatter.slug}
     </a>
-    <div>{
-        frontmatter?.created
-        ? <Date date={frontmatter.created} />
-        : ""
-    }
+    <div>
     { frontmatter.tags
         ? <div class="tags">{
             frontmatter.tags.map(tag => <Tag tag={tag} />)
           }</div>
         : ""
     }</div>
+    </span>
 </div>
