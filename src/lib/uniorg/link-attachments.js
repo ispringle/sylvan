@@ -1,7 +1,6 @@
 import { visit } from "unist-util-visit";
 
 export const linkAttachments = () => (tree, file) => {
-    visit(tree, "img", (node) => { console.log(node) })
     visit(tree, "link", (node) => {
         const isAttachment = node.linkType === "attachment";
         if (!isAttachment) { return }

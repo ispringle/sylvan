@@ -107,7 +107,6 @@ const backlinks = on(allPages, (posts) => {
   const backlinks: Record<string, Set<Page>> = {};
   for (const p of posts) {
     const links = p.frontmatter.links ?? [];
-
     for (let link of links) {
       if (Object.keys(p.ids).includes(link)) {
         // linking to self -> does not count
@@ -116,7 +115,7 @@ const backlinks = on(allPages, (posts) => {
 
       try {
         link = resolveId(link);
-      } catch { }
+      } catch {}
 
       backlinks[link] = backlinks[link] ?? new Set();
       backlinks[link].add(p);

@@ -23,5 +23,5 @@ export default {
         return h("p.verse", verses);
     },
     // superscript parsing is broken in uniorg atm
-    "footnote": (org) => { console.log(org) },
+    // "footnote": (org) => { console.log(org) },
 }
