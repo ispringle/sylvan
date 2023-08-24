@@ -1,29 +1,20 @@
 ---
 import { Image } from 'astro:assets';
-const { src, width, height, alt } = Astro.props;
-const notSupported =
-  typeof src === 'string' && (src.endsWith('.svg') || src.endsWith('.gif'));
-const isSupported = !notSupported;
-const hasAspectRatio = width !== undefined && height !== undefined;
-// aspectRatio={`${width}:${height}`}
+const { alt, src, width, height, float, margin } = Astro.props;
+console.log(Astro.props);
 ---
 <style>
 img {
-  aspect-ratio: 1/1;
-  margin-left: 1rem;
-  height: unset;
-  width: 75%;
+  object-fit: contain;
 }
 </style>
-{
-  typeof src !== 'string' ? (
-    <Image
-      widths={[320, 480, /* full-width */ 700, /* @2x */ 1400]}
-      alt={alt ?? ""}
-      fit="contain"
-      {...Astro.props}
-    />
-  ) : (
-      <img {...Astro.props} />
-  )
-}
+<Image
+  alt={alt ?? ""}
+  src={src}
+  style={`
+      float:${float};
+      height:${height??'unset'};
+      width:${width??'75%'};
+      margin:${margin??'0 0 0 1rem'};
+      ${!float ? "display:block;margin:0 auto;":""}`}
+/>
