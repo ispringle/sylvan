@@ -1,3 +1,8 @@
 ---
+import Backlinks from "@components/Backlinks.astro";
+const {frontmatter, ...props} = Astro.props;
 ---
-<article><slot/></article>
+<article>
+    <slot/>
+    <Backlinks url={frontmatter.link} />
+</article>
