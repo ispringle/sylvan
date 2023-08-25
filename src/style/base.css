@@ -44,7 +44,7 @@ html {
 
 *,
 *:hover {
-  cursor: var(--cursor-default-right), var(--cursor-default-left),
+  cursor: var(--cursor-default-left), var(--cursor-default-right),
     var(--cursor-alt-left-up), var(--cursor-alt-right-up),
     var(--cursor-alt-left-down), var(--cursor-alt-right-down), auto;
 }
