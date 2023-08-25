@@ -13,8 +13,6 @@ import {SITE_TITLE} from '../consts';
 const { pageTitle = "", ...props } = Astro.props;
 const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
 ---
-<style is:global>
-</style>
 <style>
 body {
   display: flex;

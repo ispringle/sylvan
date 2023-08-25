@@ -3,12 +3,6 @@
  * MIT License * github.com/louismerlin/concrete.css
  */
 
-@font-face {
-  font-family: drop-cap;
-  src: url(/fonts/drop-caps/floral.ttf);
-  font-display: swap;
-}
-
 :root {
   font-family: "IM Fell English";
   margin: 0;
