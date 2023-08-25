@@ -24,6 +24,7 @@ export default defineConfig({
   },
   integrations: [org(orgConfig), icon({
     include: {
+      "fa6-brands": ["*"],
       "simple-icons": ["*"]
     }
   }), sitemap()

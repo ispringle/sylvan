@@ -3,14 +3,24 @@ import { Icon } from "astro-icon/components";
 ---
 <style>
 footer {
-  bottom: 0;
-  left: 0;
-  width: 100%;
-}
-.list {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+}
+hr,
+.salutation {
+  max-width: 66.9rem;
+  width: 100%;
+  margin: auto;
+ }
+.salutation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ }
+.list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   margin: 1rem;
 }
 [astro-icon] {
@@ -20,9 +30,22 @@ footer {
   width: 1.5em;
   fill: var(--fg)
 }
+a {
+  text-decoration: none;
+ }
 </style>
 <footer>
+  <hr>
+  <div class="salutation">
+    <p><em>pax vobiscum</em></p>
+  </div>
   <div class="list">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="license">
+        <Icon name="fa6-brands:creative-commons" title="Creative Commons" />
+        <Icon name="fa6-brands:creative-commons-by" title="Attribute" />
+        <Icon name="fa6-brands:creative-commons-nc" title="Noncommercial" />
+        <Icon name="fa6-brands:creative-commons-sa" title="Share Alike"/>
+    </a>
     <div>
         <Icon name="simple-icons:gnuemacs" class="emacs" title="emacs" />
         <Icon name="simple-icons:org" class="org" title="org-mode" />
