@@ -78,9 +78,9 @@ input[type="submit"] {
   font-size: 2rem;
   font-weight: normal;
   margin-bottom: 1rem;
-  background: #fff;
-  color: #111;
-  border: 0.2rem solid #111;
+  background: var(--bg);
+  color: var(--fg);
+  border: 0.2rem solid var(--fg);
   border-radius: 0;
 }
 
@@ -93,8 +93,8 @@ button:disabled,
 input[type="button"]:disabled,
 input[type="reset"]:disabled,
 input[type="submit"]:disabled {
-  color: #fff;
-  background: #111;
+  color: var(--fg);
+  background: var(--bg);
   cursor: not-allowed;
 }
 
@@ -111,7 +111,7 @@ ul {
  */
 
 fieldset {
-  border: 0.2rem solid #111;
+  border: 0.2rem solid var(--fg);
 }
 
 /**
@@ -148,9 +148,9 @@ select {
   padding: 0.4rem 1rem;
   width: 100%;
   font-size: 2rem;
-  color: #111;
-  background-color: #fff;
-  border: 0.2rem solid #111;
+  color: var(--fg);
+  background-color: var(--bg);
+  border: 0.2rem solid var(--fg);
   border-radius: 0;
 }
 
@@ -163,7 +163,7 @@ textarea {
 
 input::placeholder,
 textarea::placeholder {
-  color: #111;
+  color: var(--fg);
   font-style: italic;
 }
 
@@ -188,12 +188,12 @@ th:last-child {
 }
 
 th {
-  border-bottom: 0.2rem solid #111;
+  border-bottom: 0.2rem solid var(--fg);
   text-align: left;
 }
 
 td {
-  border-bottom: 0.1rem solid #111;
+  border-bottom: 0.1rem solid var(--fg);
 }
 
 blockquote,
@@ -201,13 +201,12 @@ pre {
   margin-left: 0;
   margin-right: 0;
   padding: 1rem 1.6rem;
-  border-left: 0.2rem solid #111;
+  border-left: 0.2rem solid var(--fg);
   overflow-y: hidden;
 }
 
 pre {
-  border: 0.1rem dotted #111;
-  border-left: 0.2rem solid #111;
+  border-left: 0.2rem solid var(--fg);
 }
 
 pre > code {
@@ -224,24 +223,24 @@ progress {
   overflow: hidden;
   padding: 0;
   width: 100%;
-  background: #fff;
-  color: #111;
-  border: 0.2rem solid #111;
+  background: var(--bg);
+  color: var(--fg);
+  border: 0.2rem solid var(--fg);
   border-radius: 0;
 }
 
 progress::-webkit-progress-bar {
-  background-color: #fff;
+  background-color: var(--bg);
 }
 
 progress::-webkit-progress-value {
-  background-color: #111;
+  background-color: var(--fg);
 }
 
 progress::-moz-progress-bar {
-  background-color: #111;
+  background-color: var(--fg);
 }
 
 hr {
-  border: 0.1rem solid #111;
+  border: 0.1rem solid var(--fg);
 }
