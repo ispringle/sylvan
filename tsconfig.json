@@ -22,10 +22,10 @@
       "@content/*": ["src/content/*"],
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"],
-      "@styles/*": ["src/styles/*"],
+      "@style/*": ["src/style/*"],
       "@utils": ["src/utils/index.ts"],
       "@utils/*": ["src/utils/*"],
-       "@lib/*": ["src/lib/*"]
+      "@lib/*": ["src/lib/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js", "**/*.astro"],

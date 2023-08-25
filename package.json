@@ -12,6 +12,7 @@
   "dependencies": {
     "@astrojs/rss": "^2.3.2",
     "@astrojs/sitemap": "^1.2.2",
+    "@iconify-json/fa6-brands": "^1.1.13",
     "@iconify-json/simple-icons": "^1.1.67",
     "@mapbox/rehype-prism": "^0.8.0",
     "astro": "^2.3.1",
@@ -23,6 +24,7 @@
     "hast-util-select": "^5.0.5",
     "hastscript": "^8.0.0",
     "luxon": "^3.3.0",
+    "normalize.css": "^8.0.1",
     "orgast-util-visit-ids": "^1.0.0",
     "prettier": "^2.8.8",
     "prettier-plugin-astro": "^0.8.0",

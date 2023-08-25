@@ -10,16 +10,21 @@ import {Image} from "astro:assets";
 }
 .dropcap .actual,
 .dropcap .period {
-  font-size: 15rem;
+  font-size: 25.5rem;
 }
 
 .dropcap .actual {
   color: var(--accent);
   font-family: drop-cap;
+  vertical-align: sub;
+}
+
+.dropcap .period {
+  font-size: 25.5rem;
 }
 
 .dropcap .rest {
-  font-size: 10rem;
+  font-size: 15rem;
 }
 
 .sr-only {
@@ -34,8 +39,8 @@ import {Image} from "astro:assets";
 
 img {
     position: absolute;
-    top: -2.5rem;
-    left: 38rem;
+    top: -5rem;
+    left: 59rem;
     height: 15rem;
     width: unset;
 }
@@ -43,35 +48,35 @@ img {
 @media (max-width: 760px) {
     .dropcap .actual,
     .dropcap .period {
-        font-size: 9rem;
+        font-size: 13.5rem;
     }
 
     .dropcap .rest {
-        font-size: 6rem;
+        font-size: 9rem;
     }
 
     img {
-        position: absolute;
-        top: -2.5rem;
-        left: 22.7rem;
-        height: 10rem;
+        top: -4.5rem;
+        left: 34rem;
+        height: 15rem !important;
         width: unset !important;
     }
 }
 @media (max-width: 450px) {
     .dropcap .actual,
     .dropcap .period {
-        font-size: 6rem;
+        font-size: 9rem;
+        vertical-align: unset;
     }
 
     .dropcap .rest {
-        font-size: 4rem;
+        font-size: 6rem;
     }
 
     img {
-        top: -1.1rem;
-        left: 15.4rem;
-        height: 6rem;
+        top: -2rem;
+        left: 23rem;
+        height: 9rem !important;
         width: unset !important;
     }
 }

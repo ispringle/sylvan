@@ -5,28 +5,33 @@ const href = Astro.url.origin;
 ---
 <style>
 nav {
-  font-size: 2rem;
-  margin-top: -4rem;
+  font-size: 3rem;
+  margin-top: -8rem;
   font-size: 2rem;
 }
 a {
-    height: min-content;
-    padding: 0 1rem;
+  font-size: 3rem;
+  height: min-content;
+  padding: 0 2rem;
 }
 @media (max-width: 760px) {
-nav {
+  nav {
     margin-top: -2rem;
     font-size: 2rem;
-}
-a {
-    padding: 0 0.3rem;
-}
+  }
+  a {
+    padding: 0 0.5rem;
+  }
 }
 @media (max-width: 450px) {
-nav {
+  nav {
     margin-top: -1rem;
-    font-size: 1.5rem;
-}
+    font-size: 2.25rem;
+  }
+  a {
+    font-size: 2.25rem;
+    padding: 0 0.4rem;
+  }
 }
 </style>
 <nav>

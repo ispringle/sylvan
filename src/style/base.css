@@ -1,0 +1,247 @@
+/**
+ * This is based off concrete.css v2.0.3
+ * MIT License * github.com/louismerlin/concrete.css
+ */
+
+@font-face {
+  font-family: drop-cap;
+  src: url(/fonts/drop-caps/floral.ttf);
+  font-display: swap;
+}
+
+:root {
+  font-family: "IM Fell English";
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --default-white: #fffff8;
+  --default-black: #111;
+  --default-blue: #b4d5fe;
+  --accent: #903;
+  --bg: var(--default-white);
+  --fg: var(--default-black);
+  --cursor-default-right: url("/images/manicules/manicule-default-right.png")
+    113 46;
+  --cursor-default-left: url("/images/manicules/manicule-default-left.png") 0 46;
+  --cursor-alt-left-up: url("/images/manicules/manicule-alt-left-up.png") 0 0;
+  --cursor-alt-right-up: url("/images/manicules/manicule-alt-right-up.png") 81 0;
+  --cursor-alt-left-down: url("/images/manicules/manicule-alt-left-down.png") 0
+    126;
+  --cursor-alt-right-down: url("/images/manicules/manicule-alt-right-down.png")
+    81 126;
+}
+
+/**
+ * Set the base font-size to 62.5% so that 1.6rem = 16px.
+ */
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+*,
+*:hover {
+  cursor: var(--cursor-default-right), var(--cursor-default-left),
+    var(--cursor-alt-left-up), var(--cursor-alt-right-up),
+    var(--cursor-alt-left-down), var(--cursor-alt-right-down), auto;
+}
+*,
+::after,
+::before {
+  box-sizing: inherit;
+  text-decoration-thickness: 0.2rem;
+}
+
+a {
+  color: var(--fg);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+section {
+  padding: 4rem 0;
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0.4rem 1rem;
+  font-size: 2rem;
+  font-weight: normal;
+  margin-bottom: 1rem;
+  background: #fff;
+  color: #111;
+  border: 0.2rem solid #111;
+  border-radius: 0;
+}
+
+/**
+ * 1. Invert the colors of the disabled button.
+ * 2. Add the not-allowed cursor when hovering a disabled button.
+ */
+
+button:disabled,
+input[type="button"]:disabled,
+input[type="reset"]:disabled,
+input[type="submit"]:disabled {
+  color: #fff;
+  background: #111;
+  cursor: not-allowed;
+}
+
+/**
+ * Set the list bullet to square.
+ */
+
+ul {
+  list-style: square;
+}
+
+/**
+ * Set the border around a fieldset.
+ */
+
+fieldset {
+  border: 0.2rem solid #111;
+}
+
+/**
+ * 1. Modify the display of labels and legends.
+ * 2. Add a margin underneath.
+ */
+
+label,
+legend {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.8rem;
+}
+
+/**
+ * 1. Change the appearance of the text input.
+ * 2. Set the color and border of the text input.
+ */
+
+input[type="email"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="url"],
+textarea,
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  box-shadow: none;
+  box-sizing: inherit;
+  padding: 0.4rem 1rem;
+  width: 100%;
+  font-size: 2rem;
+  color: #111;
+  background-color: #fff;
+  border: 0.2rem solid #111;
+  border-radius: 0;
+}
+
+fieldset,
+input,
+select,
+textarea {
+  margin: 0 0 1.6rem 0;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #111;
+  font-style: italic;
+}
+
+table {
+  width: 100%;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0.8rem;
+}
+
+td:first-child,
+th:first-child {
+  padding-left: 0;
+}
+
+td:last-child,
+th:last-child {
+  padding-right: 0;
+}
+
+th {
+  border-bottom: 0.2rem solid #111;
+  text-align: left;
+}
+
+td {
+  border-bottom: 0.1rem solid #111;
+}
+
+blockquote,
+pre {
+  margin-left: 0;
+  margin-right: 0;
+  padding: 1rem 1.6rem;
+  border-left: 0.2rem solid #111;
+  overflow-y: hidden;
+}
+
+pre {
+  border: 0.1rem dotted #111;
+  border-left: 0.2rem solid #111;
+}
+
+pre > code {
+  white-space: pre;
+  display: block;
+  font-size: 1.6rem;
+}
+
+progress {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  height: 1rem;
+  overflow: hidden;
+  padding: 0;
+  width: 100%;
+  background: #fff;
+  color: #111;
+  border: 0.2rem solid #111;
+  border-radius: 0;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #fff;
+}
+
+progress::-webkit-progress-value {
+  background-color: #111;
+}
+
+progress::-moz-progress-bar {
+  background-color: #111;
+}
+
+hr {
+  border: 0.1rem solid #111;
+}

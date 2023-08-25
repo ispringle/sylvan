@@ -1,4 +1,7 @@
 ---
+import 'normalize.css';
+import '@style/base.css';
+
 import Background from "../components/Background.astro";
 import Head from "../components/Head.astro";
 import Header from "../components/Header.astro";
@@ -10,63 +13,19 @@ const { pageTitle = "", ...props } = Astro.props;
 const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
 ---
 <style is:global>
-@font-face {
-  font-family: drop-cap;
-  src: url(/fonts/drop-caps/floral.ttf);
-  font-display: swap;
-}
-
-*, *:hover {
-  cursor: var(--cursor-default-right),
-  var(--cursor-default-left),
-  var(--cursor-alt-left-up),
-  var(--cursor-alt-right-up),
-  var(--cursor-alt-left-down),
-  var(--cursor-alt-right-down),
-  auto;
-}
 </style>
 <style>
-:root {
-  font-family: 'IM Fell English';
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-  text-rendering: geometricPrecision;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  --default-white: #fffff8;
-  --default-black: #111;
-  --default-blue: #b4d5fe;
-  --accent: #903;
-  --bg: var(--default-white);
-  --fg: var(--default-black);
-  --cursor-default-right: url("/images/manicules/manicule-default-right.png") 113 46;
-  --cursor-default-left: url("/images/manicules/manicule-default-left.png") 0 46;
-  --cursor-alt-left-up: url("/images/manicules/manicule-alt-left-up.png") 0 0;
-  --cursor-alt-right-up: url("/images/manicules/manicule-alt-right-up.png") 81 0;
-  --cursor-alt-left-down: url("/images/manicules/manicule-alt-left-down.png") 0 126;
-  --cursor-alt-right-down: url("/images/manicules/manicule-alt-right-down.png") 81 126;
-}
-
-html {
-  font-size: 15px;
-}
-
-html, body {
-  height: 100vh;
-  width: 100vw;
-  padding: unset;
-  margin: unset;
-}
-
 body {
   display: flex;
   flex-direction: column;
-  font-size: 1.5rem;
   background-color: var(--bg);
   color: var(--fg);
   background-image : url(/images/background.png);
+  background-repeat: repeat;
+  font-size: 2rem;
+  font-weight: 400;
+  min-height: 100vh;
+  margin: unset
 }
 
 main, .main-header {
@@ -74,11 +33,11 @@ main, .main-header {
 }
 
 main {
-  width: min(669px, 60vw);
-}
-
-main {
+  max-width: 66.9rem;
+  padding: 0 1rem;
+  width: 100%;
   flex: 1 0 auto;
+  line-height: 2.5rem;
 }
 </style>
 

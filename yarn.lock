@@ -563,6 +563,13 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.18.20.tgz#786c5f41f043b07afb1af37683d7c33668858f6d"
   integrity sha512-kTdfRcSiDfQca/y9QIkng02avJ+NCaQvrMejlsB3RRv5sE9rRoeBPISaZpKxHELzRxZyLvNts1P27W3wV+8geQ==
 
+"@iconify-json/fa6-brands@^1.1.13":
+  version "1.1.13"
+  resolved "https://registry.yarnpkg.com/@iconify-json/fa6-brands/-/fa6-brands-1.1.13.tgz#2ef5ccd826402652ba128c0b864939abc3eaeebb"
+  integrity sha512-7toccM334NO1jIsfnqTK9Bo12CIuE4ClnfW9SyRFKFax7b/oKOsgnvokgCAtQgomiQ6ODjC1zWCpzSDidtBUXw==
+  dependencies:
+    "@iconify/types" "*"
+
 "@iconify-json/simple-icons@^1.1.67":
   version "1.1.67"
   resolved "https://registry.yarnpkg.com/@iconify-json/simple-icons/-/simple-icons-1.1.67.tgz#913e2aa74c9b8f81f001cbf80d90b2dcaff2e454"
@@ -4064,6 +4071,11 @@ normalize-url@^4.1.0:
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-4.5.1.tgz#0dd90cf1288ee1d1313b87081c9a5932ee48518a"
   integrity sha512-9UZCFRHQdNrfTpGg8+1INIg93B6zE0aXMVFkw1WFwvO4SlZywU6aLg5Of0Ap/PgcbSw4LNxvMWXMeugwMCX0AA==
+
+normalize.css@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-8.0.1.tgz#9b98a208738b9cc2634caacbc42d131c97487bf3"
+  integrity sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==
 
 not@^0.1.0:
   version "0.1.0"
