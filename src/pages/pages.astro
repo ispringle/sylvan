@@ -1,0 +1,12 @@
+---
+import Base from "@layouts/Base.astro"
+import Rolladex from "@components/Rolladex.astro"
+import { allPages } from "@lib/pages";
+import {filterByDir, filterIndices, sortAToZ } from "@utils/filterContent";
+
+const ROLL_DIR_REGEX = new RegExp(`^[^\/]*\.[(org)|(md)|(mdx)]$`);
+const roll = (await allPages).filter(filterIndices).filter(filterByDir(ROLL_DIR_REGEX)).sort(sortAToZ);
+---
+<Base pageTitle="Misc. Pages">
+  <Rolladex heading="Misc. Pages" roll={roll} />
+</Base>
