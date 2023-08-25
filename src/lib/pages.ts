@@ -139,7 +139,7 @@ const getTags = () => {
         color: `hsl(${Math.random() * 360} 100% ${(Math.random() * 75) + 25}%)`,
         pages: [
           ...(t[tag] ? t[tag].pages : []),
-          ...[JSON.stringify(p.frontmatter)]
+          ...[{ frontmatter: p.frontmatter }]
         ]
       })
     )

@@ -1,33 +1,25 @@
 ---
 import Base from "@layouts/Base.astro";
-import IndexCard from "@components/IndexCard.astro"
+import Rolladex from "@components/Rolladex.astro"
 
 import { tags } from "@lib/pages";
 
 export async function getStaticPaths() {
-  const allTags = tags;
-  return Object.keys(allTags).map(tag => {
-    return {
-        params: { tag },
-        props: { tag, pages: allTags[tag].pages, color: allTags[tag].color },
-    }
-  })
+    const allTags = tags;
+    return Object.keys(allTags).map(tag => {
+        return {
+            params: { tag },
+            props: { tag, pages: allTags[tag].pages },
+        }
+    })
 }
-const { color: tagColor, pages, tag } = Astro.props;
-const ps = pages.map(page => JSON.parse(page))
+const { pages, tag } = Astro.props;
+const title = `All pages tagged with “${tag}”`
 ---
-<style define:vars={{tagColor}}>
-.tag-list {
-column-width: 15rem;
-}
+<style>
 </style>
 <Base pageTitle={`'${tag}' Tags`}>
-    <article class="cards">
-        <h2>All pages tagged with "{tag}"</h2><br>
-        <div class="tag-list">{
-            ps.map((p) => (
-            <IndexCard card={{frontmatter: p}}> </IndexCard>
-        ))
-        }</div>
-    </article>
+  <article>
+    <Rolladex heading={title} roll={pages} />
+  </article>
 </Base>
