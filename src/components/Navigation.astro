@@ -4,6 +4,12 @@ import { getURL} from "@utils";
 const href = Astro.url.origin;
 ---
 <style>
+.flower2 {
+  font-family: 'flower2' !important;
+  font-variant: unset !important;
+  vertical-align: sub;
+  font-size: 3rem;
+ }
 nav {
   font-size: 3rem;
   margin-top: -6rem;
@@ -12,7 +18,7 @@ nav {
 a {
   font-size: 3rem;
   height: min-content;
-  padding: 0 2rem;
+  padding: 0 1rem;
 }
 @media (max-width: 760px) {
   nav {
@@ -32,11 +38,19 @@ a {
     font-size: 2.25rem;
     padding: 0 0.4rem;
   }
+  .flower2 {
+    display:none;
+  }
 }
 </style>
 <nav>
-    |<a class="nobracket" href={href}>Home</a>
-    |<a class="nobracket" href={getURL(href, "about")}>About</a>
-    |<a class="nobracket" href={getURL(href, "blog")}>Blog</a>
-    |<a class="nobracket" href={getURL(href, "grok")}>Grok</a>|
+    <span class='flower2'>K</span>
+    <a class="nobracket" href={href}>Home</a>
+    <span class='flower2'>L</span>
+    <a class="nobracket" href={getURL(href, "about")}>About</a>
+    <span class='flower2'>M</span>
+    <a class="nobracket" href={getURL(href, "blog")}>Blog</a>
+    <span class='flower2'>L</span>
+    <a class="nobracket" href={getURL(href, "grok")}>Grok</a>
+    <span class='flower2'>J</span>
 </nav>
