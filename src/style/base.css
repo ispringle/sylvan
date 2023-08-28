@@ -237,4 +237,16 @@ progress::-moz-progress-bar {
 
 hr {
   border: 0.1rem solid var(--fg);
+  background: ;
+  text-align: center;
+}
+hr::after {
+  content: "I";
+  font-family: "flower2";
+  display: inline-block;
+  position: relative;
+  top: -1rem;
+  padding: 0 10px;
+  color: var(--fg);
+  font-size: 18px;
 }
