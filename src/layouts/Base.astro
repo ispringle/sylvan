@@ -13,6 +13,21 @@ import {SITE_TITLE} from '../consts';
 const { pageTitle = "", ...props } = Astro.props;
 const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
 ---
+<!DOCTYPE html>
+<html lang="en">
+  <Head title={title}/>
+  <body>
+    <Header class="main-header" />
+        <main>
+          <slot/>
+        </main>
+    <Footer class="main-footer"/>
+    <script type="module">
+      import hotwiredTurbo from 'https://cdn.skypack.dev/@hotwired/turbo';
+    </script>
+  </body>
+</html>
+
 <style>
 body {
   display: flex;
@@ -39,18 +54,3 @@ main {
   line-height: 2.5rem;
 }
 </style>
-
-<!DOCTYPE html>
-<html lang="en">
-  <Head title={title}/>
-  <body>
-    <Header class="main-header" />
-        <main>
-          <slot/>
-        </main>
-    <Footer class="main-footer"/>
-    <script type="module">
-      import hotwiredTurbo from 'https://cdn.skypack.dev/@hotwired/turbo';
-    </script>
-  </body>
-</html>
