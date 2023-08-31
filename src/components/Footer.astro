@@ -1,11 +1,18 @@
 ---
 import { Icon } from "astro-icon/components";
+import Music from '@components/Music.astro'
 ---
 <style>
 footer {
   display: flex;
   flex-direction: column;
+   position: relative;
 }
+.topline {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+ }
 hr,
 .salutation {
   max-width: 66.9rem;
@@ -46,6 +53,7 @@ a {
  }
 </style>
 <footer>
+  <Music />
   <hr>
   <div class="salutation">
     <p>

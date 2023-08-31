@@ -1,0 +1,70 @@
+---
+const {class: className}=Astro.props;
+---
+<style>
+:host {
+  display: block;
+  margin: auto;
+  position: relative;
+  border: 0px solid #000;
+}
+
+.note1,
+.note2,
+.note3,
+.note4 {
+  position: absolute;
+  animation: notes 2s infinite linear;
+  font-size: inherit
+  opacity: 0;
+}
+
+.note1 {
+  top: 60px;
+  left: 0;
+  animation-delay: 0.5s;
+}
+
+.note2 {
+  top: 30px;
+  left: 30%;
+  animation-delay: 1s;
+}
+
+.note3 {
+  top: 90px;
+  left: 60%;
+  animation-delay: 1.5s;
+}
+
+.note4 {
+  top: 40px;
+  left: 90%;
+  animation-delay: 2s;
+}
+
+@keyframes notes {
+  0% {
+    transform: scale(1) translate(0, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5) translate(50%, -50%);
+  }
+  80% {
+    opacity: 0;
+    transform: scale(1.5) translate(100%, -100%);
+  }
+  100% {
+    transform: scale(1.5) translate(100%, -100%);
+    opacity: 0;
+  }
+}
+</style>
+<div class={className}>
+    <div class="note1">&#9835;&#9833;</div>
+    <div class="note2">&#9833;</div>
+    <div class="note3">&#9839;&#9834;</div>
+    <div class="note4">&#9834;</div>
+</div>

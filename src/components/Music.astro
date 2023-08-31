@@ -1,0 +1,108 @@
+---
+import band from '../assets/man-horse-band.png';
+import {Image} from "astro:assets";
+import Notes from '@components/MusicNotes.astro';
+---
+<style>
+ img {
+     width: 20rem;
+ }
+ .music {
+     position: absolute;
+     overflow:hidden;
+     bottom: 5rem;
+     right: 0;
+     background: unset;
+     border: unset;
+ }
+
+@media (max-width: 1050px) {
+    img {
+     width: 15rem;
+    }
+ .music {
+     position: initial;
+     overflow:hidden;
+     margin-left: auto;
+ }
+}
+@media (max-width: 760px) {
+    img {
+     width: 8rem;
+    }
+}
+@media (max-width: 450px) {
+    img {
+    }
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(3px, 2px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: translate(-3px, 1px) rotate(0deg); }
+  70% { transform: translate(3px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 2px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+.shake {
+    animation: shake 2s;
+    animation-iteration-count: infinite;
+ }
+.hide {
+    display: none;
+ }
+.fluteNotes,
+.lyreNotes {
+    position: absolute;
+    width: 5%;
+    font-size: 1rem;
+ }
+.fluteNotes {
+    right: 1rem;
+    top: 6rem;
+ }
+.lyreNotes {
+    left: 9rem;
+ }
+ #musicWrapper {
+     position: relative;
+     width: fit-content;
+ }
+</style>
+<script is:inline>
+ var song = new Audio('/audio/music/hips-dont-lie--stantough.opus');
+
+ var wrapper = undefined;
+ var notes = undefined;
+
+ const toggle = () => song.paused ? play() : pause();
+ function play() {
+     song.play();
+     wrapper = wrapper ? wrapper : document.getElementById("musicWrapper");
+     notes = notes ? notes : document.getElementById("notesWrapper");
+     wrapper.classList.add("shake");
+     notes.classList.remove("hide");
+ }
+ function pause() {
+     song.pause();
+     wrapper = wrapper ? wrapper : document.getElementById("musicWrapper");
+     notes = notes ? notes : document.getElementById("notesWrapper");
+     wrapper.classList.remove("shake");
+     notes.classList.add("hide");
+ }
+</script>
+<button onclick="toggle()" class="music">
+    <div id="musicWrapper">
+        <div id="notesWrapper" class="hide">
+            <Notes class="lyreNotes"/>
+            <Notes class="fluteNotes"/>
+        </div>
+        <Image alt="Medieval drollery of a man/horse playing a lyre and a horn" src={band} />
+    </div>
+</button>
