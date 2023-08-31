@@ -10,7 +10,7 @@ import Footer from "../components/Footer.astro";
 
 import {SITE_TITLE} from '../consts';
 
-const { pageTitle = "", ...props } = Astro.props;
+const { pageTitle, ...props } = Astro.props;
 const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
 ---
 <!DOCTYPE html>

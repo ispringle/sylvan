@@ -6,8 +6,7 @@ import Root from "@layouts/Root.astro";
 
 const { page, ...props } = Astro.props;
 
-const { title } = page.frontmatter?.title ?? "";
-
+const { title } = page.frontmatter;
 const kind = page.frontmatter?.type || page.frontmatter?.kind || "";
 ---
 <Base pageTitle={title}>
