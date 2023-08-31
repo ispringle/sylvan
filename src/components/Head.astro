@@ -2,13 +2,14 @@
 import { GoogleFontsOptimizer } from "astro-google-fonts-optimizer";
 import {SITE_TITLE, SITE_DESCRIPTION} from '../consts';
 const { title } = Astro.props
+const t = title === "Drollery" ? title : title.split("-")[0].trim()
 ---
 <head>
   <meta charset="utf-8" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width" />
   <meta name="generator" content={Astro.generator} />
-  <meta property="og:title" content={title}>
+  <meta property="og:title" content={t}>
   <meta property="og:type" content="website">
   <meta property="og:url" content={Astro.site}>
   <meta property="og:image" content=`${Astro.site}images/og-image-header.png`>
