@@ -11,6 +11,8 @@ if (url.protocol === 'id:') {
   } catch {
     broken = true;
   }
+} else if (url.protocol === "file:") {
+  link = url.pathname;
 }
 const external =
   url.protocol === 'http:' ||
