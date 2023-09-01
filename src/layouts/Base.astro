@@ -7,6 +7,7 @@ import Background from "../components/Background.astro";
 import Head from "../components/Head.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import ArticleBorder from "@components/ArticleBorder.astro";
 
 import {SITE_TITLE} from '../consts';
 
@@ -18,9 +19,12 @@ const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
   <Head title={title}/>
   <body>
     <Header class="main-header" />
-        <main>
-          <slot/>
-        </main>
+    <main>
+      <div id="borderArtWrapper" data-turbo-permanent>
+          <ArticleBorder class="borderArt"/>
+      </div>
+      <slot/>
+    </main>
     <Footer class="main-footer"/>
     <script type="module">
       import hotwiredTurbo from 'https://cdn.skypack.dev/@hotwired/turbo';
@@ -47,10 +51,16 @@ main, .main-header {
 }
 
 main {
+  position: relative;
   max-width: 66.9rem;
   padding: 0 1rem;
   width: 100%;
   flex: 1 0 auto;
   line-height: 2.5rem;
+}
+@media (max-width: 760px) {
+    .borderArt {
+        display: none;
+    }
 }
 </style>
