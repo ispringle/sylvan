@@ -36,7 +36,7 @@ import Notes from '@components/MusicNotes.astro';
     }
 }
 
-@keyframes shake {
+@keyframes shakeManHorse {
   0% { transform: translate(1px, 1px) rotate(0deg); }
   10% { transform: translate(-1px, -2px) rotate(-1deg); }
   20% { transform: translate(-3px, 0px) rotate(1deg); }
@@ -50,12 +50,12 @@ import Notes from '@components/MusicNotes.astro';
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
-.shake {
-    animation: shake 2s;
+.shakeManHorse {
+    animation: shakeManHorse 2s;
     animation-iteration-count: infinite;
  }
-.hide {
-    display: none;
+.hideNotes {
+    visibility: hidden;
  }
 .fluteNotes,
 .lyreNotes {
@@ -86,20 +86,20 @@ import Notes from '@components/MusicNotes.astro';
      song.play();
      wrapper = wrapper ? wrapper : document.getElementById("musicWrapper");
      notes = notes ? notes : document.getElementById("notesWrapper");
-     wrapper.classList.add("shake");
-     notes.classList.remove("hide");
+     wrapper.classList.add("shakeManHorse");
+     notes.classList.remove("hideNotes");
  }
  function pause() {
      song.pause();
      wrapper = wrapper ? wrapper : document.getElementById("musicWrapper");
      notes = notes ? notes : document.getElementById("notesWrapper");
-     wrapper.classList.remove("shake");
-     notes.classList.add("hide");
+     wrapper.classList.remove("shakeManHorse");
+     notes.classList.add("hideNotes");
  }
 </script>
 <button onclick="toggle()" class="music">
     <div id="musicWrapper">
-        <div id="notesWrapper" class="hide">
+        <div id="notesWrapper" class="hideNotes">
             <Notes class="lyreNotes"/>
             <Notes class="fluteNotes"/>
         </div>

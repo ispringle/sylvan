@@ -20,7 +20,7 @@ const {class: classList} = Astro.props;
      top: 9.1rem;
      left: -17.5rem;
  }
-@keyframes shake {
+@keyframes shakeMan {
   0% { transform: scaleX(-1) scale(0.7) translate(1px, 1px) rotate(0deg); }
   10% { transform: scaleX(-1) scale(0.7) translate(-1px, -2px) rotate(-1deg); }
   20% { transform: scaleX(-1) scale(0.7) translate(-3px, 0px) rotate(1deg); }
@@ -34,8 +34,8 @@ const {class: classList} = Astro.props;
   100% { transform: scaleX(-1) scale(0.7) translate(1px, -2px) rotate(-1deg); }
 }
 
-.shake {
-    animation: shake 2s;
+.shakeMan {
+    animation: shakeMan 2s;
  }
 
 @keyframes fall {
@@ -43,7 +43,7 @@ const {class: classList} = Astro.props;
   50% { transform: scaleX(-1) scale(0.7) rotate(90deg); top: 100vh; }
   100% { transform: scaleX(-1) scale(0.7) rotate(90deg); top: 500vh; }
 }
-.fall {
+.fallMan {
     animation: fall 5s;
  }
 
@@ -59,7 +59,7 @@ var screamSound = new Audio('/audio/effects/scream.m4a')
 function animateManShakeHandler() {
      man.removeEventListener("animationend", animateManShakeHandler, false);
      shakeCount += 1;
-     man.classList.remove("shake");
+     man.classList.remove("shakeMan");
 }
 
 function animateManFallHandler() {
@@ -70,11 +70,11 @@ function animateManFallHandler() {
 function animateMan() {
      man = man ?? document.getElementById("borderMan");
      if (shakeCount === 3) {
-        man.classList.add("fall");
+        man.classList.add("fallMan");
         screamSound.play();
         man.addEventListener("animationend", animateManFallHandler, false);
      } else {
-        man.classList.add("shake");
+        man.classList.add("shakeMan");
         noSound.play();
         man.addEventListener("animationend", animateManShakeHandler, false);
      }
