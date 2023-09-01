@@ -11,7 +11,7 @@ import Notes from '@components/MusicNotes.astro';
      position: absolute;
      overflow:hidden;
      bottom: 5rem;
-     right: 0;
+     right: 3rem;
      background: unset;
      border: unset;
  }
@@ -76,7 +76,30 @@ import Notes from '@components/MusicNotes.astro';
  }
 </style>
 <script is:inline>
- var song = new Audio('/audio/music/hips-dont-lie--stantough.opus');
+ const shuffle = a => a.map(v => ({v, sort: Math.random()})).sort((a,b)=>a.sort-b.sort).map(({v})=>v);
+ var songList = [
+     "hips-dont-lie--stantough",
+     "smooth-criminal--stantough",
+     "barbie-girl--stantough",
+     "i-want-it-that-way--stantough",
+     "blue-da-ba-dee--cornelius-link",
+     "seven-nation-army--stantought",
+ ];
+
+ var songOrder = songOrder ?? shuffle(songList).map(song => `/audio/music/${song}.opus`);
+ var song = new Audio(songOrder[0]);
+ var nextSong = new Audio(songOrder[1]);
+ var songIndex = 2
+
+ song.addEventListener("ended", function() {
+     song = nextSong;
+     song.play();
+     if (songIndex === songOrder.length) {
+         songIndex = 0;
+     }
+     nextSong = songOrder[songIndex];
+     songIndex += 1;
+ })
 
  var wrapper = undefined;
  var notes = undefined;
