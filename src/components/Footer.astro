@@ -1,6 +1,6 @@
 ---
-import { Icon } from "astro-icon/components";
 import Music from '@components/Music.astro'
+import FooterBottomBar from '@components/FooterBottomBar.astro'
 ---
 <style>
 footer {
@@ -62,17 +62,5 @@ a {
       <span class='flower2'>a</span>
     </p>
   </div>
-  <div class="list">
-    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="license">
-        <Icon name="fa6-brands:creative-commons" title="Creative Commons" />
-        <Icon name="fa6-brands:creative-commons-by" title="Attribute" />
-        <Icon name="fa6-brands:creative-commons-nc" title="Noncommercial" />
-        <Icon name="fa6-brands:creative-commons-sa" title="Share Alike"/>
-    </a>
-    <div>
-        <Icon name="simple-icons:gnuemacs" class="emacs" title="emacs" />
-        <Icon name="simple-icons:org" class="org" title="org-mode" />
-        <Icon name="simple-icons:astro" class="astro" title="Astro.build"/>
-    </div>
-  </div>
+  <FooterBottomBar/>
 </footer>

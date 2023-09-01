@@ -1,0 +1,103 @@
+---
+import { Icon } from "astro-icon/components";
+---
+<style>
+.bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+[astro-icon] {
+    display: inline;
+    line-height: 1;
+    height: 1.5em;
+    width: 1.5em;
+    fill: var(--fg)
+}
+a {
+    text-decoration: none;
+ }
+.list {
+    display: flex;
+    cursor: var(--cursor-default-left);
+    flex-direction: row;
+    position: relative;
+    gap: 1rem;
+ }
+heading:focus {
+    outline: unset;
+ }
+.entry {
+    display: flex;
+    align-items: flex-end;
+ }
+.content {
+    display: flex;
+    position: absolute;
+    opacity: 0;
+    visibility: hidden;
+}
+.content.left {
+    align-items: flex-end;
+    justify-content: flex-start;
+    width: 16rem;
+    right: -18rem;
+ }
+.content.right {
+    align-items: flex-end;
+    justify-content: flex-end;
+    left: -18rem;
+    width: 16rem;
+ }
+.content > p {
+    margin: unset;
+    margin-inline: unset;
+    margin-block: unset;
+    padding: unset;
+ }
+ .heading:focus + .content,
+ .heading:hover + .content {
+    animation: footBarOpeningAnimation 2s ease-in-out forwards;
+ }
+
+ @keyframes footBarOpeningAnimation {
+     0% { visibility: initial; opacity: 0; }
+     100% { visibility: initial; opacity: 100; }
+ }
+</style>
+<div class="bar">
+    <div class="list">
+        <span class="entry">
+            <Icon class="heading" name="simple-icons:gnuemacs" title="emacs" />
+            <div class="content left"><p>Emacs</p></div>
+        </span>
+        <span class="entry">
+            <Icon class="heading" name="simple-icons:org" title="org-mode" />
+            <div class="content left"><p>Orgmode</p></div>
+        </span>
+        <span class="entry">
+            <Icon class="heading" name="simple-icons:astro" title="Astro.build"/>
+            <div class="content left"><p>AstroJS</p></div>
+        </span>
+    </div>
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="license list">
+        <span class="entry">
+            <Icon class="heading" name="fa6-brands:creative-commons" title="Creative Commons" />
+            <div class="content right"><p>Creative Commons</p></div>
+        </span>
+        <span class="entry">
+            <Icon class="heading" name="fa6-brands:creative-commons-by" title="Attribute" />
+            <div class="content right"><p>Attribute</p></div>
+        </span>
+        <span class="entry">
+            <Icon class="heading" name="fa6-brands:creative-commons-nc" title="Noncommercial">Test</Icon>
+            <div class="content right"><p>Noncommercial</p></div>
+        </span>
+        <span class="entry">
+            <Icon class="heading" name="fa6-brands:creative-commons-sa" title="Share Alike"/>
+            <div class="content right"><p>Share Alike</p></div>
+        </span>
+    </a>
+</div>
