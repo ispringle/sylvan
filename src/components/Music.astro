@@ -78,12 +78,12 @@ import Notes from '@components/MusicNotes.astro';
 <script is:inline>
  const shuffle = a => a.map(v => ({v, sort: Math.random()})).sort((a,b)=>a.sort-b.sort).map(({v})=>v);
  var songList = [
-     "hips-dont-lie--stantough",
-     "smooth-criminal--stantough",
      "barbie-girl--stantough",
-     "i-want-it-that-way--stantough",
      "blue-da-ba-dee--cornelius-link",
-     "seven-nation-army--stantought",
+     "hips-dont-lie--stantough",
+     "i-want-it-that-way--stantough",
+     "seven-nation-army--stantough",
+     "smooth-criminal--stantough",
  ];
 
  var songOrder = songOrder ?? shuffle(songList).map(song => `/audio/music/${song}.opus`);
