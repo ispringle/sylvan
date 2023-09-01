@@ -1,8 +1,22 @@
 ---
 import Backlinks from "@components/Backlinks.astro";
+import ArticleBorder from "@components/ArticleBorder.astro";
 const {frontmatter, ...props} = Astro.props;
 ---
+<style>
+ article {
+     position: relative;
+ }
+@media (max-width: 760px) {
+    .borderArt {
+        display: none;
+    }
+}
+</style>
 <article>
+    <div id="borderArtWrapper" data-turbo-permanent>
+        <ArticleBorder class="borderArt"/>
+    </div>
     <slot/>
     <Backlinks url={frontmatter.link} />
 </article>

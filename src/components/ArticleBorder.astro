@@ -1,0 +1,90 @@
+---
+import border from '../assets/border-vines-no-man.png';
+import borderMan from '../assets/border-man-no-vines.png';
+import man from '../assets/man-no-vines.png';
+import {Image} from "astro:assets";
+
+const {class: classList} = Astro.props;
+---
+<style>
+ img {
+     position: absolute;
+ }
+ .border {
+     transform: scaleX(-1);
+     top: -10rem;
+     left: -24rem;
+ }
+ .man {
+     transform: scaleX(-1) scale(0.7);
+     top: 9.1rem;
+     left: -17.5rem;
+ }
+ .fallWrapper {
+ }
+@keyframes shake {
+  0% { transform: scaleX(-1) scale(0.7) translate(1px, 1px) rotate(0deg); }
+  10% { transform: scaleX(-1) scale(0.7) translate(-1px, -2px) rotate(-1deg); }
+  20% { transform: scaleX(-1) scale(0.7) translate(-3px, 0px) rotate(1deg); }
+  30% { transform: scaleX(-1) scale(0.7) translate(3px, 2px) rotate(0deg); }
+  40% { transform: scaleX(-1) scale(0.7) translate(1px, -1px) rotate(1deg); }
+  50% { transform: scaleX(-1) scale(0.7) translate(-1px, 2px) rotate(-1deg); }
+  60% { transform: scaleX(-1) scale(0.7) translate(-3px, 1px) rotate(0deg); }
+  70% { transform: scaleX(-1) scale(0.7) translate(3px, 1px) rotate(-1deg); }
+  80% { transform: scaleX(-1) scale(0.7) translate(-1px, -1px) rotate(1deg); }
+  90% { transform: scaleX(-1) scale(0.7) translate(1px, 2px) rotate(0deg); }
+  100% { transform: scaleX(-1) scale(0.7) translate(1px, -2px) rotate(-1deg); }
+}
+
+.shake {
+    animation: shake 2s;
+ }
+
+@keyframes fall {
+  0% { transform: scaleX(-1) scale(0.7) rotate(10deg); }
+  50% { transform: scaleX(-1) scale(0.7) rotate(90deg); top: 100vh; }
+  100% { transform: scaleX(-1) scale(0.7) rotate(90deg); top: 500vh; }
+}
+.fall {
+    animation: fall 5s;
+ }
+
+ .hide { display: none; }
+</style>
+<script is:inline>
+var man;
+var shakeCount = 0;
+
+var noSound = new Audio('/audio/effects/no.m4a')
+var screamSound = new Audio('/audio/effects/scream.m4a')
+
+function animateManShakeHandler() {
+     man.removeEventListener("animationend", animateManShakeHandler, false);
+     shakeCount += 1;
+     man.classList.remove("shake");
+}
+
+function animateManFallHandler() {
+     man.removeEventListener("animationend", animateManFallHandler, false);
+     man.classList.add("hide");
+}
+
+function animateMan() {
+     man = man ?? document.getElementById("borderMan");
+     if (shakeCount === 3) {
+        man.classList.add("fall");
+        screamSound.play();
+        man.addEventListener("animationend", animateManFallHandler, false);
+     } else {
+        man.classList.add("shake");
+        noSound.play();
+        man.addEventListener("animationend", animateManShakeHandler, false);
+     }
+ }
+</script>
+<div id="articleBorder" class={classList}>
+    <Image class="border" src={border} alt="flowery border with man falling"/>
+    <div class="fallWrapper">
+        <Image id="borderMan" class="man" onclick="animateMan()" src={man} alt="flowery border with man falling"/>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-const { alt, src, width, height, float, margin } = Astro.props;
+const { alt, src, width, height, float, margin, ...props} = Astro.props;
 ---
 <style>
 img {
@@ -10,6 +10,7 @@ img {
 <Image
   alt={alt ?? ""}
   src={src}
+  {props}
   style={`
       float:${float};
       height:${height??'unset'};
