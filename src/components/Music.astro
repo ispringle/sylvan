@@ -1,38 +1,58 @@
 ---
-import band from '../assets/man-horse-band.png';
 import {Image} from "astro:assets";
+import band from '../assets/man-horse-band.png';
+import archer from '../assets/archer-no-arrow.png';
+import arrowComplete from '../assets/no-archer-full-arrow.png';
 import Notes from '@components/MusicNotes.astro';
 ---
 <style>
- img {
-     width: 20rem;
- }
- .music {
+ img { max-width: unset !important; }
+ button.skip, button.playPause {
      position: absolute;
-     overflow:hidden;
-     bottom: 5rem;
-     right: 3rem;
      background: unset;
      border: unset;
+     bottom: -8rem;
+ }
+ .archer, .arrow {
+     width: 10rem;
+ }
+ .archer {
+     transform: scaleX(-1.0)
+ }
+ .arrow {
+     z-index: -1;
+     position: absolute;
+     transform: scaleX(-1.0) scale(0.75) rotate(25deg);
+     left: 3rem;
+     top: 3rem;
+ }
+ .manHorse {
+     width: 20rem;
+ }
+ .skip {
+     left: 3rem;
+ }
+ .playPause {
+     right: 8rem;
  }
 
 @media (max-width: 1050px) {
-    img {
+    .manHorse {
      width: 15rem;
     }
- .music {
+ .playPause {
      position: initial;
      overflow:hidden;
      margin-left: auto;
  }
 }
 @media (max-width: 760px) {
-    img {
+    .manHorse {
      width: 8rem;
     }
 }
 @media (max-width: 450px) {
-    img {
+    .manHorse {
     }
 }
 
@@ -54,6 +74,35 @@ import Notes from '@components/MusicNotes.astro';
     animation: shakeManHorse 2s;
     animation-iteration-count: infinite;
  }
+
+@keyframes shootArrow {
+  0% {
+     transform: scaleX(-1.0) scale(0.75) rotate(25deg);
+     left: 3rem;
+     top: 3rem;
+  }
+  37% {
+      transform: scaleX(-1.0) scale(0.75) rotate(17deg);
+      left: 51rem;
+      top: -21rem
+  }
+  75% {
+      transform: scaleX(-1.0) scale(0.75) rotate(-66deg);
+      left: 109rem;
+      top: -10rem
+  }
+  100% {
+      transform: scaleX(-1.0) scale(0.75) rotate(-66deg);
+      left: 109rem;
+      top: -10rem
+  }
+}
+
+.shootArrow {
+    animation: linear shootArrow 2s forwards;
+ }
+
+
 .hideNotes {
     visibility: hidden;
  }
@@ -70,9 +119,15 @@ import Notes from '@components/MusicNotes.astro';
 .lyreNotes {
     left: 9rem;
  }
- #musicWrapper {
+ #musicWrapper, #skipWrapper {
      position: relative;
      width: fit-content;
+ }
+
+ #musicPlayer {
+     position: relative;
+     height: 0;
+     width: 100%;
  }
 </style>
 <script is:inline>
@@ -90,42 +145,66 @@ import Notes from '@components/MusicNotes.astro';
  var song = new Audio(songOrder[0]);
  var nextSong = new Audio(songOrder[1]);
  var songIndex = 2
-
- song.addEventListener("ended", function() {
-     song = nextSong;
-     song.play();
-     if (songIndex === songOrder.length) {
-         songIndex = 0;
-     }
-     nextSong = songOrder[songIndex];
-     songIndex += 1;
- })
-
- var wrapper = undefined;
+ var musicWrapper = undefined;
+ var arrow = undefined;
  var notes = undefined;
+
+ song.addEventListener("ended", next);
 
  const toggle = () => song.paused ? play() : pause();
  function play() {
      song.play();
-     wrapper = wrapper ? wrapper : document.getElementById("musicWrapper");
+     musicWrapper = musicWrapper ? musicWrapper : document.getElementById("musicWrapper");
      notes = notes ? notes : document.getElementById("notesWrapper");
-     wrapper.classList.add("shakeManHorse");
+     musicWrapper.classList.add("shakeManHorse");
      notes.classList.remove("hideNotes");
  }
  function pause() {
      song.pause();
-     wrapper = wrapper ? wrapper : document.getElementById("musicWrapper");
+     musicWrapper = musicWrapper ? musicWrapper : document.getElementById("musicWrapper");
      notes = notes ? notes : document.getElementById("notesWrapper");
-     wrapper.classList.remove("shakeManHorse");
+     musicWrapper.classList.remove("shakeManHorse");
      notes.classList.add("hideNotes");
  }
+ function next() {
+     song = nextSong;
+     play()
+     if (songIndex === songOrder.length) {
+         songIndex = 0;
+     }
+     nextSong = new Audio(songOrder[songIndex]);
+     songIndex += 1;
+ }
+ function skip() {
+     pause();
+     arrow = arrow ? arrow : document.getElementById("musicArrow");
+     arrow.classList.add("shootArrow");
+     const sound = new Audio("/audio/effects/ohno.m4a");
+     sound.play();
+     arrow.addEventListener("animationend", arrowShootHandler, false);
+ }
+function arrowShootHandler() {
+     arrow.removeEventListener("animationend", arrowShootHandler, false);
+     arrow.classList.remove("shootArrow");
+     const sound = new Audio("/audio/effects/heythathurt.m4a");
+     sound.play();
+     next()
+}
 </script>
-<button onclick="toggle()" class="music">
-    <div id="musicWrapper">
-        <div id="notesWrapper" class="hideNotes">
-            <Notes class="lyreNotes"/>
-            <Notes class="fluteNotes"/>
+<div id="musicPlayer">
+    <button onclick="skip()" class="skip">
+        <div id="skipWrapper">
+            <Image class="archer" alt="Medieval drollery of a man/snail/bat/monkey shooting an arrow" src={archer} />
+            <Image id="musicArrow" class="arrow complete" alt="Arrow for archer" src={arrowComplete} />
         </div>
-        <Image alt="Medieval drollery of a man/horse playing a lyre and a horn" src={band} />
-    </div>
-</button>
+    </button>
+    <button onclick="toggle()" class="playPause">
+        <div id="musicWrapper">
+            <div id="notesWrapper" class="hideNotes">
+                <Notes class="lyreNotes"/>
+                <Notes class="fluteNotes"/>
+            </div>
+            <Image class="manHorse" alt="Medieval drollery of a man/horse playing a lyre and a horn" src={band} />
+        </div>
+    </button>
+</div>
