@@ -30,10 +30,10 @@ import Notes from '@components/MusicNotes.astro';
      width: 20rem;
  }
  .skip {
-     left: 3rem;
+     left: -20rem;
  }
  .playPause {
-     right: 8rem;
+     right: -24rem;
  }
 
 @media (max-width: 1050px) {
@@ -77,24 +77,24 @@ import Notes from '@components/MusicNotes.astro';
 
 @keyframes shootArrow {
   0% {
-     transform: scaleX(-1.0) scale(0.75) rotate(25deg);
+     transform: scaleX(-1.0) scale(0.75);
      left: 3rem;
-     top: 3rem;
   }
-  37% {
+  25% {
       transform: scaleX(-1.0) scale(0.75) rotate(17deg);
-      left: 51rem;
-      top: -21rem
+      left: 29rem;
+  }
+  50% {
+      transform: scaleX(-1.0) scale(0.75) rotate(-17deg);
+      left: 58rem;
   }
   75% {
-      transform: scaleX(-1.0) scale(0.75) rotate(-66deg);
-      left: 109rem;
-      top: -10rem
+      transform: scaleX(-1.0) scale(0.75);
+      left: 87rem;
   }
   100% {
-      transform: scaleX(-1.0) scale(0.75) rotate(-66deg);
-      left: 109rem;
-      top: -10rem
+      transform: scaleX(-1.0) scale(0.75);
+      left: 87rem;
   }
 }
 
@@ -127,7 +127,9 @@ import Notes from '@components/MusicNotes.astro';
  #musicPlayer {
      position: relative;
      height: 0;
+     max-width: 66.9rem;
      width: 100%;
+     margin: auto;
  }
 </style>
 <script is:inline>
