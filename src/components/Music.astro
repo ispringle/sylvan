@@ -194,13 +194,13 @@ function arrowShootHandler() {
 }
 </script>
 <div id="musicPlayer">
-    <button onclick="skip()" class="skip">
+    <button onclick="skip()" class="skip" title="Skip song">
         <div id="skipWrapper">
             <Image class="archer" alt="Medieval drollery of a man/snail/bat/monkey shooting an arrow" src={archer} />
             <Image id="musicArrow" class="arrow complete" alt="Arrow for archer" src={arrowComplete} />
         </div>
     </button>
-    <button onclick="toggle()" class="playPause">
+    <button onclick="toggle()" class="playPause" title="Play/pause song">
         <div id="musicWrapper">
             <div id="notesWrapper" class="hideNotes">
                 <Notes class="lyreNotes"/>

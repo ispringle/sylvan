@@ -3,6 +3,23 @@ import knight from '../assets/knight-horse.png';
 import {Image} from "astro:assets";
 ---
 <style>
+@keyframes spring {
+  0% {transform: scale(1) translateY(0);}
+  10% {transform: scale(1.2, 0.6) translateY(7rem);}
+  30% { transform: scale(0.8, 1.1) translateY(-5rem); }
+  50% { transform: scale(1) translateY(0); }
+  100% { transform: translateY(0); }
+}
+
+.spring{
+  pointer-events: auto;
+}
+.spring:hover{
+  animation: spring 2s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
+}
+
 .header-branding {
     pointer-events: none;
     position: relative;
@@ -87,5 +104,5 @@ img {
     </span>
         <span class="sr-only">Drollery</span>
     </span>
-    <Image alt="Medieval drollery of a knight on a horse" src={knight}/>
+    <Image alt="Medieval drollery of a knight on a horse" src={knight} class="spring"/>
 </div>
