@@ -1,0 +1,65 @@
+---
+---
+<style>
+.salutation {
+    max-width: 66.9rem;
+    width: 100%;
+    margin: auto;
+    font-size: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ }
+.flower2 {
+    display: inline-block;
+    font-family: 'flower2' !important;
+    font-variant: unset !important;
+    vertical-align: middle;
+    font-size: 2rem;
+ }
+.smallcap {
+    font-family: 'IM Fell English SC';
+    font-variant: small-caps;
+ }
+ @keyframes leafAnimation {
+     0% {transform:translate(0,0) rotate(1440deg);}
+     40% {transform:translate(4rem,4rem) rotate(1080deg);}
+     60% {transform:translate(18rem,4rem) rotate(720deg);}
+     80% {transform:translate(42rem,11rem) rotate(360deg);}
+     100% {transform:translate(50rem,14rem) rotate(0deg);}
+}
+.blownAway {
+    animation: leafAnimation 6s linear;
+ }
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+    80% { transform: rotate(0deg); }
+    85% { transform: rotate(5deg); }
+    95% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
+ }
+ .wiggle {
+     animation: wiggle 2.5s infinite;
+ }
+</style>
+<div class="salutation">
+    <p>
+        <span class='flower2'>A</span>
+        <span class="smallcap">pax vobiscum</span>
+        <span id="leaf" class="flower2 wiggle">a</span>
+    </p>
+</div>
+<script is:inline>
+function animateLeafBlownHandler() {
+     leaf.removeEventListener("animationend", animateLeafBlownHandler, false);
+     leaf.classList.remove("blownAway");
+     leaf.classList.add("wiggle");
+}
+function animateLeaf() {
+     leaf = leaf ?? document.getElementById("leaf");
+     leaf.classList.remove("wiggle");
+     leaf.classList.add("blownAway");
+     leaf.addEventListener("animationend", animateLeafBlownHandler, false);
+ }
+document.getElementById("leaf").onclick = animateLeaf;
+</script>

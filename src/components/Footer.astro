@@ -1,5 +1,6 @@
 ---
 import Music from '@components/Music.astro'
+import FooterTopBar from '@components/FooterTopBar.astro'
 import FooterBottomBar from '@components/FooterBottomBar.astro'
 ---
 <style>
@@ -15,27 +16,10 @@ footer {
   flex-direction: row;
   justify-content: space-between;
  }
-hr,
-.salutation {
+hr {
   max-width: 66.9rem;
   width: 100%;
   margin: auto;
- }
-.flower2 {
-  font-family: 'flower2' !important;
-  font-variant: unset !important;
-  vertical-align: middle;
-  font-size: 2rem;
- }
-.smallcap {
-  font-family: 'IM Fell English SC';
-  font-variant: small-caps;
- }
-.salutation {
-  font-size: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
  }
 .list {
   display: flex;
@@ -57,12 +41,6 @@ a {
 <footer id="rootFooter" data-turbo-permanent>
   <Music />
   <hr>
-  <div class="salutation">
-    <p>
-      <span class='flower2'>A</span>
-      <span class="smallcap">pax vobiscum</span>
-      <span class='flower2'>a</span>
-    </p>
-  </div>
+  <FooterTopBar/>
   <FooterBottomBar/>
 </footer>
