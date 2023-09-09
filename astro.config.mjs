@@ -12,9 +12,6 @@ import compress from "astro-compress";
 // https://astro.build/config
 export default defineConfig({
   site: 'https://drollery.org',
-  experimental: {
-    assets: true
-  },
   image: {
     service: sharpImageService()
   },
