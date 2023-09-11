@@ -11,8 +11,12 @@ if (url.protocol === 'id:') {
   } catch {
     broken = true;
   }
-} else if (url.protocol === "file:") {
+} else if (url.protocol === "file:" && url.hash === "") {
+  // URL
   link = url.pathname;
+} else if (url.protocol === "file:" && url.hash !== "") {
+  // Element ID
+  link = url.hash;
 }
 const external =
   url.protocol === 'http:' ||
@@ -30,5 +34,4 @@ const external =
   href={broken ? undefined : link}
 >
   <slot />
-</a
->
+</a>

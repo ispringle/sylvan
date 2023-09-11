@@ -3,25 +3,27 @@ import HeaderArt from "./HeaderArt.astro";
 import Navigation from "./Navigation.astro";
 const {class: className} = Astro.props;
 ---
+
 <style>
-header {
-  padding: 2rem 0 10rem;
-}
-@media (max-width: 760px) {
+  header {
+    padding: 2rem 0 10rem;
+    margin: auto;
+  }
+  @media (max-width: 760px) {
     header {
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 1rem 0 10rem;
     }
-}
-@media (max-width: 450px) {
+  }
+  @media (max-width: 450px) {
     header {
       padding: 0 0 5rem;
     }
-}
+  }
 </style>
-<header class={className}>
-    <HeaderArt/>
-    <Navigation />
+<header class="{className}">
+  <HeaderArt />
+  <Navigation />
 </header>
