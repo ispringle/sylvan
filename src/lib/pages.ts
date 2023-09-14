@@ -27,12 +27,12 @@ const on = <T, R>(value: T, f: (value: T) => R): R => f(value);
 const pages = Object.values(
   import.meta.glob<true, "", Page>(
     ["../../content/**/*.{md,mdx}", "../../content/**/*.org"],
-    { eager: true }
-  )
+    { eager: true },
+  ),
 );
 
 export const allPages: Page[] = unique(
-  pages.filter(devFilterMaybe).map(setFrontmatter)
+  pages.filter(devFilterMaybe).map(setFrontmatter),
 );
 
 function setSlug(path: string): string {
@@ -69,12 +69,12 @@ export const resources = Object.fromEntries(
   Object.entries(
     import.meta.glob(
       ["../../content/**/*.{png,jpg,jpeg,gif,webp,avif,txt,pdf,sh,mp3,svg}"],
-      { as: "url" }
-    )
+      { as: "url" },
+    ),
   ).map(([path, loader]) => [
     fs.realpathSync(join(cwd, "src/lib", path)),
     loader,
-  ])
+  ]),
 );
 
 const idLinks = on(allPages, (posts) => {
@@ -139,7 +139,7 @@ const getTags = () => {
             ...(t[tag] ? t[tag].pages : []),
             ...[{ frontmatter: p.frontmatter }],
           ],
-        })
+        }),
     );
   });
   return t;

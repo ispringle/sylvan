@@ -14,52 +14,53 @@ import {SITE_TITLE} from '../consts';
 const { pageTitle, ...props } = Astro.props;
 const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
 ---
-<!DOCTYPE html>
+
+<!doctype html>
 <html lang="en">
-  <Head title={title}/>
+  <head title="{title}" />
   <body>
-    <Header class="main-header" />
+    <header class="main-header" />
     <main>
       <div id="borderArtWrapper" data-turbo-permanent>
-          <ArticleBorder class="borderArt"/>
+        <ArticleBorder class="borderArt" />
       </div>
-      <slot/>
+      <slot />
     </main>
-    <Footer class="main-footer"/>
+    <footer class="main-footer" />
     <script type="module">
-      import hotwiredTurbo from 'https://cdn.skypack.dev/@hotwired/turbo';
+      import hotwiredTurbo from "https://cdn.skypack.dev/@hotwired/turbo";
     </script>
   </body>
 </html>
 
 <style>
-body {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--bg);
-  color: var(--fg);
-  background-image : url(/images/background.png);
-  background-repeat: repeat;
-  font-size: 2rem;
-  font-weight: 400;
-  min-height: 100vh;
-  margin: unset
-}
+  body {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg);
+    color: var(--fg);
+    background-image: url(/images/background.png);
+    background-repeat: repeat;
+    font-size: 2rem;
+    font-weight: 400;
+    min-height: 100vh;
+    margin: unset;
+  }
 
-main {
-  margin: auto;
-}
-main {
-  position: relative;
-  max-width: 66.9rem;
-  padding: 0 1rem;
-  width: 100%;
-  flex: 1 0 auto;
-  line-height: 2.5rem;
-}
-@media (max-width: 760px) {
+  main {
+    margin: auto;
+  }
+  main {
+    position: relative;
+    max-width: 66.9rem;
+    padding: 0 1rem;
+    width: 100%;
+    flex: 1 0 auto;
+    line-height: 2.5rem;
+  }
+  @media (max-width: 760px) {
     .borderArt {
-        display: none;
+      display: none;
     }
-}
+  }
 </style>
