@@ -1,13 +1,19 @@
 ---
-import { resolveId } from '@lib/pages';
+import { resolveOrgId, resolveDenoteId } from '@lib/pages';
 const { class: className, href, ...props } = Astro.props;
 let broken = false;
 let link = href;
 const url = new URL(link, 'file://');
+
 if (url.protocol === 'id:') {
   try {
-    link = await resolveId(link);
-    // console.log(link)
+    link = await resolveOrgId(link);
+  } catch {
+    broken = true;
+  }
+} else if (url.protocol === "denote:") {
+  try {
+    link = await resolveDenoteId(link);
   } catch {
     broken = true;
   }

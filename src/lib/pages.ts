@@ -3,11 +3,13 @@ import { join } from "path";
 import { devFilterMaybe, getURL, slugify } from "@utils";
 
 const PREFER_EXT = "md";
+const DENOTE_TITLE_RE = /\d{8}T\d{6}(?:==[\da-zA-Z]+)?--([\da-zA-Z-]+)(?:\w+)?/;
 
 export type Page = {
   frontmatter: {
     title: string;
     id?: string;
+    denoteID?: string;
     type?: string;
     slug: string | undefined;
     Link: string;
@@ -35,11 +37,18 @@ export const allPages: Page[] = unique(
   pages.filter(devFilterMaybe).map(setFrontmatter),
 );
 
-function setSlug(path: string): string {
-  const isRoot =
-    path.includes("/content/index") || path.includes("/content/site/index");
-  const file = path.split("/content/")[1].split(".")[0];
-  return isRoot ? undefined : slugify(file);
+function setSlug(filepath: string): string {
+  const file = filepath.split("/content/")[1].split(".")[0];
+  const path = file
+    .split("/")
+    .map((part) => {
+      if (DENOTE_TITLE_RE.test(part)) {
+        part = DENOTE_TITLE_RE.exec(part)[1];
+      }
+      return part === "index" ? "" : part;
+    })
+    .join("/");
+  return slugify(path);
 }
 
 function setFrontmatter(page: Page): Page {
@@ -76,30 +85,47 @@ export const resources = Object.fromEntries(
     loader,
   ]),
 );
-
-const idLinks = on(allPages, (posts) => {
-  const ids = new Map();
+const makeLinkTable = (linkKind: string) => (posts) => {
+  const linkTable = new Map();
   posts.forEach((p) => {
-    const localIds = p.ids;
-    if (localIds) {
-      Object.entries(localIds).forEach(([id, anchor]) => {
+    const identifier = p.frontmatter[linkKind];
+    if (identifier) {
+      const link = p.frontmatter.link;
+      linkTable.set(`denote:${identifier}`, { slug: link, post: p });
+    }
+  });
+  return linkTable;
+};
+
+const getLinkTable = (linkKind: string) => (posts) => {
+  const linkTable = new Map();
+  posts.forEach((p) => {
+    const localLinks = p[linkKind];
+    if (localLinks) {
+      Object.entries(localLinks).forEach(([id, anchor]) => {
         const link = p.frontmatter.link;
-        ids.set(id, { slug: link, anchor, post: p });
+        linkTable.set(id, { slug: link, anchor, post: p });
       });
     }
   });
-  return ids;
-});
+  return linkTable;
+};
 
-export const resolveId = (id: string) => {
-  const saved = idLinks.get(id);
+const orgIdLinks = on(allPages, getLinkTable("ids"));
+const denoteIdLinks = on(allPages, makeLinkTable("denoteID"));
+
+const resolveLink = (linkTable) => (link: string) => {
+  const saved = linkTable.get(link);
   if (!saved) {
-    throw new Error(`Unable to resolve ${id}`);
+    throw new Error(`Unable to resolve ${link}`);
   }
 
-  const { slug, anchor } = saved;
+  const { slug, anchor = "" } = saved;
   return slug + anchor;
 };
+
+export const resolveOrgId = resolveLink(orgIdLinks);
+export const resolveDenoteId = resolveLink(denoteIdLinks);
 
 const backlinks = on(allPages, (posts) => {
   const backlinks: Record<string, Set<Page>> = {};
@@ -110,7 +136,6 @@ const backlinks = on(allPages, (posts) => {
         // linking to self -> does not count
         continue;
       }
-
       try {
         link = resolveId(link);
       } catch {}
