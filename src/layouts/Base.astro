@@ -4,9 +4,9 @@ import '@style/base.css';
 import '@style/prism.css';
 
 import Background from "../components/Background.astro";
-import Head from "../components/Head.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import BaseHead from "../components/Head.astro";
+import BaseHeader from "../components/Header.astro";
+import BaseFooter from "../components/Footer.astro";
 import ArticleBorder from "@components/ArticleBorder.astro";
 
 import {SITE_TITLE} from '../consts';
@@ -17,16 +17,16 @@ const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
 
 <!doctype html>
 <html lang="en">
-  <head title="{title}" />
+  <BaseHead title="{title}" />
   <body>
-    <header class="main-header" />
+    <BaseHeader class="main-header" />
     <main>
       <div id="borderArtWrapper" data-turbo-permanent>
         <ArticleBorder class="borderArt" />
       </div>
       <slot />
     </main>
-    <footer class="main-footer" />
+    <BaseFooter class="main-footer" />
     <script type="module">
       import hotwiredTurbo from "https://cdn.skypack.dev/@hotwired/turbo";
     </script>
