@@ -42,10 +42,11 @@ function setSlug(filepath: string): string {
   const path = file
     .split("/")
     .map((part) => {
+      let p = ""
       if (DENOTE_TITLE_RE.test(part)) {
-        part = DENOTE_TITLE_RE.exec(part)[1];
+        p = (DENOTE_TITLE_RE.exec(part) ?? [])[1];
       }
-      return part === "index" ? "" : part;
+      return p === "index" ? "" : p;
     })
     .join("/");
   return slugify(path);
@@ -126,6 +127,19 @@ const resolveLink = (linkTable) => (link: string) => {
 
 export const resolveOrgId = resolveLink(orgIdLinks);
 export const resolveDenoteId = resolveLink(denoteIdLinks);
+export const resolveId = id => {
+  let link = ""
+  try {
+    link = resolveOrgId(id)
+  } catch {
+    try {
+      link = resolveDenoteId(id)
+    } catch {
+      throw new Error(`Unable to resolve ${id}`)
+    }
+  }
+  return link
+}
 
 const backlinks = on(allPages, (posts) => {
   const backlinks: Record<string, Set<Page>> = {};
