@@ -2,7 +2,7 @@ import fs from "fs";
 import { join } from "path";
 import { devFilterMaybe, getURL, slugify } from "@utils";
 
-const PREFER_EXT = "md";
+const PREFER_EXT = "org";
 const DENOTE_TITLE_RE = /\d{8}T\d{6}(?:==[\da-zA-Z]+)?--([\da-zA-Z-]+)(?:\w+)?/;
 
 export type Page = {
@@ -42,13 +42,13 @@ function setSlug(filepath: string): string {
   const path = file
     .split("/")
     .map((part) => {
-      let p = ""
       if (DENOTE_TITLE_RE.test(part)) {
-        p = (DENOTE_TITLE_RE.exec(part) ?? [])[1];
+        part = (DENOTE_TITLE_RE.exec(part) ?? [])[1];
       }
-      return p === "index" ? "" : p;
+      return part === "index" ? "" : part;
     })
     .join("/");
+  console.log(path);
   return slugify(path);
 }
 
@@ -127,19 +127,19 @@ const resolveLink = (linkTable) => (link: string) => {
 
 export const resolveOrgId = resolveLink(orgIdLinks);
 export const resolveDenoteId = resolveLink(denoteIdLinks);
-export const resolveId = id => {
-  let link = ""
+export const resolveId = (id) => {
+  let link = "";
   try {
-    link = resolveOrgId(id)
+    link = resolveOrgId(id);
   } catch {
     try {
-      link = resolveDenoteId(id)
+      link = resolveDenoteId(id);
     } catch {
-      throw new Error(`Unable to resolve ${id}`)
+      throw new Error(`Unable to resolve ${id}`);
     }
   }
-  return link
-}
+  return link;
+};
 
 const backlinks = on(allPages, (posts) => {
   const backlinks: Record<string, Set<Page>> = {};
