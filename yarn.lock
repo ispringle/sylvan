@@ -86,13 +86,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/sitemap@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "@astrojs/sitemap@npm:1.4.0"
+"@astrojs/sitemap@npm:1.2.2":
+  version: 1.2.2
+  resolution: "@astrojs/sitemap@npm:1.2.2"
   dependencies:
     sitemap: "npm:^7.1.1"
     zod: "npm:^3.17.3"
-  checksum: 10c0/16f141de9125c35234ebac83beace2797dae06b37cda54e1fcc21e61c2b8af12ff20e5cc0ab57eba3ff81c18bb340d22fc0f89170653c48ba481c41575e4752f
+  checksum: 10c0/ecbc45c34fbead7929a4fb2efdf12731ae4455247e40467d3457488ff1e2d4e0dcc08d61502bff98643f272bde3be61f6bcc0dc069857fb1c85f081ede8cb63a
   languageName: node
   linkType: hard
 
@@ -2804,9 +2804,9 @@ __metadata:
   linkType: hard
 
 "electron-to-chromium@npm:^1.5.328":
-  version: 1.5.365
-  resolution: "electron-to-chromium@npm:1.5.365"
-  checksum: 10c0/3f32cdad86d97c79a5778051fa3392cb99017e04b248f37756e3131ff4bf08f9a7575b840c6de45f3f0fb5aa1346bb22926ebd6336e4c28d465e470ea5c6ecb9
+  version: 1.5.366
+  resolution: "electron-to-chromium@npm:1.5.366"
+  checksum: 10c0/d2391f384df1c04acc5b74beb32f69c8e1414fa11e86df47b14fa84b388d6a7e17a7f45246df26e0cdf968d0031a51d1c1e3f6f06bde208c8f1b40d92cc30198
   languageName: node
   linkType: hard
 
@@ -7263,7 +7263,7 @@ __metadata:
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
     "@astrojs/rss": "npm:^2.3.2"
-    "@astrojs/sitemap": "npm:^1.4.0"
+    "@astrojs/sitemap": "npm:1.2.2"
     "@iconify-json/fa6-brands": "npm:^1.1.13"
     "@iconify-json/simple-icons": "npm:^1.1.67"
     "@mapbox/rehype-prism": "npm:^0.8.0"

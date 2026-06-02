@@ -1,5 +1,5 @@
 import { defineConfig, sharpImageService } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
+// import sitemap from '@astrojs/sitemap';
 import org from 'astro-org';
 import icon from "astro-icon";
 
@@ -24,7 +24,7 @@ export default defineConfig({
       "fa6-brands": ["*"],
       "simple-icons": ["*"]
     }
-  }), sitemap(), compress()],
+  }), /* sitemap(), */ compress()],
   build: {
     inlineStylesheets: 'auto',
     assets: 'assets'
