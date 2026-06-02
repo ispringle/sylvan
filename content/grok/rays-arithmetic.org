@@ -1,9 +1,0 @@
-:PROPERTIES:
-:TYPE: slip
-:ID:       1e489e8e-83de-4438-8252-cf27d4a61290
-:END:
-#+title:      rays arithmetic
-#+date:       [2023-09-13 Wed 07:08]
-#+filetags:   
-#+identifier: 20230913T070831
-
