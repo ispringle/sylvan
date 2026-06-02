@@ -1,0 +1,961 @@
+:PROPERTIES:
+:TYPE: slip
+:ID:       d5988009-38a9-4246-9535-582ad2cbace2
+:END:
+#+title:      Westminster Confession of Faith
+#+date:       [2022-08-21 Sun 06:01]
+#+filetags:   :wcf:
+#+OPTIONS: ^:{}
+
+* History
+:PROPERTIES:
+:ID:       271fe520-bd8f-4556-9d0a-b2f7b9abccf4
+:END:
+* Chapters
+** I. Of the Holy Scripture
+:PROPERTIES:
+:ID:       528fdb82-fe43-4e95-a23d-f070a3707230
+:END:
+** II. Of God, and of the Holy Trinity
+:PROPERTIES:
+:ID:       930aae74-b238-4814-b391-d068123a7a34
+:END:
+** III. Of God's Eternal Decree
+:PROPERTIES:
+:ID:       17371295-1e19-4ae0-9989-edc8e5bb02c1
+:END:
+** IV. Of Creation
+:PROPERTIES:
+:ID:       c2096346-c041-41b4-8612-1a44337a063c
+:END:
+** V. Of Providence
+:PROPERTIES:
+:ID:       f5f66b27-eeb5-4d89-9a7e-f219a27bb915
+:END:
+Chapter five is broken into two main parts. The first paragraph is setting the
+stage; we learn about the God who Decrees, and then in the next six paragraphs
+we learn about the how these decrees are put into action and play out in life.
+The Divines crafted these six paragraphs to be not only informative to laypeople
+like us, but they also wrote them to directly refute certain claims and ideas
+that people throughout time have concluded about God's providence.
+*** Paragraph 1
+:PROPERTIES:
+:ID:       8464514b-8e1d-4156-9cc8-d6f7ac2f94e0
+:END:
+**** Text
+God the great Creator of all things doth uphold, (Heb. 1:3) direct, dispose, and
+govern all creatures, actions, and things, (Dan. 4:34–35, Ps. 135:6, Acts
+17:25–26,28) from the greatest even to the least, (Matt. 10:29–31) by His most
+wise and holy providence, (Prov. 15:3, Ps. 104:24, Ps. 145:17) according to His
+infallible foreknowledge, (Acts 15:18, Ps. 94:8–11) and the free and immutable
+counsel of His own will, (Eph. 1:11) to the praise of the glory of His wisdom,
+power, justice, goodness, and mercy. (Isa. 63:14, Eph. 3:10, Rom. 9:17, Gen.
+45:7, Ps. 145:7)
+**** Remarks
+There is no random chance, capricious and impartial mechanism, or cosmic,
+balancing force behind events. Rather, events are decreed to be by the Creator
+of the universe and then they occur just as He desires them to. By this point in
+the Confession, this shouldn't be a surprise to any of us. We learned about the
+Eternal Decree of God in chapter three, the previous chapter talks about how God
+created the entire universe with His /Words/, so it shouldn't come as a surprise
+to anyone who has been keeping up that God is intimately involved in the daily
+occurrences of His creation. He isn't just doing the routine maintenance on His
+Creation either, He /directly disposes and governs/. That governance doesn't
+just fall on the Josephs, Pharaohs, and Davids of this world, it falls on all,
+"from the greatest even to the least".
+*** Paragraph 2
+:PROPERTIES:
+:ID:       51a3b2ed-59f9-454f-bf67-d10f75d6f0d5
+:END:
+**** Text
+Although, in relation to the foreknowledge and decree of God, the first Cause,
+all things come to pass immutably, and infallibly; (Acts 2:23) yet, by the same
+providence, He ordereth them to fall out, according to the nature of second
+causes, either necessarily, freely, or contingently. (Gen. 8:22, Jer. 31:35,
+Exod. 21:13, Deut. 19:5, I Kings 22:28, 34, Isa. 10:6–7)
+**** Remarks
+God set systems into effect when He created the world and these systems are
+orderly and regulated by Him. He chose to allow most of our daily lives to be
+governed by these systems. Another word for these systems might be "the nature
+of second causes". If I throw a ball up, it will come back down. If I only touch
+one terminal of a battery, I won't get shocked. There are likewise patterns and
+systems that govern all assortments of events. While meteorologists do not have
+the understanding, and while computers do not have the power to calculate it,
+even the weather is not random, though we do like to ascribe "randomness" to
+things that are beyond our capabilities to understand.
+
+These events that are ordered by the "nature of second causes" tend to fall into
+one of three categories:
+1. necessary - Jeremiah 31:35 tells us that the sun and moon and stars are for
+   our light.
+2. free - Exodus 21 and Deuteronomy 19 tell us that the Israelite who
+   accidentally kills another man can preserve his life by fleeing to a city of
+   refuge
+3. contingent - In I Kings 22 the prophet Micaiah told King Ahab that he would
+   die in battle in order to establish his credentials as a prophet of God
+
+The claim refuted is that God's Providence denies second causes, and this leads
+to the nihilistic thought that, "If God is in control, then things will always
+turn out the same, what I do is irrelevant". This claim is actually
+self-contradictory. This statement sets the stage by rightly stating that God is
+in control, but then brings in randomness to the equation, as if your moment of
+nihilism wasn't known and accounted for by God.
+*** Paragraph 3
+:PROPERTIES:
+:ID:       a9544e0f-6317-4ac8-9921-3c8faa2989db
+:END:
+**** Text
+God, in His ordinary providence, maketh use of means, (Acts 27:31, 44, Isa.
+55:10–11) yet is free to work without, (Hos. 1:7, Matt. 4:4, Job 34:10) above,
+(Rom. 9:19–21) and against them, (2 Kings 6:6, Dan. 3:27) at His pleasure.
+**** Remarks
+Generally, God works through the ordinary systems He has set forth. Ordinarily,
+the dead don't rise. Ordinarily, the sea doesn't part in two. Ordinarily, water
+doesn't turn into wine. But God isn't restricted to the ordinary, He created
+these systems, but they do not govern Him or His Will. When God chooses work
+outside of His ordinary providence He does so either without using these
+systems, by working above these systems, or by working against these systems.
+*** Paragraph 4
+:PROPERTIES:
+:ID:       35bc0709-7430-41cc-9783-0798e8fbd7ed
+:END:
+**** Text
+The almighty power, unsearchable wisdom, and infinite goodness of God so far
+manifest themselves in His providence, that it extendeth itself even to the
+first fall, and all other sins of angels and men; (Rom. 11:32–34, 2 Sam. 24:1, 1
+Chron. 21:1, 1 Kings 22:22–23, 1 Chron. 10:4, 13–14, 2 Sam. 16:10, Acts 2:23)
+and that not by a bare permission, (Acts 14:16) but such as hath joined with it
+a most wise and powerful bounding, (Ps. 76:10, 2 Kings 19:28) and otherwise
+ordering, and governing of them, in a manifold dispensation, to His own holy
+ends; (Gen. 50:20, Isa. 10:6–7, 12) yet so, as the sinfulness thereof proceedeth
+only from the creature, and not from God, who, being most holy and righteous,
+neither is nor can be the author or approver of sin. (James 1:13–14, 17, 1 John
+2:16, Ps. 50:21)
+**** Remarks
+This paragraph starts out by paraphrasing Paul in Romans 11:
+#+name: Romans 11:32-34
+#+begin_verse
+For God has consigned all to disobedience, that he may have mercy on all.
+
+Oh, the depth of the riches and wisdom and knowledge of God! How unsearchable
+are his judgments and how inscrutable his ways!
+
+    “For who has known the mind of the Lord,
+        or who has been his counselor?”
+#+end_verse
+
+***** The Fall and Sin
+We covered this in chapter three, God's Providence is so full and complete that
+it even includes the Fall of Man and "all other sins of angels and men". His
+Providence didn't kick in Chapter three of Genesis and His Providence didn't go
+on Hiatus during chapter three either. Rather, God was fully aware of what would
+transpire, and nonetheless He proceeded in creating existence and permitting
+Adam to sin. Likewise, God permitted evils to befall Job, a man who was
+blameless and upright, and who feared God and turned away from evil.
+***** God's Permission
+Does "bare permission" mean that God is culpable for the sins committed by
+/angels and men/? Of course the answer is 'no'. God permits sin, but His
+permission is also accompanied by a "most wise and powerful bounding" -- a
+governor on our sin, if you will. God lets man sin, but He also restrains the
+sins of men.
+#+name: Psalm 76:10
+#+begin_verse
+Surely the wrath of man shall praise you;
+    the remnant of wrath you will put on like a belt.
+#+end_verse
+***** The Holiness and Innocence of God
+God governs sin, just as He governs all things. God permits and restrains sin as
+well. But this sin proceeds "only from the creature, and not from God". He might
+have /let/ you sin, but He did not "author" your sin and He does not approve of
+it. The "why" of this is something that many people agonize over, and while
+Scripture does not provide an answer for them, Scripture does not waiver on the
+fact that God is not the author of sins, but He does allow them to happen and
+uses them for His own purposes.
+#+name: James 1:13
+#+begin_verse
+Let no one say when he is tempted, “I am being tempted by God,” for God cannot
+be tempted with evil, and he himself tempts no one.
+#+end_verse
+*** Paragraph 5
+:PROPERTIES:
+:ID:       b896abe3-51b9-4858-ae44-834606f5d56d
+:END:
+**** Text
+The most wise, righteous, and gracious God doth oftentimes leave, for a season,
+His own children to manifold temptations, and the corruption of their own
+hearts, to chastise them for their former sins, or to discover unto them the
+hidden strength of corruption and deceitfulness of their hearts, that they may
+be humbled; (2 Chron. 32:25–26, 31, 2 Sam. 24:1) and, to raise them to a more
+close and constant dependence for their support upon Himself, and to make them
+more watchful against all future occasions of sin, and for sundry other just and
+holy ends. (2 Cor. 12:7–9, Ps. 73, Ps. 77:1, 10, 12, Mark 14:66–72, John
+21:15–17)
+**** Remarks
+God uses sin and suffering for Good. Rather than being a stumbling block or a
+issue of contention, there is a great amount of assurance and joy that can be
+found in section four. We all sin and fall short of the Glory and Standard of
+God. I think it's safe to say we do this on a daily basis. Sometimes that daily
+sin goes beyond the "normative" or "mundane" (if you can say as much about sin)
+and becomes more like a rut in the road or a thorn in the flesh. But for those
+who love God, He uses even these ruts and thorns to glorify Himself and to
+temper the believer. We all have /that/ sin, or /those/ sins (whichever the case may
+be), that seem to always before us. We hate and despise these sins more so than
+we hate and despise others, because they dog us all the time.
+
+I'm sure we've all echoed the cry of Paul before, asking God why the thorn
+hasn't been removed from our flesh. And like Paul, our answer must be that the
+thorn remains, "lest [we] be exalted beyond all measure." I would additionally
+contend that, whatever that thorn of Paul's was, it tempered him into the man of
+God that he was, and provided him with a means of attaining the willpower and
+strength He had to persevere through some very difficult times and remain
+faithful and true to the Lord through those moments.
+
+Sometimes our thorns or more like ruts though, deep things we keep falling back
+into. David had his sins as a constant companion and they dogged him his whole
+life. Sometimes they helped David to become a better man, and other times they
+served to humble David or chastise David. With Hezekiah, God exposed him to
+suffering and sin in order that he might "test him and know everything that was
+in his heart." We see a similar tale with Job, God allowed Satan to test Job so
+that God could show Satan what was in Job's heart.
+
+Ultimately, we do not know the reason for God's ways, they are beyond us and
+above us. But there is a level of assurance in knowing that God's hand is on us
+at all times, steering us towards greater glory for His own name. Paul warns
+against seeking out sin in Romans, and we should not seek out sin in some effort
+to magnify God's mercy, but when sin tempts us or snares us, there is some
+assurance in knowing that the children of God who have come before us were
+tempted and snared, and if we lean upon Him, we can come through the otherside
+humbler, and with greater strength and reliance upon Him.
+
+*** Paragraph 6
+:PROPERTIES:
+:ID:       3f8cbdc9-6671-4526-8c63-115c94cbbb43
+:END:
+**** Text
+As for those wicked and ungodly men whom God, as a righteous Judge, for former
+sins, doth blind and harden, (Rom. 1:24, 26, 28, Rom. 11:7–8) from them He not
+only withholdeth His grace whereby they might have been enlightened in their
+understandings, and wrought upon in their hearts; (Deut. 29:4) but sometimes
+also withdraweth the gifts which they had, (Matt. 13:12, Matt. 25:29) and
+exposeth them to such objects as their corruption make occasion of sin; (Deut.
+2:30, 2 Kings 8:12–13) and, withal, gives them over to their own lusts, the
+temptations of the world, and the power of Satan, (Ps. 81:11–12, 2 Thess.
+2:10–12) whereby it comes to pass that they harden themselves, even under those
+means which God useth for the softening of others. (Exod. 7:3, Exod. 8:15, 32, 2
+Cor. 2:15–16, Isa. 8:14, 1 Pet. 2:7–8, Isa. 6:9–10, Acts 28:26–27)
+**** Remarks
+For the believer, /evil is worked for good/, but for the unbeliever, God withholds
+goodness from them at times, and even /works good for evil/.
+
+The idea of hardening the heart of an unbeliever and of removing His hand from
+them is clear in Scripture. The heart of Pharaoh was /hardened/. Deuteronomy 2:30
+and Romans 11:7,8 both use the exact phrase in the text here "blind and harden".
+The latter half of Romans 1 is all about the hardening of hearts and the
+revocation God's hand. In these cases, it isn't that God is /doing/ evil, but
+rather He is removing the restraints from the man, allowing them be fully /given
+over/ to their own mind. In Deuteronomy 29:4 Moses says God did not /give/ the
+Israelites minds to understand, eyes to see, or ears to hear, but sometimes, as
+in some of the parables, God /revokes/ a previously given gift (Matthew 13:12;
+/For whoever has, to him more shall be given, and he will have an abundance; but whoever does not have, even what he has shall be taken away from him./,
+Matthew 25:29; /“For to everyone who has, more shall be given, and he will have an abundance; but from the one who does not have, even what he does have shall be taken away./).
+
+This can go even further. Without the staying hand of God, man is not only going
+to sin far more, but he shall be /exposed/ to more sin as well. In this way, God
+allows some men to be exposed to further temptation and sin. The end result is
+that their own hearts and the sin that they love, further hardens them towards
+God, and interestingly the same cause that harden's their hearts is used in the
+others to soften the heart and bring them closer to God.
+
+#+name: Isaiah 8:13-15
+#+begin_verse
+﻿^{13} It is Yahweh of hosts whom you should regard as holy.
+    And He shall be your fear,
+    And He shall be your cause of trembling.
+﻿^{14} Then He shall become a sanctuary;
+    But to both the houses of Israel, a stone to strike and a rock to stumble over,
+    And a snare and a trap for the inhabitants of Jerusalem.
+﻿^{15} And many will stumble over them;
+    Then they will fall and be broken;
+    They will even be snared and caught.”
+#+end_verse
+
+*** Paragraph 7
+:PROPERTIES:
+:ID:       daf0125d-09b4-4db3-a011-242e92b53d76
+:END:
+**** Text
+As the providence of God doth, in general, reach to all creatures; so, after a
+most special manner, it taketh care of His Church, and disposeth all things to
+the good thereof. (1 Tim. 4:10, Amos 9:8–9, Rom. 8:28, Isa. 43:3–5, 14)
+**** Remarks
+God's providential hand is over all creatures. Sometimes that hand works evil
+for good, bringing His people closer to him, with humble and grateful hearts.
+Other times that providential hand blesses the most undeserving of creatures.
+And yet still other times that providential hand it seems /almost/ to pull away,
+allowing for the flood gates of sin to be opened.
+
+For the Church, there is great assurance, because God takes care of His Church
+in a /most special manner/, working all things for the good of /His Church/.
+
+#+name: Romans 8:28
+#+begin_verse
+And we know that for those who love God all things work together for good, for
+those who are called according to His purpose.
+#+end_verse
+** VI. Of the Fall of Man, of Sin, and of the Punishment thereof
+** VII. Of God's Covenant with Man
+:PROPERTIES:
+:ID:       19bfddc3-2920-48ee-a6fe-30d14c1a6604
+:END:
+*** Paragraph 1
+**** Text
+#+begin_quote
+The distance between God and the creature is so great, that although reasonable
+creatures do owe obedience unto him as their Creator, yet they could never have
+any fruition of him, as their blessedness and reward, but by some voluntary
+condescension on God's part, which he hath been pleased to express by way of
+covenant.
+#+end_quote
+**** Remarks
+***** The distance
+****** This is not talking about our distance from God due to sin, but rather our distance from God due to our difference of being
+****** Sin is only one example of, or lens through which we see, the gulf that exists between God and Man
+***** Obedience owed
+****** All creatures capable of reasoning recognize that there is a level of obedience that is owed to God, the Creator
+****** As we discussed previously, God has no /need/ of Man, there is no thing that Man gives to God that He requires, this owed obedience is not because of a /need/ on God's part
+****** As the created ones, our obedience is our duty
+***** A covenant
+****** The gulf between God and Man is so great, even prior to the entrance of sin, that in order for there to be a working relationship between Man and God, God had to condescend to Man's level
+****** God's condescension and the subsequent arrangement He made with Man is called a "covenant"
+****** Van Dixhoorn defines a covenant as "a sovereignly determined and administered arrangement between God and man, with penalties and promises" (Confessing the Faith, 97)
+*** Paragraph 2
+**** Text
+#+begin_quote
+The first covenant made with man was a covenant of works, wherein life was
+promised to Adam, and in him to his posterity, upon condition of perfect and
+personal obedience.
+#+end_quote
+**** Remarks
+***** Should be noted that "covenant of works" is a /working/ title, as the Bible does not assign any title to it. There are a few different titles used to refer to it including "the first covenant" and the "Adamic Covenant". The Westminster Shorter Catechism calls it the "Covenant of Life"
+***** As we defined previously, every covenant has a promise for fulfilling it and a penalty for voiding it. The covenant of work's promise was life and the penalty set for voiding the covenant was death
+***** The covenant's agreement was man's perfect and personal obedience to God
+*** Paragraph 3
+**** Text
+#+begin_quote
+Man by his fall having made himself incapable of life by that covenant, the Lord
+was pleased to make a second, commonly called the covenant of grace: wherein he
+freely offered unto sinners life and salvation by Jesus Christ, requiring of
+them faith in him, that they may be saved, and promising to give unto all those
+that are ordained unto life, his Holy Spirit, to make them willing and able to
+believe.
+#+end_quote
+**** Remarks
+***** Adam broke to first covenant, ending the promise of life, the structure God had created for Man to work with God, and bringing death
+***** God /was pleased/ to create another covenant, a /covenant of grace/
+Footnotes in the WCF for this paragraph cite Genesis 3:15 and Isaiah 42:6 as references for this covenant's creation:
+#+begin_quote
+“I am the Lord, I have called You in righteousness,
+I will also hold You by the hand and watch over You,
+And I will appoint You as a covenant to the people,
+As a light to the nations,
+
+-- Isaiah 42:6 (NASB)
+#+end_quote
+
+#+begin_quote
+And I will put enmity
+Between you and the woman,
+And between your seed and her seed;
+He shall bruise you on the head,
+And you shall bruise him on the heel.”
+
+-- Genesis 3:15 (NASB)
+#+end_quote
+
+***** This new covenant also promises life, but also salvation -- forgiveness for voiding the first covenantal contract
+#+begin_quote
+ For this reason He is the mediator of a new covenant, so that, since a death has taken place for the redemption of the transgressions that were committed under the first covenant, those who have been called may receive the promise of the eternal inheritance.
+
+ -- Hebrews 9:15 (NASB)
+#+end_quote
+
+***** The requirements of this covenant are faith in Christ
+***** Additionally, the Holy Spirit is promised as an "upfront" part of the covenant promise
+#+begin_quote
+I will put My Spirit within you and cause you to walk in My statutes, and you will be careful to observe My ordinances.
+
+-- Ezekiel 36:27 (NASB)
+#+end_quote
+*** Paragraph 4
+**** Text
+#+begin_quote
+This covenant of grace is frequently set forth in the Scripture by the name of a
+testament, in reference to the death of Jesus Christ, the testator, and to the
+everlasting inheritance, with all things belonging to it, therein bequeathed.
+#+end_quote
+**** Remarks
+***** "testament" is found in the Septuagint as "διαθήκη" and is the word picked to translate the Hebrew /brit/ (בְּרִית)
+***** the word was commonly used in the KJV:
+#+begin_quote
+And for this cause he is the mediator of the new testament, that by means of
+death, for the redemption of the transgressions that were under the first
+testament, they which are called might receive the promise of eternal
+inheritance.
+
+-- Hebrews 9:15 (KJV)
+#+end_quote
+***** Van Dixhoorn suggests (pg 101) that by bringing "testament" into the WCF the Divines were reducing the risk of debate, as there existed contention between people who thought "Covenant" was the proper term and those who thought "testament" was.
+***** Hebrews 9 brings this idea of a "last will and testament" to mind, speaking of the idea that the one who created it must first die before it can come to fruition
+#+begin_quote
+For where a testament is, there must also of necessity be the death of the
+testator. For a testament is of force after men are dead: otherwise it is of no
+strength at all while the testator liveth.
+
+-- Hebrews 9:16,17 (KJV)
+#+end_quote
+*** Paragraph 5
+**** Text
+#+begin_quote
+This covenant was differently administered in the time of the law, and in the
+time of the gospel: under the law it was administered by promises, prophecies,
+sacrifices, circumcision, the paschal lamb, and other types and ordinances
+delivered to the people of the Jews, all fore-signifying Christ to come, which
+were for that time sufficient and efficacious, through the operation of the
+Spirit, to instruct and build up the elect in faith in the promised Messiah, by
+whom they had full remission of sins, and eternal salvation, and is called the
+Old Testament.
+#+end_quote
+**** Remarks
+***** Now we look at the two ways that this covenant of grace was /administered/
+***** /In the time of the law/ the administration of the covenant of grace was done through
+****** promises
+****** prophecies
+****** sacrifices
+****** circumcision
+****** Passover
+****** et cetera
+***** These signs, symbols, and practices were all foreshadows (/fore-signifying/) of /Christ to come/
+***** This /Old Testament/ was /efficacious/ for the time and people it was administered to, namely Israel
+***** This administration of the covenant of grace was just as effective for those whom it saved, as the new administering is for us
+*** Paragraph 6
+**** Text
+#+begin_quote
+Under the gospel, when Christ the substance was exhibited, the ordinances in
+which this covenant is dispensed, are the preaching of the Word, and the
+administration of the sacraments of Baptism and the Lord's Supper; which, though
+fewer in number, and administered with more simplicity and less outward glory,
+yet in them it is held forth in more fullness, evidence, and spiritual efficacy,
+to all nations, both Jews and Gentiles; and is called the New Testament. There
+are not, therefore, two covenants of grace differing in substance, but one and
+the same under various dispensations.
+#+end_quote
+**** Remarks
+***** The /Old Testament's/ promises and symbols, were the shadow of Christ, who is revealed /under the Gospel/ to be the substance of both the old and new administration
+#+begin_quote
+things which are a mere shadow of what is to come; but the substance belongs to Christ.
+
+-- Colossians 2:17 (NASB)
+#+end_quote
+***** The ordinances of this new administering of the covenant of grace are:
+****** preaching of the Word
+****** Baptism
+****** Communion
+***** Outwardly, these ordinances appear lesser than the previous ordinances
+***** Ultimately, these ordinances contain greater efficacy, evidence, and meaning
+***** These ordinances are effective for all people, at all times, and are not to be restricted to certain people
+***** The /covenant of grace/ displayed in the Old Testament is the same covenant in the New Testament
+***** There is only one /covenant of grace/ but the Lord has administered (dispensed) that covenant in different ways
+** VIII. Of Christ the Mediator
+** IX. Of Free Will
+:PROPERTIES:
+:ID:       cb1b6f65-9dd5-4269-8f05-ea2677a3c41d
+:END:
+
+It's important to under what is meant by /will/. Sometimes there is this idea that
+the will is some /other/ force working within or that it has sentience. In truth,
+/will/ is the whole measure of person. It's the part of you that makes choices and
+actions.
+
+I think that Jonathan Edwards makes a worthwhile distinction in his own
+writings. Essentially he explains that "will" is not free because it's not
+something that is even capable of freedom. Rather agents are free to exercise
+their wills. We, Man, are the agents that exercise our own wills freely. In some
+sense this might seem pedantic, but I think it's valuable to keep in mind as we
+talk about "will" because it is easy for us to personify the "will".
+
+*** Paragraph 1
+**** Text
+#+begin_quote
+God hath endued the will of man with that natural liberty, that is neither forced, nor by any absolute necessity of nature determined to good or evil.(a)
+
+(a) Matt. 17:12; James 1:14; Deut. 30:19.
+#+end_quote
+**** Remarks
+In understanding paragraph one it's important to know the time-aspect of this
+passage. This first paragraph of chapter nine is not tied to some historic point
+only, or some future point alone. Rather this paragraph is applicable to /all/
+time. As long as man has existed and for as long as man shall exist, this
+paragraph will continue to ring true.
+
+It's also good to bear in mind that difficulty of this first paragraph. This one
+sentence took much longer to craft than you might think. It was initially
+rejected by the assembly and had to be redrafted. After the redrafting it was
+commented how difficult this truth is to nail down and one of the Divines quoted
+Augustine who said, "when grace is defended, we are thought to destroy
+free-will, and when a free-will is acknowledged we are thought to deny
+free-grace." All that to say, this is both a simple and difficult doctrine all
+at once, and perhaps its perceived simplicity lends to it being all the more
+difficult to nail down.
+
+***** Natural liberty
+"Natural liberty" is the idea of freedom of choice. God created Man with a will
+that is free to do as it pleases.
+***** Determination
+I think a close concept to what is being expressed here is the idea of /tablua
+rosa/ which means "blank slate". This idea that the Divines are expressing is
+basically that man is born neutrally buoyant in the moral realm. And it is
+through experiences that /drag/ you down or /lift/ you up, so to speak, that define
+who you become. Put another way, do not inherit the qualities of our parents
+through birth, but we might pickup their qualities as we experience life that is
+influenced by them.
+
+This can be somewhat confusing because there are forces working at your will all
+the time. A tremendous number really, I think it was Jonathan Edwards in his
+book "Freedom of the Will" that illustrated these forces so well. Essentially he
+explained that our every choice is made up of thousands of past experiences that
+link together.
+
+*** Paragraph 2
+**** Text
+#+begin_quote
+II. Man, in his state of innocency, had freedom and power to will and to do that which was good, and well pleasing to God;(b) but yet, mutably, so that he might fall from it.(c)
+
+(b) Eccles. 7:29; Gen. 1:26.
+(c) Gen. 2:16, 17; Gen. 3:6.
+#+end_quote
+**** Remarks
+***** Innocence
+The natural state of Man -- that is Man prior to the Fall -- was capable of
+/freely/ doing whatever he so pleased. In this pre-fallen Man was capable of doing
+Good and his actions were pleasing to God. Contrast this with Man post-fall,
+where he is incapable of pleasing God by his own actions.
+***** Mutability
+To be mutable means to be changeable. The quality of Man which allowed him to do
+Good and please God was not /immutable/, that is unchangeable, but that it was
+able to be changed.
+*** Paragraph 3
+**** Text
+#+begin_quote
+III. Man, by his fall into a state of sin, hath wholly lost all ability of will to any spiritual good accompanying salvation:(d) so as, a natural man, being altogether averse from that good,(e) and dead in sin,(f) is not able, by his own strength, to convert himself, or to prepare himself thereunto.(g)
+
+(d) Rom. 5:6; Rom 8:7; John 15:5.
+(e) Rom. 3:10, 12.
+(f) Eph. 2:1, 5; Col. 2:13.
+(g) John 6:44, 65; Eph. 2:2, 3, 4, 5; I Cor. 2:14; Titus 3:3, 4, 5.
+#+end_quote
+**** Remarks
+***** The Fall
+ As we all know, the mutability mentioned in paragraph two was put to the test,
+ and it was indeed changeable. And through the introduction of sin via Adam and
+ Eve our ability to do Good and please God was removed. The result of this
+ falling is that Man is no longer capable of doing Good or pleasing God, and
+ furthermore, because of the indictment of the Fall and the guilt of sin imputed
+ upon by our First Father, Adam, we are unable to make ourselves right with God.
+***** Inability
+Now you might be wondering how this is possible in light of paragraph one which
+seems to suggest that we can /will/ what we want. And really we still can, that
+has not changed. Rather what's changed is the /ability/ to Good or please God. Man
+is unable to do the good required to please God or atone for the sin he does. As
+we will learn in the next paragraph, this inability is due to our bondage to
+sin. A slave, in bondage to his master, retains his will, but loses his ability
+as an /agent/ to freely exercise that will. This is why I brought out that
+distinction earlier, the will hasn't lost freedom, the agent has lost the means.
+***** Fallen Man
+Paul summarizes the state of the Fallen Man rather succinctly (Romans 3:10-12,
+NASB):
+#+begin_quote
+“There is none righteous, not even one;
+There is none who understands,
+There is none who seeks for God;
+All have turned aside, together they have become useless;
+There is none who does good,
+There is not even one.”
+#+end_quote
+
+This inability goes beyond not being able to do Good, Fallen Man does not even
+wish to do Good, just like Adam after he sinned, there is no contrition in the
+heart of Fallen Man (Romans 3:13-18, NASB):
+#+begin_quote
+“Their throat is an open grave,
+With their tongues they keep deceiving,”
+“The poison of asps is under their lips”;
+“Whose mouth is full of cursing and bitterness”;
+“Their feet are swift to shed blood,
+Destruction and misery are in their paths,
+And the path of peace they have not known.”
+“There is no fear of God before their eyes.”
+#+end_quote
+
+*** Paragraph 4
+**** Text
+#+begin_quote
+When God converts a sinner, and translates him into the state of grace, He freeth him from his natural bondage under sin;(h) and, by His grace alone, enables him freely to will and to do that which is spiritually good;(i) yet so, as that by reason of his remaining corruption, he doth not perfectly, nor only, will that which is good, but doth also will that which is evil.(k)
+
+(h) Col. 1:13; John 8:34, 36.
+(i) Phil. 2:13; Rom. 6:18, 22.
+(k) Gal. 5:17; Rom. 7:15, 18, 19, 21, 23.
+#+end_quote
+
+**** Remarks
+The first three paragraphs discuss the will within a few contexts. We have the
+ever existent nature of the will, the will prior to the Fall, and the will after
+the Fall. We now add a new context which is will after God's salvation. And just
+as in paragraph three the will didn't lose freedom, but rather abilility, when
+God grants salvation He doesn't grant freedom to the will so much as He grants
+ability, or perhaps better put He restores the abilities of the agent to act
+according to the will.
+
+Just as that inability to do Good in Fallen Man comes from bondage to sin, the
+restored ability to do Good comes from bondage to God, as Paul says in Romans
+6:22, "now having been freed from sin and enslaved to God."
+
+Nonetheless, we are still capable of Evil. God's restoration of our abilities
+did not remove that ability to Evil. The world still calls to us and the devil
+can successfully tempt up still. We our restored in our agency but we are still
+tainted by the corruption of sin and the results of the Fall. Paul describes
+this dual-nature in Romans 7 well, "For what I am doing, I do not understand;
+for I am not practicing what I would like to do, but I am doing the very thing I
+hate."
+
+*** Paragraph 5
+**** Text
+#+begin_quote
+The will of man is made perfectly and immutably free to do good alone, in the state of glory only.(l)
+
+(l) Eph. 4:13; Heb. 12:23; I John 3:2; Jude ver. 24.
+#+end_quote
+**** Remarks
+The final state of Man shall be in glorification, when we are togehter with God
+and our corruption has been scrubbed clean. It is at this point that we will no
+longer even have the ability to commit Evil. Our wills will become immutable --
+unchangeable -- and they will be perfected. All that we do will be Good and
+pleasing to God.
+** X.
+** XI.
+** XII.
+** XIII.
+** XIV.
+** XV.
+** XVI.
+** XVII.
+** XVIII.
+** XIX.
+** XX.
+** XXVII. Of the Sacraments
+:PROPERTIES:
+:ID:       5ad66cfc-a7dd-4e03-891a-35b7b8dee192
+:END:
+*** Paragraph I
+#+begin_quote
+Sacraments are holy signs and seals of the covenant of grace,(a) immediately instituted by God,(b) to represent Christ and his benefits, and to confirm our interest in him;(c) as also, to put a visible difference between those that belong unto the church and the rest of the world;(d) and solemnly to engage them to the service of God in Christ, according to his word.(e)
+
+a Rom. 4:11 ; Gen. 17:7,10.
+b Matt. 28:19; 1 Cor. 11:23.
+c 1 Cor. 10:16; 1 Cor. 11:25,26; Gal. 3:17.
+d Rom. 15:8; Exod. 12:48; Gen. 34:14.
+e Rom. 6:3,4; 1 Cor. 10:16,21.
+#+end_quote
+
+"Seals" here refers to the guarantee of a promise. A seal was something that certified and authenticated the accompanying statement. A sign, very much like what we think of as a sign today, was a symbol that represented something. In this case, the sacraments are representations of God's Covenant of Grace and are additionally guarantees of that covenant and its promises. These sacraments were given by God. Just as he gave Abraham a seal, He also gave us seals.
+
+The sacraments carry four functions:
+    1. They point to the Savior and His redeeming work
+    2. They attest to our relationship with Christ
+    3. They set us apart from the world
+    4. They mark us as committed to Christ
+
+*** Paragraph II
+#+begin_quote
+There is in every sacrament a spiritual relation, or sacramental union, between the sign and the thing signified; whence it comes to pass, that the names and effects of the one are attributed to the other.(f)
+
+f Gen. 17:10; Matt. 26:27,28; Tit. 3:5.
+#+end_quote
+
+Confusingly the term "sacramental union" used here has nothing to do with the same term in Lutheranism. In Lutheranism, and generally in a lot of theological writings, this term refers to the Lutheran concept of the "real presence". The Divines are not attempting to substantiate "real presence" here, rather they are using the same term to refer to a different idea. Essentially section two is an aside that lends us some understanding in better understanding the Bible. Sometimes in Scripture a sacrament and the thing it signifies are interchanged. God calls circumcision "my covenant", Paul says that baptism is the "washing of regeneration", and Peter says that baptism saves you. In this section the Divines are asserting that when we read about the signs and seals in these passages, the writer has interchanged that term with the thing it actually signifies.
+
+*** Paragraph III
+#+begin_quote
+The grace which is exhibited in or by the sacraments, rightly used, is not conferred by any power in them; neither doth the efficacy of a sacrament depend upon the piety or intention of him that doth administer it,(g) but upon the work of the Spirit,(h) and the word of institution; which contains, together with a precept authorizing the use thereof, a promise of benefit to worthy receivers.(i)
+
+g Rom. 2:28,29; 1 Pet. 3:21.
+h Matt. 3:11; 1 Cor. 12:13.
+i Matt. 26:27,28; Matt. 28:19,20.
+#+end_quote
+
+The word "exhibited" here means "to show" and "present". In the minutes of the WCF they used the word a few times. One instance of its use is in reference to a report that was written and they complained that this report was never "exhibited" to them. So, put another way, the sacraments show us Christ's grace. This grace that the sacraments present is not conferred by any power in the sacraments themselves, but through the work of the Spirit.
+
+The Divines also point out that the one administering the sacraments is not at all a part of this conferal, and the sacraments efficacy does not depend upon the minster's own personal holiness or intentions. This is a direct contradiction to the concept of sacraments in Roman Catholicism. In the RCC the one administering the sacraments is in fact part of the equation and if they are unfit to administer them, than those sacarments are nullified.
+
+The Holy Spirit uses "the word of institution" in the administering of the sacraments. This phrase just means the instructions that God has given in administering the sacarments, for example in Matthew 26 we see instructions in how to administer the sacrament of communion. These words of institution are authoritative and also carry a promise of benefits to those who receive worthily. For example, the communion wine is a sign of Christ's blood which was poured out "for the forgiveness of sins" and in the Great Commission we see baptism is tied to discipleship.
+
+*** Paragraph IV
+#+begin_quote
+There be only two sacraments ordained by Christ our Lord in the gospel, that is to say, Baptism, and the Supper of the Lord; neither of which may be dispensed by any but by a minister of the word, lawfully ordained.(k)
+
+k Matt. 28:19; 1 Cor. 11:20,23; 1 Cor. 4:1; Heb. 5:4.
+#+end_quote
+
+There are two sacraments ordained by Christ for His Church, baptism and communion. This is at odds with the Roman Catholic sacramental system, which I believe has seven sacraments. These two sacraments must be administered by an ordained minister. We are not to be like the Corinthians who administered the sacraments for themselves and did so carelessly and greedily.
+
+*** Paragraph V
+#+begin_quote
+The sacraments of the Old Testament, in regard of the spiritual things thereby signified and exhibited, were, for substance, the same with those of the New.(l)
+
+l 1 Cor. 10:1-4.
+#+end_quote
+
+There is continuity in the sacraments between that of Old Testament believers and New Testament believers.
+#+begin_quote
+For I do not want you to be unaware, brothers, that our fathers were all under the cloud and all passed through the sea; and all were baptized into Moses in the cloud and in the sea; and all ate the same spiritual food; and all drank the same spiritual drink, for they were drinking from a spiritual rock which followed them, and the rock was Christ.
+#+end_quote
+
+** XXIX. Of the Lord's Supper
+:PROPERTIES:
+:ID:       b0e2ae78-5238-4f44-879b-a655c3e02648
+:END:
+*** Paragraph I
+#+begin_quote
+Our Lord Jesus, in the night wherein he was betrayed, instituted the sacrament
+of his body and blood, called the Lord’s Supper, to be observed in his church,
+unto the end of the world, for the perpetual remembrance of the sacrifice of
+himself in his death; the sealing all benefits thereof unto true believers,
+their spiritual nourishment and growth in him, their further engagement in and
+to all duties which they owe unto him; and, to be a bond and pledge of their
+communion with him, and with each other, as members of his mystical body.
+#+end_quote
+This first section of the chapter is largely a paraphrasing of Paul's own words
+and nine points about communion:
+    1. The sacrament of communion was instituted by Jesus himself
+       This is important because communion is a replacement of the Passover meal
+       and only God could replace something like Passover.
+    2. Jesus instituted the sacrament of His body and blood
+       The focus is not on the makeup of the elements, this is not a sacrament
+       of bread and wine or wheat and grapes. The emphasis is on the reality
+       that these elements represent. "This is my body which is for you." "This
+       cup is the new covenant in my blood."
+    3. Communion is to be observed within the Church
+       Chapter three will go over this in greater detail, but communion is not
+       an individual thing, but corporate.
+    4. Communion shall be observed until the 'end of the world'
+       Twice Jesus told His disciples to remember Him, which signifies 'the
+       perpetual remembrance of the sacrifice of himself in his death'. Paul
+       also recognized this and repeated the two calls himself and then ends by
+       saying, 'as often as you eat this bread and drink the cup, you proclaim
+       the Lord's death until he comes.' (1 Cor. 11:24-26)
+    5. A remembrance of the benefits Christ won for believers
+       Communion is not only a remembrance of His sacrifice but also of the
+       benefits we have because of that sacrifice. Jesus gave Himself up in our
+       places and this sacrament reminds us of that and is why Paul said that
+       the communion cup is a "cup of blessing". (1 Cor. 10:16)
+    6. Communion is for our 'spiritual nourishment and growth'
+       The supper was not for bodily nourishment and growth, Paul had to correct
+       the Corinthians on this because they were eating their fill at the
+       communion table. Likewise, when Jesus instituted the sacrament of
+       communion, He and his disciples did not sit down to the communion mean,
+       rather it wasn't until /after/ supper that Christ instituted communion.
+       VanDixhoorn says, "the Lord's supper is like a good sermon: it is
+       intended as food for the soul"
+    7. Communion reminds us that we owe all things to Christ and ought engage in them for His sake
+       This is not out of the Bible, but rather is a point the Divines felt was
+       obvious nonetheless. A man is bound to serve one master and for the
+       Christian the sacrament of communion reiterates and reminds us who our
+       one master is. As Paul said in 1 Corinthians 10:21, "you cannot drink the
+       cup of the Lord and the cup of demons. You cannot partake of the table of
+       the Lord and the table of demons."
+    8. This sacrament symbolizes our communion with Christ
+       When we take communion we 'drink of one Spirit' (1 Cor. 12:13) and engage
+       in a 'fellowship in the blood of Christ' and 'in the body of Christ' (1
+       Cor. 10:16)
+    9. This sacrament symbolizes our communion with one another
+       'Because there is one bread, we who are many are one body, for we all
+       partake of the one bread.' (1 Cor. 10:17)
+*** Paragraph II
+After going into some detail with regards to what communion /is/ the Divines take
+a moment to explain what it /is not/:
+
+#+begin_quote
+In this sacrament, Christ is not offered up to his Father; nor any real
+sacrifice made at all, for remission of sins of the quick or dead; but only a
+commemoration of that one offering up of himself, by himself, upon the cross,
+once for all: and a spiritual oblation of all possible praise unto God, for the
+same: so that the popish sacrifice of the mass (as they call it) is most
+abominably injurious to Christ’s one, only sacrifice, the alone propitiation for
+all the sins of his elect.
+#+end_quote
+
+Communion is not a re-sacrifice of Christ. Communion is not a figurative or
+symbolic sacrifice. There is no remission of sins, for either the living or the
+dead, that occurs during communion.
+
+These points are made because of the Roman mass, which is believed to involve
+the literal body and blood of Christ, and is a re-sacrifice, by priests for the
+cleansing of sins. This cannot be so, as Hebrews 9:25,26 tell us that God had no
+intention of merely replacing animals with Christ in temple sacrifices.
+Furthermore, Jesus 'has appeared once for all at the end of the ages to put away
+sin by the sacrifice of himself.' The only Christian sacrifice was made on the
+cross.
+
+Additionally, communion is a commemoration of an offering, not a 'commemorative
+offering'. There is no offering being made, for 'He ... offered one sacrifice
+for sins for all time' and then He sat at the Father's right hand. (Hebrews 10:12)
+*** Paragraph III
+The confession now gives directions for communion:
+
+#+begin_quote
+The Lord Jesus hath, in this ordinance, appointed his ministers to declare his word of institution to the people; to pray, and bless the elements of bread and wine, and thereby to set them apart from a common to an holy use; and to take and break the bread, to take the cup, and (they communicating also themselves) to give both to the communicants; but to none who are not then present in the congregation.
+#+end_quote
+
+These instructions are pulled right from the four Gospels in which we read of the night when Christ instituted communion. The Divines took three primary elements from these passages:
+    1. Word of institution
+       As we discussed in [[id:5ad66cfc-a7dd-4e03-891a-35b7b8dee192][XXVII]] the 'word of institution' means the words given
+       by God for the administering of the sacraments. These words are not
+       powerful or imbued with some mystical qualities, but they are nonetheless
+       so important that Christ reappeared to Paul so that the apostle would
+       have the right words to say. (1 Cor. 11:23)
+    2. Prayer
+       Our prayers are so important. In communion the prayer of the minister
+       should include the blessing of the elements and that God set apart the
+       elements for this holy purpose.
+    3. Distribution of the elements
+       The minister is to break the bread and take the cup and give the supper
+       to all who are communing with Christ, including himself, but to none who
+       are not there.
+*** Paragraph IV
+#+begin_quote
+Private masses, or receiving this sacrament by a priest, or any other, alone; as likewise, the denial of the cup to the people, worshiping the elements, the lifting them up, or carrying them about, for adoration, and the reserving them for any pretended religious use; are all contrary to the nature of this sacrament, and to the institution of Christ.
+#+end_quote
+
+Where chapter three leaves off, chapter four begins. Communion is not to be
+given in private or outside of the corporate church. This meal is to celebrate
+communion with Christ and with others who follow Him. A private communion cannot
+be a celebration of our union one with another. The Divines also refute private
+communion because it is not ever shown in scriptures positively (or at all). In
+the scriptures communion is described as gathering 'together to break bread'.
+Never do we see Paul or another describe a private communion, and the closest we
+get is the individualist communion practices of the Corinthians which Paul is
+quick to stop. Finally the Divines recognized the historic relationship between
+the practice of private communion and the abominably Roman mass. In Roman
+theology, communion is a life-line to grace and can restore a sinner to Christ
+because it is a re-sacrifice of Christ.
+
+The Divines also condemn the witholding of the elements. In Roman mass the wine
+was historically only consumed by the priests. They also condemn to worshiping
+and adoration of the elements. The practice of worshiping and lifting up the
+elements is one that is still practiced today in Eastern Orthodox, Roman,
+Anglican, and some Lutheran churches. Historically, not participating in this
+idolatry was considered an act of non-conformity by both the Roman and Anglican
+churches.
+
+*** Paragraph V
+#+begin_quote
+The outward elements in this sacrament, duly set apart to the uses ordained by Christ, have such relation to him crucified, as that, truly, yet sacramentally only, they are sometimes called by the name of the things they represent, to wit, the body and blood of Christ; albeit, in substance and nature, they still remain truly and only bread and wine, as they were before.
+#+end_quote
+
+Just as explained in chapter 27, the thing being signed is interchangeable with
+the sign. This is what was referred to by the Divines as "sacramental union" in
+chapter 27. This is important because of what we go over in the next few
+sections, which is the idea of transubstantiation; that Christ is literally and
+bodily present in the sacrament of communion.
+
+*** Paragraph VI
+#+begin_quote
+That doctrine which maintains a change of the substance of bread and wine, into the substance of Christ’s body and blood (commonly called transubstantiation) by consecration of a priest, or by any other way, is repugnant, not to Scripture alone, but even to common sense, and reason; overthroweth the nature of the sacrament, and hath been, and is, the cause of manifold superstitions; yea, of gross idolatries.
+#+end_quote
+
+Here when the divines say /that doctrine/ they are referring not only to
+/transubstantiation/ but also to all other such doctrines. There is /metouisiosis/
+which is essentially the same as transubstantiation but the term used by the
+Eastern Orthodox. There is also /consubstantiation/ which is the idea that the
+sacraments are both fully symbol and the thing symbolized, the bodily presence
+of Christ is /in, with, and under/ the elements, like water in a sponge. This idea
+is held by some Anglicans, some Methodists, and all Lutherans (although the
+Lutherans would reject the use of the term and instead insist upon the term
+"Sacramental Union"). Consubstantiation is not quite such a horrendous doctrine
+as /transubstantiation/, but it does have its own slew of problems including
+idolatry, but also the effective destruction of Christ's humanity, as they
+assert that Christ was not a normal human because even in His human body Christ
+can be omnipresent.
+
+Regardless of the term used, the Divines assert that it is contrary to both
+Scripture and common sense to suggest that the bread and wine are changed, in
+any sense, into the body and blood of Christ. Theologically we know this to be
+true because we know that Christ's body was offered up once only and that his
+blood was spilled at the Cross and not again afterwards. Such doctrines are
+contrary to Scripture because after the resurrection Christ asserts that his
+body is just as ours is (Luke 24:39), Peter tells the Jews in Act 3 (verse 21)
+that Heaven has taken Christ and that He will not return until the last day,
+Paul tells the Corinthians (1 Cor,. 11:24-26) that we take communion /in
+remembrance/ of Jesus and it'd be an odd thing to be remembering Christ if He was
+in fact bodily present in communion. These doctrines are also contrary to common
+sense because we should not need a simile to identify a metaphor. They are also
+contrary because we know what true /transubstantiation/ looks like, Jesus turned
+water from one substance into another, wine, and when He did that he performed a
+true miracle and that miracle was tangible. The water literally became wine, it
+looked like wine and it tasted like wine and it had the intoxicating effects of
+wine. But the so called miracle that occurs in the various masses and services
+held by those who believe in the bodily presence of Christ is results in blood
+that tastes like wine and flesh that tastes like bread. Williamson calls this a
+"lying sign and wonder."
+
+Although not a slamdunk argument in and of itself, VanDixhoorn also points out
+that in additional to all the above, the superstitions and idolatry that
+historically accompanies these doctrines is a condemnation of them. It is
+because of these various forms of /real presence/ in which Christ is bodily
+present in the elements that Catholics historically withheld the cup from
+believers and that even today the elements are venerated and worshiped as if
+they were God.
+
+*** Paragraph VII
+#+begin_quote
+Worthy receivers, outwardly partaking of the visible elements, in this sacrament, do then also, inwardly by faith, really and indeed, yet not carnally and corporally but spiritually, receive, and feed upon, Christ crucified, and all benefits of his death: the body and blood of Christ being then, not corporally or carnally, in, with, or under the bread and wine; yet, as really, but spiritually, present to the faith of believers in that ordinance, as the elements themselves are to their outward senses.
+#+end_quote
+
+Spurning the various doctrines which claim a physical presence in the sacrament
+of communion was not enough, the Divines thought it best to also spurn the
+doctrines commonly called /memorialism/ as well. Christ is not bodily present in
+the elements, but neither is He absent. The Divines are supporting "that old
+Calvinistic doctrine" as VanDixhoorn puts it, which is the doctrine that Christ
+is united spiritually with partakers in communion. Calvin famously said, "the
+Spirit truly unites things separated in space." Christ is present "really, but
+spiritually" in the sacrament. Spiritual things are not artificial things, we
+might sometimes like the ability to understand these mysteries or discern them
+as reality, but this is a human failing not a doctrinal one. The Divines sum it
+up well, Christ is as "present to the faith of believers in that ordinance as
+the elements themselves are [present] to their outward senses."
+
+*** Paragraph VIII
+#+begin_quote
+Although ignorant and wicked men receive the outward elements in this sacrament; yet, they receive not the thing signified thereby; but, by their unworthy coming thereunto, are guilty of the body and blood of the Lord, to their own damnation. Wherefore, all ignorant and ungodly persons, as they are unfit to enjoy communion with him, so are they unworthy of the Lord’s table; and cannot, without great sin against Christ, while they remain such, partake of these holy mysteries, or be admitted thereunto.
+#+end_quote
+
+And lastly, we must address the fence around the table. Over the weekend,
+Alistair jumped a fence to go play with some tin farm animals and the lot next
+to Jolly Cone. The fence was a wonderful suggestion to "stay out", but a fence
+is passive and, as my son proved, if someone wishes to ignore it they generally
+can. Sometimes fences are a warning to stay away but there is no harm in
+ignoring the fence, Alistair did not get in trouble for ignoring the fence, but
+he was kindly asked to leave. Unlike that fence, the fence around the Lord's
+Table is one with teeth and it warns of the harm to trespassers. Those who
+trespass this fence are "guilty of the body and blood of the Lord" (1 Cor.
+11:27-29). VanDixhoorn describes the unbeliever partaking of communion to be
+coming to the Father's table without being invited by His Son.
+
+Williamson points out another benefit of the metaphorical fence, it relinquishes
+the person who constructs the fence of guilt for any harm. If you do not have a
+fence, or at least signs that say "no trespassing", on your property line it's
+going to be difficult to persuade a jury that you are not guilty of any harm
+done to someone on your property. But if you do have a fence or a sign, than the
+trespasser is the one who bears the guilt of harm. Likewise, this fence around
+the table is not only a warning for those unworthy of the Table, but ensures
+that any who ignore the warning and still partake of the elements bears the full
+guilt for their actions.

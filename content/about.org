@@ -1,0 +1,42 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2022-08-04 Thu>
+:MODIFIED: <2022-08-04 Thu>
+:TYPE: about
+:END:
+#+title: About Me
+
+# Howdy, I'm Ian.
+
+#+NAME: Elsa and I
+#+CAPTION: A new-born Elsa and I, sitting on a couch enjoying a beer.
+#+ATTR_HTML: :float right :width 300px :margin 1rem
+[[./elsa-and-i.jpeg]]
+
+I'm a sinner saved by grace. I am a husband and father.
+
+By weekday I am a software developer at Jack Henry and Associates. I almost
+exclusively work on frontend projects and primarily use the Lit Framework.
+
+My past jobs include working as a systems engineer, a consultant, a full-stack developer
+(Openshift, Java, Kotlin, StencilJS), a systems administrator, a helpdesk
+agent, and a data-entry monkey. I am a self-taught programmer and systems
+operator. I believe this is an immense asset, I am capable to self-directed
+learning, often times on the job. I love learning this way and generally try to
+take new jobs that will push me into technology I do not already know.
+Language-wise I am comfortable working with Lua, Javascript, Python, Rust, Go,
+Bash,  PowerShell, and a few Lisps.
+
+I've sort of stumbled and tripped my way into the software world, but after work
+and on the weekend I am a neo-Luddite. I work hard to find an appropriate
+balance between modern technologies and my God-given desire to work with my
+hands.
+
+As you will learn from my projects and blog posts, my interests are many and
+varied. I have a degree in New Testament studies, with a minor in Koine Greek --
+I love studying and discussing theology. I also like animals, a lot. I live on a
+farm in very rural Missouri with my wife and children. We sell raw cow milk, raw
+goat milk, and eggs. If you live between Poplar Bluff and West Plains and are
+interested in our produce, feel free to reach out!
+
+If you're interested in more about this site, check out [[./drollery.org][this page]].

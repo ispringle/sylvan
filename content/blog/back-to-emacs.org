@@ -1,0 +1,29 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2023-04-17 Mon 12:22>
+:MODIFIED: <2023-04-17 Mon 12:22>
+:TYPE: blog
+:END:
+#+title: Back to Emacs
+#+filetags: :meta:emacs:
+
+I have missed writing my blog posts and tinkering. Neovim got the tinkering itch
+pretty well and I LOVE Lua, but there's something very satisfying about Emacs
+that Neovim just doesn't satisfy. I've gone ahead and returned to Emacs. The Lit
+Framework support is still lackluster, but I've gotten it a little better
+(something I should definitely cover in another post) with LSP, Treesitter, and
+some ts-ls plugins. The other big reason to come back to Emacs is that I missed
+writing blog posts. I tried doing it in Neovim but that wasn't great. I tried in
+Oblivion, but don't like Oblivion or Markdown. I tried Neovim's org-mode and
+vimwiki, but neither are the same as the tried and true org-mode. Plus none of
+these alternatives kept the barrier to writing as low as it is with Emacs. I'm
+sure I could have gotten that figured out and lowered one day, but I'd still
+have to issue of publishing being lackluster. With Emacs I have two fairly good
+options that are already built out and wokring, my custom build.el script and of
+course the OG Sylvan built with NextJS. I am not sure what I'll go with forever,
+but right now I'm using the org-publish function in my build.el script. It's not
+the best, but that's okay, it's more than nothing. +I have to figure out
+attachments still, right now pictures won't be displayed so that sucks.+
+
+Until next time (which might just be fixing up some old posts that were written
+during the MD/Oblivion era) :wave:

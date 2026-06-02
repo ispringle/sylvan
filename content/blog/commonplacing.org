@@ -1,0 +1,33 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2022-08-27 Sat 18:09>
+:MODIFIED: <2022-08-27 Sat 18:23>
+:TYPE: blog
+:ID:       50ce2d99-b12e-4370-80e9-218b8f8993d5
+:END:
+#+title: Commonplacing
+#+filetags: :meta:commonplacing:notetaking:
+
+So, I'm thinking about the concept of digital gardens, the ideas behind
+Zettelkasten, and my own interpretation of that I am /currently/ calling "[[id:e1a06552-0ed0-4320-a955-a1610f5a0382][Grok]]". I
+was reading on another /digital garden/ about this historic concept called
+"[[https://en.wikipedia.org/wiki/Commonplace_book][commonplace books]]" or "commonplaces". The idea goes back further to this Latin
+term called /locus communis/, and it goes back even further to the Greek idea of
+"τόπος κοινός" (topos koinos) or "[[https://en.wikipedia.org/wiki/Literary_topos][literary topos]]". John Locke even wrote a book
+on this idea called /[[https://archive.org/details/gu_newmethodmaki00lock][A New Method of Making Common-Place-Books]]/. I'm interested in
+this for a couple reasons; first it's interesting to see that my desire to have
+/some place/ to store my ideas is shared with many in antiquity, and second as I
+am refining this concept and building on it and how I want to treat it
+conceptually as well as in practice, it's handy to see how others, both present
+and past, have treated this same sort of concept. I think I ultimately dislike
+the Zettelkasten, at least for /me/ because it is too fine-grained and too keyed
+into specfic topics. I am not a researcher, I just like a broad array of things
+and I enjoy seeing their interconnectedness.
+
+This commonplacing (not sure if that's a coined term or not) idea is something I
+find really attractive because instead of being a repository for specfic, well
+crafted, and atomic thoughts, it is instead a repository for a myriad of
+thoughts, quotes, ideas, and excerpts on a whole array of topics.
+
+Likely, at some future time I will update the name of my digital garden to be
+more in tune with this historic concept. We'll see...

@@ -1,0 +1,48 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2024-02-11 Sun 10:54>
+:MODIFIED: <2024-02-11 Sun 10:54>
+:TYPE: blog
+:END:
+#+title: Work Smarter
+#+filetags: :programming:common-lisp:lisp:
+
+I have been using Common Lisp a bit lately and have been working on a
+web-server/framework called "Bog" to server up this website as a way of digging
+deeper into some practical CL applications. I was wanting to conditionally
+display some markup content when a URI had a file that matched the path, and if
+there was no file, then don't add any additional content, just display the
+dynamic data. My first iteration did this:
+
+#+begin_src common-lisp
+  (let ((val (function-returning-content-or-nil)))
+    (when val val))
+#+end_src
+
+I thought to myself that this might be a good function to bottle into a macro,
+so I came up with:
+
+#+begin_src common-lisp
+(defmacro when-val (f)
+  `(let ((val ,f))
+    (when val val)))
+#+end_src
+
+I was talking about this with a friend and he mentioned you can just call `and`,
+/and/ sure enough you can!
+
+#+begin_src common-lisp
+(and (function-returning-content-or-nil))
+#+end_src
+
+This works great and with a couple less calls, but it's not very readable.
+Luckily we can just write a quick macro to enhance the readability without
+adding any overhead to the call:
+
+#+begin_src common-lisp
+(defmacro when-yield (f)
+  `(and ,f))
+#+end_src
+
+And then I realized that you can just call the function,
+~(function-returning-content-or-nil)~, so this was mostly useless...

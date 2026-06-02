@@ -1,0 +1,20 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2022-08-08 Mon>
+:MODIFIED: <2022-08-17 Wed 12:21>
+:TYPE: blog
+:ID:       ae4a19f6-0688-4ef9-8ac2-75155d8bab4a
+:END:
+#+title: Tangle All The Things
+#+filetags: :meta:orgmode:tangle:
+
+So I had this idea last night, and like with all great ideas I googled it see if
+anyone else had come up with it first. To my dismay, I was far from the first
+person to have this awesome idea. The idea? Literate dotfiles!
+
+Imagine how great it'd be! You write a single file, let's call it ~dotfiles.org~
+and then inside of that you write all your dotfiles and document them. Then you
+just use org's tangle feature to pull all the config code and stick it into all
+the right files in all the right directories. I think I will try this first with
+a ZSH config, since I'm getting really annoyed with Fish in emacs and Fish
+inside of vterm inside of emacs seems sort of overkill.

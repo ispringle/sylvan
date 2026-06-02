@@ -1,0 +1,169 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2022-08-09 Tue>
+:MODIFIED: <2022-08-17 Wed 12:21>
+:TYPE: blog
+:ID:       7ed66b4e-572f-4044-b3d2-a87709f9f815
+:END:
+#+title: Literate Dots Part 1: Zsh!
+#+filetags: :emacs:orgmode:tangle:shell:zsh:
+
+I had mentioned [[id:ae4a19f6-0688-4ef9-8ac2-75155d8bab4a][tangling all the things]] yesterday, and I've gone ahead and
+gotten a literate Zsh config up and running this morning. I've also created a
+new repo for it [[https://github.com/pard68/literate-dotfiles][here]].
+
+Setup-wise, I went through a few different configurations to keep this DRY and
+eventually settled on setting global tangle settings in the properties drawer
+and then specifying each block's output file in the source block. I might update
+this eventually, but I couldn't convince babel to run any other way. The two
+things needed to get this working are the following in the file's property
+drawer:
+
+#+begin_src org
+:PROPERTIES:
+:header-args: :tangle yes :comment link :mkdirp yes :padline no :noweb tangle
+:END:
+#+end_src
+
+And then each source block must specify the output file like such:
+
+#+begin_src org
+:tangle ~/.zshenv
+#+end_src
+
+After that it's merely a matter of writing your dotfiles out inside the source
+blocks, organizing them in the orgfile as you like, and providing any comments
+you care to provide. As an example, I am going to just copy/paste the bulk of my
+zsh config from the literate-dotfiles repo into the rest of this post.
+
+* Environment Variables
+Sadly, ZSH sorta sucks and the ~.zshenv~ has to live in the home directory, so
+we're going to set that up and tell it to look in ~.config/zsh/~ for all the
+rest of the zsh config files we might use. So we'll setup the zshenv file to
+have all the right XDG settings, plus point all the various other things that
+need to be told to use .config to do so.
+** XDG and Zsh paths
+#+begin_src sh :tangle ~/.zshenv
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_DATA_HOME="$HOME/.cache/"
+
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export HISTFILE="$ZDOTDIR/zhistory"
+#+end_src
+
+** HIST
+We want to make sure our history is nice and long. It's 2022, so we shouldn't
+worry too much about disk space or RAM... I hope
+
+#+begin_src sh :tangle ~/.zshenv
+export HISTSIZE=10000
+export SAVEHIST=10000
+#+end_src
+
+** EDITOR
+Let's set our editor quickly so we can make sure we're never far away from
+emacs.
+
+#+begin_src sh :tangle ~/.zshenv
+export EDITOR="/usr/local/bin/emacsclient"
+export VISUAL="/usr/local/bin/emacsclient"
+#+end_src
+
+** $PATH
+We'll setup some ~$PATH~ stuff now too. I really hate editing one-liner ~$PATH~
+exports, so we'll just do one per line, why not? Maybe there is a cool way to
+use org and iterate over a list of path values and concatenate them together,
+but IDK how to do that right now...
+
+#+begin_src sh :tangle ~/.zshenv
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/bin:$PATH"
+export PATH="/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/go/bin/:$PATH"
+export PATH="$HOME/.emacs.d/bin/:$PATH"
+export PATH="$HOME/.npm-global/bin:$PATH"
+#+end_src
+
+* Zshrc
+** A E S T H E T I C
+
+Your terminal, in Technicolor!
+#+begin_src sh :tangle ~/.config/zsh/.zshrc
+autoload -U colors && colors
+PROMPT="%B%F{magenta}λ%f%b "
+RPROMPT="%*"
+#+end_src
+** Zsh Options
+
+[[https://zsh.sourceforge.io/Doc/Release/Options.html][Here]] is a list of all the zsh options that can be set.
+#+begin_src sh :tangle ~/.config/zsh/.zshrc
+setopt HIST_SAVE_NO_DUPS
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_SPACE
+
+setopt AUTO_CD
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
+
+REPORTTIME=3
+#+end_src
+
+** Ghetto Jump
+
+There are some neat "jump" plugins like ~j~ and ~z~. But we're just going to DIWhy it!
+#+begin_src sh :tangle ~/.config/zsh/.zshrc
+alias d='dirs -v'
+for index ({1..9}) alias "$index"="cd + ${index}"; unset index
+#+end_src
+
+** Completion
+
+#+begin_src sh :tangle ~/.config/zsh/.zshrc
+autoload -U compinit
+zstyle ':completion:*' menu select completer _complete _correct _approximate
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)
+#+end_src
+
+* Aliases
+Before we make an alias file, let's source them from the zshrc file.
+#+begin_src sh :tangle ~/.config/zsh/.zshrc
+source $ZDOTDIR/aliases
+#+end_src
+
+Okay, now for some aliases.
+#+begin_src sh :tangle ~/.config/zsh/aliases
+alias c!=clear
+alias g=git
+alias ga="git add"
+alias ga.="git add ."
+alias gb="git branch"
+alias gbd="git branch -D"
+alias gc="git commit"
+alias gcm="git commit -m"
+alias gca="git commit --amend"
+alias gcm!!="git add .; git commit -m "Update!"; git push"
+alias gcl="git clone"
+alias gco="git checkout"
+alias gd="git diff"
+alias gl="git log"
+alias gm="git merge"
+alias gpl="git pull"
+alias gps="git push"
+alias gps!="git push --force"
+alias gpsu="git push -u origin master"
+alias gri="git rebase -i"
+alias gs="git status"
+
+alias l="ls"
+alias la="ls -a"
+alias ll="ls -l"
+alias lla="ls -la"
+#+end_src

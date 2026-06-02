@@ -1,0 +1,13 @@
+:PROPERTIES:
+:TYPE: index
+:ROLL_DIR: grok
+:ROLL_HEADING: Slips
+:END:
+#+title: Slips
+#+date: <2022-08-04 Thu>
+
+These are my "slips", which are notes about things. This is not a really
+zettelkasten style "slips" because they're not atomic and I'm not a college
+student with an infinite amount of free time to finely and carefully manicure my
+notes. Lots of links are empty and some are thousands of words. It's what it is,
+and it serves my purposes.

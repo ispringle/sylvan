@@ -1,0 +1,31 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2023-04-28 Fri 13:40>
+:MODIFIED: <2023-04-28 Fri 13:40>
+:TYPE: blog
+:END:
+#+title: Astrojs and Orgmode
+#+filetags: :astrojs:orgmode:emacs:meta:
+
+* Astrojs & Orgmode
+
+I was pretty excited to see that the JavaScript orgmode parser I used when this
+blog was built with NextJS was working Astrojs now. I had [[file:astro-was-a-failure-to-launch.org][tried this last year]]
+and was unable to get it working, but I am glad to see that someone else has
+pulled it off and I am happy to capitalize on their hard work. Actually, the
+author of [[https://github.com/rasendubi/uniorg/][Uniorg]] created the Astrojs integration, and it's pretty simple to use.
+Essentially you add the integration in your Astrojs config and then write a
+function to retrieve the Orgmode files. You can also pass a config to the Uniorg
+parser with Uniorg and Rehype plugins to use in the parsing of each file.
+
+What this means for the blog is that it looks exactly like it did when I was
+using Oblivion to write content. But also I think I'm ready for a change. I do
+not like the look so that's probably going to go through a few iterations before
+I settle on something I'm happy with. After using the built in styles from
+Orgmode for a while, I really sort of took a liking to it and want to bring that
+in to the mix. And of course, I am still pursuing my desire to better mimic
+Tufte's own styling.
+
+Lastly, I'm trying out some screenrecordings and will probably be sharing those.
+Not looking to become the next Luke Smith, just found that the medium is helpful
+for sharing some stuff with others.

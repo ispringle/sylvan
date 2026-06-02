@@ -1,0 +1,22 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2022-09-07 Wed 16:29>
+:MODIFIED: <2022-09-07 Wed 16:33>
+:TYPE: blog
+:ID:       4f75ecc6-499d-475a-bde0-014e19774a24
+:END:
+#+title: Emacs From Scratch, Part 0
+#+filetags: :emacs:
+
+My experience with Emacs can be split into two parts:
+1. Emacs with doom
+2. Realizing Doom didn't load and quitting Emacs as quickly as possible and
+   trying to figure out how to get back into Doom
+
+I have been experiencing some annoyances with emacs lately. It hangs or lags or
+chokes on large files (over 1000 lines) and it crashes sometimes. Partly out of
+a desire to strip back and get a leaner emacs, and partly out of a desire to
+really "try" emacs without the help of someone else's config, I am going to
+attempt to build my own emacs from scratch. Of course it'll be /comfy/ in honor of
+=comfy.vim=, =comfy.nvim=, and =comfy.tmux=. I'll keep you posted, likely you'll start
+seeing something pop up in the [[/literate]] index before you hear from me about it.

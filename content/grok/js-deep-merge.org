@@ -1,0 +1,136 @@
+:PROPERTIES:
+:ID:       ff8d3048-3ee5-41db-b839-c1017488a573
+:TYPE: slip
+:END:
+#+title: js-deep-merge
+#+date: <2022-08-04 Thu>
+
+This is my deep-merge function to merge an infinite number of objects.
+#+begin_src javascript
+function merge(...objs) {
+    const newObj = {};
+    const isObject = obj => typeof obj == 'object' && obj !== null;
+
+    if (objs.some(obj => Array.isArray(obj))) {
+      return [].concat(...objs.filter(Array.isArray));
+    }
+    while (objs.length > 0) {
+        let obj = objs.splice(0, 1)\[0\];
+        if (isObject(obj)) {
+            for (let key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (isObject(obj[key])) {
+                  newObj[key] = merge(newObj[key] || {}, obj[key]);
+                } else {
+                  newObj[key] = obj[key];
+                }
+            }
+            }
+        }
+    }
+    return newObj;
+}
+#+end_src
+
+I've since run into an issue with the above when trying to preserve a class,
+which means preserving the ~prototype~ property of the object. I ended up solving
+this with a new deep merge function which also has the added benefit of being
+far more readable (the type docs help too).
+
+#+begin_src javascript
+/**
+ * Returns the type of `x`
+ * This functions operation is largely explained in this blog post:
+ * https://javascriptweblog.wordpress.com/2011/08/08/fixing-the-javascript-typeof-operator/
+ * With the change that I've updated the regex to match newer object
+ * types which contain more than just letters. This function is a needed improvement
+ * ofer the `typeof` keyword as that is not robust at determining the type of something
+ * which is derived from an object. For example `typeof [1,2]` is "object" and not the
+ * expected "array".
+ * @param {any} x
+ * @returns string
+ */
+const typeOf = x => ({}.toString.call(x).match(/\s([^\]]+)/)[1]);
+
+/**
+ * Returns true of `maybeObj` is a "deep" Object (object Object)
+ * @param {any} maybeObj
+ * @returns boolean
+ */
+const isObject = maybeObj => typeOf(maybeObj) === 'Object';
+
+/**
+ * Returns true if `maybeArr` is an Array
+ * @param {any} maybeArr
+ * @returns boolean
+ */
+const isArray = maybeArr => typeOf(maybeArr) === 'Array';
+
+/**
+ * Returns a closure that will merge Objects
+ * @function
+ * @param {object} opt
+ * @param {boolean} opt.proto Whether or not to preserve prototypes, defaults to true
+ * @param {boolean} opt.symbols Whether or not to merge symbols, defaults to false
+ * @returns function(original: object, objs: ...object): object
+ */
+export function mergeWithOptions(opt = { proto: true, symbols: false }) {
+  /**
+   * Merge closure, loaded with `opts`
+   * @function
+   * @param {object} original
+   * @param  {...object} objs
+   * @returns
+   */
+  const m = (original, ...objs) => {
+    const target = original;
+    if ([target, ...objs].some(isArray)) {
+      // @ts-ignore
+      return [].concat([target, ...objs].filter(isArray));
+    }
+    objs.forEach(obj => {
+      /**
+       * Merges property prop from `obj` into `target`.
+       * This function uses the descriptor
+       * @function
+       * @param {PropertyKey} prop
+       * @returns void
+       */
+      const mergeProp = prop => {
+        const descriptor = Object.getOwnPropertyDescriptor(obj, prop);
+        if (descriptor.enumerable) {
+          if (isObject(obj[prop]) && isObject(target[prop])) {
+            descriptor.value = m(target[prop], obj[prop]);
+          }
+          // This will preserve descriptors, if this ends up harming perf
+          // or is unneded than `target[prop] = descriptor.value;` would suffice
+          Object.defineProperty(target, prop, descriptor);
+        }
+      };
+
+      Object.getOwnPropertyNames(obj).forEach(mergeProp);
+      if (opt.symbols) {
+        Object.getOwnPropertySymbols(obj).forEach(mergeProp);
+      }
+      if (opt.proto) {
+        mergeWithOptions({ ...opt, ...{ proto: false } })(
+          Object.getPrototypeOf(target),
+          Object.getPrototypeOf(obj),
+        );
+      }
+    });
+    return target;
+  };
+  return m;
+}
+
+/**
+ * Merges objects with default options
+ * @function
+ * @param  {...object} objs
+ * @returns object
+ */
+export function merge(...objs) {
+  return mergeWithOptions()(objs.splice(0, 1)[0], ...objs);
+}
+#+end_src

@@ -1,0 +1,20 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2022-08-04 Thu>
+:MODIFIED: <2022-09-10 Sat 10:10>
+:TYPE: root
+:END:
+#+title: Index
+
+This is the website of Ian Pringle. I am a [[id:31cc2c4c-36be-4356-b26f-34361280c342][particular baptists]] living in the
+sticks of Missouri with my gracious wife and four feral children. I am a
+software developer by trade, currently working with web-components and
+vanillaJS. Outside of my 9-to-5, I am a tinkerer, farmer, mechanic, builder, and
+cowboy.
+
+You can find my latest [[./blog/][blog posts here]]. I have a "digital garden" that I call
+"[[file:grok/20220804T050000--grok.org][grok]]" which might be of interest to some people. I'm also trying to [[./books][review
+books]] (I'm failing at this) that I am [[file:reading.org][reading]] just to sort of keep a record of
+what I'm reading and anything I thought about the book after finishing it.
+Finally, I have a collection of other pages and articles [[/pages][here]]. These mostly
+include [[/tags/conf][configurations]] and files I've forgotten to mark as private...

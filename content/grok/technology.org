@@ -1,0 +1,18 @@
+:PROPERTIES:
+:TYPE: slip
+:ID:       619162da-9e62-46a9-a4b7-a31ce2919a81
+:END:
+#+title: Technology
+#+date: <2022-08-04 Thu>
+
+I [[file:technology-i-use.org][use]] technology every day, just like everyone else. I think what maybe
+separates me from a large number of people though is my views of "technology" --
+by which I am referring to modern, digital technology. How I use technology,
+where I draw the line, and how I attempt to remain logical and even-handed in my
+usage and view is something that I am always trying to grapple with and
+understand, so much so that I have a [[file:philosophy-of-technology.org][philosophy of technology]].
+
+Some technologies I use a lot are:
+- python
+- html
+- [[file:css.org][css]]

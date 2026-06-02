@@ -1,0 +1,28 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2023-04-17 Mon 12:11>
+:MODIFIED: <2023-04-17 Mon 12:11>
+:TYPE: blog
+:ID:       68308fb3-7edd-46a4-b935-8d2ef5bdc78c
+:END:
+#+title: Embedding HTML and JavaScript In A Blog Post
+#+filetags: :emacs:meta:
+
+With org-mode and org-export it's very easy to embed HTML, CSS, and JavaScript into your content. All that you need to do is use the =begin_export= block and declare it to be =html=. Now anything you put within that box will be added to the HTML document. For example the following:
+
+#+begin_src
+#+begin_export html
+<div><p><u>This</u> is a <emp style="color: red;">test</emp></p></div>
+#+end_export
+#+end_src
+
+Will product this:
+#+begin_export html
+<div><p><u>This</u> is a <emp style="color: red;">test</emp></p></div>
+#+end_export
+
+This will work with JavaScript as well, so long as you export html and then use =<script>=  tags:
+#+begin_export html
+<script>const clicker = () => {alert("You clicked the button!!!")}</script>
+<button onclick="clicker()">Do NOT Click!</button>
+#+end_export

@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       c7fc3d7e-c6d8-4230-9a4e-4c1fc746cde1
+:TYPE: slip
+:END:
+#+title: jsdoc
+#+date: <2022-08-04 Thu>
+
+[[https://jsdoc.app/][JSDocs]] is a specification for documenting typing of JavaScript functions and
+objects in comments. It's very similar to Typescript and has a huge amount of
+interop with TS.
+
+- [[file:jsdoc/object-type.org/][object type]]

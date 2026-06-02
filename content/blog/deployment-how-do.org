@@ -1,0 +1,173 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2022-08-07 Sun>
+:MODIFIED: <2022-08-27 Sat 06:09>
+:TYPE: blog
+:ID:       595d0f72-dfbf-47f2-93dc-c15294e2536b
+:END:
+#+title: Deployment. How Do?
+#+filetags: :infra:gh-actions:vercel:nextjs:
+
+Currently, [[https://ian.ist][ian.ist]] is hosted with [[https://vercel.com][Vercel]]. I am using Vercel and not my
+[[https://gitlab.com/bitranchlabs/ops][Bitranchlabs Infra]] because it was easier, and I am also not sure if I am going to
+keep my Kubernetes stuff running -- it's $50+ / month for something I really
+don't need. Vercel is great, I have no real reason to leave, except that my
+website's /content/ is in my private org repo, while the rest of the site is in
+the [[https://github.com/pard68/sylvan][Sylvan]] repo, and the org content must be mounted into the Sylvan repo in order
+to build this site.
+
+I might have a solution that would allow me to continue with Vercel, while also
+having these two separate repos. Vercel can either build the project for you, or
+it can be triggered from [[https://vercel.com/docs/concepts/git/vercel-for-github#using-github-actions][GitHub actions]]. The best way I can think to use this is
+to trigger the Vercel deployment from the private org-mode repo I have on Github.
+This action will pull in my Sylvan repo, mount the org content into that project,
+build the project, and then trigger the Vercel deployment. I think I can break this
+into two approximate parts; first, trigger Vercel deployments from the org repo
+and second trigger the org repo's action when changes occur to Sylvan.
+
+** Deploying to Vercel from a GitHub action
+
+I am just following right along with the docs they provide [[https://vercel.com/support/articles/how-can-i-use-github-actions-with-vercel][here]]. Step one is to
+create the workflow file in my org repo:
+
+#+name: Github Action for deploying non-prod
+#+begin_src yaml
+name: GitHub Actions Vercel Preview Deployment
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+on:
+  push:
+    branches-ignore:
+      - main
+jobs:
+  Deploy-Preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+#+end_src
+
+#+name: Github Action for deploying prod
+#+begin_src yaml
+name: GitHub Actions Vercel Production Deployment
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+on:
+  push:
+    branches:
+      - main
+jobs:
+  Deploy-Production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+#+end_src
+
+Of course, these alone won't do the trick since my org repo doesn't actually
+contain a NextJS project. I need to /pull/ that NextJS code in from the Sylvan
+repo in a separate step. We can do this by adding another checkout step to the
+action:
+
+#+begin_src yaml
+    - name: Checkout Sylvan
+      uses: actions/checkout@v2
+      with:
+        repository: pard68/sylvan
+        path: /app
+#+end_src
+
+I'll be honest, GitHub actions have always confused me, I'm never really certain
+how they work or /where/ I am. I think the easiest way to do this is to actually
+=checkout= the Sylvan repo /first/ and then =checkout= the org repo into a directory
+of the previously checked out Sylvan repo, like such:
+#+begin_src yaml
+jobs:
+  Deploy-Production:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Sylvan
+      uses: actions/checkout@v2
+      with:
+        repository: pard68/sylvan
+    - name: Checkout Org content
+      uses: actions/checkout@v2
+      with:
+        path: src/content/
+#+end_src
+
+UPDATE:
+
+I ended up copying the org repo to a directory called ~org/~ and then using a
+step to ~mv org/* public/~. I did this because there is content in the ~public/~
+directory in the Sylvan repo that I want to keep (fonts and SVGs).
+
+** Trigger builds when Sylvan repo changes
+
+Now to trigger the build action when the Sylvan repo changes I need to add
+another build hook called a ~repository_dispatch~:
+
+#+begin_src yaml
+on:
+  push:
+    branches:
+      - master
+  repository_dispatch:
+    types:
+      - build
+#+end_src
+
+I'm not going to do this on the preview builds, just doesn't seem like there's
+much point to that, so we'll only trigger a rebuild on the master branch. This
+dispatch event is basically a way for us to trigger the action from outside of
+GitHub -- which is confusing because we're actually triggering this action from
+/another/ GitHub repo's action. Think of this as a means of triggering actions
+via REST. Next we create a new developer token with the ~repo~ scope and add
+that to the repo that we want to "watch". And then finally we create the action
+on that other repo. You'll want to update the repo name in the URI to
+whatever user or org's repo is the one that is getting /triggered/. Also notice
+that the ~event_type~ is set to ~build~, which corresponds to the dispatch
+~type~ specified previously:
+
+#+begin_src yaml
+name: Trigger rebuild of parent repo
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-20.04
+    container: alpine/httpie
+    steps:
+      - name: Notify parent repo
+        run: http post https://api.github.com/repos/<User/Org>/<Repo Name>/dispatches "Authorization:token ${{ secrets.NOTIFY_TOKEN }}" event_type=build --ignore-stdin
+#+end_src
+
+I ended up changing the type from ~build~ to ~sylvan-update~ because that type
+name is what the action's run is called and this way it's a bit more expressive
+
+** Update!
+Just a quick update, I have written my Github Action as a literate file, so now
+you can check it out [[id:b3a36c3c-1fa7-40b8-9933-6b7c5fca9b10][here]], the nifty thing about this is that the file is what I
+use to compile the yaml for the GH actions, so it is in some sense a "living"
+document and will always reflect what I am actually using.

@@ -1,0 +1,8 @@
+:PROPERTIES:
+:TYPE: slip
+:ID:       271fe520-bd8f-4556-9d0a-b2f7b9abccf4
+:END:
+#+title: History of the WCF
+#+date: <2022-08-21 Sun>
+#+OPTIONS: ^:{}
+* History

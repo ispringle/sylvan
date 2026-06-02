@@ -1,0 +1,26 @@
+#+title:      mpv
+#+date:       [2024-01-26 Fri 13:08]
+#+filetags:   :software:
+#+identifier: 20240126T130822
+
+* mpv
+
+~mpv~ is a multimedia player that runs on the command line predominently. A unique
+feature of mpv is that it can be controlled via a socket using JSON commands. To
+start an mpv instance that is ready to accept socket commands run the following:
+#+begin_src shell
+mpv --input-ipc-server=/tmp/mpv.sock -v --keep-open=yes --idle=yes --force-window=immediate
+#+end_src
+
+Once mpv has been started in this way you can then append to the playlist with
+the following JSON:
+#+begin_src json
+{ "command": ["loadfile", "somefile.mp3", "append"] }
+#+end_src
+
+The ~loadfile~ directive "append-play" can be used instead. This directive will
+append the video to the playlist and start playing the playlist if it is not
+already being played.
+
+From the command line you can echo the above string into ~socat~ and direct it to
+the appropriate socket, ie ~/tmp/mpv.sock~. 

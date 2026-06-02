@@ -1,0 +1,17 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2023-07-21 Fri 14:32>
+:MODIFIED: <2023-07-21 Fri 14:32>
+:TYPE: blog
+:END:
+#+title: An Editor Crisis
+#+filetags:
+
+* And Editor Crisis
+I'm having something of an editor crisis. I want to use emacs (or neovim, that'd
+be good too) but because I use the Lit Framework at work, I find I must really
+lean on VSCode. The issue is that Lit, besides being a horrible name for search
+purposes, uses JS template literal strings for elements and this is a bit messy
+when it comes to parsing the buffer. I've debated various solutions, and I think
+I might try the option of "no syntax highlighting, no auto-formatting, no
+completion". It's how I use to roll. I can do it. We'll see.

@@ -1,0 +1,17 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: [2023-08-25 Fri 10:38]
+:MODIFIED: [2023-08-25 Fri 10:38]
+:TYPE: slip
+:ID:       88d0e61c-0b9f-49a9-8e13-02333c2b7eb3
+:END:
+#+title: proteins
+#+filetags:   :diet:macronutrients:
+
+Proteins are a harder form of calorie to convert into energy then either carbs
+or fat and ideally your body would never have to. The process is a bit more
+involved and requires more energy to produce (food is broken down into ever
+simplified amino acid chains until eventually you get an individual amino acid
+that is then consumable by the body). Protein is far easier to use and store
+because unlike carbs, amino acid isn't just a means of fueling muscles, it's the
+core building block of the body, from DNA/RNA to muscles.

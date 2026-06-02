@@ -1,0 +1,6 @@
+Dockerfile
+.git/
+.gitignore
+.github/
+.packages/
+.DS_STORE

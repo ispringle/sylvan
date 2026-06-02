@@ -1,0 +1,18 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2023-08-25 Fri 11:54>
+:MODIFIED: <2023-08-25 Fri 11:54>
+:TYPE: blog
+:END:
+#+title: A Short Canoe Trip
+#+filetags: :life:
+
+Went canoeing down the Eleven Point River last weekend. The plan was to camp out
+on the river over night, but we ended up not going far enough up river to make a
+two-day trip very viable, so we ended up finishing the 14 mile trip in one day.
+I'm definitely planning on going back again and starting at the starting point
+of the river up near Tucker, MO.
+
+#+NAME: Canoe Trip
+#+CAPTION: First person view canoeing down the Eleven Point River on one of the calmer portions of the river.
+[[../media/canoe-trip-river-2023-08-19.png]]

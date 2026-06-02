@@ -1,0 +1,359 @@
+R:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:TYPE: slip
+:ID:       975b63b1-d9a0-420f-8494-469c96e6f4b2
+:END:
+#+TITLE: Concourse CI
+#+date: <2021-09-03 Fri 10:30>
+
+* About
+** Jobs
+** Resources
+* Install & Setup
+** docker-compose test suite
+#+NAME: docker-compose.yml
+#+BEGIN_SRC yaml :cache yes :dir (getenv "TMPDIR") :file docker-compose.yml :results silent file
+version: '3'
+
+services:
+  concourse-db:
+    image: postgres
+    environment:
+      POSTGRES_DB: concourse
+      POSTGRES_PASSWORD: concourse_pass
+      POSTGRES_USER: concourse_user
+      PGDATA: /database
+
+  concourse:
+    image: concourse/concourse
+    command: quickstart
+    privileged: true
+    depends_on: [concourse-db]
+    ports: ["8080:8080"]
+    environment:
+      CONCOURSE_POSTGRES_HOST: concourse-db
+      CONCOURSE_POSTGRES_USER: concourse_user
+      CONCOURSE_POSTGRES_PASSWORD: concourse_pass
+      CONCOURSE_POSTGRES_DATABASE: concourse
+      CONCOURSE_EXTERNAL_URL: http://localhost:8080
+      CONCOURSE_ADD_LOCAL_USER: test:test
+      CONCOURSE_MAIN_TEAM_LOCAL_USER: test
+      CONCOURSE_WORKER_BAGGAGECLAIM_DRIVER: overlay
+      CONCOURSE_CLIENT_SECRET: Y29uY291cnNlLXdlYgo=
+      CONCOURSE_TSA_CLIENT_SECRET: Y29uY291cnNlLXdvcmtlcgo=
+      CONCOURSE_X_FRAME_OPTIONS: allow
+      CONCOURSE_CONTENT_SECURITY_POLICY: "*"
+      CONCOURSE_CLUSTER_NAME: test
+      CONCOURSE_WORKER_CONTAINERD_DNS_SERVER: "8.8.8.8"
+      CONCOURSE_WORKER_RUNTIME: "containerd"
+#+END_SRC
+
+#+begin_src sh :dir (getenv "TMPDIR") :async :results silent
+docker-compose up -d
+#+end_src
+
+#+begin_src sh :dir (getenv "TMPDIR") :async :results silent
+docker-compose down
+#+end_src
+
+** fly-cli
+*** Install
+**** MacOS
+#+begin_src sh
+brew install --cask fly
+#+end_src
+**** Linux
+**** Windows
+
+*** Login
+#+begin_src sh :results raw :wrap example
+fly -t test login -c http://localhost:8080 -u test -p test
+#+end_src
+
+#+RESULTS:
+#+begin_example
+logging in to team 'main'
+
+
+
+target saved
+
+#+end_example
+
+* Usage
+** Hello world
+*** Create the pipeline
+First we start with the top-level key of ~jobs~, which is an *unordered* list \
+of jobs.
+#+NAME: jobs-keyword
+#+begin_src yaml :results silent
+jobs:
+#+end_src
+
+We now specify the name of our first job.
+#+NAME: hello-world-job
+#+begin_src yaml :results silent
+- name: hello-world-job
+#+end_src
+
+And then we add the ~plan~ keyword. This is an *ordered* list of /steps/.
+#+NAME: plan-keyword
+#+begin_src yaml :results silent
+  plan:
+#+end_src
+
+A step is the smallest unit of work in a Concourse pipeline. Each step is a
+single container. If you have four steps, Concourse will spin-up four
+different containers to execute each step. A step can be one of a few possible
+keywords:
+
+- ~get~ retrieves a Resource
+- ~put~ stores a Resource
+- ~task~ executes a task, which can be thought of as a function --ideal a /pure/
+  function
+- ~set_pipeline~ can configure a pipeline. This is useful for updating a
+  pipeline's Resources
+- ~load_var~ sets a variable scoped to the rest of the pipeline, allowing it to
+  be accessed anywhere else within the pipeline
+- ~in_parallel~ run steps in parallel
+- ~do~ runs steps in serial, this is useful for handling failures
+- ~try~ runs a single step and treats it as a success, regardless of the actual result
+
+For our purposes we'll use the ~task~ step to run a containee which will ~echo~
+out =Hello World!=. Something to note about not only ~task~ but most/all steps
+is that they can either be defined in the file or in another file entirely.
+This might be useful for programmatically determinging what step to run based
+on a Resource.
+
+#+NAME: hello-world-task
+#+begin_src yaml :results silent
+  - task: hello-world-task
+#+end_src
+
+In our examople we will specify the ~config~ however we could just as easily
+specify a ~file~. Regardless of whether we wrote the ~config~ inline or if we
+sourced it from a ~file~, all [[https://concourse-ci.org/tasks.html#schema.task][task configurations]] look the same -- the platform
+to run on (Windows, Linux, or Darwin), an ~image_resources~ type, the ~run~
+command, and any number of optional keywords:
+
+#+NAME: hello-world-config-1
+#+begin_src yaml :results silent
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: busybox
+      run:
+        path: echo
+        args: ["Hello, world!"]
+#+end_src
+
+The above is fairly straight-forward. Run the ~busybox~ image on a Linux worker with the command ~echo "Hello, world!"~.
+
+#+begin_src yaml :tangle hello-world.yml :noweb yes
+<<jobs-keyword>>
+<<hello-world-job>>
+<<plan-keyword>>
+<<hello-world-task>>
+<<hello-world-config-1>>
+#+end_src
+
+*** Run the pipeline
+
+Getting a pipeline into Concourse and running takes three steps:
+
+1. Set the pipeline
+#+begin_src sh
+fly -t test set-pipeline -p hello-world -c hello-world.yml
+#+end_src
+
+#+RESULTS:
+: no changes to apply
+
+1. Unpause the pipeline
+#+begin_src sh
+fly -t test unpause-pipeline -p hello-world
+#+end_src
+
+#+RESULTS:
+: unpaused 'hello-world'
+
+3. Run the pipeline
+#+begin_src sh :async :results drawer+replace
+fly -t test trigger-job --job hello-world/hello-world-job --watch
+#+end_src
+
+#+RESULTS:
+| started                | hello-world/hello-world-job | #8           |             |
+|                        |                             |              |             |
+| [1minitializing[0m |                             |              |             |
+| [1mselected          | worker:[0m                | 666c2e56e7a0 |             |
+| [1mselected          | worker:[0m                | 666c2e56e7a0 |             |
+| [1mselected          | worker:[0m                | 666c2e56e7a0 |             |
+| [1mrunning           | echo                        | Hello,       | world![0m |
+| Hello,                 | world!
+                    |              |             |
+| succeeded              |                             |              |             |
+
+** Outputs and Inputs
+
+Let's take the above example and add an output. In concourse an output is
+defined and when the task is run Concourse sticks a directory in rootfs with
+the name specified in the output field. We'll add an ~outputs~ keyword to the
+config and change our ~run~ to echo a message into that output dir:
+
+#+NAME: hello-world-config-2
+#+begin_src yaml :results silent
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: busybox
+      outputs:
+      - name: storage
+      run:
+        path: sh
+        args:
+        - -cx
+        - |
+          echo "Hello, from the hello-world-task!" > storage/msg
+#+end_src
+
+When we created the above output Concourse creates a new "artifact" with then
+name specified and then mounts that artifact into the container. These artifacts
+can be thought of as mounts.
+
+And then we can add a new task which takes the above tasks's output as its
+input:
+
+#+NAME: receiver-task
+#+begin_src yaml :results silent
+  - task: receiver-task
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: busybox
+      inputs:
+      - name: storage
+      run:
+        path: cat
+        args: ["storage/msg"]
+#+end_src
+
+If an input's artifact does not exist that will cause the task to fail.
+
+#+begin_src yaml :tangle hello-receiver.yml :noweb yes
+<<jobs-keyword>>
+<<hello-world-job>>
+<<plan-keyword>>
+<<hello-world-task>>
+<<hello-world-config-2>>
+<<receiver-task>>
+#+end_src
+
+*** Run the pipeline
+
+Update the pipeline in Concourse and run the new pipeline:
+
+#+begin_src sh :async :results drawer+replace
+fly -t test set-pipeline -p hello-world -c hello-receiver.yml
+#+end_src
+
+#+RESULTS:
+
+#+begin_src sh :async :results drawer+replace
+fly -t test trigger-job --job hello-world/hello-world-job --watch
+#+end_src
+
+#+RESULTS:
+
+
+** Let's have some fun!
+#+NAME: fun.yml
+#+BEGIN_SRC yaml :cache yes :results silent file :tangle fun.yml
+jobs:
+- name: fib_n
+  plan:
+  - task: init
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: busybox
+      outputs:
+      - name:  fib
+      run:
+        path: sh
+        args:
+          - -cx
+          - |
+            echo $((1 + $RANDOM % 10)) >> fib/n
+            echo "1" > fib/i
+            echo "1" > fib/curr
+            echo "1" > fib/next
+  - task: run
+    config:
+      platform: linux
+      image_resource:
+        type: registry-image
+        source:
+          repository: busybox
+      inputs:
+      - name:  fib
+      outputs:
+      - name:  fib
+      run:
+        path: sh
+        args:
+          - -cx
+          - |
+            if cmp -s "fib/n" "fib/i"
+            then
+              cat fib/curr
+            else
+              curr=$(cat fib/curr)
+              next=$(cat fib/next)
+              i=$(cat fib/i)
+              cat fib/next > fib/curr
+              echo $(($curr + $next)) > fib/next
+              echo $(($i + 1)) > fib/i
+              exit 1
+            fi
+    on_failure:
+      task: run
+      attempts: 100
+      config:
+        platform: linux
+        image_resource:
+          type: registry-image
+          source:
+            repository: busybox
+        inputs:
+        - name:  fib
+        outputs:
+        - name:  fib
+        run:
+          path: sh
+          args:
+            - -cx
+            - |
+              if cmp -s "fib/n" "fib/i"
+              then
+                echo "The $(cat fib/n) Fibonacci number is $(cat fib/curr)."
+                exit 0
+              else
+                curr=$(cat fib/curr)
+                next=$(cat fib/next)
+                i=$(cat fib/i)
+                cat fib/next > fib/curr
+                echo $(($curr + $next)) > fib/next
+                echo $(($i + 1)) > fib/i
+                exit 1
+              fi
+
+#+end_src

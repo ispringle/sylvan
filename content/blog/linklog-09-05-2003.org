@@ -1,0 +1,44 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2023-09-05 Tue 06:00>
+:MODIFIED: <2023-09-05 Tue 06:00>
+:TYPE: blog
+:END:
+#+title: Linklog 09 05 2003
+#+filetags: :linklog:
+| Date Bookmarked | Bookmark                              | Comments                                                       |
+|-----------------+---------------------------------------+----------------------------------------------------------------|
+|      2023-09-05 | [[https://bugfender.com/blog/javascript-console-logging-for-developers/][Advanced JavaScript]]                   | I never knew you could do this with the browser's console      |
+|      2023-09-05 | [[https://github.com/charmbracelet/skate][charmbracelet/skate]]                   | might be worth using to replace my current shell secret system |
+|      2023-09-05 | [[https://charm.sh/][Charm]]                                 |                                                                |
+|      2023-09-05 | [[https://github.com/charmbracelet/vhs][charmbracelet/vhs]]                     |                                                                |
+|      2023-09-05 | [[http://telecom.csail.mit.edu/judy-sammel.html][Get a Cable Modem....Go to Jail]]       |                                                                |
+|      2023-09-04 | [[https://archive.org/details/BlackArt3DEBook][Black Art of 3D Game Programming]]      |                                                                |
+|      2023-09-04 | [[https://henrikwarne.com/2012/02/18/how-i-beat-rsi/][How I Beat Repetitive Stress Injury]]   |                                                                |
+|      2023-09-04 | [[https://www.replay.io/][Replay - The time-travel debugger]]     | this might be a great tool for work                            |
+|      2023-09-04 | [[https://danieldk.eu/Posts/2023-09-03-Glove80.html][Review: Glove80 Ergonomic Keyboard]]    | seems pricey                                                   |
+|      2023-09-04 | [[https://www.youtube.com/@happycoder1989/videos][James Lambert - YouTube]]               |                                                                |
+|      2023-09-04 | [[https://github.com/lambertjamesd/portal64][lambertjamesd/portal64]]                |                                                                |
+|      2023-09-04 | [[https://github.com/magit/magit/issues/4027][highlighting commit messages in magit]] |                                                                |
+|      2023-09-04 | [[https://magit.vc/manual/magit/Commit-Message-Conventions.html][Commit Message Conventions]]            | might be a way to get conventional commits working with magit  |
+|      2023-09-04 | [[https://github.com/sshaw/copy-as-format][sshaw/copy-as-format]]                  |                                                                |
+|      2023-09-04 | [[https://github.com/nyyManni/ejira][nyyManni/ejira]]                        |                                                                |
+|      2023-09-04 | [[https://store.steampowered.com/app/1205520/Pentiment/][Pentiment on Steam]]                    |                                                                |
+|      2023-09-04 | [[https://sacred-texts.com/][Internet Sacred Text Archive]]          |                                                                |
+|      2023-09-04 | [[https://goto.ucsd.edu/~ucsdpl-blog/liquidtypes/2015/09/19/liquid-types/][A Gentle Introduction to Liquid Types]] |                                                                |
+|      2023-09-04 | [[https://blog.nearlyfreespeech.net/2023/08/22/bigger-better-faster-more/][NearlyFreeSpeech.NET]]                  |                                                                |
+|      2023-09-03 | [[https://vale.sh/][Vale.sh - A linter for prose]]          |                                                                |
+|      2023-09-03 | [[https://github.com/RobPo/lorapaper][RobPo/lorapaper]]                       |                                                                |
+|      2023-09-03 | [[https://lock.cmpxchg8b.com/timex.html][Hacking the Timex m851]]                |                                                                |
+|      2023-09-01 | [[https://existential.audio/blackhole/][BlackHole: Route Audio Between Apps]]   |                                                                |
+|      2023-09-01 | [[https://blog.cerowrt.org/post/toutatis/][Space travel via tether]]               |                                                                |
+|      2023-09-01 | [[https://www.youtube.com/watch?v=OXem5v9Tfnw][Seven Nation Army Bardcore Cover]]      | using this on the site                                         |
+|      2023-09-01 | [[https://www.youtube.com/watch?v=xpxCu2q_99A][I Want It That Way Bardcore Cover]]     | using this on the site                                         |
+|      2023-09-01 | [[https://www.youtube.com/watch?v=YNm3Ggv01Ns][Barbie Girl Bardcore Cover]]            | using this on the site                                         |
+|      2023-09-01 | [[https://www.youtube.com/watch?v=0sb25bH3OnE][Smooth Criminal Bardcore Cover]]        | using this on the site                                         |
+|      2023-08-31 | [[https://github.com/domchristie/turn][domchristie/turn]]                      | seems like a zero-effort transition api lib for turbo          |
+|      2023-08-31 | [[https://www.scanofthemonth.com/][Scan of the Month]]                     |                                                                |
+|      2023-08-29 | [[https://github.com/squint-cljs/squint][squint-cljs/squint]]                    | was looking at how this might be able to get cljs into astro   |
+|      2023-08-29 | [[https://tauri.app/][Tauri Apps]]                            |                                                                |
+|      2023-08-29 | [[https://addons.mozilla.org/en-US/firefox/addon/grasshopper-urls/][Grasshopper]]                           |                                                                |
+|      2023-08-29 | [[https://play.elevatorsaga.com/index.html][Elevator Saga]]                         |                                                                |

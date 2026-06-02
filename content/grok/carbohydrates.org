@@ -1,0 +1,36 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:TYPE: slip
+:ID:       663f090d-2a4f-47e6-a268-df9d578cef27
+:END:
+#+title: carbohydrates
+#+date: <2023-08-25 Fri 08:53>
+#+filetags:   :diet:macronutrients:
+
+
+Carbohydrates are the easiest form of calorie to convert (except things that
+require fermentation like grasses and other "roughage", we do not have the means
+of fermenting food the way ruminants, horses, etc. do). Some carbs are easier
+than others but they're all (starch, sugar, fiber) converted in the exact same
+way and result in glucose
+
+(food -> dextrin/maltose -> lactase/sucrase/maltase -> monosaccharides ->
+glycogen -> glucose)
+#+begin_src mermaid :file carb-digestion.png
+flowchart LR
+a["Food"]
+b["Dextrin/Maltose"]
+c["Lactase/Sucrase/Maltase"]
+d["Monosaccharides"]
+e["Glycogen"]
+f["Glucose"]
+a --> b
+b --> c
+c --> d
+d --> e
+e --> f
+#+end_src
+
+This form of energy is not long lasting, your body can only store glucose in one
+way, fat. All the energy goes into your blood stream and whatever isn't consumed
+is then converted into fat reserves.

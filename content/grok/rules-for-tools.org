@@ -1,0 +1,17 @@
+:PROPERTIES:
+:TYPE: blog
+:ID:       a9526dd6-1682-4d67-9b30-11defd57bda0
+:END:
+#+title:      rules-for-tools
+#+date:       [2023-01-01 Sun 06:06]
+#+filetags:   
+#+identifier: 20230101T060622
+
+
+* Rules For Tools
+** Time Saver
+A tool that takes more time to learn/setup/use is not a good tool
+** Good Enough
+There's no point in selecting a tool that has features you'll never need. A tool should meet your requirements, exceeding isn't important
+** Don't Reinvent The Wheel
+If a tool's method of doing a thing isn't to your liking either accept it or find a new tool

@@ -1,0 +1,12 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2022-08-04 Thu>
+:MODIFIED: <2022-09-10 Sat 10:10>
+:TYPE: index
+:ROLL_DIR: blog
+:ROLL_HEADING: Blog Roll
+:END:
+#+title: Blog Roll
+
+These are some of the posts I’ve written. They are not all up to date or
+relevant, but I try to keep everything I’ve published around.

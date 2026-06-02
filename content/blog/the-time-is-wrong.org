@@ -1,0 +1,18 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2022-08-18 Thu>
+:MODIFIED: <2022-08-23 Tue 16:30>
+:TYPE: blog
+:END:
+#+title: The Time Is Wrong!
+#+filetags: :javascript:meta:
+
+Well... it has happened again. The last time it was because of the YAML format
+interpretting timestamps as UTC unless explicitly set otherwise. And I [[file:the-case-of-the-wrong-date.org][fixed that
+issue]]... but that won't help this, since I gave up on using Contentlayer like
+two days later 😭.
+
+I'm not sure the reason for the problem this time. I even [[https://github.com/szenius/set-timezone][updated]] the timezone
+for the GH action so that it would be set to CST. Nonetheless, the date entries
+in the indices (anywhere that is listing blog posts or content) is a whole day
+/earlier/ than the actual timestamp for the entry.

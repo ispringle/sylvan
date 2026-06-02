@@ -1,0 +1,30 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2023-01-20 Fri>
+:MODIFIED: <2023-04-26 Wed 14:21>
+:TYPE: blog
+:END:
+#+title: Astro Migration Todo
+#+filetags: :meta:
+
+The site works and is in use. It’s looking better and is on a good track. I’ve just recently gotten some kinks out of the Obsidian post creation process. Here is a todo list of what I want to get done still:
+
+- [ ] Do something with the callouts
+- [ ] Pull footnotes to the side when screen size allows
+- [x] Get a better `<img>` setup, images currently are far too large
+- [x] figure out a way to load markdown files as MDX in Astro[fn:1]
+- [ ] Figure out a changelog[fn:2]
+- [x] header
+- [x] backlinks
+- [ ] books page
+- [ ] recipes page
+- [x] nicer footer
+- [x] fonts
+- [ ] add desired portions of TufteCSS[fn:3]
+- [x] dedicated homepage
+
+This isn’t everything the site needs and this isn’t meant to be comprehensive -- although maybe I should create a site page just for todos and a history of to-dones… Anywho, this page will be updated as things are done and new things are added
+
+[fn:1]: This also might mean “figure out what Astro is flipping out at MDX frontmatter”. I tried this approach using GH actions to rename the files, but that just resulted in errors because of my frontmatter -- despite the docs saying Astro supports MDX frontmatter
+[fn:2]: This would be similar to what Evan Travers is [[https://evantravers.com/articles/2019/11/08/using-git-to-generate-a-changelog-for-your-blog/|doing on this site]]. I asked Evan about his changelog and he said he’s updated and is just shelling out and that he mentioned it in [[https://evantravers.com/articles/2022/06/17/extending-redcarpet-for-admonition-blocks/#git-changelog|this post]].
+[fn:3]: [[https://edwardtufte.github.io/tufte-css/]]

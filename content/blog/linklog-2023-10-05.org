@@ -1,0 +1,65 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2023-10-05 Thu 10:26>
+:MODIFIED: <2023-10-05 Thu 10:26>
+:TYPE: blog
+:END:
+#+title: Linklog 2023-10-05
+#+filetags: :linklog:
+
+Been looking at getting back into the game engine development. Not sure if I'd
+port Sunshine to something else or if I'd start a reworking on Sunshine. I doubt
+Sunshine currently will build without updating it and there were some annoying
+bugs that I couldn't track down before. I'd also like to implement something to
+enable height/elevation, perhaps something similar to how Doom is doing it.
+
+Anyway a lot of these links this week reflect me looking into that.
+
+| 2023-10-02T17:49:06.527Z | [[https://www.youtube.com/watch?v=-0gccsR1EEs][I Made My Own Computer \vert Let's See How It Works]]                                                                                         |
+| 2023-10-01T22:57:22.209Z | [[https://boyter.org/posts/publishing-a-pico8-game/][Publishing my first game using pico-8 \vert Ben E. C. Boyter]]                                                                                |
+| 2023-09-30T11:07:10.229Z | [[https://www.redblobgames.com/making-of/draggable/][Draggable objects]]                                                                                                                       |
+| 2023-09-30T11:06:06.388Z | [[https://flexboxfroggy.com/][Flexbox Froggy - A game for learning CSS flexbox]]                                                                                        |
+| 2023-09-30T10:31:13.277Z | [[https://github.com/amroibrahim/DIYDoom][amroibrahim/DIYDoom: An attempt to understand how DOOM engine works]]                                                                     |
+| 2023-09-29T17:46:14.810Z | [[https://www.dfworkshop.net/][Daggerfall Workshop – Remastering Daggerfall]]                                                                                            |
+| 2023-09-29T16:36:39.047Z | [[https://www.playfuljs.com/a-first-person-engine-in-265-lines/][A first-person engine in 265 lines]]                                                                                                      |
+| 2023-09-29T16:11:27.609Z | [[https://www.thecookingguy.com/cookbook/2023/5/1/salt-amp-chili-chicken-spice-bag][Salt & Chili Chicken Spice Bag — SAM THE COOKING GUY]]                                                                                    |
+| 2023-09-29T16:11:10.340Z | [[https://www.youtube.com/watch?v=lBuCq4WAjes][THE IRISH SPICE BAG (THAT WILL CHANGE FAST FOOD IN THE US FOREVER!) \vert SAM THE COOKING GUY]]                                               |
+| 2023-09-29T15:26:11.534Z | [[https://www.manim.community/][Manim Community]]                                                                                                                         |
+| 2023-09-29T14:22:33.693Z | [[https://un.curl.dev/][README]]                                                                                                                                  |
+| 2023-09-29T02:34:21.580Z | [[https://lodev.org/cgtutor/raycasting.html][Raycasting]]                                                                                                                              |
+| 2023-09-29T02:34:15.931Z | [[https://github.com/Owlzy/PIXI-CAST][Owlzy/PIXI-CAST: Simple PIXI.js raycast engine]]                                                                                          |
+| 2023-09-29T02:33:47.412Z | [[https://github.com/NotTimTam/dendgeon][NotTimTam/dendgeon: An open-source doom-style dungeon crawler engine.]]                                                                   |
+| 2023-09-29T02:32:21.755Z | [[https://github.com/emre-aki/raycast.js][emre-aki/raycast.js: An advanced ray-caster engine written in JavaScript from scratch, with zero dependencies]]                           |
+| 2023-09-29T02:31:55.436Z | [[https://github.com/salt-die/terminal_dungeon][salt-die/terminal_dungeon: Doom-like raycasting engine that renders to ascii for playing in terminal]]                                    |
+| 2023-09-28T12:49:32.442Z | [[https://noyaml.com/][🚨🚨 That's a lot of YAML 🚨🚨]]                                                                                                         |
+| 2023-09-27T22:28:31.396Z | [[https://nakst.gitlab.io/essence][Essence]]                                                                                                                                 |
+| 2023-09-27T22:25:21.600Z | [[https://www.uiua.org/][Uiua]]                                                                                                                                    |
+| 2023-09-27T02:18:28.525Z | [[https://raverie-us.github.io/raverie-engine/][Raverie Engine]]                                                                                                                          |
+| 2023-09-27T00:46:35.392Z | [[https://dotfiles-matter.click/][Dotfiles matter!]]                                                                                                                        |
+| 2023-09-26T11:25:47.222Z | [[https://pbfcomics.com/][The Perry Bible Fellowship - Offbeat comic strip by Nicholas Gurewitch. Includes archives, information about the author, and purchases.]] |
+| 2023-09-26T10:02:46.947Z | [[https://major.io/p/quadlets-replace-docker-compose/][Quadlets might make me finally stop using docker-compose · Major Hayden]]                                                                 |
+| 2023-09-26T01:34:54.978Z | [[https://doomwiki.org/wiki/Entryway][The Doom Wiki at DoomWiki.org - Doom, Heretic, Hexen, Strife, and more]]                                                                  |
+| 2023-09-26T00:53:24.931Z | [[https://howtomarketagame.com/2023/09/25/john-romero-on-his-book-doom-guy-and-developing-games-at-a-small-scale/][John Romero on his book Doom Guy and developing games at a small scale – How To Market A Game]]                                           |
+| 2023-09-24T22:02:03.456Z | [[https://github.com/natalie-lang/natalie][natalie-lang/natalie: a work-in-progress Ruby compiler, written in Ruby and C++]]                                                         |
+| 2023-09-24T21:52:10.232Z | [[https://tomscii.sig7.se/2022/07/uMon-stupid-simple-monitoring][μMon: Stupid simple monitoring]]                                                                                                          |
+| 2023-09-23T17:31:48.657Z | [[https://www.diesel-bike.com/][Home of the Off Grid; Diesel Motorcycle, 650 RPM Lister Generator, Beetle TDI, Wind and Solar Power]]                                     |
+| 2023-09-23T17:31:14.423Z | [[https://diesel-bike.com/Centurion/urba_centurion.html][Urba Centurion 128 mpg Diesel Powered Car]]                                                                                               |
+| 2023-09-23T17:30:57.518Z | [[https://www.diesel-bike.com/Wood_Splitter/Electro-Split.htm][CrazyJerry's Electric Woodsplitter - and it's fast!]]                                                                                     |
+| 2023-09-23T17:30:45.198Z | [[https://www.diesel-bike.com/Diesel_Bike/Suzuki.html][The Suzuki Motorcycle Diesel Project]]                                                                                                    |
+| 2023-09-23T17:19:12.499Z | [[https://www.behlencountry.com/product/100-gallon-rigid-poly-hog-waterer/][100 Gallon Rigid Poly Hog Waterer \vert Behlen Country]]                                                                                      |
+| 2023-09-23T14:16:52.249Z | [[https://imba.io/][Imba - The friendly full-stack language!]]                                                                                                |
+| 2023-09-23T12:56:27.653Z | [[https://github.com/akermu/emacs-libvterm/issues/555][vterm only redrawing on input · Issue #555 · akermu/emacs-libvterm]]                                                                      |
+| 2023-09-23T12:54:51.749Z | [[https://github.com/doomemacs/doomemacs/issues/2608][vterm buffer not updating contents & +vterm/here opens in popup · Issue #2608 · doomemacs/doomemacs]]                                     |
+| 2023-09-23T12:39:45.316Z | [[https://xon.sh/][The Xonsh Shell — Python-powered shell]]                                                                                                  |
+| 2023-09-23T12:38:49.084Z | [[https://plumbum.readthedocs.io/en/latest/][Plumbum: Shell Combinators and More — Plumbum: Shell Combinators]]                                                                        |
+| 2023-09-23T11:49:23.082Z | [[https://sites.google.com/site/steveyegge2/effective-emacs][steve yegge - effective-emacs]]                                                                                                           |
+| 2023-09-23T10:50:09.619Z | [[https://github.com/WebReflection/uhtml#readme][WebReflection/uhtml: A micro HTML/SVG render]]                                                                                            |
+| 2023-09-23T10:48:05.290Z | [[https://github.com/WebReflection/heresy/#readme][WebReflection/heresy: React-like Custom Elements via V1 API builtin extends.]]                                                            |
+| 2023-09-23T10:46:54.634Z | [[https://github.com/WebReflection/lighterhtml][WebReflection/lighterhtml: The hyperHTML strength & experience without its complexity 🎉]]                                                |
+| 2023-09-23T10:43:17.647Z | [[https://github.com/zqqqqz2000/shshsh][zqqqqz2000/shshsh: a bridge between python and shell]]                                                                                    |
+| 2023-09-23T00:40:10.598Z | [[https://bearblog.dev/][Bear Blog]]                                                                                                                               |
+| 2023-09-23T00:39:57.543Z | [[https://herman.bearblog.dev/the-frustration-loop/][The Frustration Loop \vert ᕕ( ᐛ )ᕗ Herman's blog]]                                                                                          |
+| 2023-09-22T21:50:00.242Z | [[http://archive.gamedev.net/archive/reference/articles/article347.html][Mode 13h]]                                                                                                                                |
+| 2023-09-22T21:40:07.963Z | [[https://github.com/matthewp/haunted][matthewp/haunted: React's Hooks API implemented for web components 👻]]                                                                   |
+| 2023-09-22T21:39:36.936Z | [[https://viperhtml.js.org/hyperhtml/documentation/][hyperHTML Documentation]]                                                                                                                 |
+

@@ -1,0 +1,214 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2023-08-28 Mon 16:20>
+:MODIFIED: <2023-08-28 Mon 16:20>
+:TYPE: blog
+:END:
+#+title: Exploring the Raindrop.io API
+#+filetags: :emacs:
+
+I want to integrate the Raindrop.io API into emacs so I can grab all my unsorted
+bookmarks, sort them in an orgfile, and then export those changes back up to
+Raindrop.io. But as a good first step I'd settle for just being able to import
+the them so I can use them in orgmode. Maybe even a sync system someday!
+
+To start you need an account, then you have to add a new integration to your
+account and grab the /test/ token. Then read up on their [[https://developer.raindrop.io/][API docs]].
+
+With test token and docs in hand, it should be pretty simple to pull in some
+JSON and then hopefully convert that to something orgmode can handle. The API
+seems pretty straightforward. Once you have a token you can use that in your
+header and then make some calls.
+
+Best as I can tell I want to GET [[https://developer.raindrop.io/v1/raindrops/multiple][multiple raindrops]] and the collection I'm
+interested in is the "unsorted" collection, which happens to have the ID of ~-1~.
+That makes this a very simple retrieval process!
+
+#+begin_src restclient :eval no
+GET https://api.raindrop.io/rest/v1/raindrops/-1
+Authorization: Bearer :token
+#+end_src
+
+Here is a truncated look at that return.
+#+BEGIN_SRC json :eval no
+{
+  "result": true,
+  "items": [
+    {
+      "_id": 635937337,
+      "link": "https://snowcat.codeberg.page/",
+      "title": "Snowcat Browser",
+      "excerpt": "",
+      "note": "",
+      "type": "link",
+      "user": {
+        "$ref": "users",
+        "$id": 1510247
+      },
+      "cover": "https://rdl.ink/render/https%3A%2F%2Fsnowcat.codeberg.page%2F",
+      "media": [
+        {
+          "type": "image",
+          "link": "https://rdl.ink/render/https%3A%2F%2Fsnowcat.codeberg.page%2F",
+          "screenshot": true
+        }
+      ],
+      "tags": [],
+      "important": false,
+      "reminder": {
+        "date": null
+      },
+      "removed": false,
+      "created": "2023-08-28T10:18:29.955Z",
+      "lastUpdate": "2023-08-28T10:18:31.373Z",
+      "collection": {
+        "$ref": "collections",
+        "$id": -1,
+        "oid": -1
+      },
+      "highlights": [],
+      "domain": "snowcat.codeberg.page",
+      "creatorRef": {
+        "_id": 1510247,
+        "name": "ispringle",
+        "avatar": "",
+        "email": ""
+      },
+      "sort": 635937337,
+      "collectionId": -1
+    },
+    ...
+  ],
+  "count": 51,
+  "collectionId": -1
+}
+#+END_SRC
+
+The way I use Raindrop, my unsorted collection is my "inbox" and holds about a
+week's worth of links. I'm hoping to integrate my weekly processing with a
+[[file:to-start-a-weekly-linklog.org][linklog]] so the above request is all I need from Raindrop. Now to get this into
+elisp and then munge some JSON into orgmode syntax.
+
+Luckily it appears the first part is trivial! The two keys here are, I'm looking
+just for the raw data back, right now, and that means I need to wrap the call to
+~request~ in this other function, ~request-response-data~. Without this, the data
+comes back and then the function errors. Not entirely sure why, but I guess it
+expects a callback or something and when it doesn't get it, it freaks out. The
+other thing, is the ~:sync t~ which lets this run synchronously. This is a pretty
+short-lived API call, we're not returning an astounding amount of data or
+making numerous round-trips. So synchronous isn't a big deal either way, but we
+actually need it here because without it this ~request~ function expects a call
+back and will make the call asynchronously and then hit the callback when it's
+got the data. In my context, I'm not sure how that would even work since I'm
+trying to fill this data into an org file.
+
+#+begin_src emacs-lisp :eval no
+(request-response-data
+ (request
+   "https://api.raindrop.io/rest/v1/raindrops/-1"
+   :headers `(("Authorization" . ,(concat "Bearer " token)))
+   :sync t
+   :parser 'json-read))
+#+end_src
+
+#+begin_src elisp :eval no
+: ((result . t) (items . [((_id . 635937337) (link . https://snowcat.codeberg.page/) (title . Snowcat Browser) (excerpt . ) (note . ) (type . link) (user ($ref . users) ($id . 1510247)) (cover . https://rdl.ink/render/https%3A%2F%2Fsnowcat.codeberg.page%2F) (media . [((type . image) (link . https://rdl.ink/render/https%3A%2F%2Fsnowcat.codeberg.page%2F) (screenshot . t))]) (tags . []) (important . :json-false) (reminder (date)) (removed . :json-false) (created . 2023-08-28T10:18:29.955Z) (lastUpdate . 2023-08-28T10:18:31.373Z) (collection ($ref . collections) ($id . -1) (oid . -1)) (highlights . []) (domain . snowcat.codeberg.page) (creatorRef (_id . 1510247) (name . ispringle) (avatar . ) (email . )) (sort . 635937337) (collectionId . -1)) ...]) (count . 51) (collectionId . -1))
+#+end_src
+
+That looks hideous and unreadable to me, but in theory elisp knows what that
+says! Now just to get the data I want, which I think for the linklog is the
+created timestamp, the title, and the link. With that I can just make a simple
+list of URLs with a date for some (maybe) context and then if I want to include
+any notes about the link or what I liked or why I bookmarked it I can.
+
+The 50,000ft view of what I need to do is iterate over the ~items~ array and for
+each item in it, pull out the date, title, and link. Should be pretty simple,
+especially since there isn't really any deep nesting of those values.
+
+The first step is to get the ~'items~ out which is simple enough now that we have
+lisp data to work with. ~assoc-default~ will grab the ~KEY~ from an ~alist~ for you.
+Then it's a matter of going through each hashmap in the ~'items~ array and
+grabbing our three desired keys.
+
+#+begin_src emacs-lisp
+(setq resp (request-response-data
+            (request
+              "https://api.raindrop.io/rest/v1/raindrops/-1"
+              :headers `(("Authorization" . ,(concat "Bearer " token)))
+              :sync t
+              :parser 'json-read)))
+(setq bookmarks (assoc-default 'items resp))
+(setq values (mapcar #'(lambda (b)
+                         (let ((title (assoc-default 'title b))
+                                (link (assoc-default 'link b))
+                                (date (assoc-default 'created b)))
+                           (list title link date))) bookmarks))
+#+end_src
+
+This almost gets us all the way there, but the output is a bit unwieldy, let's
+format the link and title into an Org link. Not the ~string-replace~, because the
+pipe char (~|~) has special meaning in org syntax, so we use the escaped version
+of that char, ~\vert~. This wouldn't be needed but the pipe char is pretty common in
+website titles, I even use it in my own!
+
+#+begin_src emacs-lisp :eval no
+(setq resp (request-response-data
+            (request
+              "https://api.raindrop.io/rest/v1/raindrops/-1"
+              :headers `(("Authorization" . ,(concat "Bearer " token)))
+              :sync t
+              :parser 'json-read)))
+(setq bookmarks (assoc-default 'items resp))
+(setq values (mapcar #'(lambda (b)
+                         (let ((title (assoc-default 'title b))
+                                (link (assoc-default 'link b))
+                                (date (assoc-default 'created b)))
+                           (list date (format "[[%s][%s]]" link (string-replace "|" "\\vert" title))))) bookmarks))
+#+end_src
+
+Which yields:
+
+| 2023-08-28T10:18:29.955Z | [[https://snowcat.codeberg.page/][Snowcat Browser]]                                                                        |
+| 2023-08-28T10:14:48.883Z | [[https://nyxt.atlas.engineer/][Nyxt browser: The hacker's browser]]                                                     |
+| 2023-08-28T01:02:50.648Z | [[https://otter-browser.org/][Otter Browser]]                                                                          |
+| 2023-08-28T00:50:46.627Z | [[https://runno.dev/articles/wasi-web-component][Runno]]                                                                                  |
+| 2023-08-27T22:05:03.688Z | [[https://github.com/magit/with-editor][magit/with-editor: Use the Emacsclient as the $EDITOR of child processes]]               |
+| 2023-08-27T21:10:01.335Z | [[https://css-tricks.com/reactive-uis-vanillajs-part-1-pure-functional-style/][Reactive UI's with VanillaJS - Part 1: Pure Functional Style \vert CSS-Tricks - CSS-Tricks]] |
+| 2023-08-27T21:09:52.081Z | [[https://github.com/jorgebucaran/hyperapp/tree/main/packages/html][hyperapp/packages/html at main · jorgebucaran/hyperapp]]                                 |
+| 2023-08-27T21:09:44.647Z | [[https://github.com/ferp-js/ferp][ferp-js/ferp: Functional Reactive JS App Framework for the Web and Node]]                |
+| 2023-08-27T21:09:38.074Z | [[https://cycle.js.org/][Cycle.js]]                                                                               |
+| 2023-08-27T21:09:30.915Z | [[https://lit.dev/docs/libraries/standalone-templates/][Using lit-html standalone – Lit]]                                                        |
+| 2023-08-27T21:09:23.575Z | [[https://docs.astro.build/en/introduction/][What is Xania?]]                                                                         |
+| 2023-08-27T21:09:06.762Z | [[https://mithril.js.org/index.html][Mithril.js]]                                                                             |
+| 2023-08-27T21:08:54.493Z | [[https://www.biblegateway.com/passage/?search=Mark%2010%3A38-39&version=NIV][Mark 10:38-39 NIV - “You don’t know what you are - Bible Gateway]]                       |
+| 2023-08-27T21:08:42.297Z | [[https://www.biblegateway.com/passage/?search=1%20Peter%203%3A20-21&version=NIV][1 Peter 3:20-21 NIV - to those who were disobedient long ago - Bible Gateway]]           |
+| 2023-08-27T21:08:24.211Z | [[https://www.dabeaz.com/generators/][:Generator Tricks for Systems Programmers]]                                              |
+| 2023-08-27T21:08:14.133Z | [[https://github.com/dabeaz-course/python-mastery][dabeaz-course/python-mastery: Advanced Python Mastery (course by @dabeaz)]]              |
+| 2023-08-27T21:07:10.224Z | [[https://www.geocities.ws/oldternet/][WELCOME TO THE HOMEPAGE OF THE OLDTERNET]]                                               |
+| 2023-08-27T21:06:52.847Z | [[https://openbenches.org/][OpenBenches Welcome!]]                                                                   |
+| 2023-08-27T21:05:36.419Z | [[https://evantravers.com/articles/2023/05/31/keyboard-only-day/][Keyboard Only Day]]                                                                      |
+| 2023-08-27T21:05:23.205Z | [[https://en.wikipedia.org/wiki/Marcus_Aurelius][Marcus Aurelius - Wikipedia]]                                                            |
+| 2023-08-27T21:04:34.422Z | [[https://en.wikipedia.org/wiki/Wyatt_Earp][Wyatt Earp - Wikipedia]]                                                                 |
+| 2023-08-27T21:03:38.366Z | [[https://en.wikipedia.org/wiki/Cordelia_of_Britain][Cordelia of Britain - Wikipedia]]                                                        |
+| 2023-08-27T21:03:22.587Z | [[https://en.wikipedia.org/wiki/Gwendolen][Gwendolen - Wikipedia]]                                                                  |
+| 2023-08-27T21:03:13.074Z | [[https://stackoverflow.com/questions/12953928/immediate-play-sound-on-button-click-in-html-page][buttonclick - Immediate play sound on button click in HTML page - Stack Overflow]]       |
+| 2023-08-27T21:03:01.072Z | [[https://arbtt.nomeata.de/#what][arbtt: the automatic, rule-based time tracker]]                                          |
+
+Now we have a nice table, which works I guess, but isn't exactly what I had in
+mind. I also could not figure out how to get that ISO-8601 timestamp string to
+nicely convert to something passable as an orgmode timestamp. I tried a using
+the built-in ~parse-time-string~ which worked well at getting an emacs time
+object, but then getting that object into an Orgmode timestamp did not work.
+There is the ~org-timestamp-from-time~ function which promises to convert an emacs
+time object to an orgmode time object, but then getting an orgmode time object
+to a string became impossible. There was also the ~org-insert-timestamp~ which
+promised to take the orgmode time object and make a string of it, but all it did
+was cover the buffer in incorrect timestamps.
+
+For the time being I'm going to just leave it as the ISO-8601 string. In fact,
+I'm going to leave this function where it is, because I have a linklog post to
+go write! I'll get this wrapped up in another post, where I take this data and
+finally get an orgmode list out of it and add it into my config as a simple
+function to insert that list ~at-point~.
+
+

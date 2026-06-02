@@ -1,0 +1,14 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2022-08-06 Sat>
+:MODIFIED: <2022-08-17 Wed 12:23>
+:TYPE: slip
+:ID:       e579a714-228d-40bc-81f7-00e8068fb9d3
+:END:
+#+title: css/sass
+#+date: <2022-08-06 Sat>
+CSS is a great and often under utilized tool, in my opinion. Lately I've been
+using it in web-components with the Lit framework, so my stylings are scoped and
+I'm largely using "class-less" CSS because of this.
+
+I also like to use sass for it's great ability to organize styling and reuse them.

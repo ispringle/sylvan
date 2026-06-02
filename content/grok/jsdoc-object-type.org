@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       51e9204f-eb38-4f88-8c8c-61543b304934
+:TYPE: slip
+:END:
+#+title: jsdoc object type
+#+date: <2022-08-04 Thu>
+
+This is the pattern for noting keys and their values in jsdocs
+#+begin_src javascript
+@typedef {Object.<string, Beneficiary>} Beneficiaries
+#+end_src
