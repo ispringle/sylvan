@@ -1,0 +1,12 @@
+:PROPERTIES:
+:AUTHOR: Ian S. Pringle
+:CREATED: <2026-06-02 Mon>
+:MODIFIED: <2026-06-02 Mon>
+:TYPE: index
+:ROLL_DIR: fontes
+:ROLL_HEADING: Fontes
+:END:
+#+title: Fontes
+
+A collection of works from various sources that have shaped my thinking and worldview.
+Many of these sources were difficult for me to find or I'd like to be able to readily link to.

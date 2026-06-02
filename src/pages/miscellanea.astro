@@ -7,6 +7,6 @@ import {filterByDir, filterIndices, sortAToZ } from "@utils/filterContent";
 const ROLL_DIR_REGEX = new RegExp(`^[^\/]*\.[(org)|(md)|(mdx)]$`);
 const roll = (await allPages).filter(filterIndices).filter(filterByDir(ROLL_DIR_REGEX)).sort(sortAToZ);
 ---
-<Base pageTitle="Misc. Pages">
-  <Rolladex heading="Misc. Pages" roll={roll} />
+<Base pageTitle="Miscellanea">
+  <Rolladex heading="Miscellanea" roll={roll} />
 </Base>

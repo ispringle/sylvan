@@ -250,3 +250,16 @@ hr::after {
   color: var(--fg);
   font-size: 18px;
 }
+
+div.verse {
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+div.verse .stanza {
+  margin-bottom: 1.6em;
+}
+
+div.verse .stanza:last-child {
+  margin-bottom: 0;
+}

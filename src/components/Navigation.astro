@@ -8,15 +8,16 @@ const href = Astro.url.origin;
   font-family: 'flower2' !important;
   font-variant: unset !important;
   vertical-align: sub;
-  font-size: 3rem;
+  font-size: 2rem;
  }
 nav {
+  font-family: 'Metamorphous', serif;
   font-size: 3rem;
   margin-top: -6rem;
   font-size: 2rem;
 }
 a {
-  font-size: 3rem;
+  font-size: 2rem;
   height: min-content;
   padding: 0 1rem;
 }
@@ -45,10 +46,12 @@ a {
 </style>
 <nav>
     <span class='flower2'>K</span>
-    <a class="nobracket" href={href}>Home</a>
+    <a class="nobracket" href={href}>Domus</a>
     <span class='flower2'>L</span>
-    <a class="nobracket" href={getURL(href, "about")}>About</a>
+    <a class="nobracket" href={getURL(href, "praefatio")}>Praefatio</a>
     <span class='flower2'>M</span>
-    <a class="nobracket" href={getURL(href, "blog")}>Examinata</a>
+    <a class="nobracket" href={getURL(href, "examinata")}>Examinata</a>
+    <span class='flower2'>L</span>
+    <a class="nobracket" href={getURL(href, "fontes")}>Fontes</a>
     <span class='flower2'>J</span>
 </nav>

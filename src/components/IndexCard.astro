@@ -31,7 +31,7 @@ font-size: 1rem;
 </script>
 <div onmouseenter="new Audio('/audio/effects/pa-choop.m4a').play();" class="card">
 
-    <Date date={frontmatter.created} />
+    {frontmatter.type !== 'fontes' && <Date date={frontmatter.created} />}
     <span>
 
     <a href={href} >
