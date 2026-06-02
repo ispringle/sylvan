@@ -10,11 +10,11 @@
   },
   "dependencies": {
     "@astrojs/rss": "^2.3.2",
-    "@astrojs/sitemap": "^1.2.2",
+    "@astrojs/sitemap": "^3.0.0",
     "@iconify-json/fa6-brands": "^1.1.13",
     "@iconify-json/simple-icons": "^1.1.67",
     "@mapbox/rehype-prism": "^0.8.0",
-    "astro": "^3.0.12",
+    "astro": "~3.6.5",
     "astro-compress": "^2.0.14",
     "astro-google-fonts-optimizer": "^0.2.2",
     "astro-icon": "^1.0.0-next.2",
