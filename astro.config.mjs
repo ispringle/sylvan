@@ -24,8 +24,7 @@ export default defineConfig({
       "fa6-brands": ["*"],
       "simple-icons": ["*"]
     }
-  }), sitemap()
-    , compress()],
+  }), sitemap(), compress()],
   build: {
     inlineStylesheets: 'auto',
     assets: 'assets'
