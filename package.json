@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@astrojs/rss": "^2.3.2",
-    "@astrojs/sitemap": "^3.0.0",
+    "@astrojs/sitemap": "^1.4.0",
     "@iconify-json/fa6-brands": "^1.1.13",
     "@iconify-json/simple-icons": "^1.1.67",
     "@mapbox/rehype-prism": "^0.8.0",
