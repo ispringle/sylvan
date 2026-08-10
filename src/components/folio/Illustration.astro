@@ -99,12 +99,30 @@ const isRemote = typeof src === 'string';
     border: 0.12rem solid color-mix(in srgb, var(--fg) 35%, var(--bg));
   }
 
+  /*
+   * Credit / source under the image: hidden until hover (or focus-within),
+   * so margin figures stay image-only until you want the annotation.
+   */
   .folio-illustration__caption {
     display: block;
-    margin-top: 0.4rem;
+    margin-top: 0;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
     font-size: 0.75em;
     line-height: 1.3;
     color: color-mix(in srgb, var(--fg) 72%, var(--bg));
+    transition:
+      opacity 0.15s ease,
+      max-height 0.18s ease,
+      margin 0.15s ease;
+  }
+
+  .folio-illustration:hover .folio-illustration__caption,
+  .folio-illustration:focus-within .folio-illustration__caption {
+    margin-top: 0.4rem;
+    max-height: 8rem;
+    opacity: 1;
   }
 
   .folio-illustration__credit {
@@ -129,6 +147,14 @@ const isRemote = typeof src === 'string';
       float: none;
       margin: 1.25rem auto;
       max-width: min(100%, 28rem);
+    }
+
+    /* Touch: keep credits visible (no hover) */
+    .folio-illustration__caption {
+      margin-top: 0.4rem;
+      max-height: none;
+      opacity: 1;
+      overflow: visible;
     }
   }
 </style>

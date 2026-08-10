@@ -12,8 +12,9 @@ const wide = Boolean(
   page.frontmatter?.wide || page.frontmatter?.layout === "wide",
 );
 // measure | folio | folio-wide (parallel texts, dual columns, etc.)
-const layout =
-  kind === "folio" ? (wide ? "folio-wide" : "folio") : "measure";
+// marginalia shares the folio shell (right gutter for Note / Margin anchors)
+const usesFolioShell = kind === "folio" || kind === "marginalia";
+const layout = usesFolioShell ? (wide ? "folio-wide" : "folio") : "measure";
 ---
 <Base pageTitle={title} layout={layout}>
   { () => {

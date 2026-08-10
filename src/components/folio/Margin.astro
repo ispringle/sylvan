@@ -1,0 +1,323 @@
+---
+/**
+ * Right-gutter anchor — fixed to a place in the text, always visible.
+ *
+ * Use for illustrations (and the rare prose note) that should sit beside a
+ * specific line. Free-floating section commentary still uses <Note> in a
+ * FolioRow. Left-gutter hover footnotes use <Fn>.
+ *
+ *   they beheld the elves
+ *   <Margin>
+ *     <Illustration src={…} credit="…" float="none" />
+ *   </Margin>
+ *
+ * Optional title / in-text mark:
+ *   <Margin title="Elves" mark>…</Margin>
+ *   <Margin mark="†">…</Margin>
+ *
+ * Panels are position:absolute against the article so they scroll with the page.
+ * Illustration captions are hidden until the figure is hovered (see Illustration).
+ */
+interface Props {
+  title?: string;
+  id?: string;
+  /** Show a small mark at the anchor (true → ❧, or a custom string) */
+  mark?: boolean | string;
+}
+
+const { title, id, mark = false } = Astro.props;
+const markText =
+  mark === true ? '❧' : typeof mark === 'string' && mark.length ? mark : '';
+---
+
+<span class="margin" data-margin id={id}>
+  {
+    markText ? (
+      <span class="margin__mark" aria-hidden="true">
+        {markText}
+      </span>
+    ) : (
+      <span class="margin__anchor" aria-hidden="true"></span>
+    )
+  }
+  <aside class="margin__panel" role="complementary">
+    {
+      title && (
+        <p class="margin__title">
+          <span class="margin__title-text">{title}</span>
+        </p>
+      )
+    }
+    <div class="margin__body">
+      <slot />
+    </div>
+  </aside>
+</span>
+
+<style is:global>
+  .margin {
+    display: inline;
+    position: static;
+  }
+
+  .margin__anchor {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .margin__mark {
+    display: inline;
+    margin: 0 0.1em;
+    color: color-mix(in srgb, var(--fg) 45%, var(--bg));
+    font-size: 0.85em;
+    user-select: none;
+  }
+
+  .margin__panel {
+    box-sizing: border-box;
+    z-index: 15;
+    width: var(--folio-margin, 24rem);
+    max-width: min(var(--folio-margin, 24rem), calc(100vw - 2rem));
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: color-mix(in srgb, var(--fg) 90%, var(--bg));
+    font-size: 1.35rem;
+    line-height: 1.4;
+    pointer-events: auto;
+  }
+
+  /*
+   * Margin titles (e.g. "Sub-creation") only appear when the panel is hovered,
+   * same idea as illustration credits — keep the gutter image-clean.
+   */
+  .margin__title {
+    margin: 0 0 0.4rem;
+    font-family: 'Metamorphous', serif;
+    font-size: 0.72em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    max-height: 0;
+    margin-bottom: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: opacity 0.15s ease, max-height 0.15s ease, margin 0.15s ease;
+  }
+
+  .margin__panel:hover .margin__title,
+  .margin__panel:focus-within .margin__title {
+    max-height: 4rem;
+    margin-bottom: 0.4rem;
+    opacity: 1;
+  }
+
+  .margin__title-text {
+    border-bottom: 0.08rem solid color-mix(in srgb, var(--fg) 35%, var(--bg));
+    padding-bottom: 0.1em;
+  }
+
+  .margin__body {
+    display: block;
+  }
+
+  .margin__body > :first-child {
+    margin-top: 0;
+  }
+
+  .margin__body > :last-child {
+    margin-bottom: 0;
+  }
+
+  .margin__body p {
+    margin: 0 0 0.65em;
+  }
+
+  .margin__body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .margin__panel .folio-illustration,
+  .margin__panel .folio-illustration--right,
+  .margin__panel .folio-illustration--left {
+    float: none;
+    clear: none;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .margin__panel .folio-illustration__caption {
+    font-size: 0.72em;
+  }
+
+  @media (max-width: 959px) {
+    .margin {
+      display: block;
+      margin: 0.85rem 0 1.1rem;
+    }
+
+    .margin__panel {
+      position: static !important;
+      top: auto !important;
+      left: auto !important;
+      width: 100%;
+      max-width: min(28rem, 100%);
+      padding: 0.65rem 0.75rem;
+      border: 0.1rem solid color-mix(in srgb, var(--fg) 28%, var(--bg));
+      background: color-mix(in srgb, var(--fg) 3.5%, var(--bg));
+    }
+
+    /* On touch / narrow, keep title visible (no reliable hover) */
+    .margin__title {
+      max-height: none;
+      margin-bottom: 0.4rem;
+      opacity: 1;
+      overflow: visible;
+    }
+  }
+</style>
+
+<script>
+  function rootPx() {
+    return parseFloat(getComputedStyle(document.documentElement).fontSize) || 10;
+  }
+
+  function cssRem(name, fallback) {
+    const raw = getComputedStyle(document.body).getPropertyValue(name);
+    const n = parseFloat(raw);
+    return (Number.isFinite(n) ? n : fallback) * rootPx();
+  }
+
+  function offsetIn(el, ancestor) {
+    const er = el.getBoundingClientRect();
+    const ar = ancestor.getBoundingClientRect();
+    return {
+      top: er.top - ar.top + ancestor.scrollTop,
+      left: er.left - ar.left + ancestor.scrollLeft,
+    };
+  }
+
+  function uidFor(marginEl) {
+    if (!marginEl.dataset.marginUid) {
+      marginEl.dataset.marginUid =
+        marginEl.id || 'm-' + Math.random().toString(36).slice(2, 9);
+    }
+    return marginEl.dataset.marginUid;
+  }
+
+  function findPanel(marginEl, article) {
+    const uid = marginEl.dataset.marginUid;
+    return (
+      marginEl.querySelector('.margin__panel') ||
+      (uid &&
+        article &&
+        article.querySelector(
+          `.margin__panel[data-margin-for="${CSS.escape(uid)}"]`,
+        )) ||
+      null
+    );
+  }
+
+  function hostPanel(panel, article, marginEl) {
+    const uid = uidFor(marginEl);
+    panel.dataset.marginFor = uid;
+    if (panel.parentElement !== article) {
+      article.appendChild(panel);
+    }
+  }
+
+  function placeAllMargins() {
+    const wide = window.matchMedia('(min-width: 960px)').matches;
+    const items = Array.from(document.querySelectorAll('[data-margin]'));
+    if (!items.length) return;
+
+    if (!wide) {
+      items.forEach((el) => {
+        const article = el.closest('article');
+        const panel = findPanel(el, article);
+        if (panel && panel.parentElement !== el) {
+          el.appendChild(panel);
+        }
+        if (!panel) return;
+        panel.style.position = '';
+        panel.style.top = '';
+        panel.style.left = '';
+        panel.style.width = '';
+      });
+      return;
+    }
+
+    const gap = cssRem('--folio-gutter', 2.5);
+    const marginW = cssRem('--folio-margin', 24);
+    const stackGap = 0.85 * rootPx();
+
+    const byArticle = new Map();
+    items.forEach((el) => {
+      const article = el.closest('article');
+      if (!article) return;
+      uidFor(el);
+      if (!byArticle.has(article)) byArticle.set(article, []);
+      byArticle.get(article).push(el);
+    });
+
+    byArticle.forEach((list, article) => {
+      let lastBottom = -Infinity;
+      const colW = article.clientWidth;
+
+      list.forEach((el) => {
+        const panel = findPanel(el, article);
+        const anchor =
+          el.querySelector('.margin__mark') ||
+          el.querySelector('.margin__anchor') ||
+          el;
+        if (!panel) return;
+
+        hostPanel(panel, article, el);
+
+        const { top: anchorTop } = offsetIn(anchor, article);
+        let top = anchorTop;
+        if (top < lastBottom + stackGap) {
+          top = lastBottom + stackGap;
+        }
+
+        panel.style.position = 'absolute';
+        panel.style.width = Math.round(marginW) + 'px';
+        panel.style.left = Math.round(colW + gap) + 'px';
+        panel.style.top = Math.round(top) + 'px';
+        panel.style.right = 'auto';
+
+        const panelH =
+          panel.offsetHeight || panel.getBoundingClientRect().height;
+        lastBottom = top + panelH;
+      });
+    });
+  }
+
+  let scheduled = false;
+  function schedulePlace() {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(() => {
+      scheduled = false;
+      placeAllMargins();
+    });
+  }
+
+  function init() {
+    placeAllMargins();
+    document
+      .querySelectorAll('[data-margin] img, article > .margin__panel img')
+      .forEach((img) => {
+        if (!img.complete) {
+          img.addEventListener('load', schedulePlace, { once: true });
+        }
+      });
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
+  window.addEventListener('resize', schedulePlace);
+</script>

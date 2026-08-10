@@ -53,7 +53,7 @@ const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
      *   left-rail      borderArt pocket (+ point footnotes / Fn panels)
      *   article-inset  shift of text column within main
      *   measure        reading column (prose + floats)
-     *   gutter + margin  right prose notes (FolioRow + Note)
+     *   gutter + margin  right gutter: Note (section) + Margin (text-anchored)
      */
     --folio-left-rail: 26rem;
     --folio-article-inset: 9rem;
@@ -115,6 +115,8 @@ const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
     main :global(section.rolladex) {
       box-sizing: border-box;
       display: flow-root;
+      /* Positioning context for text-anchored right <Margin> panels */
+      position: relative;
       width: var(--folio-measure);
       max-width: var(--folio-measure);
       margin-left: var(--folio-article-inset);
