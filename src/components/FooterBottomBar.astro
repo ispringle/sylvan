@@ -8,6 +8,17 @@ import { Icon } from "astro-icon/components";
     justify-content: space-between;
     padding: 1rem;
     margin-bottom: 1.5rem;
+    max-width: var(--folio-measure, 66.9rem);
+    width: 100%;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media (min-width: 960px) {
+  .bar {
+    margin-left: 0;
+    margin-right: auto;
+  }
 }
 [astro-icon] {
     display: inline;

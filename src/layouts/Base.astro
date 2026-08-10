@@ -45,19 +45,76 @@ const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
     font-weight: 400;
     min-height: 100vh;
     margin: unset;
+
+    /*
+     * Site rails (shared by header / main / footer).
+     * html font-size 62.5% → 1rem ≈ 10px
+     */
+    --folio-left-rail: 26rem;
+    --folio-article-inset: 9rem;
+    --folio-measure: 66.9rem;
+    --folio-gutter: 2.5rem;
+    --folio-margin: 24rem;
+    /* Mild footer shift: less than full text-column inset */
+    --folio-footer-inset: 4rem;
   }
 
   main {
-    margin: auto;
-  }
-  main {
     position: relative;
-    max-width: 66.9rem;
+    /* Narrow: centered reading column */
+    margin: 0 auto;
+    max-width: var(--folio-measure);
     padding: 0 1rem;
     width: 100%;
     flex: 1 0 auto;
     line-height: 2.5rem;
+    overflow: visible;
   }
+
+  /*
+   * Wide: shift left for borderArt; shell is exactly
+   * measure + gutter + margin (not stretched full-bleed).
+   * Pair excerpt + note with <FolioRow> (see folio/FolioRow.astro).
+   */
+  @media (min-width: 960px) {
+    main {
+      margin-left: var(--folio-left-rail);
+      margin-right: auto;
+      max-width: calc(
+        var(--folio-measure) + var(--folio-gutter) + var(--folio-margin)
+      );
+      width: 100%;
+      padding-left: 0;
+      padding-right: 1rem;
+    }
+
+    /* Article body + index lists (Rolladex) share the same left inset */
+    main :global(article),
+    main :global(section.rolladex) {
+      width: 100%;
+      max-width: none;
+      margin-left: var(--folio-article-inset);
+      overflow: visible;
+      box-sizing: border-box;
+    }
+
+    /* Body copy without a row wrapper stays on the measure */
+    main :global(article > .headingWrapper > :not(.folio-row):not(section)),
+    main
+      :global(
+        article
+          .headingWrapper
+          > section
+          > :not(.folio-row):not(.folio-note):not(section)
+      ) {
+      max-width: var(--folio-measure);
+    }
+
+    main :global(section.rolladex) {
+      max-width: var(--folio-measure);
+    }
+  }
+
   @media (max-width: 760px) {
     .borderArt {
       display: none;

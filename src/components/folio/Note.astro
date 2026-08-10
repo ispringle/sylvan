@@ -1,0 +1,104 @@
+---
+/**
+ * Folio toolkit: commentary as marginalia.
+ *
+ * Place as a *direct sibling* of the heading/excerpt it glosses (same parent
+ * section). From 960px up, that parent becomes a 2-column grid and this note
+ * occupies the right column. Below 960px it stacks in-flow.
+ */
+interface Props {
+  title?: string;
+  id?: string;
+}
+
+const { title, id } = Astro.props;
+---
+
+<aside class="folio-note" id={id}>
+  {
+    title && (
+      <p class="folio-note__label">
+        <span class="folio-note__label-text">{title}</span>
+      </p>
+    )
+  }
+  <div class="folio-note__body">
+    <slot />
+  </div>
+</aside>
+
+<style is:global>
+  .folio-note {
+    position: relative;
+    box-sizing: border-box;
+    font-size: 1.45rem;
+    line-height: 1.45;
+    color: color-mix(in srgb, var(--fg) 88%, var(--bg));
+  }
+
+  .folio-note__label {
+    margin: 0 0 0.4rem;
+    font-family: 'Metamorphous', serif;
+    font-size: 0.72em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .folio-note__label-text {
+    border-bottom: 0.08rem solid color-mix(in srgb, var(--fg) 35%, var(--bg));
+    padding-bottom: 0.1em;
+  }
+
+  .folio-note__body p {
+    margin: 0 0 0.75em;
+  }
+
+  .folio-note__body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .folio-note__body em {
+    font-style: italic;
+  }
+
+  /* Wide: grid column 2 beside body text (see Base.astro) */
+  @media (min-width: 960px) {
+    .folio-note {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0 0 0 0.85rem;
+      border: none;
+      border-left: 0.12rem solid color-mix(in srgb, var(--fg) 28%, var(--bg));
+      background: transparent;
+      float: none;
+    }
+
+    .folio-note::before {
+      content: '❧';
+      display: block;
+      margin: 0 0 0.35rem;
+      font-size: 1.1rem;
+      line-height: 1;
+      color: color-mix(in srgb, var(--fg) 45%, var(--bg));
+      opacity: 0.85;
+    }
+  }
+
+  /* Narrow: in-flow block */
+  @media (max-width: 959px) {
+    .folio-note {
+      float: none;
+      width: auto;
+      margin: 1.75rem 0;
+      padding: 1rem 1.15rem;
+      border: 0.12rem solid color-mix(in srgb, var(--fg) 30%, var(--bg));
+      background: color-mix(in srgb, var(--default-blue, #b4d5fe) 14%, var(--bg));
+    }
+
+    .folio-note::before {
+      content: '❧ ';
+      color: color-mix(in srgb, var(--fg) 50%, var(--bg));
+    }
+  }
+</style>

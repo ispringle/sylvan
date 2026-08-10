@@ -1,0 +1,133 @@
+---
+/**
+ * Folio toolkit: primary-source quotation with structured attribution.
+ *
+ * Usage:
+ *   <Excerpt work="Le Morte d'Arthur" author="Sir Thomas Malory" ref="Book II, ch. XV">
+ *     …
+ *   </Excerpt>
+ */
+interface Props {
+  /** Canonical work title */
+  work: string;
+  /** Medieval or modern author of the work (e.g. Malory) */
+  author?: string;
+  /** Translator of the quoted text */
+  translator?: string;
+  /** Locus: book, chapter, folio, lines, etc. */
+  ref?: string;
+  /** Edition / series / container ("in …") */
+  in?: string;
+  /** BCP-47-ish language of the quote body */
+  lang?: string;
+  /** Optional id for deep-linking this passage */
+  id?: string;
+}
+
+const {
+  work,
+  author,
+  translator,
+  ref: locus,
+  in: containedIn,
+  lang = 'en',
+  id,
+} = Astro.props;
+---
+
+<figure class="folio-excerpt" id={id}>
+  <blockquote class="folio-excerpt__text" lang={lang}>
+    <slot />
+  </blockquote>
+  <figcaption class="folio-excerpt__cite">
+    <span class="folio-excerpt__cite-mark" aria-hidden="true">—</span>
+    <cite>
+      <em class="folio-excerpt__work">{work}</em>
+      {
+        author && (
+          <>
+            {', '}
+            <span class="folio-excerpt__author">{author}</span>
+          </>
+        )
+      }
+      {
+        translator && (
+          <>
+            {', '}
+            <span class="folio-excerpt__translator">trans. {translator}</span>
+          </>
+        )
+      }
+      {
+        locus && (
+          <>
+            {', '}
+            <span class="folio-excerpt__locus">{locus}</span>
+          </>
+        )
+      }
+      {
+        containedIn && (
+          <>
+            {', in '}
+            <span class="folio-excerpt__in">{containedIn}</span>
+          </>
+        )
+      }
+      {'.'}
+    </cite>
+  </figcaption>
+</figure>
+
+<style>
+  .folio-excerpt {
+    margin: 1.5rem 0 2.5rem;
+    padding: 0;
+    border: none;
+  }
+
+  /* Inside FolioRow, top margin is cleared so the note lines up with the quote */
+  :global(.folio-row) > .folio-excerpt {
+    margin-top: 0;
+  }
+
+  .folio-excerpt__text {
+    margin: 0;
+    padding: 1.25rem 1.5rem 1.25rem 1.75rem;
+    border-left: 0.35rem solid var(--fg);
+    background: color-mix(in srgb, var(--fg) 4%, var(--bg));
+    font-size: 0.95em;
+    line-height: 1.55;
+  }
+
+  .folio-excerpt__text :global(p) {
+    margin: 0 0 1em;
+  }
+
+  .folio-excerpt__text :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .folio-excerpt__cite {
+    display: block;
+    margin: 0.75rem 0 0;
+    padding: 0 0.25rem 0 1.75rem;
+    font-size: 0.85em;
+    line-height: 1.4;
+    color: color-mix(in srgb, var(--fg) 75%, var(--bg));
+    text-align: left;
+  }
+
+  .folio-excerpt__cite-mark {
+    margin-right: 0.35em;
+  }
+
+  .folio-excerpt__work {
+    font-style: italic;
+  }
+
+  .folio-excerpt__cite cite {
+    font-style: normal;
+  }
+</style>

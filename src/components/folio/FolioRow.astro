@@ -1,0 +1,58 @@
+---
+/**
+ * Pairs primary content with a margin note on one horizontal line.
+ *
+ *   <FolioRow>
+ *     <Excerpt …>…</Excerpt>
+ *     <Note>…</Note>
+ *   </FolioRow>
+ *
+ * Children that are .folio-note go in the right column; everything else stays
+ * in the reading column. On narrow viewports the note stacks below.
+ */
+---
+
+<div class="folio-row">
+  <slot />
+</div>
+
+<style is:global>
+  .folio-row {
+    display: block;
+    margin: 0;
+  }
+
+  @media (min-width: 960px) {
+    .folio-row {
+      display: grid;
+      grid-template-columns: minmax(0, var(--folio-measure, 66.9rem)) var(
+          --folio-margin,
+          24rem
+        );
+      column-gap: var(--folio-gutter, 2.5rem);
+      align-items: start;
+      width: 100%;
+      max-width: calc(
+        var(--folio-measure, 66.9rem) + var(--folio-gutter, 2.5rem) +
+          var(--folio-margin, 24rem)
+      );
+    }
+
+    .folio-row > :not(.folio-note) {
+      grid-column: 1;
+      min-width: 0;
+    }
+
+    .folio-row > .folio-note {
+      grid-column: 2;
+      grid-row: 1 / -1;
+      align-self: start;
+      margin-top: 0;
+    }
+
+    /* Excerpts normally have large vertical margins; zero the top so note lines up */
+    .folio-row > .folio-excerpt {
+      margin-top: 0;
+    }
+  }
+</style>

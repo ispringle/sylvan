@@ -10,17 +10,21 @@ footer {
   position: relative;
   overflow: visible;
   padding-top: 20rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 .topline {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
- }
+}
+/* Measure-wide chrome; mild left shift on wide screens (not full article inset) */
 hr {
-  max-width: 66.9rem;
+  max-width: var(--folio-measure, 66.9rem);
   width: 100%;
-  margin: auto;
- }
+  margin: 0 auto;
+  box-sizing: border-box;
+}
 .list {
   display: flex;
   flex-direction: row;
@@ -36,7 +40,20 @@ hr {
 }
 a {
   text-decoration: none;
- }
+}
+
+@media (min-width: 960px) {
+  footer {
+    padding-left: calc(
+      var(--folio-left-rail, 26rem) + var(--folio-footer-inset, 4rem)
+    );
+    padding-right: 1rem;
+  }
+  hr {
+    margin-left: 0;
+    margin-right: auto;
+  }
+}
 </style>
 <footer id="rootFooter" data-turbo-permanent>
   <Music />

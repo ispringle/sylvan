@@ -2,14 +2,21 @@
 ---
 <style>
 .salutation {
-    max-width: 66.9rem;
+    max-width: var(--folio-measure, 66.9rem);
     width: 100%;
-    margin: auto;
+    margin: 0 auto;
     font-size: 2.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-sizing: border-box;
  }
+@media (min-width: 960px) {
+  .salutation {
+    margin-left: 0;
+    margin-right: auto;
+  }
+}
 .flower2 {
     display: inline-block;
     font-family: 'flower2' !important;

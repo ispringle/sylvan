@@ -2,7 +2,10 @@
 import Page from "@layouts/Page.astro";
 import Image from '@components/Image.astro';
 import Link from '@components/Link.astro';
-import { allPages, getBacklinks, resources } from "@lib/pages";
+import Excerpt from '@components/folio/Excerpt.astro';
+import Note from '@components/folio/Note.astro';
+import FolioRow from '@components/folio/FolioRow.astro';
+import { allPages } from "@lib/pages";
 
 export async function getStaticPaths() {
   const pages = await allPages;
@@ -17,11 +20,14 @@ export async function getStaticPaths() {
   });
 }
 const {page} = Astro.props;
-const { default: Content, frontmatter: data = {} } = page;
+const { default: Content } = page;
 ---
 <Page page={page}>
   <Content components={{
     a: Link,
-    img: Image
+    img: Image,
+    Excerpt,
+    Note,
+    FolioRow,
   }}/>
 </Page>
