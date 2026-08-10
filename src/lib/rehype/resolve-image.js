@@ -23,9 +23,12 @@ export const resolveImage = () => {
                 }
 
                 let url = node.properties[propertyName];
-                const headingLink = /.*\.org::.*/
+                if (!url || typeof url !== 'string') {
+                    return;
+                }
+                const headingLink = /.*\.(org|md|mdx)::.*/
                 if (url.match(headingLink)) {
-                    const [fileLink, headingLink] = url.split("::")
+                    const [fileLink] = url.split("::")
                     url = fileLink
                 }
 

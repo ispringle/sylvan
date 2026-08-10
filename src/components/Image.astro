@@ -1,20 +1,38 @@
 ---
-import { Image } from 'astro:assets';
-const { alt, src, width, height, float, margin, ...props} = Astro.props;
+import { Image as AstroImage } from 'astro:assets';
+
+const {
+  alt = '',
+  src,
+  width,
+  height,
+  float = 'right',
+  margin = '0 0 1rem 1rem',
+  class: className,
+  ...rest
+} = Astro.props;
+
+// Markdown/MDX often passes image metadata objects from resolve-image imports.
+const imageSrc = src;
+const displayWidth = width ?? 300;
 ---
 <style>
-img {
-  object-fit: contain;
-}
+  img.inline-img {
+    object-fit: contain;
+    max-width: min(100%, 300px);
+    height: auto;
+  }
 </style>
-<Image
-  alt={alt ?? ""}
-  src={src}
-  {props}
-  style={`
-      float:${float};
-      height:${height??'unset'};
-      width:${width??'75%'};
-      margin:${margin??'0 0 0 1rem'};
-      ${!float ? "display:block;margin:0 auto;":""}`}
+<AstroImage
+  class:list={['inline-img', className]}
+  alt={alt}
+  src={imageSrc}
+  widths={[displayWidth, displayWidth * 2]}
+  style={{
+    float,
+    width: typeof displayWidth === 'number' ? `${displayWidth}px` : displayWidth,
+    height: height ?? 'auto',
+    margin,
+  }}
+  {...rest}
 />

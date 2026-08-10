@@ -1,37 +1,43 @@
-import { defineConfig, sharpImageService } from 'astro/config';
-// import sitemap from '@astrojs/sitemap';
-import org from 'astro-org';
-import icon from "astro-icon";
+import { defineConfig } from 'astro/config';
+import mdx from '@astrojs/mdx';
+import icon from 'astro-icon';
+import compress from 'astro-compress';
 
-import orgConfig from './src/lib/org-config.js';
 import rehypePlugins from './src/lib/rehype/index.js';
 import remarkPlugins from './src/lib/remark/index.js';
-
-import compress from "astro-compress";
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://drollery.org',
   image: {
-    service: sharpImageService()
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+    },
   },
   markdown: {
     rehypePlugins,
-    remarkPlugins
+    remarkPlugins,
   },
-  integrations: [org(orgConfig), icon({
-    include: {
-      "fa6-brands": ["*"],
-      "simple-icons": ["*"]
-    }
-  }), /* sitemap(), */ compress()],
+  integrations: [
+    mdx({
+      rehypePlugins,
+      remarkPlugins,
+    }),
+    icon({
+      include: {
+        'fa6-brands': ['*'],
+        'simple-icons': ['*'],
+      },
+    }),
+    compress(),
+  ],
   build: {
     inlineStylesheets: 'auto',
-    assets: 'assets'
+    assets: 'assets',
   },
   vite: {
     css: {
-      devSourcemap: true
-    }
-  }
+      devSourcemap: true,
+    },
+  },
 });

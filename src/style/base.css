@@ -58,6 +58,16 @@ img {
   height: auto;
 }
 
+/*
+ * Markdown wraps a lone image in <p>. That block would otherwise keep the float
+ * from wrapping following paragraphs the way Org ATTR_HTML :float right did.
+ * Collapse the wrapper so the floated image participates in surrounding flow.
+ */
+p:has(> img.inline-img:only-child),
+p:has(> img[style*="float"]:only-child) {
+  display: contents;
+}
+
 section {
   padding: 4rem 0;
 }

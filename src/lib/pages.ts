@@ -2,7 +2,7 @@ import fs from "fs";
 import { join } from "path";
 import { devFilterMaybe, getURL, slugify } from "@utils";
 
-const PREFER_EXT = "org";
+const PREFER_EXT = "mdx";
 const DENOTE_TITLE_RE = /\d{8}T\d{6}(?:==[\da-zA-Z]+)?--([\da-zA-Z-]+)(?:\w+)?/;
 
 export type Page = {
@@ -21,6 +21,8 @@ export type Page = {
     tags: string[];
     draft?: boolean;
     private?: boolean;
+    roll_dir?: string;
+    roll_heading?: string;
   };
   ids: Record<string, string>;
   file: string;
@@ -28,13 +30,13 @@ export type Page = {
 const on = <T, R>(value: T, f: (value: T) => R): R => f(value);
 const pages = Object.values(
   import.meta.glob<true, "", Page>(
-    ["../../content/**/*.{md,mdx}", "../../content/**/*.org"],
+    ["../../content/**/*.{md,mdx}"],
     { eager: true },
   ),
 );
 
 export const allPages: Page[] = unique(
-  pages.filter(devFilterMaybe).map(setFrontmatter),
+  pages.filter(devFilterMaybe).map(normalizePage),
 );
 
 function setSlug(filepath: string): string {
@@ -48,17 +50,26 @@ function setSlug(filepath: string): string {
       return part === "index" ? "" : part;
     })
     .join("/");
-  console.log(path);
   return slugify(path);
 }
 
-function setFrontmatter(page: Page): Page {
-  const slug =
-    page.frontmatter.type === "root" ? undefined : setSlug(page.file);
-  page.frontmatter.slug = slug;
-  page.frontmatter.link = slug ? `/${slug}` : "/";
-  page.frontmatter.canonicalUrl = getURL(import.meta.env.SITE, slug);
-  return page;
+function normalizePage(page: Page): Page {
+  // Astro 5 marks module exports as read-only; copy before enriching.
+  const baseFm = { ...(page.frontmatter ?? {}) } as Page["frontmatter"];
+  const slug = baseFm.type === "root" ? undefined : setSlug(page.file);
+  const frontmatter: Page["frontmatter"] = {
+    ...baseFm,
+    slug,
+    link: slug ? `/${slug}` : "/",
+    canonicalUrl: getURL(import.meta.env.SITE, slug),
+    links: baseFm.links ?? [],
+    tags: baseFm.tags ?? [],
+  };
+  return {
+    ...page,
+    frontmatter,
+    ids: page.ids ?? {},
+  };
 }
 
 function unique(pages: Page[]): Page[] {
@@ -79,7 +90,7 @@ export const resources = Object.fromEntries(
   Object.entries(
     import.meta.glob(
       ["../../content/**/*.{png,jpg,jpeg,gif,webp,avif,txt,pdf,sh,mp3,svg}"],
-      { as: "url" },
+      { query: "?url", import: "default" },
     ),
   ).map(([path, loader]) => [
     fs.realpathSync(join(cwd, "src/lib", path)),
@@ -102,7 +113,7 @@ const getLinkTable = (linkKind: string) => (posts) => {
   const linkTable = new Map();
   posts.forEach((p) => {
     const localLinks = p[linkKind];
-    if (localLinks) {
+    if (localLinks && typeof localLinks === "object") {
       Object.entries(localLinks).forEach(([id, anchor]) => {
         const link = p.frontmatter.link;
         linkTable.set(id, { slug: link, anchor, post: p });
@@ -145,8 +156,9 @@ const backlinks = on(allPages, (posts) => {
   const backlinks: Record<string, Set<Page>> = {};
   for (const p of posts) {
     const links = p.frontmatter.links ?? [];
+    const ids = p.ids ?? {};
     for (let link of links) {
-      if (Object.keys(p.ids).includes(link)) {
+      if (Object.keys(ids).includes(link)) {
         // linking to self -> does not count
         continue;
       }
