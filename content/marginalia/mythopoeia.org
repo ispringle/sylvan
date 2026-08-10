@@ -2,7 +2,7 @@
 :AUTHOR: J.R.R. Tolkien
 :CREATED: <2026-06-02 Mon>
 :MODIFIED: <2026-06-02 Mon>
-:TYPE: fontes
+:TYPE: marginalia
 :END:
 #+title: Mythopoeia
 

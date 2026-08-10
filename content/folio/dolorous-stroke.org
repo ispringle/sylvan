@@ -2,7 +2,7 @@
 :AUTHOR: The Merlin Continuation
 :CREATED: <2026-06-02 Mon>
 :MODIFIED: <2026-06-02 Mon>
-:TYPE: fontes
+:TYPE: folio
 :END:
 #+title: The Dolorous Stroke
 
