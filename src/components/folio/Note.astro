@@ -1,10 +1,14 @@
 ---
 /**
- * Folio toolkit: commentary as marginalia.
+ * Right-gutter prose note (section commentary).
  *
- * Place as a *direct sibling* of the heading/excerpt it glosses (same parent
- * section). From 960px up, that parent becomes a 2-column grid and this note
- * occupies the right column. Below 960px it stacks in-flow.
+ * Use for general discussion that sits beside a block of text — not for a
+ * single word or line. Point-specific glosses use <Fn> (left gutter).
+ *
+ *   <FolioRow>
+ *     <Excerpt>…</Excerpt>
+ *     <Note title="…">…</Note>
+ *   </FolioRow>
  */
 interface Props {
   title?: string;
@@ -61,9 +65,10 @@ const { title, id } = Astro.props;
     font-style: italic;
   }
 
-  /* Wide: grid column 2 beside body text (see Base.astro) */
+  /* Wide: right-gutter treatment when inside FolioRow (see FolioRow.astro) */
   @media (min-width: 960px) {
-    .folio-note {
+    .folio-row > .folio-note,
+    .folio-row > .folio-notes .folio-note {
       width: 100%;
       max-width: 100%;
       margin: 0;
@@ -74,7 +79,8 @@ const { title, id } = Astro.props;
       float: none;
     }
 
-    .folio-note::before {
+    .folio-row > .folio-note::before,
+    .folio-row > .folio-notes .folio-note::before {
       content: '❧';
       display: block;
       margin: 0 0 0.35rem;
@@ -85,7 +91,7 @@ const { title, id } = Astro.props;
     }
   }
 
-  /* Narrow: in-flow block */
+  /* Narrow / outside FolioRow: in-flow card */
   @media (max-width: 959px) {
     .folio-note {
       float: none;

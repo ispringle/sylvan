@@ -1,0 +1,80 @@
+---
+/**
+ * Side-by-side (wide) or stacked (narrow) comparison of Version children.
+ *
+ *   <Parallel caption="Opening vision">
+ *     <Version label="Old English" lang="ang">…</Version>
+ *     <Version label="Modern English" lang="en">…</Version>
+ *   </Parallel>
+ */
+interface Props {
+  /** Optional caption under the pair */
+  caption?: string;
+  id?: string;
+}
+
+const { caption, id } = Astro.props;
+---
+
+<figure class="folio-parallel" id={id}>
+  <div class="folio-parallel__columns">
+    <slot />
+  </div>
+  {
+    caption && (
+      <figcaption class="folio-parallel__caption">{caption}</figcaption>
+    )
+  }
+</figure>
+
+<style is:global>
+  .folio-parallel {
+    margin: 2rem 0 2.5rem;
+    padding: 0;
+    border: none;
+  }
+
+  .folio-parallel__columns {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+  }
+
+  /*
+   * Dual Version children → side-by-side columns.
+   * Locked alliterative-parallel markup is a single child and uses full width.
+   */
+  @media (min-width: 720px) {
+    .folio-parallel__columns:has(> .folio-version + .folio-version) {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+  }
+
+  .folio-parallel__columns > .folio-version {
+    padding: 1rem 1.15rem;
+    border-left: 0.25rem solid var(--fg);
+    background: color-mix(in srgb, var(--fg) 4%, var(--bg));
+  }
+
+  /*
+   * Paired verse: panel is language text only.
+   * Line numbers hang left via --verse-ln-outset.
+   * Pad vars keep the continuous OE|EN center rule aligned.
+   */
+  .folio-parallel__columns > .alliterative-parallel {
+    --verse-panel-pad-left: 1rem;
+    --verse-panel-pad-right: 1.15rem;
+    padding: 0.85rem var(--verse-panel-pad-right) 0.95rem
+      var(--verse-panel-pad-left);
+    border-left: 0.25rem solid var(--fg);
+    background: color-mix(in srgb, var(--fg) 4%, var(--bg));
+  }
+
+  .folio-parallel__caption {
+    margin: 0.75rem 0 0;
+    font-size: 0.85em;
+    color: color-mix(in srgb, var(--fg) 75%, var(--bg));
+  }
+</style>

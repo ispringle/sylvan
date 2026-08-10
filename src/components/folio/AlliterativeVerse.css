@@ -1,0 +1,248 @@
+/* Half-line (a-verse | b-verse) + optional locked OE|EN pairs */
+
+:root {
+  --verse-ln-width: 2.5rem;
+  --verse-col-gap: 1.5rem;
+  --verse-half-gap: 0.75rem;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Single-language half-line layout (standalone columns)                        */
+/* -------------------------------------------------------------------------- */
+
+.alliterative-verse {
+  font-size: 0.92em;
+  line-height: 1.55;
+}
+
+.verse-line {
+  display: grid;
+  grid-template-columns: var(--verse-ln-width) minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 1rem;
+  align-items: baseline;
+  margin: 0.12em 0;
+}
+
+.verse-ln {
+  font-size: 0.78em;
+  line-height: inherit;
+  text-align: right;
+  color: color-mix(in srgb, var(--fg) 42%, var(--bg));
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+  min-height: 1em;
+}
+
+.verse-a,
+.verse-b {
+  min-width: 0;
+}
+
+.verse-a {
+  text-align: left;
+  padding-right: 0.25rem;
+}
+
+.verse-b {
+  text-align: left;
+  padding-left: 0.35rem;
+  border-left: 0.08rem solid color-mix(in srgb, var(--fg) 18%, var(--bg));
+}
+
+.alliterative-verse[lang='ang'] {
+  line-height: 1.65;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Locked parallel: OE | EN on one row; line numbers hang outside the panel     */
+/* -------------------------------------------------------------------------- */
+
+.alliterative-parallel {
+  /*
+   * Hang room to the left of the reading panel so numbers sit in true margin,
+   * outside the border / wash (classic edition style).
+   */
+  --verse-ln-width: 2.5rem;
+  /* air between line number and panel edge */
+  --verse-ln-gap: 2.85rem;
+  --verse-half-gap: 0.65rem;
+  --verse-lang-pad: 1.15rem;
+  --verse-lang-rule: color-mix(in srgb, var(--fg) 28%, var(--bg));
+  --verse-lang-rule-width: 0.1rem;
+
+  position: relative;
+  font-size: 0.9em;
+  line-height: 1.55;
+}
+
+/*
+ * One continuous vertical rule between OE and EN — full height of the block
+ * so it meets the header rule and runs unbroken through every pair.
+ */
+.alliterative-parallel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  /* center of the two equal language columns (accounts for horizontal padding) */
+  left: calc(
+    var(--verse-panel-pad-left, 1rem) +
+      (100% - var(--verse-panel-pad-left, 1rem) - var(--verse-panel-pad-right, 1.15rem)) /
+        2
+  );
+  width: var(--verse-lang-rule-width);
+  transform: translateX(-50%);
+  background: var(--verse-lang-rule);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.verse-parallel-header,
+.verse-pair {
+  display: grid;
+  /* language columns only; line# is absolutely hung to the left */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 0;
+  align-items: baseline;
+  position: relative;
+}
+
+.verse-parallel-header {
+  margin-bottom: 0;
+  padding-bottom: 0.45rem;
+  border-bottom: 0.08rem solid color-mix(in srgb, var(--fg) 18%, var(--bg));
+}
+
+.verse-col-label {
+  font-family: 'Metamorphous', serif;
+  font-size: 0.72em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--fg) 70%, var(--bg));
+}
+
+/* OE column — pad away from the continuous center rule */
+.verse-parallel-header .verse-col-label:nth-child(2),
+.verse-half[lang='ang'] {
+  padding-right: var(--verse-lang-pad);
+  padding-left: 0.15rem;
+}
+
+/* EN column — pad away from the continuous center rule (no per-row border) */
+.verse-parallel-header .verse-col-label:nth-child(3),
+.verse-half[lang='en'] {
+  padding-left: var(--verse-lang-pad);
+}
+
+.verse-pair {
+  margin: 0;
+  padding: 0.2em 0;
+}
+
+.verse-pair + .verse-pair {
+  border-top: 0.04rem solid color-mix(in srgb, var(--fg) 8%, var(--bg));
+}
+
+/* Soft band on numbered lines (every 5) — only over language columns */
+.verse-pair:has(> .verse-ln:not(:empty)) {
+  background: color-mix(in srgb, var(--fg) 3.5%, transparent);
+  border-radius: 0.12rem;
+}
+
+/*
+ * Line numbers: hang fully into the left margin, outside the panel border.
+ * Header spacer uses the same class so the grid stays simple.
+ */
+.verse-parallel-header > .verse-ln,
+.verse-pair > .verse-ln {
+  position: absolute;
+  right: 100%;
+  top: 0.2em;
+  width: var(--verse-ln-width);
+  margin-right: var(--verse-ln-gap); /* 2.85rem between number and panel */
+  text-align: right;
+  box-sizing: border-box;
+}
+
+.verse-parallel-header > .verse-ln {
+  /* header has no number; keep track empty for layout consistency */
+  display: none;
+}
+
+.verse-half {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: var(--verse-half-gap);
+  align-items: baseline;
+  min-width: 0;
+}
+
+.verse-half[lang='ang'] {
+  line-height: 1.65;
+}
+
+.verse-half .verse-a {
+  padding-right: 0.2rem;
+}
+
+.verse-half .verse-b {
+  padding-left: 0.3rem;
+  border-left: 0.08rem solid color-mix(in srgb, var(--fg) 16%, var(--bg));
+}
+
+/* Narrow: keep hung line#; stack EN under OE with a horizontal rule */
+@media (max-width: 860px) {
+  /* No center divider when columns stack */
+  .alliterative-parallel::before {
+    display: none;
+  }
+
+  .verse-parallel-header,
+  .verse-pair {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0.25rem;
+  }
+
+  .verse-parallel-header .verse-col-label:nth-child(3) {
+    display: none;
+  }
+
+  .verse-parallel-header .verse-col-label:nth-child(2),
+  .verse-half[lang='ang'] {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .verse-half[lang='en'] {
+    border-top: 0.08rem solid var(--verse-lang-rule);
+    padding-left: 0;
+    padding-top: 0.35em;
+    margin-top: 0.1em;
+    opacity: 0.97;
+  }
+}
+
+/* Very narrow: a-verse above b-verse within each language */
+@media (max-width: 520px) {
+  .verse-line {
+    grid-template-columns: var(--verse-ln-width) 1fr;
+    row-gap: 0.1rem;
+  }
+
+  .verse-line .verse-b {
+    grid-column: 2;
+    border-left: none;
+    padding-left: 0;
+  }
+
+  .verse-half {
+    grid-template-columns: 1fr;
+    row-gap: 0.05rem;
+  }
+
+  .verse-half .verse-b {
+    border-left: none;
+    padding-left: 0;
+    opacity: 0.95;
+  }
+}

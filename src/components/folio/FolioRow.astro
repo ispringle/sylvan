@@ -1,14 +1,24 @@
 ---
 /**
- * Pairs primary content with a margin note on one horizontal line.
+ * Reading column + optional right-gutter prose notes.
  *
  *   <FolioRow>
- *     <Excerpt …>…</Excerpt>
- *     <Note>…</Note>
+ *     <Excerpt>…</Excerpt>
+ *     <Note title="Commentary">…</Note>
  *   </FolioRow>
  *
- * Children that are .folio-note go in the right column; everything else stays
- * in the reading column. On narrow viewports the note stacks below.
+ * Multiple right-gutter notes:
+ *
+ *   <FolioRow>
+ *     <div class="folio-poem">…</div>
+ *     <div class="folio-notes">
+ *       <Note>…</Note>
+ *       <Note>…</Note>
+ *     </div>
+ *   </FolioRow>
+ *
+ * Point footnotes belong *inline* in the text via <Fn>, not here — they use
+ * the left gutter and open on hover/click.
  */
 ---
 
@@ -19,39 +29,59 @@
 <style is:global>
   .folio-row {
     display: block;
-    margin: 0;
+    margin: 0 0 2rem;
+    max-width: 100%;
+  }
+
+  .folio-notes {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
   }
 
   @media (min-width: 960px) {
     .folio-row {
       display: grid;
-      grid-template-columns: minmax(0, var(--folio-measure, 66.9rem)) var(
-          --folio-margin,
-          24rem
-        );
+      grid-template-columns: var(--folio-measure, 66.9rem) var(--folio-margin, 24rem);
       column-gap: var(--folio-gutter, 2.5rem);
       align-items: start;
-      width: 100%;
-      max-width: calc(
+      box-sizing: content-box;
+      width: calc(
         var(--folio-measure, 66.9rem) + var(--folio-gutter, 2.5rem) +
           var(--folio-margin, 24rem)
       );
+      max-width: none;
+      min-width: calc(
+        var(--folio-measure, 66.9rem) + var(--folio-gutter, 2.5rem) +
+          var(--folio-margin, 24rem)
+      );
+      grid-template-rows: auto;
     }
 
-    .folio-row > :not(.folio-note) {
+    /* Body (poem, excerpt, …) — left track */
+    .folio-row > :not(.folio-note):not(.folio-notes) {
       grid-column: 1;
+      grid-row: 1;
+      width: 100%;
+      max-width: var(--folio-measure, 66.9rem);
       min-width: 0;
     }
 
-    .folio-row > .folio-note {
+    /* Prose notes — right gutter, top of the block */
+    .folio-row > .folio-note,
+    .folio-row > .folio-notes {
       grid-column: 2;
-      grid-row: 1 / -1;
+      grid-row: 1;
+      width: 100%;
+      max-width: var(--folio-margin, 24rem);
       align-self: start;
-      margin-top: 0;
+      margin: 0;
     }
 
-    /* Excerpts normally have large vertical margins; zero the top so note lines up */
-    .folio-row > .folio-excerpt {
+    .folio-row > .folio-excerpt,
+    .folio-row > .folio-parallel,
+    .folio-row > .folio-gloss,
+    .folio-row > .folio-poem .folio-parallel {
       margin-top: 0;
     }
   }

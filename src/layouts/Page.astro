@@ -7,17 +7,27 @@ import Root from "@layouts/Root.astro";
 const { page, ...props } = Astro.props;
 
 const { title } = page.frontmatter;
-const kind = page.frontmatter?.type || page.frontmatter?.kind || "";
+const kind = page.frontmatter?.type || page.frontmatter?.kind || "post";
+const wide = Boolean(
+  page.frontmatter?.wide || page.frontmatter?.layout === "wide",
+);
+// measure | folio | folio-wide (parallel texts, dual columns, etc.)
+const layout =
+  kind === "folio" ? (wide ? "folio-wide" : "folio") : "measure";
 ---
-<Base pageTitle={title}>
+<Base pageTitle={title} layout={layout}>
   { () => {
-    switch (page.frontmatter?.type || page.frontmatter?.kind || "post") {
+    switch (kind) {
       case "root":
         return <Root page={page}><slot /></Root >
       case "index":
         return <Index page={page}><slot /></Index>
       case "post":
       case "article":
+      case "folio":
+      case "about":
+      case "page":
+      case "marginalia":
         return <Article frontmatter={page.frontmatter}>
           <slot />
         </Article>

@@ -1,0 +1,55 @@
+---
+/**
+ * One side of a Parallel comparison (e.g. Old English | Modern English).
+ */
+interface Props {
+  /** Short display label shown above the column */
+  label: string;
+  /** BCP-47-ish language of the text (default en) */
+  lang?: string;
+}
+
+const { label, lang = 'en' } = Astro.props;
+---
+
+<div class="folio-version" lang={lang} data-label={label}>
+  <p class="folio-version__label">{label}</p>
+  <div class="folio-version__body">
+    <slot />
+  </div>
+</div>
+
+<style is:global>
+  .folio-version {
+    min-width: 0;
+  }
+
+  .folio-version__label {
+    margin: 0 0 0.65rem;
+    font-family: 'Metamorphous', serif;
+    font-size: 0.72em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--fg) 70%, var(--bg));
+  }
+
+  .folio-version__body {
+    font-size: 0.95em;
+    line-height: 1.55;
+  }
+
+  .folio-version__body p {
+    margin: 0 0 0.85em;
+  }
+
+  .folio-version__body p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Old English: slightly more open, monospaced-friendly lineation optional */
+  .folio-version[lang='ang'] .folio-version__body,
+  .folio-version[lang='ang'] .folio-version__body p {
+    font-feature-settings: 'hist' 0;
+    line-height: 1.65;
+  }
+</style>

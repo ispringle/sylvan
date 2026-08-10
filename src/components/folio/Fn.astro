@@ -1,0 +1,326 @@
+---
+/**
+ * Point footnote — left gutter, only on hover / focus / click.
+ *
+ * Place *inline* at the word or line it glosses:
+ *
+ *   Hwæt, iċ swefna cyst<Fn title="Hwæt">…</Fn>
+ *
+ * Distinct from <Note>, which is right-gutter prose commentary.
+ */
+interface Props {
+  /** Optional marker label (default ※). Numbers work well: n="1" */
+  n?: string | number;
+  /** Short title shown above the panel body */
+  title?: string;
+  id?: string;
+}
+
+const { n = '※', title, id } = Astro.props;
+const markLabel = String(n);
+---
+
+<span class="fn" data-fn id={id}>
+  <button
+    type="button"
+    class="fn__mark"
+    aria-expanded="false"
+    aria-label={title ? `Footnote: ${title}` : 'Show footnote'}
+  >
+    {markLabel}
+  </button>
+  <span class="fn__panel" role="note" hidden>
+    {
+      title && (
+        <span class="fn__title">{title}</span>
+      )
+    }
+    <span class="fn__body">
+      <slot />
+    </span>
+  </span>
+</span>
+
+<style is:global>
+  .fn {
+    display: inline;
+    position: static;
+  }
+
+  .fn__mark {
+    display: inline;
+    margin: 0 0.1em;
+    padding: 0 0.15em;
+    border: none;
+    border-radius: 0.15em;
+    background: color-mix(in srgb, var(--fg) 8%, transparent);
+    color: color-mix(in srgb, var(--fg) 70%, var(--bg));
+    font-family: 'Metamorphous', serif;
+    font-size: 0.72em;
+    font-weight: 400;
+    line-height: 1;
+    vertical-align: super;
+    letter-spacing: 0.02em;
+    cursor: inherit;
+  }
+
+  .fn__mark:hover,
+  .fn__mark:focus-visible,
+  .fn.is-open .fn__mark,
+  .fn:hover .fn__mark {
+    background: color-mix(in srgb, var(--fg) 14%, transparent);
+    color: var(--fg);
+    outline: none;
+  }
+
+  .fn__mark:focus-visible {
+    box-shadow: 0 0 0 0.12rem color-mix(in srgb, var(--fg) 45%, var(--bg));
+  }
+
+  /*
+   * Panel is position:fixed; script sizes + places it fully in the left gutter
+   * (never overlapping the measure). Width is set in px at show time.
+   */
+  .fn__panel {
+    box-sizing: border-box;
+    z-index: 40;
+    width: 16rem; /* overwritten by script to fit the gutter */
+    max-width: calc(100vw - 2rem);
+    padding: 0.65rem 0.75rem 0.75rem;
+    border: 0.1rem solid color-mix(in srgb, var(--fg) 35%, var(--bg));
+    border-right-width: 0.18rem;
+    background: var(--bg, #fffff8);
+    color: color-mix(in srgb, var(--fg) 90%, var(--bg));
+    font-size: 1.35rem;
+    line-height: 1.4;
+    box-shadow: 0.15rem 0.15rem 0 color-mix(in srgb, var(--fg) 12%, transparent);
+    pointer-events: auto;
+  }
+
+  .fn__panel[hidden] {
+    display: none !important;
+  }
+
+  .fn__title {
+    display: block;
+    margin: 0 0 0.4rem;
+    font-family: 'Metamorphous', serif;
+    font-size: 0.72em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--fg) 70%, var(--bg));
+    border-bottom: 0.08rem solid color-mix(in srgb, var(--fg) 28%, var(--bg));
+    padding-bottom: 0.25em;
+  }
+
+  .fn__body {
+    display: block;
+  }
+
+  .fn__body p {
+    margin: 0 0 0.65em;
+  }
+
+  .fn__body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .fn__body em {
+    font-style: italic;
+  }
+
+  @media (max-width: 959px) {
+    .fn__panel {
+      width: min(28rem, calc(100vw - 2.5rem));
+      border-right-width: 0.1rem;
+      border-left-width: 0.18rem;
+    }
+  }
+</style>
+
+<script>
+  const HIDE_MS = 180;
+
+  function rootPx() {
+    return parseFloat(getComputedStyle(document.documentElement).fontSize) || 10;
+  }
+
+  function cssRem(name, fallback) {
+    const raw = getComputedStyle(document.body).getPropertyValue(name);
+    const n = parseFloat(raw);
+    return (Number.isFinite(n) ? n : fallback) * rootPx();
+  }
+
+  function placePanel(fn) {
+    const mark = fn.querySelector('.fn__mark');
+    const panel = fn.querySelector('.fn__panel');
+    if (!mark || !panel) return;
+
+    const markRect = mark.getBoundingClientRect();
+    const article = fn.closest('article');
+    const main = fn.closest('main');
+    const gap = 0.75 * rootPx();
+    const wide = window.matchMedia('(min-width: 960px)').matches;
+    const preferW = 18 * rootPx(); // ~18rem when readable
+
+    panel.hidden = false;
+    panel.style.position = 'fixed';
+
+    let top = markRect.top;
+    let left;
+    let width;
+
+    if (wide && article) {
+      const artRect = article.getBoundingClientRect();
+      const mainRect = main
+        ? main.getBoundingClientRect()
+        : { left: cssRem('--folio-left-rail', 26) };
+      const leftRail = cssRem('--folio-left-rail', 26);
+      /*
+       * Left gutter = article-inset + part of the left-rail (borderArt pocket).
+       * Panel RIGHT edge is always left of the measure — never over the text.
+       */
+      const gutterRight = artRect.left - gap;
+      // Reach back into the left-rail so notes have real width
+      const gutterLeft = Math.max(gap, mainRect.left - leftRail * 0.55);
+      const avail = Math.max(10 * rootPx(), gutterRight - gutterLeft);
+      width = Math.min(preferW, avail);
+      // Sit against the text edge, fully inside the gutter
+      left = gutterRight - width;
+      if (left < gutterLeft) {
+        left = gutterLeft;
+        width = Math.max(8 * rootPx(), gutterRight - left);
+      }
+    } else {
+      width = Math.min(preferW, window.innerWidth - 2 * gap);
+      left = Math.max(gap, markRect.left - width - gap);
+      top = markRect.bottom + gap;
+      if (left + width > window.innerWidth - gap) {
+        left = Math.max(gap, window.innerWidth - width - gap);
+      }
+    }
+
+    panel.style.width = Math.round(width) + 'px';
+
+    // Vertical: keep in viewport after width (height) settles
+    const panelH = panel.getBoundingClientRect().height;
+    const maxTop = window.innerHeight - panelH - gap;
+    if (top > maxTop) top = Math.max(gap, maxTop);
+    if (top < gap) top = gap;
+
+    panel.style.top = Math.round(top) + 'px';
+    panel.style.left = Math.round(left) + 'px';
+  }
+
+  function forceHide(fn) {
+    const mark = fn.querySelector('.fn__mark');
+    const panel = fn.querySelector('.fn__panel');
+    fn.classList.remove('is-open', 'is-pinned');
+    if (panel) panel.hidden = true;
+    if (mark) mark.setAttribute('aria-expanded', 'false');
+    if (fn._fnHideTimer) {
+      clearTimeout(fn._fnHideTimer);
+      fn._fnHideTimer = null;
+    }
+  }
+
+  function hidePanel(fn) {
+    if (fn.classList.contains('is-pinned')) return;
+    forceHide(fn);
+  }
+
+  function scheduleHide(fn) {
+    if (fn.classList.contains('is-pinned')) return;
+    if (fn._fnHideTimer) clearTimeout(fn._fnHideTimer);
+    fn._fnHideTimer = setTimeout(() => hidePanel(fn), HIDE_MS);
+  }
+
+  function cancelHide(fn) {
+    if (fn._fnHideTimer) {
+      clearTimeout(fn._fnHideTimer);
+      fn._fnHideTimer = null;
+    }
+  }
+
+  function showPanel(fn) {
+    const mark = fn.querySelector('.fn__mark');
+    if (!mark) return;
+
+    document.querySelectorAll('[data-fn].is-open').forEach((other) => {
+      if (other !== fn && !other.classList.contains('is-pinned')) {
+        forceHide(other);
+      }
+    });
+
+    cancelHide(fn);
+    fn.classList.add('is-open');
+    mark.setAttribute('aria-expanded', 'true');
+    placePanel(fn);
+  }
+
+  function onScrollOrResize() {
+    document.querySelectorAll('[data-fn].is-open').forEach((fn) => placePanel(fn));
+  }
+
+  function bindFn(fn) {
+    if (fn.dataset.fnBound) return;
+    fn.dataset.fnBound = '1';
+    const mark = fn.querySelector('.fn__mark');
+    const panel = fn.querySelector('.fn__panel');
+    if (!mark || !panel) return;
+
+    mark.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (fn.classList.contains('is-pinned')) {
+        forceHide(fn);
+      } else {
+        document.querySelectorAll('[data-fn].is-pinned').forEach((o) => {
+          if (o !== fn) forceHide(o);
+        });
+        fn.classList.add('is-pinned');
+        showPanel(fn);
+      }
+    });
+
+    // Hover bridge: delay hide so pointer can reach the fixed panel
+    fn.addEventListener('mouseenter', () => showPanel(fn));
+    fn.addEventListener('mouseleave', () => scheduleHide(fn));
+    panel.addEventListener('mouseenter', () => {
+      cancelHide(fn);
+      showPanel(fn);
+    });
+    panel.addEventListener('mouseleave', () => scheduleHide(fn));
+
+    mark.addEventListener('focus', () => showPanel(fn));
+    mark.addEventListener('blur', () => {
+      requestAnimationFrame(() => {
+        if (!fn.contains(document.activeElement)) scheduleHide(fn);
+      });
+    });
+  }
+
+  function init() {
+    document.querySelectorAll('[data-fn]').forEach(bindFn);
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
+  window.addEventListener('scroll', onScrollOrResize, { passive: true });
+  window.addEventListener('resize', onScrollOrResize);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('[data-fn].is-open').forEach(forceHide);
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    const t = e.target;
+    document.querySelectorAll('[data-fn].is-pinned').forEach((fn) => {
+      const panel = fn.querySelector('.fn__panel');
+      if (fn.contains(t) || (panel && panel.contains(t))) return;
+      forceHide(fn);
+    });
+  });
+</script>

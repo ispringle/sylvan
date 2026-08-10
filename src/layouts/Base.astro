@@ -2,7 +2,7 @@
 import 'normalize.css';
 import '@style/base.css';
 import '@style/prism.css';
-
+import '@components/folio/AlliterativeVerse.css';
 import Background from "../components/Background.astro";
 import BaseHead from "../components/Head.astro";
 import BaseHeader from "../components/Header.astro";
@@ -11,14 +11,14 @@ import ArticleBorder from "@components/ArticleBorder.astro";
 
 import {SITE_TITLE} from '../consts';
 
-const { pageTitle, ...props } = Astro.props;
+const { pageTitle, layout = 'measure', ...props } = Astro.props;
 const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
 ---
 
 <!doctype html>
 <html lang="en">
   <BaseHead title={title} />
-  <body>
+  <body data-layout={layout}>
     <BaseHeader class="main-header" />
     <main>
       <div id="borderArtWrapper" data-turbo-permanent>
@@ -49,19 +49,31 @@ const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
     /*
      * Site rails (shared by header / main / footer).
      * html font-size 62.5% → 1rem ≈ 10px
+     *
+     *   left-rail      borderArt pocket (+ point footnotes / Fn panels)
+     *   article-inset  shift of text column within main
+     *   measure        reading column (prose + floats)
+     *   gutter + margin  right prose notes (FolioRow + Note)
      */
     --folio-left-rail: 26rem;
     --folio-article-inset: 9rem;
     --folio-measure: 66.9rem;
+    --folio-measure-wide: 104rem; /* side-by-side OE | EN, etc. */
     --folio-gutter: 2.5rem;
     --folio-margin: 24rem;
-    /* Mild footer shift: less than full text-column inset */
     --folio-footer-inset: 4rem;
+  }
+
+  /*
+   * folio-wide: broaden the reading measure for parallel text without
+   * changing home/about/default folio.
+   */
+  body[data-layout='folio-wide'] {
+    --folio-measure: var(--folio-measure-wide);
   }
 
   main {
     position: relative;
-    /* Narrow: centered reading column */
     margin: 0 auto;
     max-width: var(--folio-measure);
     padding: 0 1rem;
@@ -71,47 +83,49 @@ const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
     overflow: visible;
   }
 
-  /*
-   * Wide: shift left for borderArt; shell is exactly
-   * measure + gutter + margin (not stretched full-bleed).
-   * Pair excerpt + note with <FolioRow> (see folio/FolioRow.astro).
-   */
   @media (min-width: 960px) {
+    /*
+     * measure  → inset + measure (home, about, indexes)
+     * folio    → + note gutter (single-column primary text + sidenotes)
+     * folio-wide → same shell math, but --folio-measure is widened above
+     */
     main {
       margin-left: var(--folio-left-rail);
       margin-right: auto;
-      max-width: calc(
-        var(--folio-measure) + var(--folio-gutter) + var(--folio-margin)
-      );
+      max-width: calc(var(--folio-article-inset) + var(--folio-measure));
       width: 100%;
       padding-left: 0;
       padding-right: 1rem;
+      overflow: visible;
     }
 
-    /* Article body + index lists (Rolladex) share the same left inset */
+    body[data-layout='folio'] main,
+    body[data-layout='folio-wide'] main {
+      max-width: calc(
+        var(--folio-article-inset) + var(--folio-measure) + var(--folio-gutter) +
+          var(--folio-margin)
+      );
+    }
+
+    /*
+     * Article = reading column only (floats stay here).
+     * FolioRow breaks out into the note gutter on folio / folio-wide.
+     */
     main :global(article),
     main :global(section.rolladex) {
-      width: 100%;
-      max-width: none;
-      margin-left: var(--folio-article-inset);
-      overflow: visible;
       box-sizing: border-box;
+      display: flow-root;
+      width: var(--folio-measure);
+      max-width: var(--folio-measure);
+      margin-left: var(--folio-article-inset);
+      margin-right: 0;
+      overflow: visible;
     }
 
-    /* Body copy without a row wrapper stays on the measure */
-    main :global(article > .headingWrapper > :not(.folio-row):not(section)),
-    main
-      :global(
-        article
-          .headingWrapper
-          > section
-          > :not(.folio-row):not(.folio-note):not(section)
-      ) {
-      max-width: var(--folio-measure);
-    }
-
-    main :global(section.rolladex) {
-      max-width: var(--folio-measure);
+    main :global(article .headingWrapper),
+    main :global(article section) {
+      max-width: 100%;
+      overflow: visible;
     }
   }
 

@@ -4,7 +4,12 @@ import Image from '@components/Image.astro';
 import Link from '@components/Link.astro';
 import Excerpt from '@components/folio/Excerpt.astro';
 import Note from '@components/folio/Note.astro';
+import Fn from '@components/folio/Fn.astro';
 import FolioRow from '@components/folio/FolioRow.astro';
+import Parallel from '@components/folio/Parallel.astro';
+import Version from '@components/folio/Version.astro';
+import Gloss from '@components/folio/Gloss.astro';
+import Illustration from '@components/folio/Illustration.astro';
 import { allPages } from "@lib/pages";
 
 export async function getStaticPaths() {
@@ -28,6 +33,11 @@ const { default: Content } = page;
     img: Image,
     Excerpt,
     Note,
+    Fn,
     FolioRow,
+    Parallel,
+    Version,
+    Gloss,
+    Illustration,
   }}/>
 </Page>

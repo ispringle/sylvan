@@ -1,0 +1,67 @@
+---
+/**
+ * Compact glossary for a Folio entry (lemmas + short definitions).
+ *
+ *   <Gloss>
+ *     <dt>rōd</dt><dd>cross; gallows</dd>
+ *     <dt>beacen</dt><dd>sign, beacon; here the cross as marvel</dd>
+ *   </Gloss>
+ */
+interface Props {
+  title?: string;
+  id?: string;
+}
+
+const { title = 'Gloss', id } = Astro.props;
+---
+
+<aside class="folio-gloss" id={id}>
+  <p class="folio-gloss__title">{title}</p>
+  <dl class="folio-gloss__list">
+    <slot />
+  </dl>
+</aside>
+
+<style is:global>
+  .folio-gloss {
+    margin: 2rem 0;
+    padding: 1.15rem 1.35rem;
+    border: 0.12rem solid color-mix(in srgb, var(--fg) 30%, var(--bg));
+    max-width: var(--folio-measure, 66.9rem);
+    box-sizing: border-box;
+  }
+
+  .folio-gloss__title {
+    margin: 0 0 0.85rem;
+    font-family: 'Metamorphous', serif;
+    font-size: 0.75em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .folio-gloss__list {
+    margin: 0;
+    display: grid;
+    grid-template-columns: minmax(6rem, max-content) 1fr;
+    column-gap: 1.25rem;
+    row-gap: 0.55rem;
+    font-size: 0.92em;
+    line-height: 1.4;
+  }
+
+  .folio-gloss__list dt {
+    margin: 0;
+    font-style: italic;
+    font-weight: normal;
+  }
+
+  .folio-gloss__list dd {
+    margin: 0;
+  }
+
+  /* When used inside FolioRow as the body, drop outer max-width */
+  :global(.folio-row) > .folio-gloss {
+    max-width: none;
+    margin-top: 0;
+  }
+</style>
