@@ -1,60 +1,51 @@
-# [[file:../../github-workflow.org::*Triggers][Triggers:1]]
+# Legacy dual-repo deploy path; primary workflow is sylvan/.github/workflows/deploy.yaml
 name: GitHub Actions Production Deployment
 
 on:
   push:
     branches:
       - master
-# Triggers:1 ends here
-# [[file:../../github-workflow.org::*Triggers][Triggers:2]]
   repository_dispatch:
     types:
       - sylvan-update
-# Triggers:2 ends here
-# [[file:../../github-workflow.org::*Triggers][Triggers:3]]
   workflow_dispatch:
-# Triggers:3 ends here
-# [[file:../../github-workflow.org::*Jobs][Jobs:1]]
+
 jobs:
   Deploy-Production:
     runs-on: ubuntu-latest
     steps:
-# Jobs:1 ends here
-# [[file:../../github-workflow.org::*Checkout and Cleanup][Checkout and Cleanup:1]]
       - name: Checkout Sylvan
         uses: actions/checkout@v4
         with:
           repository: ispringle/sylvan
-# Checkout and Cleanup:1 ends here
-# [[file:../../github-workflow.org::*Checkout and Cleanup][Checkout and Cleanup:2]]
+
       - name: Checkout Org content
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           path: content/
-# Checkout and Cleanup:2 ends here
-# [[file:../../github-workflow.org::*Checkout and Cleanup][Checkout and Cleanup:3]]
+
       - name: "Remove files marked :PRIVATE: t"
         run: 'find ./content -type f -exec grep -q "^:PRIVATE: t\$" {} \; -delete'
-# Checkout and Cleanup:3 ends here
-# [[file:../../github-workflow.org::*Build and Deploy!][Build and Deploy!:1]]
+
       - name: Set Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
-      - name: Instal deps
-        uses: borales/actions-yarn@v4
+          node-version: 22
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
         with:
-          cmd: install
+          version: 10
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
       - name: Build
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: build
-# Build and Deploy!:1 ends here
-# [[file:../../github-workflow.org::*Build and Deploy!][Build and Deploy!:2]]
+        run: pnpm build
+
       - name: Publish
-        uses: cloudflare/wrangler-action@2.0.0
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           command: pages publish --project-name=org dist
-# Build and Deploy!:2 ends here
