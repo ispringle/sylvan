@@ -50,15 +50,17 @@ const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
      * Site rails (shared by header / main / footer).
      * html font-size 62.5% → 1rem ≈ 10px
      *
-     *   left-rail      borderArt pocket (+ point footnotes / Fn panels)
-     *   article-inset  shift of text column within main
-     *   measure        reading column (prose + floats)
-     *   gutter + margin  right gutter: Note (section) + Margin (text-anchored)
+     *   left-rail       borderArt pocket
+     *   article-inset   shift of text column within main
+     *   left-notes      scribal gloss column (Scribe / Sidenote)
+     *   measure         reading column (prose / Poem)
+     *   gutter + margin right: flowing Note + fixed Margin figures
      */
     --folio-left-rail: 26rem;
     --folio-article-inset: 9rem;
+    --folio-left-notes: 20rem;
     --folio-measure: 66.9rem;
-    --folio-measure-wide: 104rem; /* side-by-side OE | EN, etc. */
+    --folio-measure-wide: 104rem; /* rare dual-column specimens */
     --folio-gutter: 2.5rem;
     --folio-margin: 24rem;
     --folio-footer-inset: 4rem;
@@ -83,6 +85,11 @@ const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
     overflow: visible;
   }
 
+  /* Content column only — not <main> chrome */
+  :global(article.index) {
+    margin-top: 3rem;
+  }
+
   @media (min-width: 960px) {
     /*
      * measure  → inset + measure (home, about, indexes)
@@ -101,9 +108,10 @@ const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
 
     body[data-layout='folio'] main,
     body[data-layout='folio-wide'] main {
+      /* room for Scribe: left notes (via breakout) + measure + right margin */
       max-width: calc(
-        var(--folio-article-inset) + var(--folio-measure) + var(--folio-gutter) +
-          var(--folio-margin)
+        var(--folio-left-notes) + var(--folio-gutter) + var(--folio-measure) +
+          var(--folio-gutter) + var(--folio-margin)
       );
     }
 
@@ -122,6 +130,10 @@ const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
       margin-left: var(--folio-article-inset);
       margin-right: 0;
       overflow: visible;
+    }
+
+    main :global(article.index) {
+      margin-top: 3rem;
     }
 
     main :global(article .headingWrapper),

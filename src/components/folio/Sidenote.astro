@@ -1,0 +1,123 @@
+---
+/**
+ * Left-gutter scribal gloss — always visible, tied to a poem line.
+ *
+ *   <Sidenote id="hwaet" title="The dream frame" at={1}>
+ *     …
+ *   </Sidenote>
+ *
+ * `at` is a 1-based poem line number, or a string matching
+ * `[data-anchor="…"]` in prose (e.g. inside <Excerpt>).
+ *
+ * Place as a sibling of the main text inside <Scribe>.
+ */
+interface Props {
+  title?: string;
+  id?: string;
+  /** Poem line (number) or prose data-anchor id (string) */
+  at: number | string;
+}
+
+const { title, id, at } = Astro.props;
+const atLabel = String(at);
+const atIsLine = typeof at === 'number' || /^\d+$/.test(atLabel);
+---
+
+<aside
+  class="sidenote"
+  data-sidenote
+  data-at={atLabel}
+  id={id}
+  tabindex="0"
+>
+  {
+    title && (
+      <p class="sidenote__label">
+        <span class="sidenote__label-text">{title}</span>
+        {
+          atIsLine && (
+            <span class="sidenote__line" aria-hidden="true">
+              l.{atLabel}
+            </span>
+          )
+        }
+      </p>
+    )
+  }
+  <div class="sidenote__body">
+    <slot />
+  </div>
+</aside>
+
+<style is:global>
+  .sidenote {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: var(--folio-left-notes, 20rem);
+    padding: 0.65rem 0.75rem 0.75rem;
+    border: 0.1rem solid color-mix(in srgb, var(--fg) 28%, var(--bg));
+    border-left-width: 0.22rem;
+    background: color-mix(in srgb, var(--fg) 3.5%, var(--bg));
+    color: color-mix(in srgb, var(--fg) 90%, var(--bg));
+    font-size: 1.35rem;
+    line-height: 1.4;
+    box-shadow: 0.12rem 0.12rem 0 color-mix(in srgb, var(--fg) 10%, transparent);
+    cursor: default;
+  }
+
+  .sidenote.is-active,
+  .sidenote.is-pinned {
+    border-color: color-mix(in srgb, var(--fg) 55%, var(--bg));
+    background: color-mix(in srgb, var(--default-blue, #b4d5fe) 16%, var(--bg));
+    box-shadow: 0.18rem 0.18rem 0 color-mix(in srgb, var(--fg) 14%, transparent);
+    z-index: 30 !important;
+  }
+
+  .sidenote__label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin: 0 0 0.4rem;
+    font-family: 'Metamorphous', serif;
+    font-size: 0.72em;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .sidenote__label-text {
+    border-bottom: 0.08rem solid color-mix(in srgb, var(--fg) 30%, var(--bg));
+    padding-bottom: 0.1em;
+  }
+
+  .sidenote__line {
+    flex: 0 0 auto;
+    color: color-mix(in srgb, var(--fg) 45%, var(--bg));
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+
+  .sidenote__body p {
+    margin: 0 0 0.55em;
+  }
+
+  .sidenote__body p:last-child {
+    margin-bottom: 0;
+  }
+
+  .sidenote__body em {
+    font-style: italic;
+  }
+
+  /* Narrow: in-flow cards (Scribe parks them statically) */
+  @media (max-width: 959px) {
+    .sidenote {
+      max-width: none;
+      margin: 0 0 0.85rem;
+      position: static !important;
+      left: auto !important;
+      top: auto !important;
+      transform: none !important;
+    }
+  }
+</style>

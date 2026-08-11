@@ -66,10 +66,12 @@ const { title, id } = Astro.props;
     font-style: italic;
   }
 
-  /* Wide: right-gutter treatment when inside FolioRow (see FolioRow.astro) */
+  /* Wide: right-gutter treatment (FolioRow or Scribe right track) */
   @media (min-width: 960px) {
     .folio-row > .folio-note,
-    .folio-row > .folio-notes .folio-note {
+    .folio-row > .folio-notes .folio-note,
+    .folio-scribe__right > .folio-note,
+    .folio-scribe__right > .folio-notes .folio-note {
       width: 100%;
       max-width: 100%;
       margin: 0;
@@ -78,10 +80,13 @@ const { title, id } = Astro.props;
       border-left: 0.12rem solid color-mix(in srgb, var(--fg) 28%, var(--bg));
       background: transparent;
       float: none;
+      box-sizing: border-box;
     }
 
     .folio-row > .folio-note::before,
-    .folio-row > .folio-notes .folio-note::before {
+    .folio-row > .folio-notes .folio-note::before,
+    .folio-scribe__right > .folio-note::before,
+    .folio-scribe__right > .folio-notes .folio-note::before {
       content: '❧';
       display: block;
       margin: 0 0 0.35rem;

@@ -1,0 +1,473 @@
+---
+/**
+ * Three-track scribal shell around a poem:
+ *
+ *   left notes (Sidenote) | measure (Poem) | right (Margin fixed + Note flow)
+ *
+ * Authoring — put everything in the default slot; layout script sorts:
+ *
+ *   <Scribe>
+ *     <Poem>…</Poem>
+ *     <Sidenote at={1} title="…">…</Sidenote>
+ *     <Note title="…">flowing commentary</Note>
+ *     <Margin>…optional fixed figure…</Margin>
+ *   </Scribe>
+ */
+---
+
+<div class="folio-scribe" data-scribe>
+  <div class="folio-scribe__left" data-scribe-left aria-label="Marginal notes"></div>
+  <div class="folio-scribe__center" data-scribe-center>
+    <slot />
+  </div>
+  <div class="folio-scribe__right" data-scribe-right aria-label="Commentary and figures"></div>
+</div>
+
+<style is:global>
+  :root {
+    --folio-left-notes: 20rem;
+  }
+
+  .folio-scribe {
+    position: relative;
+    display: block;
+    margin: 0 0 2.5rem;
+    max-width: 100%;
+  }
+
+  @media (min-width: 960px) {
+    .folio-scribe {
+      /*
+       * Full breakout: left notes + measure + right margin.
+       * Center column holds the poem; gutters are populated by script.
+       */
+      display: grid;
+      grid-template-columns:
+        var(--folio-left-notes)
+        var(--folio-measure, 66.9rem)
+        var(--folio-margin, 24rem);
+      column-gap: var(--folio-gutter, 2.5rem);
+      width: calc(
+        var(--folio-left-notes) + var(--folio-measure, 66.9rem) +
+          var(--folio-margin, 24rem) + 2 * var(--folio-gutter, 2.5rem)
+      );
+      max-width: none;
+      box-sizing: content-box;
+      /* Shift left so the *poem* still starts near article measure origin:
+         article is measure-wide; we pull left by left-notes + gutter */
+      margin-left: calc(
+        -1 * (var(--folio-left-notes) + var(--folio-gutter, 2.5rem))
+      );
+    }
+
+    .folio-scribe__left,
+    .folio-scribe__right {
+      position: relative;
+      min-width: 0;
+      min-height: 1px;
+    }
+
+    .folio-scribe__center {
+      min-width: 0;
+      max-width: var(--folio-measure, 66.9rem);
+    }
+
+    /* While JS runs, keep authored sidenotes/notes from breaking the poem flow */
+    .folio-scribe__center > .sidenote,
+    .folio-scribe__center > .folio-note,
+    .folio-scribe__center > .margin {
+      /* script moves these; hide until placed to avoid flash in center */
+    }
+  }
+
+  /* Prose anchors inside Excerpt (invisible markers / highlight targets) */
+  [data-anchor] {
+    border-radius: 0.12rem;
+    transition: background 0.12s ease;
+  }
+
+  [data-anchor].is-active {
+    background: color-mix(in srgb, var(--default-blue, #b4d5fe) 22%, transparent);
+    outline: 0.08rem solid color-mix(in srgb, var(--fg) 22%, var(--bg));
+  }
+
+  /* Excerpt sits cleanly in the center track */
+  .folio-scribe__center > .folio-excerpt {
+    margin-top: 0;
+    max-width: 100%;
+  }
+
+  @media (max-width: 959px) {
+    .folio-scribe__left,
+    .folio-scribe__right {
+      display: block;
+      margin-top: 1.25rem;
+    }
+  }
+</style>
+
+<script>
+  function rootPx() {
+    return parseFloat(getComputedStyle(document.documentElement).fontSize) || 10;
+  }
+
+  function cssRem(name, fallback) {
+    const raw = getComputedStyle(document.body).getPropertyValue(name);
+    const n = parseFloat(raw);
+    return (Number.isFinite(n) ? n : fallback) * rootPx();
+  }
+
+  function offsetTopIn(el, ancestor) {
+    const er = el.getBoundingClientRect();
+    const ar = ancestor.getBoundingClientRect();
+    return er.top - ar.top + ancestor.scrollTop;
+  }
+
+  /** Poem line by number, or [data-anchor="…"] for prose. */
+  function anchorEl(scribe, at) {
+    if (at === undefined || at === null || at === '') return null;
+    const key = String(at);
+    if (/^\d+$/.test(key)) {
+      return scribe.querySelector(`.poem-line[data-line="${key}"]`);
+    }
+    return (
+      scribe.querySelector(`[data-anchor="${CSS.escape(key)}"]`) ||
+      scribe.querySelector(`#${CSS.escape(key)}`)
+    );
+  }
+
+  function layoutScribe(scribe) {
+    const wide = window.matchMedia('(min-width: 960px)').matches;
+    const leftCol = scribe.querySelector('[data-scribe-left]');
+    const center = scribe.querySelector('[data-scribe-center]');
+    const rightCol = scribe.querySelector('[data-scribe-right]');
+    if (!leftCol || !center || !rightCol) return;
+
+    const sidenotes = Array.from(
+      scribe.querySelectorAll('[data-sidenote]'),
+    );
+    const flowingNotes = Array.from(
+      center.querySelectorAll(':scope > .folio-note, :scope > .folio-notes'),
+    ).concat(
+      Array.from(rightCol.querySelectorAll(':scope > .folio-note, :scope > .folio-notes')),
+    );
+    // Margins may be in center or already hosted
+    const margins = Array.from(scribe.querySelectorAll('[data-margin]'));
+
+    if (!wide) {
+      // Stack: poem (center) already first; move notes below into left/right as flow
+      sidenotes.forEach((sn) => {
+        sn.style.position = '';
+        sn.style.top = '';
+        sn.style.left = '';
+        sn.style.transform = '';
+        sn.style.zIndex = '';
+        leftCol.appendChild(sn);
+      });
+      flowingNotes.forEach((n) => {
+        n.style.position = '';
+        n.style.top = '';
+        n.style.left = '';
+        n.style.width = '';
+        rightCol.appendChild(n);
+      });
+      // leave margins to their own script / static
+      return;
+    }
+
+    // --- Left: sidenotes at line Y, sticky-note stack ---
+    const stackGap = 0.65 * rootPx();
+    let lastBottom = -Infinity;
+    let stackIndex = 0;
+
+    sidenotes
+      .slice()
+      .sort((a, b) => {
+        const aa = a.getAttribute('data-at') || '';
+        const bb = b.getAttribute('data-at') || '';
+        const na = parseInt(aa, 10);
+        const nb = parseInt(bb, 10);
+        if (!Number.isNaN(na) && !Number.isNaN(nb)) return na - nb;
+        return aa.localeCompare(bb);
+      })
+      .forEach((sn) => {
+        leftCol.appendChild(sn);
+        const at = sn.getAttribute('data-at') || '';
+        const target = anchorEl(scribe, at);
+        let top = target ? offsetTopIn(target, scribe) : 0;
+        if (top < lastBottom + stackGap) {
+          top = lastBottom + stackGap;
+          stackIndex += 1;
+        } else {
+          stackIndex = 0;
+        }
+        sn.style.position = 'absolute';
+        sn.style.left = '0';
+        sn.style.width = '100%';
+        sn.style.top = Math.round(top) + 'px';
+        sn.style.right = 'auto';
+        // slight sticky-note layering
+        const jitter = (stackIndex % 3) * 0.15;
+        sn.style.transform =
+          stackIndex > 0
+            ? `translateX(${jitter}rem) rotate(${stackIndex % 2 ? -0.35 : 0.35}deg)`
+            : '';
+        sn.style.zIndex = String(10 + stackIndex);
+        lastBottom = top + (sn.offsetHeight || 0);
+      });
+
+    // Make left column tall enough for absolute cards
+    leftCol.style.minHeight = Math.round(Math.max(lastBottom, 0)) + 'px';
+
+    // --- Right: fixed margins, then flowing notes in free bands ---
+    const rightW = rightCol.clientWidth || cssRem('--folio-margin', 24);
+    /** @type {{top:number, bottom:number}[]} */
+    const reserved = [];
+
+    margins.forEach((m) => {
+      // Prefer Margin's own panel host if present; else whole node
+      const panel =
+        m.querySelector('.margin__panel') ||
+        (m.dataset.marginUid &&
+          scribe.querySelector(
+            `.margin__panel[data-margin-for="${CSS.escape(m.dataset.marginUid)}"]`,
+          )) ||
+        m;
+      // Anchor: use data-at on margin if set, else stay where Margin script put it
+      const at = m.getAttribute('data-at') || '';
+      rightCol.appendChild(m);
+      if (panel && panel !== m && panel.parentElement !== rightCol && panel.parentElement !== m) {
+        // keep panel with margin element
+      }
+      let top = 0;
+      if (at) {
+        const target = anchorEl(scribe, at);
+        top = target ? offsetTopIn(target, scribe) : 0;
+      }
+      m.style.position = 'absolute';
+      m.style.left = '0';
+      m.style.width = '100%';
+      m.style.top = Math.round(top) + 'px';
+      // show margin panel always for scribe (Margin component may hide)
+      const inner = m.querySelector('.margin__panel');
+      if (inner) {
+        inner.hidden = false;
+        inner.style.position = 'static';
+        inner.style.left = '';
+        inner.style.top = '';
+        inner.style.width = '100%';
+      }
+      const h = m.offsetHeight || 0;
+      reserved.push({ top, bottom: top + h });
+    });
+
+    reserved.sort((a, b) => a.top - b.top);
+
+    function fits(start, height) {
+      const end = start + height;
+      for (const r of reserved) {
+        if (start < r.bottom && end > r.top) return false;
+      }
+      return true;
+    }
+
+    function nextFree(start, height) {
+      let y = Math.max(0, start);
+      // scan downward until a free slot
+      for (let guard = 0; guard < 200; guard++) {
+        if (fits(y, height)) return y;
+        // jump to end of overlapping reserved
+        let bumped = false;
+        for (const r of reserved) {
+          if (y < r.bottom && y + height > r.top) {
+            y = r.bottom + stackGap;
+            bumped = true;
+            break;
+          }
+        }
+        if (!bumped) y += stackGap;
+      }
+      return y;
+    }
+
+    let flowY = 0;
+    flowingNotes.forEach((note) => {
+      rightCol.appendChild(note);
+      note.style.position = 'absolute';
+      note.style.left = '0';
+      note.style.width = '100%';
+      note.style.boxSizing = 'border-box';
+      // measure height with temporary placement
+      note.style.top = '0';
+      note.style.visibility = 'hidden';
+      const h = note.offsetHeight || 120;
+      note.style.visibility = '';
+      const y = nextFree(flowY, h);
+      note.style.top = Math.round(y) + 'px';
+      reserved.push({ top: y, bottom: y + h });
+      reserved.sort((a, b) => a.top - b.top);
+      flowY = y + h + stackGap;
+    });
+
+    const rightBottom = reserved.reduce((m, r) => Math.max(m, r.bottom), 0);
+    rightCol.style.minHeight = Math.round(rightBottom) + 'px';
+  }
+
+  function bindHighlights(scribe) {
+    if (scribe.dataset.highlightBound) return;
+    scribe.dataset.highlightBound = '1';
+
+    function clearPin() {
+      scribe
+        .querySelectorAll(
+          '.sidenote.is-pinned, .poem-line.is-pinned, [data-anchor].is-pinned',
+        )
+        .forEach((el) => {
+          el.classList.remove('is-pinned');
+        });
+      clearActive();
+    }
+
+    function clearActive() {
+      scribe
+        .querySelectorAll(
+          '.sidenote.is-active, .poem-line.is-active, [data-anchor].is-active',
+        )
+        .forEach((el) => el.classList.remove('is-active'));
+    }
+
+    function activate(at, pin) {
+      if (!pin) clearActive();
+      const sn = scribe.querySelector(
+        `[data-sidenote][data-at="${CSS.escape(String(at))}"]`,
+      );
+      const target = anchorEl(scribe, at);
+      if (sn) {
+        sn.classList.add('is-active');
+        if (pin) sn.classList.add('is-pinned');
+      }
+      if (target) {
+        target.classList.add('is-active');
+        if (pin) target.classList.add('is-pinned');
+      }
+    }
+
+    function atFromTextTarget(el) {
+      if (!el) return null;
+      const line = el.closest?.('.poem-line');
+      if (line?.hasAttribute('data-line')) return line.getAttribute('data-line');
+      const anc = el.closest?.('[data-anchor]');
+      if (anc) return anc.getAttribute('data-anchor');
+      return null;
+    }
+
+    scribe.addEventListener('mouseover', (e) => {
+      const t = e.target;
+      if (!(t instanceof Element)) return;
+      const sn = t.closest('[data-sidenote]');
+      if (sn && scribe.contains(sn)) {
+        if (!scribe.querySelector('.sidenote.is-pinned')) {
+          activate(sn.getAttribute('data-at'), false);
+        }
+        return;
+      }
+      const at = atFromTextTarget(t);
+      if (
+        at &&
+        scribe.querySelector(
+          `[data-sidenote][data-at="${CSS.escape(at)}"]`,
+        ) &&
+        !scribe.querySelector('.sidenote.is-pinned')
+      ) {
+        activate(at, false);
+      }
+    });
+
+    scribe.addEventListener('mouseout', (e) => {
+      if (scribe.querySelector('.sidenote.is-pinned')) return;
+      const rel = e.relatedTarget;
+      if (rel instanceof Node && scribe.contains(rel)) {
+        const overSn = rel.closest?.('[data-sidenote]');
+        const overAt = atFromTextTarget(rel);
+        if (
+          overSn ||
+          (overAt &&
+            scribe.querySelector(
+              `[data-sidenote][data-at="${CSS.escape(overAt)}"]`,
+            ))
+        ) {
+          return;
+        }
+      }
+      clearActive();
+    });
+
+    scribe.addEventListener('click', (e) => {
+      const t = e.target;
+      if (!(t instanceof Element)) return;
+      const sn = t.closest('[data-sidenote]');
+      if (sn && scribe.contains(sn)) {
+        e.stopPropagation();
+        const at = sn.getAttribute('data-at');
+        if (sn.classList.contains('is-pinned')) {
+          clearPin();
+        } else {
+          clearPin();
+          activate(at, true);
+        }
+        return;
+      }
+      const at = atFromTextTarget(t);
+      const has =
+        at &&
+        scribe.querySelector(
+          `[data-sidenote][data-at="${CSS.escape(at)}"]`,
+        );
+      if (has) {
+        e.stopPropagation();
+        const target = anchorEl(scribe, at);
+        if (target?.classList.contains('is-pinned')) {
+          clearPin();
+        } else {
+          clearPin();
+          activate(at, true);
+        }
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!scribe.querySelector('.sidenote.is-pinned')) return;
+      const t = e.target;
+      if (t instanceof Node && scribe.contains(t)) return;
+      clearPin();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') clearPin();
+    });
+  }
+
+  function initOne(scribe) {
+    layoutScribe(scribe);
+    bindHighlights(scribe);
+    scribe.querySelectorAll('img').forEach((img) => {
+      if (!img.complete) {
+        img.addEventListener(
+          'load',
+          () => layoutScribe(scribe),
+          { once: true },
+        );
+      }
+    });
+  }
+
+  function init() {
+    document.querySelectorAll('[data-scribe]').forEach(initOne);
+  }
+
+  init();
+  document.addEventListener('astro:page-load', init);
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('[data-scribe]').forEach(layoutScribe);
+  });
+</script>

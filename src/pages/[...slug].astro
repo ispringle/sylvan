@@ -11,6 +11,9 @@ import Parallel from '@components/folio/Parallel.astro';
 import Version from '@components/folio/Version.astro';
 import Gloss from '@components/folio/Gloss.astro';
 import Illustration from '@components/folio/Illustration.astro';
+import Poem from '@components/folio/Poem.astro';
+import Scribe from '@components/folio/Scribe.astro';
+import Sidenote from '@components/folio/Sidenote.astro';
 import { allPages } from "@lib/pages";
 
 export async function getStaticPaths() {
@@ -41,5 +44,8 @@ const { default: Content } = page;
     Version,
     Gloss,
     Illustration,
+    Poem,
+    Scribe,
+    Sidenote,
   }}/>
 </Page>

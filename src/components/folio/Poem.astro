@@ -1,0 +1,118 @@
+---
+/**
+ * Continuous verse for Folio/Marginalia.
+ *
+ * Slot text is split on newlines; blank lines become stanza gaps.
+ * Line numbers and band tint on every 5th line only (5, 10, 15… — not 1).
+ *
+ *   <Poem lang="en" id="dream-of-the-rood-text">
+ *   Listen! The best of dreams I will tell,
+ *   what I dreamed in the middle of the night
+ *   …
+ *   </Poem>
+ */
+interface Props {
+  lang?: string;
+  id?: string;
+}
+
+const { lang = 'en', id } = Astro.props;
+
+const rawHtml = await Astro.slots.render('default');
+const rawText = rawHtml
+  .replace(/<br\s*\/?>/gi, '\n')
+  .replace(/<\/p>/gi, '\n')
+  .replace(/<[^>]+>/g, '')
+  .replace(/&nbsp;/g, ' ')
+  .replace(/&amp;/g, '&')
+  .replace(/&lt;/g, '<')
+  .replace(/&gt;/g, '>')
+  .replace(/&quot;/g, '"')
+  .replace(/&#39;/g, "'")
+  .replace(/&apos;/g, "'");
+
+type PoemItem =
+  | { type: 'line'; n: number; text: string; band: boolean }
+  | { type: 'gap' };
+
+const items: PoemItem[] = [];
+let n = 0;
+for (const row of rawText.split('\n')) {
+  const text = row.replace(/\s+$/, '');
+  if (text.trim() === '') {
+    if (items.length && items[items.length - 1].type === 'line') {
+      items.push({ type: 'gap' });
+    }
+    continue;
+  }
+  n += 1;
+  const band = n % 5 === 0;
+  items.push({ type: 'line', n, text: text.trim(), band });
+}
+---
+
+<div class="poem" data-poem id={id} lang={lang}>
+  {
+    items.map((item) =>
+      item.type === 'gap' ? (
+        <div class="poem-gap" aria-hidden="true" />
+      ) : (
+        <div
+          class:list={['poem-line', item.band && 'poem-line--band']}
+          data-line={item.n}
+        >
+          <span class="poem-ln" aria-hidden={!item.band}>
+            {item.band ? item.n : ''}
+          </span>
+          <span class="poem-text">{item.text}</span>
+        </div>
+      ),
+    )
+  }
+</div>
+
+<style is:global>
+  .poem {
+    --poem-ln-width: 2.75rem;
+    font-size: 0.98em;
+    line-height: 1.65;
+  }
+
+  .poem-line {
+    display: grid;
+    grid-template-columns: var(--poem-ln-width) minmax(0, 1fr);
+    column-gap: 0.65rem;
+    align-items: baseline;
+    margin: 0;
+    padding: 0.12em 0.35em 0.12em 0;
+    border-radius: 0.12rem;
+  }
+
+  .poem-line--band {
+    background: color-mix(in srgb, var(--fg) 4%, transparent);
+  }
+
+  .poem-ln {
+    font-size: 0.78em;
+    line-height: inherit;
+    text-align: right;
+    color: color-mix(in srgb, var(--fg) 42%, var(--bg));
+    font-variant-numeric: tabular-nums;
+    user-select: none;
+    min-height: 1em;
+  }
+
+  .poem-text {
+    min-width: 0;
+  }
+
+  .poem-gap {
+    height: 0.85em;
+  }
+
+  /* Highlight when linked sidenote is active */
+  .poem-line.is-active {
+    background: color-mix(in srgb, var(--default-blue, #b4d5fe) 22%, transparent);
+    outline: 0.08rem solid color-mix(in srgb, var(--fg) 22%, var(--bg));
+  }
+</style>

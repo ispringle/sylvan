@@ -1,7 +1,5 @@
 ---
-import { getURL } from "@utils"
 import Date from "./Date.astro"
-import Tag from "./Tag.astro"
 const { card: {frontmatter} } = Astro.props
 const href = frontmatter.link
 ---
@@ -23,9 +21,6 @@ const href = frontmatter.link
 span {
     flex: 1;
 }
-.tags {
-font-size: 1rem;
-}
 </style>
 <script is:inline>
 </script>
@@ -33,16 +28,8 @@ font-size: 1rem;
 
     {frontmatter.type !== 'folio' && frontmatter.type !== 'marginalia' && <Date date={frontmatter.created} />}
     <span>
-
     <a href={href} >
         {frontmatter.title || frontmatter.slug}
     </a>
-    <div>
-    { frontmatter.tags
-        ? <div class="tags">{
-            frontmatter.tags.map(tag => <Tag tag={tag} />)
-          }</div>
-        : ""
-    }</div>
     </span>
 </div>

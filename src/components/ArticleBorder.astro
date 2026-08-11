@@ -1,25 +1,37 @@
 ---
-import border from '../assets/border-vines-no-man.png';
+import border from '../../branch-extended.png';
 import borderMan from '../assets/border-man-no-vines.png';
 import man from '../assets/man-no-vines.png';
 import {Image} from "astro:assets";
 
 const {class: classList} = Astro.props;
 ---
-<style>
- img {
+<style is:global>
+ /*
+  * Size is fixed to the asset's natural dimensions so index/measure pages
+  * (narrower main) do not shrink the art via img { max-width: 100% }.
+  * Match the larger article/folio appearance everywhere.
+  */
+ #articleBorder img {
      position: absolute;
+     max-width: none;
+     height: auto;
  }
- .border {
+ #articleBorder .border,
+ #articleBorder img.border {
      transform: scaleX(-1);
      top: -10rem;
      left: -24rem;
+     width: 96rem;
+     max-width: none;
      pointer-events: none;
  }
- .man {
+ #articleBorder .man {
      transform: scaleX(-1) scale(0.7);
-     top: 9.1rem;
-     left: -18.5rem;
+     top: 11.1rem;
+     left: -16.5rem;
+     width: 9.8rem; /* 98px natural */
+     max-width: none;
  }
 @keyframes shakeMan {
   0% { transform: scaleX(-1) scale(0.7) translate(1px, 1px) rotate(0deg); }
@@ -35,7 +47,7 @@ const {class: classList} = Astro.props;
   100% { transform: scaleX(-1) scale(0.7) translate(1px, -2px) rotate(-1deg); }
 }
 
-.shakeMan {
+#articleBorder .shakeMan {
     animation: shakeMan 2s;
  }
 
@@ -44,11 +56,11 @@ const {class: classList} = Astro.props;
     95% { transform: scaleX(-1) scale(0.7) rotate(90deg); top: 90%; opacity: 0; visibility: hidden; }
     100% { transform: scaleX(-1) scale(0.7) rotate(90deg); top: 93%; opacity: 0; visibility: hidden; }
 }
-.fallMan {
+#articleBorder .fallMan {
     animation: fall 5s;
  }
 
- .hide { display: none; }
+ #articleBorder .hide { display: none; }
 </style>
 <script is:inline>
 var man;

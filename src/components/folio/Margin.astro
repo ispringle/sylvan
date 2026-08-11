@@ -21,16 +21,22 @@
 interface Props {
   title?: string;
   id?: string;
+  /**
+   * Poem line number or prose data-anchor id — used by <Scribe> to pin this
+   * figure in the right gutter beside that place in the text.
+   */
+  at?: number | string;
   /** Show a small mark at the anchor (true → ❧, or a custom string) */
   mark?: boolean | string;
 }
 
-const { title, id, mark = false } = Astro.props;
+const { title, id, at, mark = false } = Astro.props;
 const markText =
   mark === true ? '❧' : typeof mark === 'string' && mark.length ? mark : '';
+const atAttr = at === undefined || at === null ? undefined : String(at);
 ---
 
-<span class="margin" data-margin id={id}>
+<span class="margin" data-margin data-at={atAttr} id={id}>
   {
     markText ? (
       <span class="margin__mark" aria-hidden="true">
@@ -41,16 +47,20 @@ const markText =
     )
   }
   <aside class="margin__panel" role="complementary">
-    {
-      title && (
-        <p class="margin__title">
-          <span class="margin__title-text">{title}</span>
-        </p>
-      )
-    }
     <div class="margin__body">
       <slot />
     </div>
+    {
+      title ? (
+        <div class="margin__slip">
+          <p class="margin__title">
+            <span class="margin__title-text">{title}</span>
+          </p>
+        </div>
+      ) : (
+        <div class="margin__slip" data-slip-host hidden></div>
+      )
+    }
   </aside>
 </span>
 
@@ -76,6 +86,7 @@ const markText =
   }
 
   .margin__panel {
+    position: relative;
     box-sizing: border-box;
     z-index: 15;
     width: var(--folio-margin, 24rem);
@@ -87,39 +98,12 @@ const markText =
     font-size: 1.35rem;
     line-height: 1.4;
     pointer-events: auto;
-  }
-
-  /*
-   * Margin titles (e.g. "Sub-creation") only appear when the panel is hovered,
-   * same idea as illustration credits — keep the gutter image-clean.
-   */
-  .margin__title {
-    margin: 0 0 0.4rem;
-    font-family: 'Metamorphous', serif;
-    font-size: 0.72em;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    max-height: 0;
-    margin-bottom: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: opacity 0.15s ease, max-height 0.15s ease, margin 0.15s ease;
-  }
-
-  .margin__panel:hover .margin__title,
-  .margin__panel:focus-within .margin__title {
-    max-height: 4rem;
-    margin-bottom: 0.4rem;
-    opacity: 1;
-  }
-
-  .margin__title-text {
-    border-bottom: 0.08rem solid color-mix(in srgb, var(--fg) 35%, var(--bg));
-    padding-bottom: 0.1em;
+    overflow: visible;
   }
 
   .margin__body {
     display: block;
+    position: relative;
   }
 
   .margin__body > :first-child {
@@ -138,6 +122,83 @@ const markText =
     margin-bottom: 0;
   }
 
+  /*
+   * One parchment slip under the image: title then caption (caption is
+   * moved into the slip by script). Absolute → image never shifts.
+   */
+  .margin__slip {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    z-index: 5;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    margin: 0.3rem 0 0;
+    padding: 0.4rem 0.55rem 0.45rem;
+    color: var(--fg);
+    background: var(--bg, #fffff8);
+    border: 0.08rem solid color-mix(in srgb, var(--fg) 32%, var(--bg));
+    box-shadow: 0.1rem 0.1rem 0 color-mix(in srgb, var(--fg) 10%, transparent);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.15s ease, visibility 0.15s ease;
+  }
+
+  /* No title and no caption → never show the empty parchment box */
+  .margin__slip:not(:has(*)),
+  .margin__slip[hidden] {
+    display: none;
+  }
+
+  .margin__panel:hover .margin__slip:has(*),
+  .margin__panel:focus-within .margin__slip:has(*) {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .margin__title {
+    margin: 0;
+    padding: 0;
+    font-family: 'Metamorphous', serif;
+    font-size: 0.72em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg);
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .margin__title-text {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  /* Caption inside the slip: normal flow, no second absolute hang */
+  .margin__slip .folio-illustration__caption {
+    position: static;
+    left: auto;
+    right: auto;
+    top: auto;
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    font-size: 0.72em;
+    color: color-mix(in srgb, var(--fg) 78%, var(--bg));
+  }
+
   .margin__panel .folio-illustration,
   .margin__panel .folio-illustration--right,
   .margin__panel .folio-illustration--left {
@@ -149,10 +210,6 @@ const markText =
     margin: 0;
   }
 
-  .margin__panel .folio-illustration__caption {
-    font-size: 0.72em;
-  }
-
   @media (max-width: 959px) {
     .margin {
       display: block;
@@ -160,22 +217,14 @@ const markText =
     }
 
     .margin__panel {
-      position: static !important;
-      top: auto !important;
-      left: auto !important;
       width: 100%;
       max-width: min(28rem, 100%);
-      padding: 0.65rem 0.75rem;
-      border: 0.1rem solid color-mix(in srgb, var(--fg) 28%, var(--bg));
-      background: color-mix(in srgb, var(--fg) 3.5%, var(--bg));
     }
 
-    /* On touch / narrow, keep title visible (no reliable hover) */
-    .margin__title {
-      max-height: none;
-      margin-bottom: 0.4rem;
+    .margin__panel .margin__slip:has(*) {
       opacity: 1;
-      overflow: visible;
+      visibility: visible;
+      pointer-events: auto;
     }
   }
 </style>
@@ -231,7 +280,10 @@ const markText =
 
   function placeAllMargins() {
     const wide = window.matchMedia('(min-width: 960px)').matches;
-    const items = Array.from(document.querySelectorAll('[data-margin]'));
+    // Scribe-owned margins are laid out by Scribe.astro
+    const items = Array.from(document.querySelectorAll('[data-margin]')).filter(
+      (el) => !el.closest('[data-scribe]'),
+    );
     if (!items.length) return;
 
     if (!wide) {
@@ -306,18 +358,53 @@ const markText =
     });
   }
 
+  /** Move figure captions into the hang slip under the image (with title). */
+  function collectSlips() {
+    document.querySelectorAll('.margin__panel').forEach((panel) => {
+      const slip = panel.querySelector('.margin__slip');
+      if (!slip) return;
+      panel.querySelectorAll('.folio-illustration__caption').forEach((cap) => {
+        if (cap.parentElement !== slip) {
+          slip.appendChild(cap);
+        }
+      });
+      // Reveal host only when it actually has content (title or caption)
+      if (slip.hasAttribute('hidden') || slip.hasAttribute('data-slip-host')) {
+        if (slip.children.length) {
+          slip.removeAttribute('hidden');
+        } else {
+          slip.setAttribute('hidden', '');
+        }
+      }
+    });
+  }
+
   function init() {
+    collectSlips();
+    // Inside <Scribe>, the shell owns right-gutter placement via data-at.
+    const free = Array.from(
+      document.querySelectorAll('[data-margin]'),
+    ).filter((el) => !el.closest('[data-scribe]'));
+    if (!free.length) return;
     placeAllMargins();
-    document
-      .querySelectorAll('[data-margin] img, article > .margin__panel img')
-      .forEach((img) => {
+    free.forEach((el) => {
+      el.querySelectorAll('img').forEach((img) => {
         if (!img.complete) {
           img.addEventListener('load', schedulePlace, { once: true });
         }
       });
+    });
   }
 
   init();
   document.addEventListener('astro:page-load', init);
-  window.addEventListener('resize', schedulePlace);
+  window.addEventListener('resize', () => {
+    if (
+      document.querySelector(
+        '[data-margin]:not([data-scribe] [data-margin])',
+      )
+    ) {
+      schedulePlace();
+    }
+  });
 </script>

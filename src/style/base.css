@@ -3,8 +3,35 @@
  * MIT License * github.com/louismerlin/concrete.css
  */
 
+/*
+ * IM Fell English’s quote/apostrophe glyphs often look inverted (opening
+ * marks read as closing). Pull only those code points from a neutral serif;
+ * everything else stays IM Fell.
+ */
+@font-face {
+  font-family: 'QuoteMarks';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Georgia'), local('Times New Roman'), local('Times'),
+    local('Liberation Serif'), local('DejaVu Serif');
+  unicode-range: U+0022, U+0027, U+2018-201F, U+2032-2037, U+00AB, U+00BB,
+    U+2039, U+203A;
+}
+
+@font-face {
+  font-family: 'QuoteMarks';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: local('Georgia'), local('Times New Roman'), local('Times'),
+    local('Liberation Serif'), local('DejaVu Serif');
+  unicode-range: U+0022, U+0027, U+2018-201F, U+2032-2037, U+00AB, U+00BB,
+    U+2039, U+203A;
+}
+
 :root {
-  font-family: "IM Fell English";
+  font-family: 'QuoteMarks', 'IM Fell English', serif;
   margin: 0;
   padding: 0;
   min-height: 100%;

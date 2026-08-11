@@ -1,16 +1,29 @@
 ---
 import Rolladex from "@components/Rolladex.astro"
-import {filterByDir, filterIndices, sortNewestToOldest } from "@utils/filterContent";
+import {
+  filterByDir,
+  filterIndices,
+  sortAToZ,
+  sortNewestToOldest,
+} from "@utils/filterContent";
 import { allPages } from "@lib/pages";
 
 const { page, ...props } = Astro.props;
 const { frontmatter, file } = page;
 
-
-const includeRoll = frontmatter?.include_roll || typeof frontmatter?.include_roll === "undefined"
+const includeRoll =
+  frontmatter?.include_roll || typeof frontmatter?.include_roll === "undefined";
 const rollDir = frontmatter.rollDir || frontmatter.roll_dir;
 const ROLL_DIR_REGEX = new RegExp(`${rollDir}/.*\\.(md|mdx)$`);
-const roll = (await allPages).filter(filterIndices).filter(filterByDir(ROLL_DIR_REGEX)).sort(sortNewestToOldest);
+// Folio: A–Z by title. Marginalia (and other indexes): newest first.
+const sortRoll =
+  String(rollDir || "").replace(/\/$/, "") === "folio"
+    ? sortAToZ
+    : sortNewestToOldest;
+const roll = (await allPages)
+  .filter(filterIndices)
+  .filter(filterByDir(ROLL_DIR_REGEX))
+  .sort(sortRoll);
 ---
 <article class="main index">
   <slot />
