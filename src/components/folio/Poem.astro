@@ -5,11 +5,12 @@
  * Slot text is split on newlines; blank lines become stanza gaps.
  * Line numbers and band tint on every 5th line only (5, 10, 15… — not 1).
  *
- *   <Poem lang="en" id="dream-of-the-rood-text">
- *   Listen! The best of dreams I will tell,
- *   what I dreamed in the middle of the night
- *   …
- *   </Poem>
+ * Phrase anchors (shared across a multi-target sidenote):
+ *
+ *   (for <span data-anchor="mere-naming">trees are 'trees'</span>, and …)
+ *
+ * Multiple spans may reuse the same data-anchor id; hover any → highlight all
+ * plus the linked <Sidenote at="mere-naming">.
  */
 interface Props {
   lang?: string;
@@ -19,25 +20,61 @@ interface Props {
 const { lang = 'en', id } = Astro.props;
 
 const rawHtml = await Astro.slots.render('default');
-const rawText = rawHtml
+
+/** Decode common entities so template-string HTML survives MDX/Astro. */
+function decodeEntities(s: string): string {
+  return s
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'");
+}
+
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+/**
+ * Keep only <span data-anchor="…">…</span>; escape everything else.
+ * Nested markup inside the span is flattened to text.
+ */
+function lineToSafeHtml(line: string): string {
+  const re =
+    /<span\b[^>]*\bdata-anchor\s*=\s*(["'])([^"']+)\1[^>]*>([\s\S]*?)<\/span>/gi;
+  let out = '';
+  let last = 0;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(line)) !== null) {
+    out += escapeHtml(line.slice(last, m.index));
+    const anchorId = m[2];
+    const inner = decodeEntities(m[3]).replace(/<[^>]+>/g, '');
+    out += `<span data-anchor="${escapeHtml(anchorId)}">${escapeHtml(inner)}</span>`;
+    last = m.index + m[0].length;
+  }
+  out += escapeHtml(line.slice(last));
+  return out;
+}
+
+const normalized = decodeEntities(rawHtml)
   .replace(/<br\s*\/?>/gi, '\n')
   .replace(/<\/p>/gi, '\n')
-  .replace(/<[^>]+>/g, '')
-  .replace(/&nbsp;/g, ' ')
-  .replace(/&amp;/g, '&')
-  .replace(/&lt;/g, '<')
-  .replace(/&gt;/g, '>')
-  .replace(/&quot;/g, '"')
-  .replace(/&#39;/g, "'")
-  .replace(/&apos;/g, "'");
+  // Drop tags that are not data-anchor spans (keep those for lineToSafeHtml)
+  .replace(/<(?!\/?span\b)[^>]+>/gi, '');
 
 type PoemItem =
-  | { type: 'line'; n: number; text: string; band: boolean }
+  | { type: 'line'; n: number; html: string; band: boolean }
   | { type: 'gap' };
 
 const items: PoemItem[] = [];
 let n = 0;
-for (const row of rawText.split('\n')) {
+for (const row of normalized.split('\n')) {
   const text = row.replace(/\s+$/, '');
   if (text.trim() === '') {
     if (items.length && items[items.length - 1].type === 'line') {
@@ -47,7 +84,7 @@ for (const row of rawText.split('\n')) {
   }
   n += 1;
   const band = n % 5 === 0;
-  items.push({ type: 'line', n, text: text.trim(), band });
+  items.push({ type: 'line', n, html: lineToSafeHtml(text.trim()), band });
 }
 ---
 
@@ -64,7 +101,7 @@ for (const row of rawText.split('\n')) {
           <span class="poem-ln" aria-hidden={!item.band}>
             {item.band ? item.n : ''}
           </span>
-          <span class="poem-text">{item.text}</span>
+          <span class="poem-text" set:html={item.html} />
         </div>
       ),
     )
@@ -110,9 +147,23 @@ for (const row of rawText.split('\n')) {
     height: 0.85em;
   }
 
-  /* Highlight when linked sidenote is active */
+  /* Whole-line highlight when a line-number sidenote is active */
   .poem-line.is-active {
     background: color-mix(in srgb, var(--default-blue, #b4d5fe) 22%, transparent);
     outline: 0.08rem solid color-mix(in srgb, var(--fg) 22%, var(--bg));
+  }
+
+  /* Phrase anchors (may share an id across lines) */
+  .poem-text [data-anchor] {
+    border-radius: 0.12rem;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    cursor: help;
+    transition: background 0.12s ease, outline-color 0.12s ease;
+  }
+
+  .poem-text [data-anchor].is-active {
+    background: color-mix(in srgb, var(--default-blue, #b4d5fe) 28%, transparent);
+    outline: 0.08rem solid color-mix(in srgb, var(--fg) 28%, var(--bg));
   }
 </style>

@@ -53,12 +53,21 @@ const title = pageTitle ? `${pageTitle} - ${SITE_TITLE}` : SITE_TITLE
      *   left-rail       borderArt pocket
      *   article-inset   shift of text column within main
      *   left-notes      scribal gloss column (Scribe / Sidenote)
+     *   sidenote-left-min-top
+     *                   fallback floor (Scribe Y) below border art; layout
+     *                   also measures #articleBorder .man when present
+     *   sidenote-left-snap
+     *                   only if the anchor is *just* above that floor
+     *                   (within this distance) stay left and push down;
+     *                   anything higher flips to the right gutter
      *   measure         reading column (prose / Poem)
      *   gutter + margin right: flowing Note + fixed Margin figures
      */
     --folio-left-rail: 26rem;
     --folio-article-inset: 9rem;
     --folio-left-notes: 20rem;
+    --folio-sidenote-left-min-top: 18rem;
+    --folio-sidenote-left-snap: 2.5rem;
     --folio-measure: 66.9rem;
     --folio-measure-wide: 104rem; /* rare dual-column specimens */
     --folio-gutter: 2.5rem;

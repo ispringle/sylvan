@@ -4,11 +4,19 @@
  *
  *   left notes (Sidenote) | measure (Poem) | right (Margin fixed + Note flow)
  *
+ * Border-art clearance (from Scribe top):
+ *   --folio-sidenote-left-min-top  safe Y below the vines/man
+ *   --folio-sidenote-left-snap     if anchor is within this band above
+ *                                   min-top, stay left and push down;
+ *                                   only flip right when higher still
+ *
  * Authoring — put everything in the default slot; layout script sorts:
  *
  *   <Scribe>
  *     <Poem>…</Poem>
  *     <Sidenote at={1} title="…">…</Sidenote>
+ *     <!-- multi-target: shared data-anchor id, or at={[2, 5, 'foo']} -->
+ *     <Sidenote at="mere-naming" title="…">…</Sidenote>
  *     <Note title="…">flowing commentary</Note>
  *     <Margin>…optional fixed figure…</Margin>
  *   </Scribe>
@@ -97,11 +105,60 @@
     max-width: 100%;
   }
 
+  /* Title / dedication / addressee above a poem inside Scribe */
+  .folio-scribe__center > .poem-front {
+    margin: 0 0 1.75rem;
+    max-width: 100%;
+  }
+
+  .folio-scribe__center > .poem-front > :first-child {
+    margin-top: 0;
+  }
+
+  .folio-scribe__center > .poem-front h1 {
+    margin-bottom: 0.35em;
+  }
+
+  .folio-scribe__center > .poem-front p {
+    margin: 0.55em 0;
+  }
+
+  .folio-scribe__center > .poem-front [data-anchor] {
+    border-radius: 0.12rem;
+    cursor: help;
+    transition: background 0.12s ease, outline-color 0.12s ease;
+  }
+
+  /*
+   * Sidenotes flipped to the right gutter (above left clearance).
+   * Accent faces the measure; still reads as a scribal card, not a Note.
+   */
+  .folio-scribe__right > .sidenote,
+  .sidenote.sidenote--flipped-right {
+    max-width: 100%;
+    border-left-width: 0.22rem;
+    border-right-width: 0.1rem;
+    box-shadow: -0.12rem 0.12rem 0 color-mix(in srgb, var(--fg) 10%, transparent);
+  }
+
+  .folio-scribe__right > .sidenote.is-active,
+  .folio-scribe__right > .sidenote.is-pinned,
+  .sidenote.sidenote--flipped-right.is-active,
+  .sidenote.sidenote--flipped-right.is-pinned {
+    box-shadow: -0.18rem 0.18rem 0 color-mix(in srgb, var(--fg) 14%, transparent);
+  }
+
   @media (max-width: 959px) {
     .folio-scribe__left,
     .folio-scribe__right {
       display: block;
       margin-top: 1.25rem;
+    }
+
+    .sidenote.sidenote--flipped-right {
+      box-shadow: 0.12rem 0.12rem 0 color-mix(in srgb, var(--fg) 10%, transparent);
+      border-left-width: 0.22rem;
+      border-right-width: 0.1rem;
     }
   }
 </style>
@@ -123,16 +180,69 @@
     return er.top - ar.top + ancestor.scrollTop;
   }
 
-  /** Poem line by number, or [data-anchor="…"] for prose. */
-  function anchorEl(scribe, at) {
-    if (at === undefined || at === null || at === '') return null;
+  /**
+   * Y (from Scribe top) where the left border figure ends — left notes
+   * should start at or below this. Prefer measuring the man; fall back
+   * to --folio-sidenote-left-min-top. Small pad so cards clear the art.
+   */
+  function leftClearanceY(scribe) {
+    const fallback = cssRem('--folio-sidenote-left-min-top', 18);
+    const pad = 0.75 * rootPx();
+    const man = document.querySelector('#articleBorder .man');
+    if (!man) return fallback;
+    const y =
+      man.getBoundingClientRect().bottom -
+      scribe.getBoundingClientRect().top +
+      pad;
+    if (!Number.isFinite(y) || y <= 0) return fallback;
+    // Use the larger of measured vs configured so a short man never
+    // under-clears when the vines still crowd the pocket.
+    return Math.max(y, fallback);
+  }
+
+  /** Split data-at into keys (space and/or comma separated). */
+  function parseAtList(value) {
+    if (value === undefined || value === null || value === '') return [];
+    return String(value)
+      .split(/[\s,]+/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+  }
+
+  /**
+   * Targets for one key: poem line by number, or every [data-anchor="…"]
+   * (and optional #id). Multiple spans may share the same data-anchor id.
+   */
+  function anchorEls(scribe, at) {
+    if (at === undefined || at === null || at === '') return [];
     const key = String(at);
     if (/^\d+$/.test(key)) {
-      return scribe.querySelector(`.poem-line[data-line="${key}"]`);
+      const line = scribe.querySelector(`.poem-line[data-line="${key}"]`);
+      return line ? [line] : [];
     }
-    return (
-      scribe.querySelector(`[data-anchor="${CSS.escape(key)}"]`) ||
-      scribe.querySelector(`#${CSS.escape(key)}`)
+    const byAnchor = Array.from(
+      scribe.querySelectorAll(`[data-anchor="${CSS.escape(key)}"]`),
+    );
+    if (byAnchor.length) return byAnchor;
+    const byId = scribe.querySelector(`#${CSS.escape(key)}`);
+    return byId ? [byId] : [];
+  }
+
+  /** First target for layout positioning. */
+  function anchorEl(scribe, at) {
+    const keys = parseAtList(at);
+    for (const key of keys.length ? keys : [at]) {
+      const found = anchorEls(scribe, key);
+      if (found.length) return found[0];
+    }
+    return null;
+  }
+
+  /** Sidenotes whose data-at list includes this key. */
+  function sidenotesForKey(scribe, key) {
+    const k = String(key);
+    return Array.from(scribe.querySelectorAll('[data-sidenote]')).filter((sn) =>
+      parseAtList(sn.getAttribute('data-at')).includes(k),
     );
   }
 
@@ -157,11 +267,13 @@
     if (!wide) {
       // Stack: poem (center) already first; move notes below into left/right as flow
       sidenotes.forEach((sn) => {
+        sn.classList.remove('sidenote--flipped-right');
         sn.style.position = '';
         sn.style.top = '';
         sn.style.left = '';
         sn.style.transform = '';
         sn.style.zIndex = '';
+        sn.style.width = '';
         leftCol.appendChild(sn);
       });
       flowingNotes.forEach((n) => {
@@ -175,70 +287,91 @@
       return;
     }
 
-    // --- Left: sidenotes at line Y, sticky-note stack ---
     const stackGap = 0.65 * rootPx();
+    // Floor = below border man (measured) / CSS fallback.
+    // Snap = only *barely* above that floor → stay left and push down;
+    // anything higher (title, dedication, Philomythus…) → right gutter.
+    const leftMinTop = leftClearanceY(scribe);
+    const leftSnap = cssRem('--folio-sidenote-left-snap', 2.5);
+    const flipCeiling = leftMinTop - leftSnap;
+
+    const placed = sidenotes.map((sn) => {
+      const at = sn.getAttribute('data-at') || '';
+      const target = anchorEl(scribe, at);
+      const naturalTop = target ? offsetTopIn(target, scribe) : 0;
+      return { sn, target, naturalTop };
+    });
+
+    const leftPlaced = placed
+      .filter((p) => p.naturalTop >= flipCeiling)
+      .sort((a, b) => a.naturalTop - b.naturalTop || 0);
+    const rightFlip = placed
+      .filter((p) => p.naturalTop < flipCeiling)
+      .sort((a, b) => a.naturalTop - b.naturalTop || 0);
+
+    // --- Left: clear of art (or snapped just under it), then sticky stack ---
     let lastBottom = -Infinity;
     let stackIndex = 0;
 
-    sidenotes
-      .slice()
-      .sort((a, b) => {
-        const aa = a.getAttribute('data-at') || '';
-        const bb = b.getAttribute('data-at') || '';
-        const na = parseInt(aa, 10);
-        const nb = parseInt(bb, 10);
-        if (!Number.isNaN(na) && !Number.isNaN(nb)) return na - nb;
-        return aa.localeCompare(bb);
-      })
-      .forEach((sn) => {
-        leftCol.appendChild(sn);
-        const at = sn.getAttribute('data-at') || '';
-        const target = anchorEl(scribe, at);
-        let top = target ? offsetTopIn(target, scribe) : 0;
-        if (top < lastBottom + stackGap) {
-          top = lastBottom + stackGap;
-          stackIndex += 1;
-        } else {
-          stackIndex = 0;
-        }
-        sn.style.position = 'absolute';
-        sn.style.left = '0';
-        sn.style.width = '100%';
-        sn.style.top = Math.round(top) + 'px';
-        sn.style.right = 'auto';
-        // slight sticky-note layering
-        const jitter = (stackIndex % 3) * 0.15;
-        sn.style.transform =
-          stackIndex > 0
-            ? `translateX(${jitter}rem) rotate(${stackIndex % 2 ? -0.35 : 0.35}deg)`
-            : '';
-        sn.style.zIndex = String(10 + stackIndex);
-        lastBottom = top + (sn.offsetHeight || 0);
-      });
+    leftPlaced.forEach(({ sn, naturalTop }) => {
+      sn.classList.remove('sidenote--flipped-right');
+      leftCol.appendChild(sn);
+      // Near-miss anchors: push down to clearance; already-clear keep Y
+      let top = Math.max(naturalTop, leftMinTop);
+      if (top < lastBottom + stackGap) {
+        top = lastBottom + stackGap;
+        stackIndex += 1;
+      } else {
+        stackIndex = 0;
+      }
+      sn.style.position = 'absolute';
+      sn.style.left = '0';
+      sn.style.width = '100%';
+      sn.style.top = Math.round(top) + 'px';
+      sn.style.right = 'auto';
+      const jitter = (stackIndex % 3) * 0.15;
+      sn.style.transform =
+        stackIndex > 0
+          ? `translateX(${jitter}rem) rotate(${stackIndex % 2 ? -0.35 : 0.35}deg)`
+          : '';
+      sn.style.zIndex = String(10 + stackIndex);
+      lastBottom = top + (sn.offsetHeight || 0);
+    });
 
-    // Make left column tall enough for absolute cards
     leftCol.style.minHeight = Math.round(Math.max(lastBottom, 0)) + 'px';
 
-    // --- Right: fixed margins, then flowing notes in free bands ---
-    const rightW = rightCol.clientWidth || cssRem('--folio-margin', 24);
+    // --- Right: margins (fixed Y) → flipped high sidenotes → flowing notes ---
     /** @type {{top:number, bottom:number}[]} */
     const reserved = [];
 
+    function fits(start, height) {
+      const end = start + height;
+      for (const r of reserved) {
+        if (start < r.bottom && end > r.top) return false;
+      }
+      return true;
+    }
+
+    function nextFree(start, height) {
+      let y = Math.max(0, start);
+      for (let guard = 0; guard < 200; guard++) {
+        if (fits(y, height)) return y;
+        let bumped = false;
+        for (const r of reserved) {
+          if (y < r.bottom && y + height > r.top) {
+            y = r.bottom + stackGap;
+            bumped = true;
+            break;
+          }
+        }
+        if (!bumped) y += stackGap;
+      }
+      return y;
+    }
+
     margins.forEach((m) => {
-      // Prefer Margin's own panel host if present; else whole node
-      const panel =
-        m.querySelector('.margin__panel') ||
-        (m.dataset.marginUid &&
-          scribe.querySelector(
-            `.margin__panel[data-margin-for="${CSS.escape(m.dataset.marginUid)}"]`,
-          )) ||
-        m;
-      // Anchor: use data-at on margin if set, else stay where Margin script put it
       const at = m.getAttribute('data-at') || '';
       rightCol.appendChild(m);
-      if (panel && panel !== m && panel.parentElement !== rightCol && panel.parentElement !== m) {
-        // keep panel with margin element
-      }
       let top = 0;
       if (at) {
         const target = anchorEl(scribe, at);
@@ -248,7 +381,6 @@
       m.style.left = '0';
       m.style.width = '100%';
       m.style.top = Math.round(top) + 'px';
-      // show margin panel always for scribe (Margin component may hide)
       const inner = m.querySelector('.margin__panel');
       if (inner) {
         inner.hidden = false;
@@ -263,32 +395,26 @@
 
     reserved.sort((a, b) => a.top - b.top);
 
-    function fits(start, height) {
-      const end = start + height;
-      for (const r of reserved) {
-        if (start < r.bottom && end > r.top) return false;
-      }
-      return true;
-    }
-
-    function nextFree(start, height) {
-      let y = Math.max(0, start);
-      // scan downward until a free slot
-      for (let guard = 0; guard < 200; guard++) {
-        if (fits(y, height)) return y;
-        // jump to end of overlapping reserved
-        let bumped = false;
-        for (const r of reserved) {
-          if (y < r.bottom && y + height > r.top) {
-            y = r.bottom + stackGap;
-            bumped = true;
-            break;
-          }
-        }
-        if (!bumped) y += stackGap;
-      }
-      return y;
-    }
+    // High anchors: same vertical band as the text, but in the right track
+    rightFlip.forEach(({ sn, naturalTop }) => {
+      sn.classList.add('sidenote--flipped-right');
+      rightCol.appendChild(sn);
+      sn.style.position = 'absolute';
+      sn.style.left = '0';
+      sn.style.width = '100%';
+      sn.style.boxSizing = 'border-box';
+      sn.style.right = 'auto';
+      sn.style.transform = '';
+      sn.style.zIndex = '12';
+      sn.style.top = '0';
+      sn.style.visibility = 'hidden';
+      const h = sn.offsetHeight || 120;
+      sn.style.visibility = '';
+      const y = nextFree(naturalTop, h);
+      sn.style.top = Math.round(y) + 'px';
+      reserved.push({ top: y, bottom: y + h });
+      reserved.sort((a, b) => a.top - b.top);
+    });
 
     let flowY = 0;
     flowingNotes.forEach((note) => {
@@ -297,7 +423,6 @@
       note.style.left = '0';
       note.style.width = '100%';
       note.style.boxSizing = 'border-box';
-      // measure height with temporary placement
       note.style.top = '0';
       note.style.visibility = 'hidden';
       const h = note.offsetHeight || 120;
@@ -336,29 +461,53 @@
         .forEach((el) => el.classList.remove('is-active'));
     }
 
-    function activate(at, pin) {
+    /**
+     * Activate a note (or every note linked to `key`) and all of its targets.
+     * Shared data-anchor ids light up every matching span; multi-key data-at
+     * lights the full set.
+     */
+    function activate(keyOrNote, pin) {
       if (!pin) clearActive();
-      const sn = scribe.querySelector(
-        `[data-sidenote][data-at="${CSS.escape(String(at))}"]`,
-      );
-      const target = anchorEl(scribe, at);
-      if (sn) {
+
+      /** @type {Element[]} */
+      let notes = [];
+      if (keyOrNote instanceof Element) {
+        notes = [keyOrNote];
+      } else if (keyOrNote != null && keyOrNote !== '') {
+        notes = sidenotesForKey(scribe, keyOrNote);
+        // Fallback: exact data-at match (legacy single-value selectors)
+        if (!notes.length) {
+          const exact = scribe.querySelector(
+            `[data-sidenote][data-at="${CSS.escape(String(keyOrNote))}"]`,
+          );
+          if (exact) notes = [exact];
+        }
+      }
+
+      for (const sn of notes) {
         sn.classList.add('is-active');
         if (pin) sn.classList.add('is-pinned');
-      }
-      if (target) {
-        target.classList.add('is-active');
-        if (pin) target.classList.add('is-pinned');
+        for (const key of parseAtList(sn.getAttribute('data-at'))) {
+          for (const target of anchorEls(scribe, key)) {
+            target.classList.add('is-active');
+            if (pin) target.classList.add('is-pinned');
+          }
+        }
       }
     }
 
-    function atFromTextTarget(el) {
+    function keyFromTextTarget(el) {
       if (!el) return null;
-      const line = el.closest?.('.poem-line');
-      if (line?.hasAttribute('data-line')) return line.getAttribute('data-line');
+      // Prefer explicit phrase anchors over the whole poem line
       const anc = el.closest?.('[data-anchor]');
       if (anc) return anc.getAttribute('data-anchor');
+      const line = el.closest?.('.poem-line');
+      if (line?.hasAttribute('data-line')) return line.getAttribute('data-line');
       return null;
+    }
+
+    function hasLinkedNote(key) {
+      return key && sidenotesForKey(scribe, key).length > 0;
     }
 
     scribe.addEventListener('mouseover', (e) => {
@@ -367,19 +516,13 @@
       const sn = t.closest('[data-sidenote]');
       if (sn && scribe.contains(sn)) {
         if (!scribe.querySelector('.sidenote.is-pinned')) {
-          activate(sn.getAttribute('data-at'), false);
+          activate(sn, false);
         }
         return;
       }
-      const at = atFromTextTarget(t);
-      if (
-        at &&
-        scribe.querySelector(
-          `[data-sidenote][data-at="${CSS.escape(at)}"]`,
-        ) &&
-        !scribe.querySelector('.sidenote.is-pinned')
-      ) {
-        activate(at, false);
+      const key = keyFromTextTarget(t);
+      if (hasLinkedNote(key) && !scribe.querySelector('.sidenote.is-pinned')) {
+        activate(key, false);
       }
     });
 
@@ -388,14 +531,8 @@
       const rel = e.relatedTarget;
       if (rel instanceof Node && scribe.contains(rel)) {
         const overSn = rel.closest?.('[data-sidenote]');
-        const overAt = atFromTextTarget(rel);
-        if (
-          overSn ||
-          (overAt &&
-            scribe.querySelector(
-              `[data-sidenote][data-at="${CSS.escape(overAt)}"]`,
-            ))
-        ) {
+        const overKey = keyFromTextTarget(rel);
+        if (overSn || hasLinkedNote(overKey)) {
           return;
         }
       }
@@ -408,29 +545,25 @@
       const sn = t.closest('[data-sidenote]');
       if (sn && scribe.contains(sn)) {
         e.stopPropagation();
-        const at = sn.getAttribute('data-at');
         if (sn.classList.contains('is-pinned')) {
           clearPin();
         } else {
           clearPin();
-          activate(at, true);
+          activate(sn, true);
         }
         return;
       }
-      const at = atFromTextTarget(t);
-      const has =
-        at &&
-        scribe.querySelector(
-          `[data-sidenote][data-at="${CSS.escape(at)}"]`,
-        );
-      if (has) {
+      const key = keyFromTextTarget(t);
+      if (hasLinkedNote(key)) {
         e.stopPropagation();
-        const target = anchorEl(scribe, at);
-        if (target?.classList.contains('is-pinned')) {
+        const pinned = sidenotesForKey(scribe, key).some((n) =>
+          n.classList.contains('is-pinned'),
+        );
+        if (pinned) {
           clearPin();
         } else {
           clearPin();
-          activate(at, true);
+          activate(key, true);
         }
       }
     });

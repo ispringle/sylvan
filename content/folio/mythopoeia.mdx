@@ -3,6 +3,7 @@ title: Mythopoeia
 author: J.R.R. Tolkien
 created: 2026-06-02
 modified: 2026-08-11
+
 type: folio
 ---
 
@@ -11,47 +12,55 @@ import seedOfDragon from '../../seed-of-dragon.png';
 import shutTheGate from '../../shut-the-gate.png';
 import circeKiss from '../../circe-kiss.png';
 
-# Mythopoeia
-
-*by J.R.R. Tolkien*
-
-*To one [C.S. Lewis] who said that myths were lies and therefore worthless, even
-though 'breathed through silver'.*
-
-Philomythus to Misomythus
+{/* Front matter lives inside <Scribe> so left sidenotes can align with it. */}
 
 <Scribe>
 
-<Poem lang="en" id="mythopoeia-text">{`You look at trees and label them just so,
-(for trees are 'trees', and growing is 'to grow');
+<div class="poem-front">
+
+# <span data-anchor="myth-title">Mythopoeia</span>
+
+*by J.R.R. Tolkien*
+
+*To <span data-anchor="myth-lewis">one who said that myths were
+lies</span> and therefore worthless, even though 'breathed through silver'.*
+
+<span data-anchor="myth-philomythus">Philomythus</span> to
+<span data-anchor="myth-misomythus"> Misomythus</span>
+
+</div>
+
+<Poem lang="en" id="mythopoeia-text">{`You look at trees and <span data-anchor="mere-naming">label them just so</span>,
+(for <span data-anchor="mere-naming">trees are 'trees'</span>, and <span data-anchor="mere-naming">growing is 'to grow'</span>);
 you walk the earth and tread with solemn pace
 one of the many minor globes of Space:
-a star's a star, some matter in a ball
+<span data-anchor="mere-naming">a star's a star</span>, some matter in a ball
 compelled to courses mathematical
 amid the regimented, cold, inane,
 where destined atoms are each moment slain.
 
-At bidding of a Will, to which we bend
-(and must), but only dimly apprehend,
+At bidding of a <span data-anchor="will-god">Will</span>, to which <span data-anchor="myth-we">we</span> bend
+(and must), but only <span data-anchor="dimly-apprehend">dimly apprehend</span>,
 great processes march on, as Time unrolls
-from dark beginnings to uncertain goals;
-and as on page o'er-written without clue,
+from <span data-anchor="dark-origo">dark beginnings</span> to uncertain goals;
+and as on page o'er-written without <span data-anchor="without-clue">clue</span>,
 with script and limning packed of various hue,
 an endless multitude of forms appear,
 some grim, some frail, some beautiful, some queer,
 each alien, except as kin from one
-remote Origo, gnat, man, stone, and sun.
-God made the petreous rocks, the arboreal trees,
+<span data-anchor="dark-origo">remote Origo</span>, gnat, man, stone, and sun.
+<span data-anchor="will-god">God</span> made the petreous rocks, the arboreal trees,
 tellurian earth, and stellar stars, and these
 homuncular men, who walk upon the ground
 with nerves that tingle touched by light and sound.
 The movements of the sea, the wind in boughs,
 green grass, the large slow oddity of cows,
 thunder and lightning, birds that wheel and cry,
-slime crawling up from mud to live and die,
+<span data-anchor="slime-crawling">slime crawling up from mud to live and die</span>,
 these each are duly registered and print
-the brain's contortions with a separate dint.
-Yet trees are not 'trees', until so named and seen
+the <span data-anchor="brain-dint">brain's contortions with a separate dint</span>.
+
+<span data-anchor="yet-trees">Yet trees are not 'trees', until so named and seen</span>
 and never were so named, till those had been
 who speech's involuted breath unfurled,
 faint echo and dim picture of the world,
@@ -68,12 +77,12 @@ and looking backward they beheld the elves
 that wrought on cunning forges in the mind,
 and light and dark on secret looms entwined.
 
-He sees no stars who does not see them first
-of living silver made that sudden burst
-to flame like flowers beneath an ancient song,
-whose very echo after-music long
-has since pursued. There is no firmament,
-only a void, unless a jewelled tent
+<span data-anchor="living-silver">He sees no stars who does not see them first</span>
+<span data-anchor="living-silver">of living silver made that sudden burst</span>
+<span data-anchor="living-silver">to flame like flowers beneath an ancient song,</span>
+<span data-anchor="living-silver">whose very echo after-music long</span>
+<span data-anchor="living-silver">has since pursued. There is no firmament,</span>
+<span data-anchor="living-silver">only a void, unless a jewelled tent</span>
 myth-woven and elf-patterned; and no earth,
 unless the mother's womb whence all have birth.
 The heart of Man is not compound of lies,
@@ -213,27 +222,101 @@ there each shall choose for ever from the All.
   />
 </Margin>
 
-<Sidenote id="myth-subcreation" title="Sub-creator" at={42}>
+{/* —— Left gutter (sidenotes), top → down by anchor Y —— */}
 
-Tolkien's answer to Lewis: myth is not a silver-breathed lie but a lawful making
-— Man as sub-creator, splintering the single White into living shapes. The
-elves at the forges are that faculty looking back at itself.
+<Sidenote id="myth-title-note" title="Title" at="myth-title">
 
-</Sidenote>
-
-<Sidenote id="myth-right" title="The right to make" at={68}>
-
-Elves, goblins, gods, dragons: the catalogue of things not found in recorded
-time. The right "has not decayed" even when misused — a moral claim for
-legend-making, not a license for whatever Fact alone can vouch.
+From the Greek "μυθοποιία", meaning "myth making", also called "mythopoesis". This is ostensibly what modern readers would call "epic fantasy", although the mythopoeia genre claims to be denser than mere fantasy, no matter how "epic", and to fulfill a modern "need" for mythology.  
 
 </Sidenote>
 
-<Note title="Philomythus to Misomythus">
+<Sidenote id="myth-lewis" title="One who said myths were lies" at="myth-lewis">
 
-The dedication names the quarrel: myth-lover to myth-hater. The poem never
-abandons argument for ornament; it argues that the making of myth is lawful,
-not a silver-breathed lie.
+Tolkien wrote this letter to his friend and fellow Inkling C.S. Lewis
+
+</Sidenote>
+
+<Sidenote id="myth-philomythus" title="Philomythus" at="myth-philomythus">
+
+Meaning "myth-lover", the poem's author, Tolkien, bears this title. And it's an interesting title to claim, I'm almost certain Tolkien would have been aware of the book "[Philomythus](https://archive.org/details/philomythusantid00abbouoft)", which used the title of myth-maker as a pejorative. Probably Tolkien wished to wear the pejorative with pride. Alternatively he's looking back to Aristotle's use of the word in Metaphysics (discussed more later).
+
+</Sidenote>
+
+<Sidenote id="myth-misomythus" title="Misomythus" at="myth-misomythus">
+
+Meaning "myth-hater". Probably not meant to be a pejorative so much as the opposite of "Philomythus". This is of course C.S. Lewis.
+
+</Sidenote>
+
+<Sidenote id="myth-mere-naming" title="Mere naming" at="mere-naming">
+
+This mere naming is viewed negatively. It flattens and reduces meaning. It reminds me of Owen Barfield's "original participation"
+
+</Sidenote>
+
+<Sidenote id="myth-we" title="We" at="myth-we">
+
+The first stanza is addressed to "you", the Myth-hater, but now the poet addresses both Myth-lover and Myth-hater
+
+</Sidenote>
+
+<Sidenote id="myth-will-god" title="Will and God" at="will-god">
+
+Placeholder: on *Will* and *God* — the same agency named twice? Bidding we
+bend to, then the maker of rocks and stars. Expand the link between the two
+words across the stanza.
+
+</Sidenote>
+
+<Sidenote id="myth-dimly-apprehend" title="Dimly apprehend" at="dimly-apprehend">
+
+Both Myth-lover and Myth-hater are only "dimly" apprehending reality, neither can know the Truth clearly
+
+</Sidenote>
+
+<Sidenote id="myth-dark-origo" title="Dark beginnings / Origo" at="dark-origo">
+
+_Origo_ is Latin for origin. The phrases "dark beginnings" and "remote Origo" are referring to the same "In the Beginning" time frame
+
+</Sidenote>
+
+<Sidenote id="myth-without-clue" title="Without clue" at="without-clue">
+
+I wonder if Tolkien was at all thinking of the origin of the English word "clue", itself derived from [myth](https://www.etymonline.com/word/clue)
+
+</Sidenote>
+
+<Sidenote id="myth-slime-crawling" title="Slime crawling" at="slime-crawling">
+
+The lowest wrung. I wonder if this is also tongue in cheek reference to the Theory of Evolution
+
+</Sidenote>
+
+<Sidenote id="myth-yet-trees" title="Yet trees are not 'trees'" at="yet-trees">
+
+We now switch to Myth-lover's perspective and will see how the word 'tree' is not merely words.
+
+</Sidenote>
+
+<Sidenote id="myth-brain-dint" title="A separate dint" at="brain-dint">
+
+https://www.perseus.tufts.edu/hopper/text?doc=urn:cts:greekLit:tlg0086.tlg025.perseus-grc1:1.982b
+
+</Sidenote>
+
+<Sidenote id="myth-living-silver" title="Living silver" at="living-silver">
+
+"[stars] are borne round in a unified and constant movement, adhering to the [largest sphere which embraces all things] as it leads them around, always maintaining one and the same position and precieving their order in an unvarying pattern, never admitting any change in position, ascent, size, or even color."
+
+- Calcidius, "On Plato's Timaeus", pg. 231
+
+</Sidenote>
+
+{/* —— Right gutter (flowing notes); first Note parks at the top —— */}
+
+<Note title="Opening the poem">
+
+I first read this poem after hearing Malcolm Guite recite it, I liked it and filed it away but it didn't stick in my brain then. I re-read the poem after steeping myself in medieval thought and cosmology and reading "The Medieval Mind of C.S. Lewis", which in turn highlighted Lewis' later understanding of mythology and the medieval cosmology. In light of this context, the introductory stanza jumps out at me. Tolkien is clearly showing that the Myth-hater treats words as mere words, and is setting that as a negative. In the mind of the mythological wonderer words evoke so much more than the thing signified. 
 
 </Note>
 

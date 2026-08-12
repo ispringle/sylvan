@@ -1,32 +1,43 @@
 ---
 /**
- * Left-gutter scribal gloss — always visible, tied to a poem line.
+ * Left-gutter scribal gloss — always visible, tied to text anchors.
  *
  *   <Sidenote id="hwaet" title="The dream frame" at={1}>
  *     …
  *   </Sidenote>
  *
- * `at` is a 1-based poem line number, or a string matching
- * `[data-anchor="…"]` in prose (e.g. inside <Excerpt>).
+ *   <!-- several poem lines and/or prose anchors; hover any → highlight all -->
+ *   <Sidenote at={['mere-naming', 2, 5]} title="…">…</Sidenote>
+ *
+ * `at` is one of, or an array of:
+ *   - 1-based poem line number
+ *   - string matching `[data-anchor="…"]` (multiple spans may share one id)
  *
  * Place as a sibling of the main text inside <Scribe>.
  */
 interface Props {
   title?: string;
   id?: string;
-  /** Poem line (number) or prose data-anchor id (string) */
-  at: number | string;
+  /** Poem line(s) and/or prose data-anchor id(s) */
+  at: number | string | Array<number | string>;
 }
 
 const { title, id, at } = Astro.props;
-const atLabel = String(at);
-const atIsLine = typeof at === 'number' || /^\d+$/.test(atLabel);
+const atList = (Array.isArray(at) ? at : [at]).map((v) => String(v));
+const atAttr = atList.join(' ');
+const lineNums = atList.filter((v) => /^\d+$/.test(v));
+const lineLabel =
+  lineNums.length === 0
+    ? null
+    : lineNums.length === 1
+      ? `l.${lineNums[0]}`
+      : `ll.${lineNums.join(', ')}`;
 ---
 
 <aside
   class="sidenote"
   data-sidenote
-  data-at={atLabel}
+  data-at={atAttr}
   id={id}
   tabindex="0"
 >
@@ -35,9 +46,9 @@ const atIsLine = typeof at === 'number' || /^\d+$/.test(atLabel);
       <p class="sidenote__label">
         <span class="sidenote__label-text">{title}</span>
         {
-          atIsLine && (
+          lineLabel && (
             <span class="sidenote__line" aria-hidden="true">
-              l.{atLabel}
+              {lineLabel}
             </span>
           )
         }
